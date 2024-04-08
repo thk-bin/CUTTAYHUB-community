@@ -12,7 +12,7 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
-    Main = Window:AddTab({ Title = "Tap Home", Icon = "xx" }),
+    Main = Window:AddTab({ Title = "Tap Fram", Icon = "xx" }),
     Setting = Window:AddTab({ Title = "Tap Setting", Icon = "xx" }),
     Stats = Window:AddTab({ Title = "Tap Stats", Icon = "xx" }),
     Player = Window:AddTab({ Title = "Tap Player", Icon = "xx" }),
@@ -22,7 +22,7 @@ local Tabs = {
     Race = Window:AddTab({ Title = "Tap Race V4", Icon = "xx" }),
     Shop = Window:AddTab({ Title = "Tap Shop", Icon = "xx" }),
 	Misc = Window:AddTab({ Title = "Tap Misc", Icon = "xx" }),
-    Hop = Window:AddTab({ Title = "Tap Hop", Icon = "xx" }),
+    Hop = Window:AddTab({ Title = "Tap Tele-Hop", Icon = "xx" }),
 }
 local Options = Fluent.Options
 do
@@ -2542,13 +2542,13 @@ local listfastattack = {'Normal Attack','Fast Attack','Super Fast Attack'}
         Multi = false,
         Default = 1,
     })
-    DropdownDelayAttack:SetValue("Fast Attack")
+    DropdownDelayAttack:SetValue("Normal Attack")
     DropdownDelayAttack:OnChanged(function(Value)
     _G.FastAttackFaiFao_Mode = Value
 	if _G.FastAttackFaiFao_Mode == "Fast Attack" then
-		_G.Fast_Delay = 0.1
+		_G.Fast_Delay = 0.2
 	elseif _G.FastAttackFaiFao_Mode == "Normal Attack" then
-		_G.Fast_Delay = 0.15
+		_G.Fast_Delay = 0.20
 	elseif _G.FastAttackFaiFao_Mode == "Super Fast Attack" then
 		_G.Fast_Delay = 0
 	end

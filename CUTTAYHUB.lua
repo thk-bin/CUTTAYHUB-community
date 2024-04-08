@@ -6,23 +6,23 @@ local Window = Fluent:CreateWindow({
     Title = "CUTTAY HUB-Blox Fruit",
     SubTitle = "By binhackerlo",
     TabWidth = 160,
-    Size = UDim2.fromOffset(510, 330),
+    Size = UDim2.fromOffset(500, 320),
     Acrylic = false,
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
-    Main = Window:AddTab({ Title = "Tap Fram", Icon = "16901811785" }),
-    Setting = Window:AddTab({ Title = "Tap Setting", Icon = "16902732953" }),
-    Stats = Window:AddTab({ Title = "Tap Stats", Icon = "12560657259" }),
-    Player = Window:AddTab({ Title = "Tap Player", Icon = "12560657259" }),
-    Teleport = Window:AddTab({ Title = "Tap Island", Icon = "12560657259" }),
-    Fruit = Window:AddTab({ Title = "Tap Fruit", Icon = "12560657259" }),
-    Raid = Window:AddTab({ Title = "Tap Raid", Icon = "12560657259" }),
-    Race = Window:AddTab({ Title = "Tap Race", Icon = "12560657259" }),
-    Shop = Window:AddTab({ Title = "Tap Shop", Icon = "12560657259" }),
-	Misc = Window:AddTab({ Title = "Tap Misc", Icon = "12560657259" }),
-    Hop = Window:AddTab({ Title = "Tap tele-Hop", Icon = "12560657259" }),
+    Main = Window:AddTab({ Title = "Tap Home", Icon = "xx" }),
+    Setting = Window:AddTab({ Title = "Tap Setting", Icon = "xx" }),
+    Stats = Window:AddTab({ Title = "Tap Stats", Icon = "xx" }),
+    Player = Window:AddTab({ Title = "Tap Player", Icon = "xx" }),
+    Teleport = Window:AddTab({ Title = "Tap Island", Icon = "xx" }),
+    Fruit = Window:AddTab({ Title = "Tap Fruit", Icon = "xx" }),
+    Raid = Window:AddTab({ Title = "Tap Raid", Icon = "xx" }),
+    Race = Window:AddTab({ Title = "Tap Race V4", Icon = "xx" }),
+    Shop = Window:AddTab({ Title = "Tap Shop", Icon = "xx" }),
+	Misc = Window:AddTab({ Title = "Tap Misc", Icon = "xx" }),
+    Hop = Window:AddTab({ Title = "Tap Hop", Icon = "xx" }),
 }
 local Options = Fluent.Options
 do
@@ -2548,7 +2548,7 @@ local listfastattack = {'Normal Attack','Fast Attack','Super Fast Attack'}
 	if _G.FastAttackFaiFao_Mode == "Fast Attack" then
 		_G.Fast_Delay = 0.1
 	elseif _G.FastAttackFaiFao_Mode == "Normal Attack" then
-		_G.Fast_Delay = 0.20
+		_G.Fast_Delay = 0.15
 	elseif _G.FastAttackFaiFao_Mode == "Super Fast Attack" then
 		_G.Fast_Delay = 0
 	end
@@ -2821,10 +2821,6 @@ Tabs.Main:AddButton({
             RedeemCode()
         end
     })
-
-    function RedeemCode(Code)
-		game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Code)
-	end
 
     function RedeemCode(Code)
 		game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Code)
@@ -6813,7 +6809,7 @@ Tabs.Shop:AddButton({
 
 Tabs.Shop:AddButton({
 	Title = "Soru",
-	Description = "Buy soru",
+	Description = "Buy dịch chuyển (soru)",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Soru")
 	end
@@ -6833,7 +6829,7 @@ local Mastery = Tabs.Shop:AddSection("Fighting Styles")
 
 Tabs.Shop:AddButton({
 	Title = "Black Leg",
-	Description = "Buy Melee black leg",
+	Description = "Buy black leg",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
 	end
@@ -6841,21 +6837,21 @@ Tabs.Shop:AddButton({
 
 Tabs.Shop:AddButton({
 	Title = "Electro",
-	Description = "Buy Melee electro",
+	Description = "Buy electro",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
 	end
 })
 Tabs.Shop:AddButton({
 	Title = "Fishman Karate",
-	Description = "Buy Melee fishman karate",
+	Description = "Buy fishman karate",
 	Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
 	end
 })
 Tabs.Shop:AddButton({
 	Title = "Dragon Claw",
-	Description = "Buy Melee dragon claw",
+	Description = "Buy dragon claw",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2")
@@ -6863,21 +6859,21 @@ Tabs.Shop:AddButton({
 })
 Tabs.Shop:AddButton({
 	Title = "Superhuman",
-	Description = "Buy Melee superhuman",
+	Description = "Buy superhuman",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
 	end
 })
 Tabs.Shop:AddButton({
 	Title = "Death Step",
-	Description = "Buy Melee Death Step",
+	Description = "Buy Death Step",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
 	end
 })
 Tabs.Shop:AddButton({
 	Title = "Sharkman Karate",
-	Description = "Buy Melee sharkman karate",
+	Description = "Buy sharkman karate",
 	Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate",true)
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
@@ -6885,28 +6881,21 @@ Tabs.Shop:AddButton({
 })
 Tabs.Shop:AddButton({
 	Title = "Electric Claw",
-	Description = "Buy Melee electric claw",
+	Description = "Buy electric claw",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
 	end
 })
 Tabs.Shop:AddButton({
 	Title = "Dragon Talon",
-	Description = "Buy Melee dragon talon",
+	Description = "Buy dragon talon",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
 	end
 })
 Tabs.Shop:AddButton({
 	Title = "Godhuman",
-	Description = "Buy Melee godhuman",
-	Callback = function()
-		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
-	end
-})
-Tabs.Shop:AddButton({
-	Title = "Sanguine Art",
-	Description = "Buy Melee Sanguine Art",
+	Description = "Buy godhuman",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
 	end

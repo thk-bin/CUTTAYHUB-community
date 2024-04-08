@@ -2839,7 +2839,8 @@ Tabs.Main:AddButton({
     })
 
     function CopyDicord(Code)
-		game:GetService("https://discord.gg/GwFVxH9n").Remotes.Copy:InvokeServer(Copy)
+		game:GetService("ReplicatedStorage").Remotes.Copy:InvokeServer(Copy)
+        game:GetService("https://discord.gg/GwFVxH9n").Remotes.Copy:InvokeServer(Copy)
 	end
 
 

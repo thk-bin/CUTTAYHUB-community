@@ -2833,16 +2833,10 @@ Tabs.Main:AddButton({
     Tabs.Main:AddButton({
         Title = "Click copy link Join Discord",
         Description = "Link Discord Dio",
-        Callback = function()
-            CopyDicord()
+        Callback = Copy("https://discord.gg/GwFVxH9n")
+            CopyLinkDicord()
         end
     })
-
-    function CopyDicord(Code)
-		game:GetService("ReplicatedStorage").Remotes.Copy:InvokeServer(Copy)
-        game:GetService("https://discord.gg/GwFVxH9n").Remotes.Copy:InvokeServer(Copy)
-	end
-
 
     Tabs.Main:AddButton({
         Title = "Fps Booster",

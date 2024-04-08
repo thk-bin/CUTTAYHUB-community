@@ -1,12 +1,7466 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+----------------------------------------------------------------------------------------------------------------------------------------------
+local Window = Fluent:CreateWindow({
+    Title = "CUTTAY HUB-Blox Fruit",
+    SubTitle = "By binhackerlo",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(510, 330),
+    Acrylic = false,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.End
+})
+local Tabs = {
+    Main = Window:AddTab({ Title = "Tap Home", Icon = "16901811785" }),
+    Setting = Window:AddTab({ Title = "Tap Setting", Icon = "16902732953" }),
+    Stats = Window:AddTab({ Title = "Tap Stats", Icon = "12560657259" }),
+    Player = Window:AddTab({ Title = "Tap Player", Icon = "12560657259" }),
+    Teleport = Window:AddTab({ Title = "Tap Island", Icon = "12560657259" }),
+    Fruit = Window:AddTab({ Title = "Tap Fruit", Icon = "12560657259" }),
+    Raid = Window:AddTab({ Title = "Tap Raid", Icon = "12560657259" }),
+    Race = Window:AddTab({ Title = "Tap Race", Icon = "12560657259" }),
+    Shop = Window:AddTab({ Title = "Tap Shop", Icon = "12560657259" }),
+	Misc = Window:AddTab({ Title = "Tap Misc", Icon = "12560657259" }),
+    Hop = Window:AddTab({ Title = "Tap tele-Hop", Icon = "12560657259" }),
+}
+local Options = Fluent.Options
+do
+--------------------------------------------------------------------------------------------------------------------------------------------
+--// Place Id Check
+local id = game.PlaceId
+if id == 2753915549 then First_Sea = true; elseif id == 4442272183 then Second_Sea = true; elseif id == 7449423635 then Third_Sea = true; else game:Shutdown() end;
+--------------------------------------------------------------------------------------------------------------------------------------------
+--// Flag Player
+function AntiBan()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+     end
+     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+     end
+    end
+    AntiBan()
+--------------------------------------------------------------------------------------------------------------------------------------------
+--// Anti AFK
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+	game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	wait(1)
+	game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+-------------// BLOX FRUIT
+--// Sea World
+First_Sea = false
+Second_Sea = false
+Third_Sea = false
+local placeId = game.PlaceId
+if placeId == 2753915549 then
+First_Sea = true
+elseif placeId == 4442272183 then
+Second_Sea = true
+elseif placeId == 7449423635 then
+Third_Sea = true
+end
+--// Check Quest
+function CheckLevel()
+local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
+if First_Sea then
+if Lv == 1 or Lv <= 9 or SelectMonster == "Bandit" or SelectArea == '' then -- Bandit
+Ms = "Bandit"
+NameQuest = "BanditQuest1"
+QuestLv = 1
+NameMon = "Bandit"
+CFrameQ = CFrame.new(1060.9383544922, 16.455066680908, 1547.7841796875)
+CFrameMon = CFrame.new(1038.5533447266, 41.296249389648, 1576.5098876953)
+elseif Lv == 10 or Lv <= 14 or SelectMonster == "Monkey" or SelectArea == 'Jungle' then -- Monkey
+Ms = "Monkey"
+NameQuest = "JungleQuest"
+QuestLv = 1
+NameMon = "Monkey"
+CFrameQ = CFrame.new(-1601.6553955078, 36.85213470459, 153.38809204102)
+CFrameMon = CFrame.new(-1448.1446533203, 50.851993560791, 63.60718536377)
+elseif Lv == 15 or Lv <= 29 or SelectMonster == "Gorilla" or SelectArea == 'Jungle' then -- Gorilla
+Ms = "Gorilla"
+NameQuest = "JungleQuest"
+QuestLv = 2
+NameMon = "Gorilla"
+CFrameQ = CFrame.new(-1601.6553955078, 36.85213470459, 153.38809204102)
+CFrameMon = CFrame.new(-1142.6488037109, 40.462348937988, -515.39227294922)
+elseif Lv == 30 or Lv <= 39 or SelectMonster == "Pirate" or SelectArea == 'Buggy' then -- Pirate
+Ms = "Pirate"
+NameQuest = "BuggyQuest1"
+QuestLv = 1
+NameMon = "Pirate"
+CFrameQ = CFrame.new(-1140.1761474609, 4.752049446106, 3827.4057617188)
+CFrameMon = CFrame.new(-1201.0881347656, 40.628940582275, 3857.5966796875)
+elseif Lv == 40 or Lv <= 59 or SelectMonster == "Brute" or SelectArea == 'Buggy' then -- Brute
+Ms = "Brute"
+NameQuest = "BuggyQuest1"
+QuestLv = 2
+NameMon = "Brute"
+CFrameQ = CFrame.new(-1140.1761474609, 4.752049446106, 3827.4057617188)
+CFrameMon = CFrame.new(-1387.5324707031, 24.592035293579, 4100.9575195313)
+elseif Lv == 60 or Lv <= 74 or SelectMonster == "Desert Bandit" or SelectArea == 'Desert' then -- Desert Bandit
+Ms = "Desert Bandit"
+NameQuest = "DesertQuest"
+QuestLv = 1
+NameMon = "Desert Bandit"
+CFrameQ = CFrame.new(896.51721191406, 6.4384617805481, 4390.1494140625)
+CFrameMon = CFrame.new(984.99896240234, 16.109552383423, 4417.91015625)
+elseif Lv == 75 or Lv <= 89 or SelectMonster == "Desert Officer" or SelectArea == 'Desert' then -- Desert Officer
+Ms = "Desert Officer"
+NameQuest = "DesertQuest"
+QuestLv = 2
+NameMon = "Desert Officer"
+CFrameQ = CFrame.new(896.51721191406, 6.4384617805481, 4390.1494140625)
+CFrameMon = CFrame.new(1547.1510009766, 14.452038764954, 4381.8002929688)
+elseif Lv == 90 or Lv <= 99 or SelectMonster == "Snow Bandit" or SelectArea == 'Snow' then -- Snow Bandit
+Ms = "Snow Bandit"
+NameQuest = "SnowQuest"
+QuestLv = 1
+NameMon = "Snow Bandit"
+CFrameQ = CFrame.new(1386.8073730469, 87.272789001465, -1298.3576660156)
+CFrameMon = CFrame.new(1356.3028564453, 105.76865386963, -1328.2418212891)
+elseif Lv == 100 or Lv <= 119 or SelectMonster == "Snowman" or SelectArea == 'Snow' then -- Snowman
+Ms = "Snowman"
+NameQuest = "SnowQuest"
+QuestLv = 2
+NameMon = "Snowman"
+CFrameQ = CFrame.new(1386.8073730469, 87.272789001465, -1298.3576660156)
+CFrameMon = CFrame.new(1218.7956542969, 138.01184082031, -1488.0262451172)
+elseif Lv == 120 or Lv <= 149 or SelectMonster == "Chief Petty Officer" or SelectArea == 'Marine' then -- Chief Petty Officer
+Ms = "Chief Petty Officer"
+NameQuest = "MarineQuest2"
+QuestLv = 1
+NameMon = "Chief Petty Officer"
+CFrameQ = CFrame.new(-5035.49609375, 28.677835464478, 4324.1840820313)
+CFrameMon = CFrame.new(-4931.1552734375, 65.793113708496, 4121.8393554688)
+elseif Lv == 150 or Lv <= 174 or SelectMonster == "Sky Bandit" or SelectArea == 'Sky' then -- Sky Bandit
+Ms = "Sky Bandit"
+NameQuest = "SkyQuest"
+QuestLv = 1
+NameMon = "Sky Bandit"
+CFrameQ = CFrame.new(-4842.1372070313, 717.69543457031, -2623.0483398438)
+CFrameMon = CFrame.new(-4955.6411132813, 365.46365356445, -2908.1865234375)
+elseif Lv == 175 or Lv <= 189 or SelectMonster == "Dark Master" or SelectArea == 'Sky' then -- Dark Master
+Ms = "Dark Master"
+NameQuest = "SkyQuest"
+QuestLv = 2
+NameMon = "Dark Master"
+CFrameQ = CFrame.new(-4842.1372070313, 717.69543457031, -2623.0483398438)
+CFrameMon = CFrame.new(-5148.1650390625, 439.04571533203, -2332.9611816406)
+elseif Lv == 190 or Lv <= 209 or SelectMonster == "Prisoner" or SelectArea == 'Prison' then -- Prisoner
+Ms = "Prisoner"
+NameQuest = "PrisonerQuest"
+QuestLv = 1
+NameMon = "Prisoner"
+CFrameQ = CFrame.new(5310.60547, 0.350014925, 474.946594, 0.0175017118, 0, 0.999846935, 0, 1, 0, -0.999846935, 0, 0.0175017118)
+CFrameMon = CFrame.new(4937.31885, 0.332031399, 649.574524, 0.694649816, 0, -0.719348073, 0, 1, 0, 0.719348073, 0, 0.694649816)
+elseif Lv == 210 or Lv <= 249 or SelectMonster == "Dangerous Prisoner" or SelectArea == 'Prison' then -- Dangerous Prisoner
+Ms = "Dangerous Prisoner"
+NameQuest = "PrisonerQuest"
+QuestLv = 2
+NameMon = "Dangerous Prisoner"
+CFrameQ = CFrame.new(5310.60547, 0.350014925, 474.946594, 0.0175017118, 0, 0.999846935, 0, 1, 0, -0.999846935, 0, 0.0175017118)
+CFrameMon = CFrame.new(5099.6626, 0.351562679, 1055.7583, 0.898906827, 0, -0.438139856, 0, 1, 0, 0.438139856, 0, 0.898906827)
+elseif Lv == 250 or Lv <= 274 or SelectMonster == "Toga Warrior" or SelectArea == 'Colosseum' then -- Toga Warrior
+Ms = "Toga Warrior"
+NameQuest = "ColosseumQuest"
+QuestLv = 1
+NameMon = "Toga Warrior"
+CFrameQ = CFrame.new(-1577.7890625, 7.4151420593262, -2984.4838867188)
+CFrameMon = CFrame.new(-1872.5166015625, 49.080215454102, -2913.810546875)
+elseif Lv == 275 or Lv <= 299 or SelectMonster == "Gladiator" or SelectArea == 'Colosseum' then -- Gladiator
+Ms = "Gladiator"
+NameQuest = "ColosseumQuest"
+QuestLv = 2
+NameMon = "Gladiator"
+CFrameQ = CFrame.new(-1577.7890625, 7.4151420593262, -2984.4838867188)
+CFrameMon = CFrame.new(-1521.3740234375, 81.203170776367, -3066.3139648438)
+elseif Lv == 300 or Lv <= 324 or SelectMonster == "Military Soldier" or SelectArea == 'Magma' then -- Military Soldier
+Ms = "Military Soldier"
+NameQuest = "MagmaQuest"
+QuestLv = 1
+NameMon = "Military Soldier"
+CFrameQ = CFrame.new(-5316.1157226563, 12.262831687927, 8517.00390625)
+CFrameMon = CFrame.new(-5369.0004882813, 61.24352645874, 8556.4921875)
+elseif Lv == 325 or Lv <= 374 or SelectMonster == "Military Spy" or SelectArea == 'Magma' then -- Military Spy
+Ms = "Military Spy"
+NameQuest = "MagmaQuest"
+QuestLv = 2
+NameMon = "Military Spy"
+CFrameQ = CFrame.new(-5316.1157226563, 12.262831687927, 8517.00390625)
+CFrameMon = CFrame.new(-5787.00293, 75.8262634, 8651.69922, 0.838590562, 0, -0.544762194, 0, 1, 0, 0.544762194, 0, 0.838590562)
+elseif Lv == 375 or Lv <= 399 or SelectMonster == "Fishman Warrior" or SelectArea == 'Fishman' then -- Fishman Warrior
+Ms = "Fishman Warrior"
+NameQuest = "FishmanQuest"
+QuestLv = 1
+NameMon = "Fishman Warrior"
+CFrameQ = CFrame.new(61122.65234375, 18.497442245483, 1569.3997802734)
+CFrameMon = CFrame.new(60844.10546875, 98.462875366211, 1298.3985595703)
+if _G.AutoLevel and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 3000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+end
+elseif Lv == 400 or Lv <= 449 or SelectMonster == "Fishman Commando" or SelectArea == 'Fishman' then -- Fishman Commando
+Ms = "Fishman Commando"
+NameQuest = "FishmanQuest"
+QuestLv = 2
+NameMon = "Fishman Commando"
+CFrameQ = CFrame.new(61122.65234375, 18.497442245483, 1569.3997802734)
+CFrameMon = CFrame.new(61738.3984375, 64.207321166992, 1433.8375244141)
+if _G.AutoLevel and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 3000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+end
+elseif Lv == 10 or Lv <= 474 or SelectMonster == "God's Guard" or SelectArea == 'Sky Island' then -- God's Guard
+Ms = "God's Guard"
+NameQuest = "SkyExp1Quest"
+QuestLv = 1
+NameMon = "God's Guard"
+CFrameQ = CFrame.new(-4721.8603515625, 845.30297851563, -1953.8489990234)
+CFrameMon = CFrame.new(-4628.0498046875, 866.92877197266, -1931.2352294922)
+if _G.AutoLevel and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 3000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
+end
+elseif Lv == 475 or Lv <= 524 or SelectMonster == "Shanda" or SelectArea == 'Sky Island' then -- Shanda
+Ms = "Shanda"
+NameQuest = "SkyExp1Quest"
+QuestLv = 2
+NameMon = "Shanda"
+CFrameQ = CFrame.new(-7863.1596679688, 5545.5190429688, -378.42266845703)
+CFrameMon = CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773)
+if _G.AutoLevel and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 3000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
+end
+elseif Lv == 525 or Lv <= 549 or SelectMonster == "Royal Squad" or SelectArea == 'Sky Island' then -- Royal Squad
+Ms = "Royal Squad"
+NameQuest = "SkyExp2Quest"
+QuestLv = 1
+NameMon = "Royal Squad"
+CFrameQ = CFrame.new(-7903.3828125, 5635.9897460938, -1410.923828125)
+CFrameMon = CFrame.new(-7654.2514648438, 5637.1079101563, -1407.7550048828)
+elseif Lv == 550 or Lv <= 624 or SelectMonster == "Royal Soldier" or SelectArea == 'Sky Island' then -- Royal Soldier
+Ms = "Royal Soldier"
+NameQuest = "SkyExp2Quest"
+QuestLv = 2
+NameMon = "Royal Soldier"
+CFrameQ = CFrame.new(-7903.3828125, 5635.9897460938, -1410.923828125)
+CFrameMon = CFrame.new(-7760.4106445313, 5679.9077148438, -1884.8112792969)
+elseif Lv == 625 or Lv <= 649 or SelectMonster == "Galley Pirate" or SelectArea == 'Fountain' then -- Galley Pirate
+Ms = "Galley Pirate"
+NameQuest = "FountainQuest"
+QuestLv = 1
+NameMon = "Galley Pirate"
+CFrameQ = CFrame.new(5258.2788085938, 38.526931762695, 4050.044921875)
+CFrameMon = CFrame.new(5557.1684570313, 152.32717895508, 3998.7758789063)
+elseif Lv >= 650 or SelectMonster == "Galley Captain" or SelectArea == 'Fountain' then -- Galley Captain
+Ms = "Galley Captain"
+NameQuest = "FountainQuest"
+QuestLv = 2
+NameMon = "Galley Captain"
+CFrameQ = CFrame.new(5258.2788085938, 38.526931762695, 4050.044921875)
+CFrameMon = CFrame.new(5677.6772460938, 92.786109924316, 4966.6323242188)
+end
+end
+if Second_Sea then
+if Lv == 700 or Lv <= 724 or SelectMonster == "Raider" or SelectArea == 'Area 1' then -- Raider
+Ms = "Raider"
+NameQuest = "Area1Quest"
+QuestLv = 1
+NameMon = "Raider"
+CFrameQ = CFrame.new(-427.72567749023, 72.99634552002, 1835.9426269531)
+CFrameMon = CFrame.new(68.874565124512, 93.635643005371, 2429.6752929688)
+elseif Lv == 725 or Lv <= 774 or SelectMonster == "Mercenary" or SelectArea == 'Area 1' then -- Mercenary
+Ms = "Mercenary"
+NameQuest = "Area1Quest"
+QuestLv = 2
+NameMon = "Mercenary"
+CFrameQ = CFrame.new(-427.72567749023, 72.99634552002, 1835.9426269531)
+CFrameMon = CFrame.new(-864.85009765625, 122.47104644775, 1453.1505126953)
+elseif Lv == 775 or Lv <= 799 or SelectMonster == "Swan Pirate" or SelectArea == 'Area 2' then -- Swan Pirate
+Ms = "Swan Pirate"
+NameQuest = "Area2Quest"
+QuestLv = 1
+NameMon = "Swan Pirate"
+CFrameQ = CFrame.new(635.61151123047, 73.096351623535, 917.81298828125)
+CFrameMon = CFrame.new(1065.3669433594, 137.64012145996, 1324.3798828125)
+elseif Lv == 800 or Lv <= 874 or SelectMonster == "Factory Staff" or SelectArea == 'Area 2' then -- Factory Staff
+Ms = "Factory Staff"
+NameQuest = "Area2Quest"
+QuestLv = 2
+NameMon = "Factory Staff"
+CFrameQ = CFrame.new(635.61151123047, 73.096351623535, 917.81298828125)
+CFrameMon = CFrame.new(533.22045898438, 128.46876525879, 355.62615966797)
+elseif Lv == 875 or Lv <= 899 or SelectMonster == "Marine Lieutenan" or SelectArea == 'Marine' then -- Marine Lieutenant
+Ms = "Marine Lieutenant"
+NameQuest = "MarineQuest3"
+QuestLv = 1
+NameMon = "Marine Lieutenant"
+CFrameQ = CFrame.new(-2440.9934082031, 73.04190826416, -3217.7082519531)
+CFrameMon = CFrame.new(-2489.2622070313, 84.613594055176, -3151.8830566406)
+elseif Lv == 900 or Lv <= 949 or SelectMonster == "Marine Captain" or SelectArea == 'Marine' then -- Marine Captain
+Ms = "Marine Captain"
+NameQuest = "MarineQuest3"
+QuestLv = 2
+NameMon = "Marine Captain"
+CFrameQ = CFrame.new(-2440.9934082031, 73.04190826416, -3217.7082519531)
+CFrameMon = CFrame.new(-2335.2026367188, 79.786659240723, -3245.8674316406)
+elseif Lv == 950 or Lv <= 974 or SelectMonster == "Zombie" or SelectArea == 'Zombie' then -- Zombie
+Ms = "Zombie"
+NameQuest = "ZombieQuest"
+QuestLv = 1
+NameMon = "Zombie"
+CFrameQ = CFrame.new(-5494.3413085938, 48.505931854248, -794.59094238281)
+CFrameMon = CFrame.new(-5536.4970703125, 101.08577728271, -835.59075927734)
+elseif Lv == 975 or Lv <= 999 or SelectMonster == "Vampire" or SelectArea == 'Zombie' then -- Vampire
+Ms = "Vampire"
+NameQuest = "ZombieQuest"
+QuestLv = 2
+NameMon = "Vampire"
+CFrameQ = CFrame.new(-5494.3413085938, 48.505931854248, -794.59094238281)
+CFrameMon = CFrame.new(-5806.1098632813, 16.722528457642, -1164.4384765625)
+elseif Lv == 1000 or Lv <= 1049 or SelectMonster == "Snow Trooper" or SelectArea == 'Snow Mountain' then -- Snow Trooper
+Ms = "Snow Trooper"
+NameQuest = "SnowMountainQuest"
+QuestLv = 1
+NameMon = "Snow Trooper"
+CFrameQ = CFrame.new(607.05963134766, 401.44781494141, -5370.5546875)
+CFrameMon = CFrame.new(535.21051025391, 432.74209594727, -5484.9165039063)
+elseif Lv == 1050 or Lv <= 1099 or SelectMonster == "Winter Warrior" or SelectArea == 'Snow Mountain' then -- Winter Warrior
+Ms = "Winter Warrior"
+NameQuest = "SnowMountainQuest"
+QuestLv = 2
+NameMon = "Winter Warrior"
+CFrameQ = CFrame.new(607.05963134766, 401.44781494141, -5370.5546875)
+CFrameMon = CFrame.new(1234.4449462891, 456.95419311523, -5174.130859375)
+elseif Lv == 1100 or Lv <= 1124 or SelectMonster == "Lab Subordinate" or SelectArea == 'Ice Fire' then -- Lab Subordinate
+Ms = "Lab Subordinate"
+NameQuest = "IceSideQuest"
+QuestLv = 1
+NameMon = "Lab Subordinate"
+CFrameQ = CFrame.new(-6061.841796875, 15.926671981812, -4902.0385742188)
+CFrameMon = CFrame.new(-5720.5576171875, 63.309471130371, -4784.6103515625)
+elseif Lv == 1125 or Lv <= 1174 or SelectMonster == "Horned Warrior" or SelectArea == 'Ice Fire' then -- Horned Warrior
+Ms = "Horned Warrior"
+NameQuest = "IceSideQuest"
+QuestLv = 2
+NameMon = "Horned Warrior"
+CFrameQ = CFrame.new(-6061.841796875, 15.926671981812, -4902.0385742188)
+CFrameMon = CFrame.new(-6292.751953125, 91.181983947754, -5502.6499023438)
+elseif Lv == 1175 or Lv <= 1199 or SelectMonster == "Magma Ninja" or SelectArea == 'Ice Fire' then -- Magma Ninja
+Ms = "Magma Ninja"
+NameQuest = "FireSideQuest"
+QuestLv = 1
+NameMon = "Magma Ninja"
+CFrameQ = CFrame.new(-5429.0473632813, 15.977565765381, -5297.9614257813)
+CFrameMon = CFrame.new(-5461.8388671875, 130.36347961426, -5836.4702148438)
+elseif Lv == 1200 or Lv <= 1249 or SelectMonster == "Lava Pirate" or SelectArea == 'Ice Fire' then -- Lava Pirate
+Ms = "Lava Pirate"
+NameQuest = "FireSideQuest"
+QuestLv = 2
+NameMon = "Lava Pirate"
+CFrameQ = CFrame.new(-5429.0473632813, 15.977565765381, -5297.9614257813)
+CFrameMon = CFrame.new(-5251.1889648438, 55.164535522461, -4774.4096679688)
+elseif Lv == 1250 or Lv <= 1274 or SelectMonster == "Ship Deckhand" or SelectArea == 'Ship' then -- Ship Deckhand
+Ms = "Ship Deckhand"
+NameQuest = "ShipQuest1"
+QuestLv = 1
+NameMon = "Ship Deckhand"
+CFrameQ = CFrame.new(1040.2927246094, 125.08293151855, 32911.0390625)
+CFrameMon = CFrame.new(921.12365722656, 125.9839553833, 33088.328125)
+if _G.AutoLevel and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+end
+elseif Lv == 1275 or Lv <= 1299 or SelectMonster == "Ship Engineer" or SelectArea == 'Ship' then -- Ship Engineer
+Ms = "Ship Engineer"
+NameQuest = "ShipQuest1"
+QuestLv = 2
+NameMon = "Ship Engineer"
+CFrameQ = CFrame.new(1040.2927246094, 125.08293151855, 32911.0390625)
+CFrameMon = CFrame.new(886.28179931641, 40.47790145874, 32800.83203125)
+if _G.AutoLevel and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+end
+elseif Lv == 1300 or Lv <= 1324 or SelectMonster == "Ship Steward" or SelectArea == 'Ship' then -- Ship Steward
+Ms = "Ship Steward"
+NameQuest = "ShipQuest2"
+QuestLv = 1
+NameMon = "Ship Steward"
+CFrameQ = CFrame.new(971.42065429688, 125.08293151855, 33245.54296875)
+CFrameMon = CFrame.new(943.85504150391, 129.58183288574, 33444.3671875)
+if _G.AutoLevel and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+end
+elseif Lv == 1325 or Lv <= 1349 or SelectMonster == "Ship Officer" or SelectArea == 'Ship' then -- Ship Officer
+Ms = "Ship Officer"
+NameQuest = "ShipQuest2"
+QuestLv = 2
+NameMon = "Ship Officer"
+CFrameQ = CFrame.new(971.42065429688, 125.08293151855, 33245.54296875)
+CFrameMon = CFrame.new(955.38458251953, 181.08335876465, 33331.890625)
+if _G.AutoLevel and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+end
+elseif Lv == 1350 or Lv <= 1374 or SelectMonster == "Arctic Warrior" or SelectArea == 'Frost' then -- Arctic Warrior
+Ms = "Arctic Warrior"
+NameQuest = "FrostQuest"
+QuestLv = 1
+NameMon = "Arctic Warrior"
+CFrameQ = CFrame.new(5668.1372070313, 28.202531814575, -6484.6005859375)
+CFrameMon = CFrame.new(5935.4541015625, 77.26016998291, -6472.7568359375)
+if _G.AutoLevel and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422))
+end
+elseif Lv == 1375 or Lv <= 1424 or SelectMonster == "Snow Lurker" or SelectArea == 'Frost' then -- Snow Lurker
+Ms = "Snow Lurker"
+NameQuest = "FrostQuest"
+QuestLv = 2
+NameMon = "Snow Lurker"
+CFrameQ = CFrame.new(5668.1372070313, 28.202531814575, -6484.6005859375)
+CFrameMon = CFrame.new(5628.482421875, 57.574996948242, -6618.3481445313)
+elseif Lv == 1425 or Lv <= 1449 or SelectMonster == "Sea Soldier" or SelectArea == 'Forgotten' then -- Sea Soldier
+Ms = "Sea Soldier"
+NameQuest = "ForgottenQuest"
+QuestLv = 1
+NameMon = "Sea Soldier"
+CFrameQ = CFrame.new(-3054.5827636719, 236.87213134766, -10147.790039063)
+CFrameMon = CFrame.new(-3185.0153808594, 58.789089202881, -9663.6064453125)
+elseif Lv >= 1450 or SelectMonster == "Water Fighter" or SelectArea == 'Forgotten' then -- Water Fighter
+Ms = "Water Fighter"
+NameQuest = "ForgottenQuest"
+QuestLv = 2
+NameMon = "Water Fighter"
+CFrameQ = CFrame.new(-3054.5827636719, 236.87213134766, -10147.790039063)
+CFrameMon = CFrame.new(-3262.9301757813, 298.69036865234, -10552.529296875)
+end
+end
+if Third_Sea then
+if Lv == 1500 or Lv <= 1524 or SelectMonster == "Pirate Millionaire" or SelectArea == 'Pirate Port' then -- Pirate Millionaire
+Ms = "Pirate Millionaire"
+NameQuest = "PiratePortQuest"
+QuestLv = 1
+NameMon = "Pirate Millionaire"
+CFrameQ = CFrame.new(-289.61752319336, 43.819011688232, 5580.0903320313)
+CFrameMon = CFrame.new(-435.68109130859, 189.69866943359, 5551.0756835938)
+elseif Lv == 1525 or Lv <= 1574 or SelectMonster == "Pistol Billionaire" or SelectArea == 'Pirate Port' then -- Pistol Billoonaire
+Ms = "Pistol Billionaire"
+NameQuest = "PiratePortQuest"
+QuestLv = 2
+NameMon = "Pistol Billionaire"
+CFrameQ = CFrame.new(-289.61752319336, 43.819011688232, 5580.0903320313)
+CFrameMon = CFrame.new(-236.53652954102, 217.46676635742, 6006.0883789063)
+elseif Lv == 1575 or Lv <= 1599 or SelectMonster == "Dragon Crew Warrior" or SelectArea == 'Amazon' then -- Dragon Crew Warrior
+Ms = "Dragon Crew Warrior"
+NameQuest = "AmazonQuest"
+QuestLv = 1
+NameMon = "Dragon Crew Warrior"
+CFrameQ = CFrame.new(5833.1147460938, 51.60498046875, -1103.0693359375)
+CFrameMon = CFrame.new(6301.9975585938, 104.77153015137, -1082.6075439453)
+elseif Lv == 1600 or Lv <= 1624 or SelectMonster == "Dragon Crew Archer" or SelectArea == 'Amazon' then -- Dragon Crew Archer
+Ms = "Dragon Crew Archer"
+NameQuest = "AmazonQuest"
+QuestLv = 2
+NameMon = "Dragon Crew Archer"
+CFrameQ = CFrame.new(5833.1147460938, 51.60498046875, -1103.0693359375)
+CFrameMon = CFrame.new(6831.1171875, 441.76708984375, 446.58615112305)
+elseif Lv == 1625 or Lv <= 1649 or SelectMonster == "Female Islander" or SelectArea == 'Amazon' then -- Female Islander
+Ms = "Female Islander"
+NameQuest = "AmazonQuest2"
+QuestLv = 1
+NameMon = "Female Islander"
+CFrameQ = CFrame.new(5446.8793945313, 601.62945556641, 749.45672607422)
+CFrameMon = CFrame.new(5792.5166015625, 848.14392089844, 1084.1818847656)
+elseif Lv == 1650 or Lv <= 1699 or SelectMonster == "Giant Islander" or SelectArea == 'Amazon' then -- Giant Islander
+Ms = "Giant Islander"
+NameQuest = "AmazonQuest2"
+QuestLv = 2
+NameMon = "Giant Islander"
+CFrameQ = CFrame.new(5446.8793945313, 601.62945556641, 749.45672607422)
+CFrameMon = CFrame.new(5009.5068359375, 664.11071777344, -40.960144042969)
+elseif Lv == 1700 or Lv <= 1724 or SelectMonster == "Marine Commodore" or SelectArea == 'Marine Tree' then -- Marine Commodore
+Ms = "Marine Commodore"
+NameQuest = "MarineTreeIsland"
+QuestLv = 1
+NameMon = "Marine Commodore"
+CFrameQ = CFrame.new(2179.98828125, 28.731239318848, -6740.0551757813)
+CFrameMon = CFrame.new(2198.0063476563, 128.71075439453, -7109.5043945313)
+elseif Lv == 1725 or Lv <= 1774 or SelectMonster == "Marine Rear Admiral" or SelectArea == 'Marine Tree' then -- Marine Rear Admiral
+Ms = "Marine Rear Admiral"
+NameQuest = "MarineTreeIsland"
+QuestLv = 2
+NameMon = "Marine Rear Admiral"
+CFrameQ = CFrame.new(2179.98828125, 28.731239318848, -6740.0551757813)
+CFrameMon = CFrame.new(3294.3142089844, 385.41125488281, -7048.6342773438)
+elseif Lv == 1775 or Lv <= 1799 or SelectMonster == "Fishman Raider" or SelectArea == 'Deep Forest' then -- Fishman Raide
+Ms = "Fishman Raider"
+NameQuest = "DeepForestIsland3"
+QuestLv = 1
+NameMon = "Fishman Raider"
+CFrameQ = CFrame.new(-10582.759765625, 331.78845214844, -8757.666015625)
+CFrameMon = CFrame.new(-10553.268554688, 521.38439941406, -8176.9458007813)
+elseif Lv == 1800 or Lv <= 1824 or SelectMonster == "Fishman Captain" or SelectArea == 'Deep Forest' then -- Fishman Captain
+Ms = "Fishman Captain"
+NameQuest = "DeepForestIsland3"
+QuestLv = 2
+NameMon = "Fishman Captain"
+CFrameQ = CFrame.new(-10583.099609375, 331.78845214844, -8759.4638671875)
+CFrameMon = CFrame.new(-10789.401367188, 427.18637084961, -9131.4423828125)
+elseif Lv == 1825 or Lv <= 1849 or SelectMonster == "Forest Pirate" or SelectArea == 'Deep Forest' then -- Forest Pirate
+Ms = "Forest Pirate"
+NameQuest = "DeepForestIsland"
+QuestLv = 1
+NameMon = "Forest Pirate"
+CFrameQ = CFrame.new(-13232.662109375, 332.40396118164, -7626.4819335938)
+CFrameMon = CFrame.new(-13489.397460938, 400.30349731445, -7770.251953125)
+elseif Lv == 1850 or Lv <= 1899 or SelectMonster == "Mythological Pirate" or SelectArea == 'Deep Forest' then -- Mythological Pirate
+Ms = "Mythological Pirate"
+NameQuest = "DeepForestIsland"
+QuestLv = 2
+NameMon = "Mythological Pirate"
+CFrameQ = CFrame.new(-13232.662109375, 332.40396118164, -7626.4819335938)
+CFrameMon = CFrame.new(-13508.616210938, 582.46228027344, -6985.3037109375)
+elseif Lv == 1900 or Lv <= 1924 or SelectMonster == "Jungle Pirate" or SelectArea == 'Deep Forest' then -- Jungle Pirate
+Ms = "Jungle Pirate"
+NameQuest = "DeepForestIsland2"
+QuestLv = 1
+NameMon = "Jungle Pirate"
+CFrameQ = CFrame.new(-12682.096679688, 390.88653564453, -9902.1240234375)
+CFrameMon = CFrame.new(-12267.103515625, 459.75262451172, -10277.200195313)
+elseif Lv == 1925 or Lv <= 1974 or SelectMonster == "Musketeer Pirate" or SelectArea == 'Deep Forest' then -- Musketeer Pirate
+Ms = "Musketeer Pirate"
+NameQuest = "DeepForestIsland2"
+QuestLv = 2
+NameMon = "Musketeer Pirate"
+CFrameQ = CFrame.new(-12682.096679688, 390.88653564453, -9902.1240234375)
+CFrameMon = CFrame.new(-13291.5078125, 520.47338867188, -9904.638671875)
+elseif Lv == 1975 or Lv <= 1999 or SelectMonster == "Reborn Skeleton" or SelectArea == 'Haunted Castle' then
+Ms = "Reborn Skeleton"
+NameQuest = "HauntedQuest1"
+QuestLv = 1
+NameMon = "Reborn Skeleton"
+CFrameQ = CFrame.new(-9480.80762, 142.130661, 5566.37305, -0.00655503059, 4.52954225e-08, -0.999978542, 2.04920472e-08, 1, 4.51620679e-08, 0.999978542, -2.01955679e-08, -0.00655503059)
+CFrameMon = CFrame.new(-8761.77148, 183.431747, 6168.33301, 0.978073597, -1.3950732e-05, -0.208259016, -1.08073925e-06, 1, -7.20630269e-05, 0.208259016, 7.07080399e-05, 0.978073597)
+elseif Lv == 2000 or Lv <= 2024 or SelectMonster == "Living Zombie" or SelectArea == 'Haunted Castle' then
+Ms = "Living Zombie"
+NameQuest = "HauntedQuest1"
+QuestLv = 2
+NameMon = "Living Zombie"
+CFrameQ = CFrame.new(-9480.80762, 142.130661, 5566.37305, -0.00655503059, 4.52954225e-08, -0.999978542, 2.04920472e-08, 1, 4.51620679e-08, 0.999978542, -2.01955679e-08, -0.00655503059)
+CFrameMon = CFrame.new(-10103.7529, 238.565979, 6179.75977, 0.999474227, 2.77547141e-08, 0.0324240364, -2.58006327e-08, 1, -6.06848474e-08, -0.0324240364, 5.98163865e-08, 0.999474227)
+elseif Lv == 2025 or Lv <= 2049 or SelectMonster == "Demonic Soul" or SelectArea == 'Haunted Castle' then
+Ms = "Demonic Soul"
+NameQuest = "HauntedQuest2"
+QuestLv = 1
+NameMon = "Demonic Soul"
+CFrameQ = CFrame.new(-9516.9931640625, 178.00651550293, 6078.4653320313)
+CFrameMon = CFrame.new(-9712.03125, 204.69589233398, 6193.322265625)
+elseif Lv == 2050 or Lv <= 2074 or SelectMonster == "Posessed Mummy" or SelectArea == 'Haunted Castle' then
+Ms = "Posessed Mummy"
+NameQuest = "HauntedQuest2"
+QuestLv = 2
+NameMon = "Posessed Mummy"
+CFrameQ = CFrame.new(-9516.9931640625, 178.00651550293, 6078.4653320313)
+CFrameMon = CFrame.new(-9545.7763671875, 69.619895935059, 6339.5615234375)
+elseif Lv == 2075 or Lv <= 2099 or SelectMonster == "Peanut Scout" or SelectArea == 'Nut Island' then
+Ms = "Peanut Scout"
+NameQuest = "NutsIslandQuest"
+QuestLv = 1
+NameMon = "Peanut Scout"
+CFrameQ = CFrame.new(-2105.53198, 37.2495995, -10195.5088, -0.766061664, 0, -0.642767608, 0, 1, 0, 0.642767608, 0, -0.766061664)
+CFrameMon = CFrame.new(-2150.587890625, 122.49767303467, -10358.994140625)
+elseif Lv == 2100 or Lv <= 2124 or SelectMonster == "Peanut President" or SelectArea == 'Nut Island' then
+Ms = "Peanut President"
+NameQuest = "NutsIslandQuest"
+QuestLv = 2
+NameMon = "Peanut President"
+CFrameQ = CFrame.new(-2105.53198, 37.2495995, -10195.5088, -0.766061664, 0, -0.642767608, 0, 1, 0, 0.642767608, 0, -0.766061664)
+CFrameMon = CFrame.new(-2150.587890625, 122.49767303467, -10358.994140625)
+elseif Lv == 2125 or Lv <= 2149 or SelectMonster == "Ice Cream Chef" or SelectArea == 'Ice Cream Island' then
+Ms = "Ice Cream Chef"
+NameQuest = "IceCreamIslandQuest"
+QuestLv = 1
+NameMon = "Ice Cream Chef"
+CFrameQ = CFrame.new(-819.376709, 64.9259796, -10967.2832, -0.766061664, 0, 0.642767608, 0, 1, 0, -0.642767608, 0, -0.766061664)
+CFrameMon = CFrame.new(-789.941528, 209.382889, -11009.9805, -0.0703101531, -0, -0.997525156, -0, 1.00000012, -0, 0.997525275, 0, -0.0703101456)
+elseif Lv == 2150 or Lv <= 2199 or SelectMonster == "Ice Cream Commander" or SelectArea == 'Ice Cream Island' then
+Ms = "Ice Cream Commander"
+NameQuest = "IceCreamIslandQuest"
+QuestLv = 2
+NameMon = "Ice Cream Commander"
+CFrameQ = CFrame.new(-819.376709, 64.9259796, -10967.2832, -0.766061664, 0, 0.642767608, 0, 1, 0, -0.642767608, 0, -0.766061664)
+CFrameMon = CFrame.new(-789.941528, 209.382889, -11009.9805, -0.0703101531, -0, -0.997525156, -0, 1.00000012, -0, 0.997525275, 0, -0.0703101456)
+elseif Lv == 2200 or Lv <= 2224 or SelectMonster == "Cookie Crafter" or SelectArea == 'Cake Island' then
+Ms = "Cookie Crafter"
+NameQuest = "CakeQuest1"
+QuestLv = 1
+NameMon = "Cookie Crafter"
+CFrameQ = CFrame.new(-2022.29858, 36.9275894, -12030.9766, -0.961273909, 0, -0.275594592, 0, 1, 0, 0.275594592, 0, -0.961273909)
+CFrameMon = CFrame.new(-2321.71216, 36.699482, -12216.7871, -0.780074954, 0, 0.625686109, 0, 1, 0, -0.625686109, 0, -0.780074954)
+elseif Lv == 2225 or Lv <= 2249 or SelectMonster == "Cake Guard" or SelectArea == 'Cake Island' then
+Ms = "Cake Guard"
+NameQuest = "CakeQuest1"
+QuestLv = 2
+NameMon = "Cake Guard"
+CFrameQ = CFrame.new(-2022.29858, 36.9275894, -12030.9766, -0.961273909, 0, -0.275594592, 0, 1, 0, 0.275594592, 0, -0.961273909)
+CFrameMon = CFrame.new(-1418.11011, 36.6718941, -12255.7324, 0.0677844882, 0, 0.997700036, 0, 1, 0, -0.997700036, 0, 0.0677844882)
+elseif Lv == 2250 or Lv <= 2274 or SelectMonster == "Baking Staff" or SelectArea == 'Cake Island' then
+Ms = "Baking Staff"
+NameQuest = "CakeQuest2"
+QuestLv = 1
+NameMon = "Baking Staff"
+CFrameQ = CFrame.new(-1928.31763, 37.7296638, -12840.626, 0.951068401, -0, -0.308980465, 0, 1, -0, 0.308980465, 0, 0.951068401)
+CFrameMon = CFrame.new(-1980.43848, 36.6716766, -12983.8418, -0.254443765, 0, -0.967087567, 0, 1, 0, 0.967087567, 0, -0.254443765)
+elseif Lv == 2275 or Lv <= 2299 or SelectMonster == "Head Baker" or SelectArea == 'Cake Island' then
+Ms = "Head Baker"
+NameQuest = "CakeQuest2"
+QuestLv = 2
+NameMon = "Head Baker"
+CFrameQ = CFrame.new(-1928.31763, 37.7296638, -12840.626, 0.951068401, -0, -0.308980465, 0, 1, -0, 0.308980465, 0, 0.951068401)
+CFrameMon = CFrame.new(-2251.5791, 52.2714615, -13033.3965, -0.991971016, 0, -0.126466095, 0, 1, 0, 0.126466095, 0, -0.991971016)
+elseif Lv == 2300 or Lv <= 2324 or SelectMonster == "Cocoa Warrior" or SelectArea == 'Choco Island' then
+Ms = "Cocoa Warrior"
+NameQuest = "ChocQuest1"
+QuestLv = 1
+NameMon = "Cocoa Warrior"
+CFrameQ = CFrame.new(231.75, 23.9003029, -12200.292, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+CFrameMon = CFrame.new(167.978516, 26.2254658, -12238.874, -0.939700961, 0, 0.341998369, 0, 1, 0, -0.341998369, 0, -0.939700961)
+elseif Lv == 2325 or Lv <= 2349 or SelectMonster == "Chocolate Bar Battler" or SelectArea == 'Choco Island' then
+Ms = "Chocolate Bar Battler"
+NameQuest = "ChocQuest1"
+QuestLv = 2
+NameMon = "Chocolate Bar Battler"
+CFrameQ = CFrame.new(231.75, 23.9003029, -12200.292, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+CFrameMon = CFrame.new(701.312073, 25.5824986, -12708.2148, -0.342042685, 0, -0.939684391, 0, 1, 0, 0.939684391, 0, -0.342042685)
+elseif Lv == 2350 or Lv <= 2374 or SelectMonster == "Sweet Thief" or SelectArea == 'Choco Island' then
+Ms = "Sweet Thief"
+NameQuest = "ChocQuest2"
+QuestLv = 1
+NameMon = "Sweet Thief"
+CFrameQ = CFrame.new(151.198242, 23.8907146, -12774.6172, 0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, 0.422592998)
+CFrameMon = CFrame.new(-140.258301, 25.5824986, -12652.3115, 0.173624337, -0, -0.984811902, 0, 1, -0, 0.984811902, 0, 0.173624337)
+elseif Lv == 2375 or Lv <= 2400 or SelectMonster == "Candy Rebel" or SelectArea == 'Choco Island' then
+Ms = "Candy Rebel"
+NameQuest = "ChocQuest2"
+QuestLv = 2
+NameMon = "Candy Rebel"
+CFrameQ = CFrame.new(151.198242, 23.8907146, -12774.6172, 0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, 0.422592998)
+CFrameMon = CFrame.new(47.9231453, 25.5824986, -13029.2402, -0.819156051, 0, -0.573571265, 0, 1, 0, 0.573571265, 0, -0.819156051)
+elseif Lv == 2400 or Lv <= 2424 or SelectMonster == "Candy Pirate" or SelectArea == 'Candy Island' then
+Ms = "Candy Pirate"
+NameQuest = "CandyQuest1"
+QuestLv = 1
+NameMon = "Candy Pirate"
+CFrameQ = CFrame.new(-1149.328, 13.5759039, -14445.6143, -0.156446099, 0, -0.987686574, 0, 1, 0, 0.987686574, 0, -0.156446099)
+CFrameMon = CFrame.new(-1437.56348, 17.1481285, -14385.6934, 0.173624337, -0, -0.984811902, 0, 1, -0, 0.984811902, 0, 0.173624337)
+elseif Lv == 2425 or Lv <= 2449 or SelectMonster == "Snow Demon" or SelectArea == 'Candy Island' then
+Ms = "Snow Demon"
+NameQuest = "CandyQuest1"
+QuestLv = 2
+NameMon = "Snow Demon"
+CFrameQ = CFrame.new(-1149.328, 13.5759039, -14445.6143, -0.156446099, 0, -0.987686574, 0, 1, 0, 0.987686574, 0, -0.156446099)
+CFrameMon = CFrame.new(-916.222656, 17.1481285, -14638.8125, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
+elseif Lv == 2450 or Lv <= 2474 or SelectMonster == "Isle Outlaw" or SelectArea == 'Tiki Outpost' then
+Ms = "Isle Outlaw"
+NameQuest = "TikiQuest1"
+QuestLv = 1
+NameMon = "Isle Outlaw"
+CFrameQ = CFrame.new(-16549.890625, 55.68635559082031, -179.91360473632812)
+CFrameMon = CFrame.new(-16162.8193359375, 11.6863374710083, -96.45481872558594)
+elseif Lv == 2475 or Lv <= 2499 or SelectMonster == "Island Boy" or SelectArea == 'Tiki Outpost' then 
+Ms = "Island Boy"
+NameQuest = "TikiQuest1"
+QuestLv = 2
+NameMon = "Island Boy"
+CFrameQ = CFrame.new(-16549.890625, 55.68635559082031, -179.91360473632812)
+CFrameMon = CFrame.new(-16912.130859375, 11.787443161010742, -133.0850830078125)
+elseif Lv == 2500 or Lv <= 2424 then
+Ms = "Sun-kissed Warrior"
+QuestLv = 1
+NameQuest = "TikiQuest2"
+NameMon = "kissed"
+CFrameQ = CFrame.new(-16539.078125, 55.68632888793945, 1051.5738525390625)
+CFrameMon = CFrame.new(-16349.8779296875, 92.0808334350586, 1123.4169921875)
+elseif Lv >= 2525 or SelectMonster == "Isle Champion" or SelectArea == 'Tiki Outpost' then
+Ms = "Isle Champion"
+NameQuest = "TikiQuest2"
+QuestLv = 2
+NameMon = "Isle Champion"
+CFrameQ = CFrame.new(-16542.447265625, 55.68632888793945, 1044.41650390625)
+CFrameMon = CFrame.new(-16848.94140625, 21.68633460998535, 1041.4490966796875)
+end
+end
+end
+
+--// Select Monster
+if First_Sea then
+tableMon = {
+  "Bandit","Monkey","Gorilla","Pirate","Brute","Desert Bandit","Desert Officer","Snow Bandit","Snowman","Chief Petty Officer","Sky Bandit","Dark Master","Prisoner", "Dangerous Prisoner","Toga Warrior","Gladiator","Military Soldier","Military Spy","Fishman Warrior","Fishman Commando","God's Guard","Shanda","Royal Squad","Royal Soldier","Galley Pirate","Galley Captain"
+} elseif Second_Sea then
+tableMon = {
+  "Raider","Mercenary","Swan Pirate","Factory Staff","Marine Lieutenant","Marine Captain","Zombie","Vampire","Snow Trooper","Winter Warrior","Lab Subordinate","Horned Warrior","Magma Ninja","Lava Pirate","Ship Deckhand","Ship Engineer","Ship Steward","Ship Officer","Arctic Warrior","Snow Lurker","Sea Soldier","Water Fighter"
+} elseif Third_Sea then
+tableMon = {
+  "Pirate Millionaire","Dragon Crew Warrior","Dragon Crew Archer","Female Islander","Giant Islander","Marine Commodore","Marine Rear Admiral","Fishman Raider","Fishman Captain","Forest Pirate","Mythological Pirate","Jungle Pirate","Musketeer Pirate","Reborn Skeleton","Living Zombie","Demonic Soul","Posessed Mummy", "Peanut Scout", "Peanut President", "Ice Cream Chef", "Ice Cream Commander", "Cookie Crafter", "Cake Guard", "Baking Staff", "Head Baker", "Cocoa Warrior", "Chocolate Bar Battler", "Sweet Thief", "Candy Rebel", "Candy Pirate", "Snow Demon","Isle Outlaw","Island Boy","Isle Champion"
+}
+end
+
+--// Select Island
+if First_Sea then
+AreaList = {
+  'Jungle', 'Buggy', 'Desert', 'Snow', 'Marine', 'Sky', 'Prison', 'Colosseum', 'Magma', 'Fishman', 'Sky Island', 'Fountain'
+} elseif Second_Sea then
+AreaList = {
+  'Area 1', 'Area 2', 'Zombie', 'Marine', 'Snow Mountain', 'Ice fire', 'Ship', 'Frost', 'Forgotten'
+} elseif Third_Sea then
+AreaList = {
+  'Pirate Port', 'Amazon', 'Marine Tree', 'Deep Forest', 'Haunted Castle', 'Nut Island', 'Ice Cream Island', 'Cake Island', 'Choco Island', 'Candy Island','Tiki Outpost'
+}
+end
+
+--// Check Boss Quest
+function CheckBossQuest()
+if First_Sea then
+if SelectBoss == "The Gorilla King" then
+BossMon = "The Gorilla King"
+NameBoss = 'The Gorrila King'
+NameQuestBoss = "JungleQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$2,000\n7,000 Exp."
+CFrameQBoss = CFrame.new(-1601.6553955078, 36.85213470459, 153.38809204102)
+CFrameBoss = CFrame.new(-1088.75977, 8.13463783, -488.559906, -0.707134247, 0, 0.707079291, 0, 1, 0, -0.707079291, 0, -0.707134247)
+elseif SelectBoss == "Bobby" then
+BossMon = "Bobby"
+NameBoss = 'Bobby'
+NameQuestBoss = "BuggyQuest1"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$8,000\n35,000 Exp."
+CFrameQBoss = CFrame.new(-1140.1761474609, 4.752049446106, 3827.4057617188)
+CFrameBoss = CFrame.new(-1087.3760986328, 46.949409484863, 4040.1462402344)
+elseif SelectBoss == "The Saw" then
+BossMon = "The Saw"
+NameBoss = 'The Saw'
+CFrameBoss = CFrame.new(-784.89715576172, 72.427383422852, 1603.5822753906)
+elseif SelectBoss == "Yeti" then
+BossMon = "Yeti"
+NameBoss = 'Yeti'
+NameQuestBoss = "SnowQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$10,000\n180,000 Exp."
+CFrameQBoss = CFrame.new(1386.8073730469, 87.272789001465, -1298.3576660156)
+CFrameBoss = CFrame.new(1218.7956542969, 138.01184082031, -1488.0262451172)
+elseif SelectBoss == "Mob Leader" then
+BossMon = "Mob Leader"
+NameBoss = 'Mob Leader'
+CFrameBoss = CFrame.new(-2844.7307128906, 7.4180502891541, 5356.6723632813)
+elseif SelectBoss == "Vice Admiral" then
+BossMon = "Vice Admiral"
+NameBoss = 'Vice Admiral'
+NameQuestBoss = "MarineQuest2"
+QuestLvBoss = 2
+RewardBoss = "Reward:\n$10,000\n180,000 Exp."
+CFrameQBoss = CFrame.new(-5036.2465820313, 28.677835464478, 4324.56640625)
+CFrameBoss = CFrame.new(-5006.5454101563, 88.032081604004, 4353.162109375)
+elseif SelectBoss == "Saber Expert" then
+NameBoss = 'Saber Expert'
+BossMon = "Saber Expert"
+CFrameBoss = CFrame.new(-1458.89502, 29.8870335, -50.633564)
+elseif SelectBoss == "Warden" then
+BossMon = "Warden"
+NameBoss = 'Warden'
+NameQuestBoss = "ImpelQuest"
+QuestLvBoss = 1
+RewardBoss = "Reward:\n$6,000\n850,000 Exp."
+CFrameBoss = CFrame.new(5278.04932, 2.15167475, 944.101929, 0.220546961, -4.49946401e-06, 0.975376427, -1.95412576e-05, 1, 9.03162072e-06, -0.975376427, -2.10519756e-05, 0.220546961)
+CFrameQBoss = CFrame.new(5191.86133, 2.84020686, 686.438721, -0.731384635, 0, 0.681965172, 0, 1, 0, -0.681965172, 0, -0.731384635)
+elseif SelectBoss == "Chief Warden" then
+BossMon = "Chief Warden"
+NameBoss = 'Chief Warden'
+NameQuestBoss = "ImpelQuest"
+QuestLvBoss = 2
+RewardBoss = "Reward:\n$10,000\n1,000,000 Exp."
+CFrameBoss = CFrame.new(5206.92578, 0.997753382, 814.976746, 0.342041343, -0.00062915677, 0.939684749, 0.00191645394, 0.999998152, -2.80422337e-05, -0.939682961, 0.00181045406, 0.342041939)
+CFrameQBoss = CFrame.new(5191.86133, 2.84020686, 686.438721, -0.731384635, 0, 0.681965172, 0, 1, 0, -0.681965172, 0, -0.731384635)
+elseif SelectBoss == "Swan" then
+BossMon = "Swan"
+NameBoss = 'Swan'
+NameQuestBoss = "ImpelQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$15,000\n1,600,000 Exp."
+CFrameBoss = CFrame.new(5325.09619, 7.03906584, 719.570679, -0.309060812, 0, 0.951042235, 0, 1, 0, -0.951042235, 0, -0.309060812)
+CFrameQBoss = CFrame.new(5191.86133, 2.84020686, 686.438721, -0.731384635, 0, 0.681965172, 0, 1, 0, -0.681965172, 0, -0.731384635)
+elseif SelectBoss == "Magma Admiral" then
+BossMon = "Magma Admiral"
+NameBoss = 'Magma Admiral'
+NameQuestBoss = "MagmaQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$15,000\n2,800,000 Exp."
+CFrameQBoss = CFrame.new(-5314.6220703125, 12.262420654297, 8517.279296875)
+CFrameBoss = CFrame.new(-5765.8969726563, 82.92064666748, 8718.3046875)
+elseif SelectBoss == "Fishman Lord" then
+BossMon = "Fishman Lord"
+NameBoss = 'Fishman Lord'
+NameQuestBoss = "FishmanQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$15,000\n4,000,000 Exp."
+CFrameQBoss = CFrame.new(61122.65234375, 18.497442245483, 1569.3997802734)
+CFrameBoss = CFrame.new(61260.15234375, 30.950881958008, 1193.4329833984)
+elseif SelectBoss == "Wysper" then
+BossMon = "Wysper"
+NameBoss = 'Wysper'
+NameQuestBoss = "SkyExp1Quest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$15,000\n4,800,000 Exp."
+CFrameQBoss = CFrame.new(-7861.947265625, 5545.517578125, -379.85974121094)
+CFrameBoss = CFrame.new(-7866.1333007813, 5576.4311523438, -546.74816894531)
+elseif SelectBoss == "Thunder God" then
+BossMon = "Thunder God"
+NameBoss = 'Thunder God'
+NameQuestBoss = "SkyExp2Quest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$20,000\n5,800,000 Exp."
+CFrameQBoss = CFrame.new(-7903.3828125, 5635.9897460938, -1410.923828125)
+CFrameBoss = CFrame.new(-7994.984375, 5761.025390625, -2088.6479492188)
+elseif SelectBoss == "Cyborg" then
+BossMon = "Cyborg"
+NameBoss = 'Cyborg'
+NameQuestBoss = "FountainQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$20,000\n7,500,000 Exp."
+CFrameQBoss = CFrame.new(5258.2788085938, 38.526931762695, 4050.044921875)
+CFrameBoss = CFrame.new(6094.0249023438, 73.770050048828, 3825.7348632813)
+elseif SelectBoss == "Ice Admiral" then
+BossMon = "Ice Admiral"
+NameBoss = 'Ice Admiral'
+CFrameBoss = CFrame.new(1266.08948, 26.1757946, -1399.57678, -0.573599219, 0, -0.81913656, 0, 1, 0, 0.81913656, 0, -0.573599219)
+elseif SelectBoss == "Greybeard" then
+BossMon = "Greybeard"
+NameBoss = 'Greybeard'
+CFrameBoss = CFrame.new(-5081.3452148438, 85.221641540527, 4257.3588867188)
+end
+end
+if Second_Sea then
+if SelectBoss == "Diamond" then
+BossMon = "Diamond"
+NameBoss = 'Diamond'
+NameQuestBoss = "Area1Quest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$25,000\n9,000,000 Exp."
+CFrameQBoss = CFrame.new(-427.5666809082, 73.313781738281, 1835.4208984375)
+CFrameBoss = CFrame.new(-1576.7166748047, 198.59265136719, 13.724286079407)
+elseif SelectBoss == "Jeremy" then
+BossMon = "Jeremy"
+NameBoss = 'Jeremy'
+NameQuestBoss = "Area2Quest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$25,000\n11,500,000 Exp."
+CFrameQBoss = CFrame.new(636.79943847656, 73.413787841797, 918.00415039063)
+CFrameBoss = CFrame.new(2006.9261474609, 448.95666503906, 853.98284912109)
+elseif SelectBoss == "Fajita" then
+BossMon = "Fajita"
+NameBoss = 'Fajita'
+NameQuestBoss = "MarineQuest3"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$25,000\n15,000,000 Exp."
+CFrameQBoss = CFrame.new(-2441.986328125, 73.359344482422, -3217.5324707031)
+CFrameBoss = CFrame.new(-2172.7399902344, 103.32216644287, -4015.025390625)
+elseif SelectBoss == "Don Swan" then
+BossMon = "Don Swan"
+NameBoss = 'Don Swan'
+CFrameBoss = CFrame.new(2286.2004394531, 15.177839279175, 863.8388671875)
+elseif SelectBoss == "Smoke Admiral" then
+BossMon = "Smoke Admiral"
+NameBoss = 'Smoke Admiral'
+NameQuestBoss = "IceSideQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$20,000\n25,000,000 Exp."
+CFrameQBoss = CFrame.new(-5429.0473632813, 15.977565765381, -5297.9614257813)
+CFrameBoss = CFrame.new(-5275.1987304688, 20.757257461548, -5260.6669921875)
+elseif SelectBoss == "Awakened Ice Admiral" then
+BossMon = "Awakened Ice Admiral"
+NameBoss = 'Awakened Ice Admiral'
+NameQuestBoss = "FrostQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$20,000\n36,000,000 Exp."
+CFrameQBoss = CFrame.new(5668.9780273438, 28.519989013672, -6483.3520507813)
+CFrameBoss = CFrame.new(6403.5439453125, 340.29766845703, -6894.5595703125)
+elseif SelectBoss == "Tide Keeper" then
+BossMon = "Tide Keeper"
+NameBoss = 'Tide Keeper'
+NameQuestBoss = "ForgottenQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$12,500\n38,000,000 Exp."
+CFrameQBoss = CFrame.new(-3053.9814453125, 237.18954467773, -10145.0390625)
+CFrameBoss = CFrame.new(-3795.6423339844, 105.88877105713, -11421.307617188)
+elseif SelectBoss == "Darkbeard" then
+BossMon = "Darkbeard"
+NameBoss = 'Darkbeard'
+CFrameMon = CFrame.new(3677.08203125, 62.751937866211, -3144.8332519531)
+elseif SelectBoss == "Cursed Captain" then
+BossMon = "Cursed Captain"
+NameBoss = 'Cursed Captain'
+CFrameBoss = CFrame.new(916.928589, 181.092773, 33422)
+elseif SelectBoss == "Order" then
+BossMon = "Order"
+NameBoss = 'Order'
+CFrameBoss = CFrame.new(-6217.2021484375, 28.047645568848, -5053.1357421875)
+end
+end
+if Third_Sea then
+if SelectBoss == "Stone" then
+BossMon = "Stone"
+NameBoss = 'Stone'
+NameQuestBoss = "PiratePortQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$25,000\n40,000,000 Exp."
+CFrameQBoss = CFrame.new(-289.76705932617, 43.819011688232, 5579.9384765625)
+CFrameBoss = CFrame.new(-1027.6512451172, 92.404174804688, 6578.8530273438)
+elseif SelectBoss == "Island Empress" then
+BossMon = "Island Empress"
+NameBoss = 'Island Empress'
+NameQuestBoss = "AmazonQuest2"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$30,000\n52,000,000 Exp."
+CFrameQBoss = CFrame.new(5445.9541015625, 601.62945556641, 751.43792724609)
+CFrameBoss = CFrame.new(5543.86328125, 668.97399902344, 199.0341796875)
+elseif SelectBoss == "Kilo Admiral" then
+BossMon = "Kilo Admiral"
+NameBoss = 'Kilo Admiral'
+NameQuestBoss = "MarineTreeIsland"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$35,000\n56,000,000 Exp."
+CFrameQBoss = CFrame.new(2179.3010253906, 28.731239318848, -6739.9741210938)
+CFrameBoss = CFrame.new(2764.2233886719, 432.46154785156, -7144.4580078125)
+elseif SelectBoss == "Captain Elephant" then
+BossMon = "Captain Elephant"
+NameBoss = 'Captain Elephant'
+NameQuestBoss = "DeepForestIsland"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$40,000\n67,000,000 Exp."
+CFrameQBoss = CFrame.new(-13232.682617188, 332.40396118164, -7626.01171875)
+CFrameBoss = CFrame.new(-13376.7578125, 433.28689575195, -8071.392578125)
+elseif SelectBoss == "Beautiful Pirate" then
+BossMon = "Beautiful Pirate"
+NameBoss = 'Beautiful Pirate'
+NameQuestBoss = "DeepForestIsland2"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$50,000\n70,000,000 Exp."
+CFrameQBoss = CFrame.new(-12682.096679688, 390.88653564453, -9902.1240234375)
+CFrameBoss = CFrame.new(5283.609375, 22.56223487854, -110.78285217285)
+elseif SelectBoss == "Cake Queen" then
+BossMon = "Cake Queen"
+NameBoss = 'Cake Queen'
+NameQuestBoss = "IceCreamIslandQuest"
+QuestLvBoss = 3
+RewardBoss = "Reward:\n$30,000\n112,500,000 Exp."
+CFrameQBoss = CFrame.new(-819.376709, 64.9259796, -10967.2832, -0.766061664, 0, 0.642767608, 0, 1, 0, -0.642767608, 0, -0.766061664)
+CFrameBoss = CFrame.new(-678.648804, 381.353943, -11114.2012, -0.908641815, 0.00149294338, 0.41757378, 0.00837114919, 0.999857843, 0.0146408929, -0.417492568, 0.0167988986, -0.90852499)
+elseif SelectBoss == "Longma" then
+BossMon = "Longma"
+NameBoss = 'Longma'
+CFrameBoss = CFrame.new(-10238.875976563, 389.7912902832, -9549.7939453125)
+elseif SelectBoss == "Soul Reaper" then
+BossMon = "Soul Reaper"
+NameBoss = 'Soul Reaper'
+CFrameBoss = CFrame.new(-9524.7890625, 315.80429077148, 6655.7192382813)
+elseif SelectBoss == "rip_indra True Form" then
+BossMon = "rip_indra True Form"
+NameBoss = 'rip_indra True Form'
+CFrameBoss = CFrame.new(-5415.3920898438, 505.74133300781, -2814.0166015625)
+end
+end
+end
+
+--// Check Material
+function MaterialMon()
+if SelectMaterial == "Radioactive Material" then
+MMon = "Factory Staff"
+MPos = CFrame.new(295,73,-56)
+SP = "Default"
+elseif SelectMaterial == "Mystic Droplet" then
+MMon = "Water Fighter"
+MPos = CFrame.new(-3385,239,-10542)
+SP = "Default"
+elseif SelectMaterial == "Magma Ore" then
+if First_Sea then
+MMon = "Military Spy"
+MPos = CFrame.new(-5815,84,8820)
+SP = "Default"
+elseif Second_Sea then
+MMon = "Magma Ninja"
+MPos = CFrame.new(-5428,78,-5959)
+SP = "Default"
+end
+elseif SelectMaterial == "Angel Wings" then
+MMon = "God's Guard"
+MPos = CFrame.new(-4698,845,-1912)
+SP = "Default"
+if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(-7859.09814, 5544.19043, -381.476196)).Magnitude >= 5000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7859.09814, 5544.19043, -381.476196))
+end
+elseif SelectMaterial == "Leather" then
+if First_Sea then
+MMon = "Brute"
+MPos = CFrame.new(-1145,15,4350)
+SP = "Default"
+elseif Second_Sea then
+MMon = "Marine Captain"
+MPos = CFrame.new(-2010.5059814453125, 73.00115966796875, -3326.620849609375)
+SP = "Default"
+elseif Third_Sea then
+MMon = "Jungle Pirate"
+MPos = CFrame.new(-11975.78515625, 331.7734069824219, -10620.0302734375)
+SP = "Default"
+end
+elseif SelectMaterial == "Scrap Metal" then
+if First_Sea then
+MMon = "Brute"
+MPos = CFrame.new(-1145,15,4350)
+SP = "Default"
+elseif Second_Sea then
+MMon = "Swan Pirate"
+MPos = CFrame.new(878,122,1235)
+SP = "Default"
+elseif Third_Sea then
+MMon = "Jungle Pirate"
+MPos = CFrame.new(-12107,332,-10549)
+SP = "Default"
+end
+elseif SelectMaterial == "Fish Tail" then
+if Third_Sea then
+MMon = "Fishman Raider"
+MPos = CFrame.new(-10993,332,-8940)
+SP = "Default"
+elseif First_Sea then
+MMon = "Fishman Warrior"
+MPos = CFrame.new(61123,19,1569)
+SP = "Default"
+if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(61163.8515625, 5.342342376708984, 1819.7841796875)).Magnitude >= 17000 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 5.342342376708984, 1819.7841796875))
+end
+end
+elseif SelectMaterial == "Demonic Wisp" then
+MMon = "Demonic Soul"
+MPos = CFrame.new(-9507,172,6158)
+SP = "Default"
+elseif SelectMaterial == "Vampire Fang" then
+MMon = "Vampire"
+MPos = CFrame.new(-6033,7,-1317)
+SP = "Default"
+elseif SelectMaterial == "Conjured Cocoa" then
+MMon = "Chocolate Bar Battler"
+MPos = CFrame.new(620.6344604492188,78.93644714355469, -12581.369140625)
+SP = "Default"
+elseif SelectMaterial == "Dragon Scale" then
+MMon = "Dragon Crew Archer"
+MPos = CFrame.new(6594,383,139)
+SP = "Default"
+elseif SelectMaterial == "Gunpowder" then
+MMon = "Pistol Billionaire"
+MPos = CFrame.new(-469,74,5904)
+SP = "Default"
+elseif SelectMaterial == "Mini Tusk" then
+MMon = "Mythological Pirate"
+MPos = CFrame.new(-13545,470,-6917)
+SP = "Default"
+end
+end
+
+
+
+
+---------------------Esp
+
+function UpdateIslandESP() 
+    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+        pcall(function()
+            if IslandESP then 
+                if v.Name ~= "Sea" then
+                    if not v:FindFirstChild('NameEsp') then
+                        local bill = Instance.new('BillboardGui',v)
+                        bill.Name = 'NameEsp'
+                        bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                        bill.Size = UDim2.new(1,200,1,30)
+                        bill.Adornee = v
+                        bill.AlwaysOnTop = true
+                        local name = Instance.new('TextLabel',bill)
+                        name.Font = "GothamBold"
+                        name.FontSize = "Size14"
+                        name.TextWrapped = true
+                        name.Size = UDim2.new(1,0,1,0)
+                        name.TextYAlignment = 'Top'
+                        name.BackgroundTransparency = 1
+                        name.TextStrokeTransparency = 0.5
+                        name.TextColor3 = Color3.fromRGB(8, 0, 0)
+                    else
+                        v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                    end
+                end
+            else
+                if v:FindFirstChild('NameEsp') then
+                    v:FindFirstChild('NameEsp'):Destroy()
+                end
+            end
+        end)
+    end
+end
+
+function isnil(thing)
+return (thing == nil)
+end
+local function round(n)
+return math.floor(tonumber(n) + 0.5)
+end
+Number = math.random(1, 1000000)
+function UpdatePlayerChams()
+for i,v in pairs(game:GetService'Players':GetChildren()) do
+    pcall(function()
+        if not isnil(v.Character) then
+            if ESPPlayer then
+                if not isnil(v.Character.Head) and not v.Character.Head:FindFirstChild('NameEsp'..Number) then
+                    local bill = Instance.new('BillboardGui',v.Character.Head)
+                    bill.Name = 'NameEsp'..Number
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v.Character.Head
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = Enum.Font.GothamSemibold
+                    name.FontSize = "Size10"
+                    name.TextWrapped = true
+                    name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' Distance')
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    if v.Team == game.Players.LocalPlayer.Team then
+                        name.TextColor3 = Color3.new(0,0,254)
+                    else
+                        name.TextColor3 = Color3.new(255,0,0)
+                    end
+                else
+                    v.Character.Head['NameEsp'..Number].TextLabel.Text = (v.Name ..' | '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' Distance\nHealth : ' .. round(v.Character.Humanoid.Health*100/v.Character.Humanoid.MaxHealth) .. '%')
+                end
+            else
+                if v.Character.Head:FindFirstChild('NameEsp'..Number) then
+                    v.Character.Head:FindFirstChild('NameEsp'..Number):Destroy()
+                end
+            end
+        end
+    end)
+end
+end
+function UpdateChestChams() 
+for i,v in pairs(game.Workspace:GetChildren()) do
+    pcall(function()
+        if string.find(v.Name,"Chest") then
+            if ChestESP then
+                if string.find(v.Name,"Chest") then
+                    if not v:FindFirstChild('NameEsp'..Number) then
+                        local bill = Instance.new('BillboardGui',v)
+                        bill.Name = 'NameEsp'..Number
+                        bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                        bill.Size = UDim2.new(1,200,1,30)
+                        bill.Adornee = v
+                        bill.AlwaysOnTop = true
+                        local name = Instance.new('TextLabel',bill)
+                        name.Font = Enum.Font.GothamSemibold
+                        name.FontSize = "Size14"
+                        name.TextWrapped = true
+                        name.Size = UDim2.new(1,0,1,0)
+                        name.TextYAlignment = 'Top'
+                        name.BackgroundTransparency = 1
+                        name.TextStrokeTransparency = 0.5
+                        if v.Name == "Chest1" then
+                            name.TextColor3 = Color3.fromRGB(109, 109, 109)
+                            name.Text = ("Chest 1" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        end
+                        if v.Name == "Chest2" then
+                            name.TextColor3 = Color3.fromRGB(173, 158, 21)
+                            name.Text = ("Chest 2" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        end
+                        if v.Name == "Chest3" then
+                            name.TextColor3 = Color3.fromRGB(85, 255, 255)
+                            name.Text = ("Chest 3" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        end
+                    else
+                        v['NameEsp'..Number].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                    end
+                end
+            else
+                if v:FindFirstChild('NameEsp'..Number) then
+                    v:FindFirstChild('NameEsp'..Number):Destroy()
+                end
+            end
+        end
+    end)
+end
+end
+function UpdateDevilChams() 
+for i,v in pairs(game.Workspace:GetChildren()) do
+    pcall(function()
+        if DevilFruitESP then
+            if string.find(v.Name, "Fruit") then   
+                if not v.Handle:FindFirstChild('NameEsp'..Number) then
+                    local bill = Instance.new('BillboardGui',v.Handle)
+                    bill.Name = 'NameEsp'..Number
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v.Handle
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = Enum.Font.GothamSemibold
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+                else
+                    v.Handle['NameEsp'..Number].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+                end
+            end
+        else
+            if v.Handle:FindFirstChild('NameEsp'..Number) then
+                v.Handle:FindFirstChild('NameEsp'..Number):Destroy()
+            end
+        end
+    end)
+end
+end
+function UpdateFlowerChams() 
+for i,v in pairs(game.Workspace:GetChildren()) do
+    pcall(function()
+        if v.Name == "Flower2" or v.Name == "Flower1" then
+            if FlowerESP then 
+                if not v:FindFirstChild('NameEsp'..Number) then
+                    local bill = Instance.new('BillboardGui',v)
+                    bill.Name = 'NameEsp'..Number
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = Enum.Font.GothamSemibold
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(255, 0, 0)
+                    if v.Name == "Flower1" then 
+                        name.Text = ("Blue Flower" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        name.TextColor3 = Color3.fromRGB(0, 0, 255)
+                    end
+                    if v.Name == "Flower2" then
+                        name.Text = ("Red Flower" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        name.TextColor3 = Color3.fromRGB(255, 0, 0)
+                    end
+                else
+                    v['NameEsp'..Number].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                end
+            else
+                if v:FindFirstChild('NameEsp'..Number) then
+                v:FindFirstChild('NameEsp'..Number):Destroy()
+                end
+            end
+        end   
+    end)
+end
+end
+function UpdateRealFruitChams() 
+for i,v in pairs(game.Workspace.AppleSpawner:GetChildren()) do
+    if v:IsA("Tool") then
+        if RealFruitESP then 
+            if not v.Handle:FindFirstChild('NameEsp'..Number) then
+                local bill = Instance.new('BillboardGui',v.Handle)
+                bill.Name = 'NameEsp'..Number
+                bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                bill.Size = UDim2.new(1,200,1,30)
+                bill.Adornee = v.Handle
+                bill.AlwaysOnTop = true
+                local name = Instance.new('TextLabel',bill)
+                name.Font = Enum.Font.GothamSemibold
+                name.FontSize = "Size14"
+                name.TextWrapped = true
+                name.Size = UDim2.new(1,0,1,0)
+                name.TextYAlignment = 'Top'
+                name.BackgroundTransparency = 1
+                name.TextStrokeTransparency = 0.5
+                name.TextColor3 = Color3.fromRGB(255, 0, 0)
+                name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            else
+                v.Handle['NameEsp'..Number].TextLabel.Text = (v.Name ..' '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            end
+        else
+            if v.Handle:FindFirstChild('NameEsp'..Number) then
+                v.Handle:FindFirstChild('NameEsp'..Number):Destroy()
+            end
+        end 
+    end
+end
+for i,v in pairs(game.Workspace.PineappleSpawner:GetChildren()) do
+    if v:IsA("Tool") then
+        if RealFruitESP then 
+            if not v.Handle:FindFirstChild('NameEsp'..Number) then
+                local bill = Instance.new('BillboardGui',v.Handle)
+                bill.Name = 'NameEsp'..Number
+                bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                bill.Size = UDim2.new(1,200,1,30)
+                bill.Adornee = v.Handle
+                bill.AlwaysOnTop = true
+                local name = Instance.new('TextLabel',bill)
+                name.Font = Enum.Font.GothamSemibold
+                name.FontSize = "Size14"
+                name.TextWrapped = true
+                name.Size = UDim2.new(1,0,1,0)
+                name.TextYAlignment = 'Top'
+                name.BackgroundTransparency = 1
+                name.TextStrokeTransparency = 0.5
+                name.TextColor3 = Color3.fromRGB(255, 174, 0)
+                name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            else
+                v.Handle['NameEsp'..Number].TextLabel.Text = (v.Name ..' '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            end
+        else
+            if v.Handle:FindFirstChild('NameEsp'..Number) then
+                v.Handle:FindFirstChild('NameEsp'..Number):Destroy()
+            end
+        end 
+    end
+end
+for i,v in pairs(game.Workspace.BananaSpawner:GetChildren()) do
+    if v:IsA("Tool") then
+        if RealFruitESP then 
+            if not v.Handle:FindFirstChild('NameEsp'..Number) then
+                local bill = Instance.new('BillboardGui',v.Handle)
+                bill.Name = 'NameEsp'..Number
+                bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                bill.Size = UDim2.new(1,200,1,30)
+                bill.Adornee = v.Handle
+                bill.AlwaysOnTop = true
+                local name = Instance.new('TextLabel',bill)
+                name.Font = Enum.Font.GothamSemibold
+                name.FontSize = "Size14"
+                name.TextWrapped = true
+                name.Size = UDim2.new(1,0,1,0)
+                name.TextYAlignment = 'Top'
+                name.BackgroundTransparency = 1
+                name.TextStrokeTransparency = 0.5
+                name.TextColor3 = Color3.fromRGB(251, 255, 0)
+                name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            else
+                v.Handle['NameEsp'..Number].TextLabel.Text = (v.Name ..' '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            end
+        else
+            if v.Handle:FindFirstChild('NameEsp'..Number) then
+                v.Handle:FindFirstChild('NameEsp'..Number):Destroy()
+            end
+        end 
+    end
+end
+end
+
+function UpdateIslandESP() 
+    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+        pcall(function()
+            if IslandESP then 
+                if v.Name ~= "Sea" then
+                    if not v:FindFirstChild('NameEsp') then
+                        local bill = Instance.new('BillboardGui',v)
+                        bill.Name = 'NameEsp'
+                        bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                        bill.Size = UDim2.new(1,200,1,30)
+                        bill.Adornee = v
+                        bill.AlwaysOnTop = true
+                        local name = Instance.new('TextLabel',bill)
+                        name.Font = "GothamBold"
+                        name.FontSize = "Size14"
+                        name.TextWrapped = true
+                        name.Size = UDim2.new(1,0,1,0)
+                        name.TextYAlignment = 'Top'
+                        name.BackgroundTransparency = 1
+                        name.TextStrokeTransparency = 0.5
+                        name.TextColor3 = Color3.fromRGB(7, 236, 240)
+                    else
+                        v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                    end
+                end
+            else
+                if v:FindFirstChild('NameEsp') then
+                    v:FindFirstChild('NameEsp'):Destroy()
+                end
+            end
+        end)
+    end
+end
+
+function isnil(thing)
+return (thing == nil)
+end
+local function round(n)
+return math.floor(tonumber(n) + 0.5)
+end
+Number = math.random(1, 1000000)
+function UpdatePlayerChams()
+for i,v in pairs(game:GetService'Players':GetChildren()) do
+    pcall(function()
+        if not isnil(v.Character) then
+            if ESPPlayer then
+                if not isnil(v.Character.Head) and not v.Character.Head:FindFirstChild('NameEsp'..Number) then
+                    local bill = Instance.new('BillboardGui',v.Character.Head)
+                    bill.Name = 'NameEsp'..Number
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v.Character.Head
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = Enum.Font.GothamSemibold
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' Distance')
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    if v.Team == game.Players.LocalPlayer.Team then
+                        name.TextColor3 = Color3.new(0,255,0)
+                    else
+                        name.TextColor3 = Color3.new(255,0,0)
+                    end
+                else
+                    v.Character.Head['NameEsp'..Number].TextLabel.Text = (v.Name ..' | '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' Distance\nHealth : ' .. round(v.Character.Humanoid.Health*100/v.Character.Humanoid.MaxHealth) .. '%')
+                end
+            else
+                if v.Character.Head:FindFirstChild('NameEsp'..Number) then
+                    v.Character.Head:FindFirstChild('NameEsp'..Number):Destroy()
+                end
+            end
+        end
+    end)
+end
+end
+function UpdateChestChams() 
+for i,v in pairs(game.Workspace:GetChildren()) do
+    pcall(function()
+        if string.find(v.Name,"Chest") then
+            if ChestESP then
+                if string.find(v.Name,"Chest") then
+                    if not v:FindFirstChild('NameEsp'..Number) then
+                        local bill = Instance.new('BillboardGui',v)
+                        bill.Name = 'NameEsp'..Number
+                        bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                        bill.Size = UDim2.new(1,200,1,30)
+                        bill.Adornee = v
+                        bill.AlwaysOnTop = true
+                        local name = Instance.new('TextLabel',bill)
+                        name.Font = Enum.Font.GothamSemibold
+                        name.FontSize = "Size14"
+                        name.TextWrapped = true
+                        name.Size = UDim2.new(1,0,1,0)
+                        name.TextYAlignment = 'Top'
+                        name.BackgroundTransparency = 1
+                        name.TextStrokeTransparency = 0.5
+                        if v.Name == "Chest1" then
+                            name.TextColor3 = Color3.fromRGB(109, 109, 109)
+                            name.Text = ("Chest 1" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        end
+                        if v.Name == "Chest2" then
+                            name.TextColor3 = Color3.fromRGB(173, 158, 21)
+                            name.Text = ("Chest 2" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        end
+                        if v.Name == "Chest3" then
+                            name.TextColor3 = Color3.fromRGB(85, 255, 255)
+                            name.Text = ("Chest 3" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        end
+                    else
+                        v['NameEsp'..Number].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                    end
+                end
+            else
+                if v:FindFirstChild('NameEsp'..Number) then
+                    v:FindFirstChild('NameEsp'..Number):Destroy()
+                end
+            end
+        end
+    end)
+end
+end
+function UpdateDevilChams() 
+for i,v in pairs(game.Workspace:GetChildren()) do
+    pcall(function()
+        if DevilFruitESP then
+            if string.find(v.Name, "Fruit") then   
+                if not v.Handle:FindFirstChild('NameEsp'..Number) then
+                    local bill = Instance.new('BillboardGui',v.Handle)
+                    bill.Name = 'NameEsp'..Number
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v.Handle
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = Enum.Font.GothamSemibold
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+                else
+                    v.Handle['NameEsp'..Number].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+                end
+            end
+        else
+            if v.Handle:FindFirstChild('NameEsp'..Number) then
+                v.Handle:FindFirstChild('NameEsp'..Number):Destroy()
+            end
+        end
+    end)
+end
+end
+function UpdateFlowerChams() 
+for i,v in pairs(game.Workspace:GetChildren()) do
+    pcall(function()
+        if v.Name == "Flower2" or v.Name == "Flower1" then
+            if FlowerESP then 
+                if not v:FindFirstChild('NameEsp'..Number) then
+                    local bill = Instance.new('BillboardGui',v)
+                    bill.Name = 'NameEsp'..Number
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = Enum.Font.GothamSemibold
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(255, 0, 0)
+                    if v.Name == "Flower1" then 
+                        name.Text = ("Blue Flower" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        name.TextColor3 = Color3.fromRGB(0, 0, 255)
+                    end
+                    if v.Name == "Flower2" then
+                        name.Text = ("Red Flower" ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                        name.TextColor3 = Color3.fromRGB(255, 0, 0)
+                    end
+                else
+                    v['NameEsp'..Number].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' Distance')
+                end
+            else
+                if v:FindFirstChild('NameEsp'..Number) then
+                v:FindFirstChild('NameEsp'..Number):Destroy()
+                end
+            end
+        end   
+    end)
+end
+end
+function UpdateRealFruitChams() 
+for i,v in pairs(game.Workspace.AppleSpawner:GetChildren()) do
+    if v:IsA("Tool") then
+        if RealFruitESP then 
+            if not v.Handle:FindFirstChild('NameEsp'..Number) then
+                local bill = Instance.new('BillboardGui',v.Handle)
+                bill.Name = 'NameEsp'..Number
+                bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                bill.Size = UDim2.new(1,200,1,30)
+                bill.Adornee = v.Handle
+                bill.AlwaysOnTop = true
+                local name = Instance.new('TextLabel',bill)
+                name.Font = Enum.Font.GothamSemibold
+                name.FontSize = "Size14"
+                name.TextWrapped = true
+                name.Size = UDim2.new(1,0,1,0)
+                name.TextYAlignment = 'Top'
+                name.BackgroundTransparency = 1
+                name.TextStrokeTransparency = 0.5
+                name.TextColor3 = Color3.fromRGB(255, 0, 0)
+                name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            else
+                v.Handle['NameEsp'..Number].TextLabel.Text = (v.Name ..' '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            end
+        else
+            if v.Handle:FindFirstChild('NameEsp'..Number) then
+                v.Handle:FindFirstChild('NameEsp'..Number):Destroy()
+            end
+        end 
+    end
+end
+for i,v in pairs(game.Workspace.PineappleSpawner:GetChildren()) do
+    if v:IsA("Tool") then
+        if RealFruitESP then 
+            if not v.Handle:FindFirstChild('NameEsp'..Number) then
+                local bill = Instance.new('BillboardGui',v.Handle)
+                bill.Name = 'NameEsp'..Number
+                bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                bill.Size = UDim2.new(1,200,1,30)
+                bill.Adornee = v.Handle
+                bill.AlwaysOnTop = true
+                local name = Instance.new('TextLabel',bill)
+                name.Font = Enum.Font.GothamSemibold
+                name.FontSize = "Size14"
+                name.TextWrapped = true
+                name.Size = UDim2.new(1,0,1,0)
+                name.TextYAlignment = 'Top'
+                name.BackgroundTransparency = 1
+                name.TextStrokeTransparency = 0.5
+                name.TextColor3 = Color3.fromRGB(255, 174, 0)
+                name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            else
+                v.Handle['NameEsp'..Number].TextLabel.Text = (v.Name ..' '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            end
+        else
+            if v.Handle:FindFirstChild('NameEsp'..Number) then
+                v.Handle:FindFirstChild('NameEsp'..Number):Destroy()
+            end
+        end 
+    end
+end
+for i,v in pairs(game.Workspace.BananaSpawner:GetChildren()) do
+    if v:IsA("Tool") then
+        if RealFruitESP then 
+            if not v.Handle:FindFirstChild('NameEsp'..Number) then
+                local bill = Instance.new('BillboardGui',v.Handle)
+                bill.Name = 'NameEsp'..Number
+                bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                bill.Size = UDim2.new(1,200,1,30)
+                bill.Adornee = v.Handle
+                bill.AlwaysOnTop = true
+                local name = Instance.new('TextLabel',bill)
+                name.Font = Enum.Font.GothamSemibold
+                name.FontSize = "Size14"
+                name.TextWrapped = true
+                name.Size = UDim2.new(1,0,1,0)
+                name.TextYAlignment = 'Top'
+                name.BackgroundTransparency = 1
+                name.TextStrokeTransparency = 0.5
+                name.TextColor3 = Color3.fromRGB(251, 255, 0)
+                name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            else
+                v.Handle['NameEsp'..Number].TextLabel.Text = (v.Name ..' '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Handle.Position).Magnitude/3) ..' Distance')
+            end
+        else
+            if v.Handle:FindFirstChild('NameEsp'..Number) then
+                v.Handle:FindFirstChild('NameEsp'..Number):Destroy()
+            end
+        end 
+    end
+end
+end
+
+spawn(function()
+while wait() do
+    pcall(function()
+        if MobESP then
+            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                if v:FindFirstChild('HumanoidRootPart') then
+                    if not v:FindFirstChild("MobEap") then
+                        local BillboardGui = Instance.new("BillboardGui")
+                        local TextLabel = Instance.new("TextLabel")
+
+                        BillboardGui.Parent = v
+                        BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+                        BillboardGui.Active = true
+                        BillboardGui.Name = "MobEap"
+                        BillboardGui.AlwaysOnTop = true
+                        BillboardGui.LightInfluence = 1.000
+                        BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+                        BillboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
+
+                        TextLabel.Parent = BillboardGui
+                        TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                        TextLabel.BackgroundTransparency = 1.000
+                        TextLabel.Size = UDim2.new(0, 200, 0, 50)
+                        TextLabel.Font = Enum.Font.GothamBold
+                        TextLabel.TextColor3 = Color3.fromRGB(7, 236, 240)
+                        TextLabel.Text.Size = 35
+                    end
+                    local Dis = math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude)
+                    v.MobEap.TextLabel.Text = v.Name.." - "..Dis.." Distance"
+                end
+            end
+        else
+            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                if v:FindFirstChild("MobEap") then
+                    v.MobEap:Destroy()
+                end
+            end
+        end
+    end)
+end
+end)
+
+spawn(function()
+while wait() do
+    pcall(function()
+        if SeaESP then
+            for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                if v:FindFirstChild('HumanoidRootPart') then
+                    if not v:FindFirstChild("Seaesps") then
+                        local BillboardGui = Instance.new("BillboardGui")
+                        local TextLabel = Instance.new("TextLabel")
+
+                        BillboardGui.Parent = v
+                        BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+                        BillboardGui.Active = true
+                        BillboardGui.Name = "Seaesps"
+                        BillboardGui.AlwaysOnTop = true
+                        BillboardGui.LightInfluence = 1.000
+                        BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+                        BillboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
+
+                        TextLabel.Parent = BillboardGui
+                        TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                        TextLabel.BackgroundTransparency = 1.000
+                        TextLabel.Size = UDim2.new(0, 200, 0, 50)
+                        TextLabel.Font = Enum.Font.GothamBold
+                        TextLabel.TextColor3 = Color3.fromRGB(7, 236, 240)
+                        TextLabel.Text.Size = 35
+                    end
+                    local Dis = math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude)
+                    v.Seaesps.TextLabel.Text = v.Name.." - "..Dis.." Distance"
+                end
+            end
+        else
+            for i,v in pairs (game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                if v:FindFirstChild("Seaesps") then
+                    v.Seaesps:Destroy()
+                end
+            end
+        end
+    end)
+end
+end)
+
+spawn(function()
+while wait() do
+    pcall(function()
+        if NpcESP then
+            for i,v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+                if v:FindFirstChild('HumanoidRootPart') then
+                    if not v:FindFirstChild("NpcEspes") then
+                        local BillboardGui = Instance.new("BillboardGui")
+                        local TextLabel = Instance.new("TextLabel")
+
+                        BillboardGui.Parent = v
+                        BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+                        BillboardGui.Active = true
+                        BillboardGui.Name = "NpcEspes"
+                        BillboardGui.AlwaysOnTop = true
+                        BillboardGui.LightInfluence = 1.000
+                        BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+                        BillboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
+
+                        TextLabel.Parent = BillboardGui
+                        TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                        TextLabel.BackgroundTransparency = 1.000
+                        TextLabel.Size = UDim2.new(0, 200, 0, 50)
+                        TextLabel.Font = Enum.Font.GothamBold
+                        TextLabel.TextColor3 = Color3.fromRGB(7, 236, 240)
+                        TextLabel.Text.Size = 35
+                    end
+                    local Dis = math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude)
+                    v.NpcEspes.TextLabel.Text = v.Name.." - "..Dis.." Distance"
+                end
+            end
+        else
+            for i,v in pairs (game:GetService("Workspace").NPCs:GetChildren()) do
+                if v:FindFirstChild("NpcEspes") then
+                    v.NpcEspes:Destroy()
+                end
+            end
+        end
+    end)
+end
+end)
+
+function isnil(thing)
+return (thing == nil)
+end
+local function round(n)
+return math.floor(tonumber(n) + 0.5)
+end
+Number = math.random(1, 1000000)
+
+function UpdateIslandMirageESP() 
+for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+    pcall(function()
+        if MirageIslandESP then 
+            if v.Name == "Mirage Island" then
+                if not v:FindFirstChild('NameEsp') then
+                    local bill = Instance.new('BillboardGui',v)
+                    bill.Name = 'NameEsp'
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = "Code"
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(80, 245, 245)
+                else
+                    v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+                end
+            end
+        else
+            if v:FindFirstChild('NameEsp') then
+                v:FindFirstChild('NameEsp'):Destroy()
+            end
+        end
+    end)
+end
+end
+
+function isnil(thing)
+return (thing == nil)
+end
+local function round(n)
+return math.floor(tonumber(n) + 0.5)
+end
+Number = math.random(1, 1000000)
+
+function UpdateAfdESP() 
+for i,v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+    pcall(function()
+        if AfdESP then 
+            if v.Name == "Advanced Fruit Dealer" then
+                if not v:FindFirstChild('NameEsp') then
+                    local bill = Instance.new('BillboardGui',v)
+                    bill.Name = 'NameEsp'
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = "Code"
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(80, 245, 245)
+                else
+                    v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+                end
+            end
+        else
+            if v:FindFirstChild('NameEsp') then
+                v:FindFirstChild('NameEsp'):Destroy()
+            end
+        end
+    end)
+end
+end
+
+function UpdateAuraESP() 
+for i,v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+    pcall(function()
+        if AuraESP then 
+            if v.Name == "Master of Enhancement" then
+                if not v:FindFirstChild('NameEsp') then
+                    local bill = Instance.new('BillboardGui',v)
+                    bill.Name = 'NameEsp'
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = "Code"
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(80, 245, 245)
+                else
+                    v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+                end
+            end
+        else
+            if v:FindFirstChild('NameEsp') then
+                v:FindFirstChild('NameEsp'):Destroy()
+            end
+        end
+    end)
+end
+end
+
+function UpdateLSDESP() 
+for i,v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+    pcall(function()
+        if LADESP then 
+            if v.Name == "Legendary Sword Dealer" then
+                if not v:FindFirstChild('NameEsp') then
+                    local bill = Instance.new('BillboardGui',v)
+                    bill.Name = 'NameEsp'
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = "Code"
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(80, 245, 245)
+                else
+                    v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+                end
+            end
+        else
+            if v:FindFirstChild('NameEsp') then
+                v:FindFirstChild('NameEsp'):Destroy()
+            end
+        end
+    end)
+end
+end
+
+function UpdateGeaESP() 
+for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do 
+    pcall(function()
+        if GearESP then 
+            if v.Name == "MeshPart" then
+                if not v:FindFirstChild('NameEsp') then
+                    local bill = Instance.new('BillboardGui',v)
+                    bill.Name = 'NameEsp'
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = "Code"
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(80, 245, 245)
+                else
+                    v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+                end
+            end
+        else
+            if v:FindFirstChild('NameEsp') then
+                v:FindFirstChild('NameEsp'):Destroy()
+            end
+        end
+    end)
+end
+end
+--------------------------------------------------------------------------------------------------------------------------------------------
+---------Tween
+
+  function Tween2(P1)
+    local Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance >= 1 then
+    Speed = 300
+    end
+    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
+      CFrame = P1
+    }):Play()
+    if _G.CancelTween2 then
+    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
+      CFrame = P1
+    }):Cancel()
+    end
+    _G.Clip2 = true
+    wait(Distance/Speed)
+    _G.Clip2 = false
+    end
+   
+-- [Function (Abandoned Quest , Others)]
+
+function Com(com,...)
+	local Remote = game:GetService('ReplicatedStorage').Remotes:FindFirstChild("Comm"..com)
+	if Remote:IsA("RemoteEvent") then
+		Remote:FireServer(...)
+	elseif Remote:IsA("RemoteFunction") then
+		Remote:InvokeServer(...)
+	end
+end
+
+--BTP
+function BTP(Position)
+	game.Players.LocalPlayer.Character.Head:Destroy()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
+	wait(0.5)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
+	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+end
+--BTPZ
+function BTPZ(Point)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point
+    task.wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point
+        end
+------Bypass TP 2
+ function GetIsLand(...)
+	local RealtargetPos = {...}
+	local targetPos = RealtargetPos[1]
+	local RealTarget
+	if type(targetPos) == "vector" then
+		RealTarget = targetPos
+	elseif type(targetPos) == "userdata" then
+		RealTarget = targetPos.Position
+	elseif type(targetPos) == "number" then
+		RealTarget = CFrame.new(unpack(RealtargetPos))
+		RealTarget = RealTarget.p
+	end
+
+	local ReturnValue
+	local CheckInOut = math.huge;
+	if game.Players.LocalPlayer.Team then
+		for i,v in pairs(game.Workspace._WorldOrigin.PlayerSpawns:FindFirstChild(tostring(game.Players.LocalPlayer.Team)):GetChildren()) do 
+			local ReMagnitude = (RealTarget - v:GetModelCFrame().p).Magnitude;
+			if ReMagnitude < CheckInOut then
+				CheckInOut = ReMagnitude;
+				ReturnValue = v.Name
+			end
+		end
+		if ReturnValue then
+			return ReturnValue
+		end 
+    end
+end
+
+
+     function toTarget(...)
+    local RealtargetPos = { ... }
+    local targetPos = RealtargetPos[1]
+    local RealTarget
+    if type(targetPos) == "vector" then
+        RealTarget = CFrame.new(targetPos)
+    elseif type(targetPos) == "userdata" then
+        RealTarget = targetPos
+    elseif type(targetPos) == "number" then
+        RealTarget = CFrame.new(unpack(RealtargetPos))
+    end
+    if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health == 0 then
+        if tween then tween:Cancel() end
+        repeat wait(_G.Fast_Delay) until game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health > 0; wait(0.2)
+    end
+    local tweenfunc = {}
+    local Distance = (RealTarget.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position)
+        .Magnitude
+    if Distance < 1000 then
+        Speed = 315
+    elseif Distance >= 1000 then
+        Speed = 300
+    end
+    if BypassTP then
+        if Distance > 3000 and not AutoNextIsland and not (game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Sweet Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Sweet Chalice")) and not (Name == "Fishman Commando" or Name == "Fishman Warrior") then
+            pcall(function()
+                tween:Cancel()
+                fkwarp = false
+                if game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("SpawnPoint").Value == tostring(GetIsLand(RealTarget)) then
+                    wait(.1)
+                    Com("F_", "TeleportToSpawn")
+                elseif game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("LastSpawnPoint").Value == tostring(GetIsLand(RealTarget)) then
+                    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+                    wait(0.1)
+                    repeat wait(_G.Fast_Delay) until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+                else
+                    if game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 then
+                        if fkwarp == false then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = RealTarget
+                        end
+                        fkwarp = true
+                    end
+                    wait(.08)
+                    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+                    repeat wait(_G.Fast_Delay) until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+                    wait(.1)
+                    Com("F_", "SetSpawnPoint")
+                end
+                wait(0.2)
+
+                return
+            end)
+        end
+    end
+
+    local tween_s = game:service "TweenService"
+    local info = TweenInfo.new(
+        (RealTarget.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position)
+        .Magnitude / Speed, Enum.EasingStyle.Linear)
+    local tweenw, err = pcall(function()
+        tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, { CFrame = RealTarget })
+        tween:Play()
+    end)
+
+    function tweenfunc:Stop()
+        tween:Cancel()
+    end
+
+    function tweenfunc:Wait()
+        tween.Completed:Wait()
+    end
+
+    return tweenfunc
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+  TweenSpeed = 340
+   function Tween(P1)
+    local Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance >= 1 then
+    Speed = TweenSpeed
+    end
+    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
+      CFrame = P1
+    }):Play()
+    if _G.StopTween then
+    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
+      CFrame = P1
+    }):Cancel()
+    end
+    end
+    function CancelTween(target)
+    if not target then
+    _G.StopTween = true
+    wait()
+    Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+    wait()
+    _G.StopTween = false
+    end
+    end
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+function toTargetP(CFgo)
+	if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then tween:Cancel() repeat wait(_G.Fast_Delay) until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 wait(7) return end
+	if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - CFgo.Position).Magnitude <= 150 then
+		pcall(function()
+			tween:Cancel()
+
+			game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = CFgo
+
+			return
+		end)
+	end
+	local tween_s = game:service"TweenService"
+	local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - CFgo.Position).Magnitude/325, Enum.EasingStyle.Linear)
+	tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = CFgo})
+	tween:Play()
+
+	local tweenfunc = {}
+
+	function tweenfunc:Stop()
+		tween:Cancel()
+	end
+
+	return tweenfunc
+end
+
+    --function TP to Boat/Ship
+    function TweenShip(CFgo)
+        local tween_s = game:service"TweenService"
+        local info = TweenInfo.new((game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat.CFrame.Position - CFgo.Position).Magnitude/300, Enum.EasingStyle.Linear)
+        tween = tween_s:Create(game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat, info, {CFrame = CFgo})
+        tween:Play()
+    
+        local tweenfunc = {}
+    
+        function tweenfunc:Stop()
+            tween:Cancel()
+        end
+    
+        return tweenfunc
+    end
+    
+    function TweenBoat(CFgo)
+        if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then tween:Cancel() repeat wait(_G.Fast_Delay) until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 wait(7) return end
+        local tween_s = game:service"TweenService"
+        local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - CFgo.Position).Magnitude/325, Enum.EasingStyle.Linear)
+        tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = CFgo})
+        tween:Play()
+    
+        local tweenfunc = {}
+    
+        function tweenfunc:Stop()
+            tween:Cancel()
+        end
+    
+        return tweenfunc
+    end
+
+--select weapon
+function EquipTool(ToolSe)
+		if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+			local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+			wait(0.5)
+			game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+		end
+	end
+    
+    --aimbot mastery
+
+	spawn(function()
+		local gg = getrawmetatable(game)
+		local old = gg.__namecall
+		setreadonly(gg,false)
+		gg.__namecall = newcclosure(function(...)
+		  local method = getnamecallmethod()
+		  local args = {
+			...
+		  }
+		  if tostring(method) == "FireServer" then
+		  if tostring(args[1]) == "RemoteEvent" then
+		  if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+		  if _G.UseSkill then
+		  if type(args[2]) == "vector" then
+		  args[2] = PositionSkillMasteryDevilFruit
+		  else
+			args[2] = CFrame.new(PositionSkillMasteryDevilFruit)
+		  end
+		  return old(unpack(args))
+		  end
+		  end
+		  end
+		  end
+		  return old(...)
+		  end)
+        end)
+--Equip Gun
+spawn(function()
+  pcall(function()
+    while task.wait() do
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+    if v:IsA("Tool") then
+    if v:FindFirstChild("RemoteFunctionShoot") then
+    CurrentEquipGun = v.Name
+    end
+    end
+    end
+    end
+    end)
+  end)
+
+-- [Body Gyro]
+   spawn(function()
+			while task.wait() do
+				pcall(function()
+					if _G.TeleportIsland or _G.AutoEvoRace or AutoFarmChest or _G.chestsea2 or _G.chestsea3 or _G.CastleRaid or _G.CollectAzure or _G.TweenToKitsune or _G.AutoCandy or _G.GhostShip or _G.Ship or _G.SailBoat or _G.Auto_Holy_Torch or _G.FindMirageIsland or _G.TeleportPly or _G.Tweenfruit or _G.AutoFishCrew or _G.AutoShark or _G.AutoCakeV2 or _G.AutoMysticIsland or _G.AutoQuestRace or _G.AutoBuyBoat or _G.dao or _G.AutoMirage or AutoFarmAcient or _G.AutoQuestRace or Auto_Law or _G.AutoAllBoss or AutoTushita or _G.AutoHolyTorch or _G.AutoTerrorshark or _G.farmpiranya or _G.DriveMytic or _G.AutoCakeV2V2 or PirateShip or _G.AutoSeaBeast or _G.AutoNear or _G.BossRaid or _G.GrabChest or AutoCitizen or _G.Ectoplasm or AutoEvoRace or AutoBartilo or AutoFactory or BringChestz or BringFruitz or _G.AutoLevel or _G.Clip2 or AutoFarmNoQuest or _G.AutoBone or AutoFarmSelectMonsterQuest or AutoFarmSelectMonsterNoQuest or _G.AutoBoss or AutoFarmBossQuest or AutoFarmMasGun or AutoFarmMasDevilFruit or AutoFarmSelectArea or AutoSecondSea or AutoThirdSea or AutoDeathStep or AutoSuperhuman or AutoSharkman or AutoElectricClaw or AutoDragonTalon or AutoGodhuman or AutoRengoku or AutoBuddySword or AutoPole or AutoHallowSycthe or AutoCavander or AutoTushita or AutoDarkDagger or _G.CakePrince or _G.AutoElite or AutoRainbowHaki or AutoSaber or AutoFarmKen or AutoKenHop or AutoKenV2 or _G.AutoKillPlayerMelee or _G.AutoKillPlayerGun or _G.AutoKillPlayerFruit or AutoDungeon or AutoNextIsland or AutoAdvanceDungeon or Musketeer or RipIndra or Auto_Serpent_Bow or AutoTorch or AutoSoulGuitar or Auto_Cursed_Dual_Katana or _G.AutoMaterial or Auto_Quest_Yama_1 or Auto_Quest_Yama_2 or Auto_Quest_Yama_3 or Auto_Quest_Tushita_1 or Auto_Quest_Tushita_2 or Auto_Quest_Tushita_3 or _G.Factory or _G.SwanGlasses or AutoBartilo or AutoEvoRace or _G.Ectoplasm then
+						if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+							local Noclip = Instance.new("BodyVelocity")
+							Noclip.Name = "BodyClip"
+							Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+							Noclip.MaxForce = Vector3.new(100000,100000,100000)
+							Noclip.Velocity = Vector3.new(0,0,0)
+						end
+					else
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+					end
+				end)
+			end
+		end)
+
+	
+--No CLip Auto Farm
+spawn(function()
+  pcall(function()
+    game:GetService("RunService").Stepped:Connect(function()
+      if _G.TeleportIsland or _G.AutoEvoRace or _G.CastleRaid or AutoFarmChest or _G.CollectAzure or _G.TweenToKitsune or _G.AutoCandy or _G.GhostShip or _G.Ship or _G.SailBoat or _G.Auto_Holy_Torch or _G.Tweenfruit or _G.FindMirageIsland or _G.TeleportPly or _G.AutoFishCrew or _G.AutoShark or _G.AutoMysticIsland or _G.AutoCakeV2 or _G.AutoQuestRace or _G.AutoBuyBoat or _G.dao or AutoFarmAcient or _G.AutoMirage or Auto_Law or _G.AutoQuestRace or _G.AutoAllBoss or _G.AutoHolyTorch or AutoTushita or _G.farmpiranya or _G.AutoTerrorshark or _G.AutoNear or _G.AutoCakeV2V2 or PirateShip or _G.AutoSeaBeast or _G.DriveMytic or _G.BossRaid or _G.GrabChest or AutoCitizen or _G.Ectoplasm or AutoEvoRace or AutoBartilo or AutoFactory or BringChestz or BringFruitz or _G.AutoLevel or _G.Clip2 or AutoFarmNoQuest or _G.AutoBone or AutoFarmSelectMonsterQuest or AutoFarmSelectMonsterNoQuest or _G.AutoBoss or AutoFarmBossQuest or AutoFarmMasGun or AutoFarmMasDevilFruit or AutoFarmSelectArea or AutoSecondSea or AutoThirdSea or AutoDeathStep or AutoSuperhuman or AutoSharkman or AutoElectricClaw or AutoDragonTalon or AutoGodhuman or AutoRengoku or AutoBuddySword or AutoPole or AutoHallowSycthe or AutoCavander or AutoTushita or AutoDarkDagger or _G.CakePrince or _G.AutoElite or AutoRainbowHaki or AutoSaber or AutoFarmKen or AutoKenHop or AutoKenV2 or _G.AutoKillPlayerMelee or _G.AutoKillPlayerGun or _G.AutoKillPlayerFruit or AutoDungeon or AutoNextIsland or AutoAdvanceDungeon or Musketeer or RipIndra or Auto_Serpent_Bow or AutoTorch or AutoSoulGuitar or Auto_Cursed_Dual_Katana or _G.AutoMaterial or Auto_Quest_Yama_1 or Auto_Quest_Yama_2 or Auto_Quest_Yama_3 or Auto_Quest_Tushita_1 or Auto_Quest_Tushita_2 or Auto_Quest_Tushita_3 or _G.Factory or _G.SwanGlasses or AutoBartilo or AutoEvoRace or _G.Ectoplasm then
+      for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+      if v:IsA("BasePart") then
+      v.CanCollide = false
+      end
+      end
+      end
+      end)
+    end)
+  end)
+  --//Stun Player
+  task.spawn(function()
+    if game.Players.LocalPlayer.Character:FindFirstChild("Stun") then
+    game.Players.LocalPlayer.Character.Stun.Changed:connect(function()
+      pcall(function()
+        if game.Players.LocalPlayer.Character:FindFirstChild("Stun") then
+        game.Players.LocalPlayer.Character.Stun.Value = 0
+        end
+        end)
+      end)
+    end
+    end)
+  
+
+--Check Material
+function CheckMaterial(matname)
+for i,v in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
+if type(v) == "table" then
+if v.Type == "Material" then
+if v.Name == matname then
+return v.Count
+end
+end
+end
+end
+return 0
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+------AttackNoCD  
+local plr = game.Players.LocalPlayer
+local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
+local CbFw2 = CbFw[2]
+
+function GetCurrentBlade() 
+    local p13 = CbFw2.activeController
+    local ret = p13.blades[1]
+    if not ret then return end
+    while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
+    return ret
+end
+
+function AttackNoCoolDown() 
+    local AC = CbFw2.activeController
+    for i = 1, 1 do 
+        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+            plr.Character,
+            {plr.Character.HumanoidRootPart},
+            60
+        )
+        local cac = {}
+        local hash = {}
+        for k, v in pairs(bladehit) do
+            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                table.insert(cac, v.Parent.HumanoidRootPart)
+                hash[v.Parent] = true
+            end
+        end
+        bladehit = cac
+        if #bladehit > 0 then
+            local u8 = debug.getupvalue(AC.attack, 5)
+            local u9 = debug.getupvalue(AC.attack, 6)
+            local u7 = debug.getupvalue(AC.attack, 4)
+            local u10 = debug.getupvalue(AC.attack, 7)
+            local u12 = (u8 * 798405 + u7 * 727595) % u9
+            local u13 = u7 * 798405
+            (function()
+                u12 = (u12 * u9 + u13) % 1099511627776
+                u8 = math.floor(u12 / u9)
+                u7 = u12 - u8 * u9
+            end)()
+            u10 = u10 + 1
+            debug.setupvalue(AC.attack, 5, u8)
+            debug.setupvalue(AC.attack, 6, u9)
+            debug.setupvalue(AC.attack, 4, u7)
+            debug.setupvalue(AC.attack, 7, u10)
+            pcall(function()
+                for k, v in pairs(AC.animator.anims.basic) do
+                    v:Play()
+                end                  
+            end)
+            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "") 
+            end
+        end
+    end
+end
+
+--Attack Mastery
+    function NormalAttack()
+        if not _G.NormalAttack then
+            local Module = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
+            local CombatFramework = debug.getupvalues(Module)[2]
+            local CamShake = require(game.ReplicatedStorage.Util.CameraShaker)
+            CamShake:Stop()
+            CombatFramework.activeController.attacking = false
+            CombatFramework.activeController.timeToNextAttack = 0
+            CombatFramework.activeController.hitboxMagnitude = 180
+            game:GetService'VirtualUser':CaptureController()
+            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+        end
+    end
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+--Sword Weapon
+function GetWeaponInventory(Weaponname)
+for i,v in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
+if type(v) == "table" then
+if v.Type == "Sword" then
+if v.Name == Weaponname then
+return true
+end
+end
+end
+end
+return false
+end
+
+---Method Farm
+Type1 = 1
+spawn(function()
+    while wait(.1) do
+        if Type == 1 then
+            Pos = CFrame.new(10,40,10)
+        elseif Type == 2 then
+            Pos = CFrame.new(-30,10,-30)
+        elseif Type == 3 then
+            Pos = CFrame.new(10,10,-40)
+        elseif Type == 4 then
+            Pos = CFrame.new(-40,10,10)	
+        end
+        end
+    end)
+
+spawn(function()
+    while wait(.1) do
+        Type = 1
+        wait(1)
+        Type = 2
+        wait(1)
+        Type = 3
+        wait(1)
+        Type = 4
+        wait(1)
+    end
+end)
+--auto turn haki
+  function AutoHaki()
+    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+    end
+end
+---Bypass Teleport
+function to(P)
+	repeat wait(0.5)
+		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+		task.wait()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
+end
+
+function to(p)
+		pcall(function()
+			if (p.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 2000 and not Auto_Raid and game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+				if NameMon == "FishmanQuest" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+				elseif Mon == "God's Guard"  then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
+				elseif NameMon == "SkyExp1Quest" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
+				elseif NameMon == "ShipQuest1" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+				elseif NameMon == "ShipQuest2" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+				elseif NameMon == "FrostQuest" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422))
+				else
+						repeat wait(0.5)
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p
+						wait(.05)
+						game.Players.LocalPlayer.Character.Head:Destroy()
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p
+					until (p.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2500 and game.Players.LocalPlayer.Character.Humanoid.Health > 0
+					wait()
+				end
+			end
+		end)
+	end
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+---Close UI
+local ScreenGui = Instance.new("ScreenGui")
+local ImageButton = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ImageButton.Parent = ScreenGui
+ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+ImageButton.Size = UDim2.new(0, 50, 0, 50)
+ImageButton.Draggable = true
+ImageButton.Image = "http://www.roblox.com/asset/?id=16906622093"
+ImageButton.MouseButton1Down:connect(function()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
+end)
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Remove Effect
+if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+	game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+end
+if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+end
+--------------------------------------------------------------------------------------------------------------------------------------------
+-- Hehe
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Create Tabs
+local Farming = Tabs.Main:AddSection("Farming")
+local listfastattack = {'Normal Attack','Fast Attack','Super Fast Attack'}
+
+    local DropdownDelayAttack = Tabs.Main:AddDropdown("DropdownDelayAttack", {
+        Title = "Select Fast Attack",
+        Description = "Fast Attack",
+        Values = listfastattack,
+        Multi = false,
+        Default = 1,
+    })
+    DropdownDelayAttack:SetValue("Fast Attack")
+    DropdownDelayAttack:OnChanged(function(Value)
+    _G.FastAttackFaiFao_Mode = Value
+	if _G.FastAttackFaiFao_Mode == "Fast Attack" then
+		_G.Fast_Delay = 0.1
+	elseif _G.FastAttackFaiFao_Mode == "Normal Attack" then
+		_G.Fast_Delay = 0.15
+	elseif _G.FastAttackFaiFao_Mode == "Super Fast Attack" then
+		_G.Fast_Delay = 0
+	end
+end)
+
+    local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
+        Title = "Weapon",
+        Description = "Choose Weapon",
+        Values = {'Melee','Sword','Blox Fruit'},
+        Multi = false,
+        Default = 1,
+    })
+    DropdownSelectWeapon:SetValue('Melee')
+    DropdownSelectWeapon:OnChanged(function(Value)
+        ChooseWeapon = Value
+    end)
+    task.spawn(function()
+        while wait() do
+            pcall(function()
+                if ChooseWeapon == "Melee" then
+                    for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                        if v.ToolTip == "Melee" then
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                                SelectWeapon = v.Name
+                            end
+                        end
+                    end
+                elseif ChooseWeapon == "Sword" then
+                    for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                        if v.ToolTip == "Sword" then
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                                SelectWeapon = v.Name
+                            end
+                        end
+                    end
+                elseif ChooseWeapon == "Blox Fruit" then
+                    for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                        if v.ToolTip == "Blox Fruit" then
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                                SelectWeapon = v.Name
+                            end
+                        end
+                    end
+                else
+                    for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                        if v.ToolTip == "Melee" then
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                                SelectWeapon = v.Name
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+
+
+    local ToggleLevel = Tabs.Main:AddToggle("ToggleLevel", {
+        Title = "Auto Level",
+        Description = "Auto Fram Level",
+        Default = false })
+    ToggleLevel:OnChanged(function(Value)
+        _G.AutoLevel = Value
+        if Value == false then
+            wait()
+            toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+            wait()
+        end
+    end)
+    Options.ToggleLevel:SetValue(false)
+    spawn(function()
+        while task.wait() do
+        if _G.AutoLevel then
+        pcall(function()
+          CheckLevel()
+          if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+          toTarget(CFrameQ)
+          if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,QuestLv)
+          end
+          elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+          for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+          if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+          if v.Name == Ms then
+          repeat wait(_G.Fast_Delay)
+          AttackNoCoolDown()
+          bringmob = true
+          AutoHaki()
+          EquipTool(SelectWeapon)
+          Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+          v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+          v.HumanoidRootPart.Transparency = 1
+          v.Humanoid.JumpPower = 0
+          v.Humanoid.WalkSpeed = 0
+          v.HumanoidRootPart.CanCollide = false
+          FarmPos = v.HumanoidRootPart.CFrame
+          MonFarm = v.Name
+          until not _G.AutoLevel or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+          bringmob = false
+        end   
+          end
+          end
+          for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+          if string.find(v.Name,NameMon) then
+          if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
+            Tween(v.CFrame * CFrame.new(posX,posY,posZ))
+          end
+          end
+          end
+          end
+          end)
+        end
+        end
+        end)
+
+
+
+
+        local ToggleCandy = Tabs.Main:AddToggle("ToggleCandy", {Title = "Auto Farm Candy ( Only Max Level )",Description = "Auto Farm Candy ( Only Max Level )", Default = false })
+        ToggleCandy:OnChanged(function(Value)
+           _G.AutoCandy = Value
+           if Value == false then
+            wait()
+            Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+            wait()
+        end
+        end)
+        Options.ToggleCandy:SetValue(false)
+
+		local CandyPos = CFrame.new(-16603.197265625, 130.3873748779297, 1087.16455078125)
+		spawn(function()
+				  while wait() do 
+					  if _G.AutoCandy then
+						  pcall(function()
+							toTarget(CandyPos)
+							  if game:GetService("Workspace").Enemies:FindFirstChild("Isle Outlaw") or game:GetService("Workspace").Enemies:FindFirstChild("Island Boy") or game:GetService("Workspace").Enemies:FindFirstChild("Sun-kissed Warrior") or game:GetService("Workspace").Enemies:FindFirstChild("Isle Champion") then
+								  for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+									  if v.Name == "Isle Outlaw" or v.Name == "Island Boy" or v.Name == "Sun-kissed Warrior" or v.Name == "Isle Champion" then
+										 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+											 repeat wait(_G.Fast_Delay)
+												 AttackNoCoolDown()
+                                                 bringmob = true
+												 AutoHaki()
+												 EquipTool(SelectWeapon)
+												 Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+												 v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+												 v.HumanoidRootPart.Transparency = 1
+												 v.Humanoid.JumpPower = 0
+												 v.Humanoid.WalkSpeed = 0
+												 v.HumanoidRootPart.CanCollide = false
+												 FarmPos = v.HumanoidRootPart.CFrame
+												 MonFarm = v.Name
+											  until not _G.AutoCandy or not v.Parent or v.Humanoid.Health <= 0
+                                              bringmob = false
+                                            end
+									  end
+								  end
+                                  Tween(CFrame.new(-16599.1484375, 154.2681121826172, -166.32186889648438))
+							end
+						end)
+					  end
+				  end
+			  end)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+    local ToggleMobAura = Tabs.Main:AddToggle("ToggleMobAura", {
+        Title = "Kill Near | Mob Aura",
+        Description = "Kill Near | Mob Aura",
+        Default = false })
+    ToggleMobAura:OnChanged(function(Value)
+        _G.AutoNear = Value
+        if Value == false then
+            wait()
+            Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+            wait()
+        end
+    end)
+    Options.ToggleMobAura:SetValue(false)
+    spawn(function()
+        while wait(.1) do
+        if _G.AutoNear then
+        pcall(function()
+          for i,v in pairs (game.Workspace.Enemies:GetChildren()) do
+          if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+          if v.Name then
+          if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v:FindFirstChild("HumanoidRootPart").Position).Magnitude <= 5000 then
+            repeat wait(_G.Fast_Delay)
+                AttackNoCoolDown()
+                bringmob = true
+          AutoHaki()
+          EquipTool(SelectWeapon)
+          Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+          v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+          v.HumanoidRootPart.Transparency = 1
+          v.Humanoid.JumpPower = 0
+          v.Humanoid.WalkSpeed = 0
+          v.HumanoidRootPart.CanCollide = false
+          FarmPos = v.HumanoidRootPart.CFrame
+          MonFarm = v.Name
+          --Click
+          until not _G.AutoNear or not v.Parent or v.Humanoid.Health <= 0 or not game.Workspace.Enemies:FindFirstChild(v.Name)
+          bringmob = false
+        end
+          end
+          end
+          end
+          end)
+        end
+        end
+      end)
+
+
+    local ToggleCastleRaid = Tabs.Main:AddToggle("ToggleCastleRaid", {
+        Title = "Auto Castle Raid | Pirates Castle",
+        Description = "Auto Castle Raid | Pirates Castle", 
+        Default = false })
+    ToggleCastleRaid:OnChanged(function(Value)
+        _G.CastleRaid = Value
+    end)
+    Options.ToggleCastleRaid:SetValue(false)
+    spawn(function()
+        while wait() do
+            if _G.CastleRaid then
+                pcall(function()
+                    local CFrameCastleRaid = CFrame.new(-5496.17432, 313.768921, -2841.53027, 0.924894512, 7.37058015e-09, 0.380223751, 3.5881019e-08, 1, -1.06665446e-07, -0.380223751, 1.12297109e-07, 0.924894512)
+                    if (CFrame.new(-5539.3115234375, 313.800537109375, -2972.372314453125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if _G.CastleRaid and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+                                        AutoHaki()
+                                        EquipTool(SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                    until v.Humanoid.Health <= 0 or not v.Parent or not _G.CastleRaid
+                                end
+                            end
+                        end
+                    else
+                        toTarget(CFrameCastleRaid)
+                     
+                      
+                    end
+                end)
+            end
+        end
+        end)
+
+
+--// auto chest
+
+Tabs.Main:AddButton({
+    Title = "Auto Chest",
+    Description = "Auto Chest",
+    Callback = function()
+        _G.JoinTeam = "Pirates"
+        _G.Stop_If_Has_Items = true
+        loadstring(game:HttpGet("https://github.com/PNguyen0199/Script/raw/main/Trash_Auto_Chest.lua"))()
+    end
+})
+
+      Tabs.Main:AddButton({
+        Title = "Redeem All Code",
+        Description = "Redeem All Code",
+        Callback = function()
+            RedeemCode()
+        end
+    })
+
+    function RedeemCode(Code)
+		game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Code)
+	end
+
+    Tabs.Main:AddButton({
+        Title = "Fps Booster",
+        Description = "Fps Booster",
+        Callback = function()
+            FPSBooster()
+        end
+    })
+
+    function FPSBooster()
+        local decalsyeeted = true
+        local g = game
+        local w = g.Workspace
+        local l = g.Lighting
+        local t = w.Terrain
+        sethiddenproperty(l,"Technology",2)
+        sethiddenproperty(t,"Decoration",false)
+        t.WaterWaveSize = 0
+        t.WaterWaveSpeed = 0
+        t.WaterReflectance = 0
+        t.WaterTransparency = 0
+        l.GlobalShadows = false
+        l.FogEnd = 9e9
+        l.Brightness = 0
+        settings().Rendering.QualityLevel = "Level01"
+        for i, v in pairs(g:GetDescendants()) do
+            if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+                v.Material = "Plastic"
+                v.Reflectance = 0
+            elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+                v.Transparency = 1
+            elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                v.Lifetime = NumberRange.new(0)
+            elseif v:IsA("Explosion") then
+                v.BlastPressure = 1
+                v.BlastRadius = 1
+            elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+                v.Enabled = false
+            elseif v:IsA("MeshPart") then
+                v.Material = "Plastic"
+                v.Reflectance = 0
+                v.TextureID = 10385902758728957
+            end
+        end
+        for i, e in pairs(l:GetChildren()) do
+            if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+                e.Enabled = false
+            end
+        end
+    end
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Mastery
+local Mastery = Tabs.Main:AddSection("Mastery Farm")
+    local DropdownMastery = Tabs.Main:AddDropdown("DropdownMastery", {
+        Title = "Mastery Mode",
+        Description = "Mastery Mode",
+        Values = {"Level","Near Mobs",},
+        Multi = false,
+        Default = 1,
+    })
+
+    DropdownMastery:SetValue("Level")
+
+    DropdownMastery:OnChanged(function(Value)
+        TypeMastery = Value
+    end)
+
+    local ToggleMasteryFruit = Tabs.Main:AddToggle("ToggleMasteryFruit", {
+        Title = "Auto BF Mastery",
+        Description = "Auto Mastery Fruit", 
+        Default = false })
+    ToggleMasteryFruit:OnChanged(function(Value)
+        AutoFarmMasDevilFruit = Value
+    end)
+    Options.ToggleMasteryFruit:SetValue(false)
+
+ 
+
+    local SliderHealt = Tabs.Main:AddSlider("SliderHealt", {
+        Title = "Health (%) Mob",
+        Description = "Health % Mob",
+        Default = 25,
+        Min = 0,
+        Max = 100,
+        Rounding = 1,
+        Callback = function(Value)
+            KillPercent = Value
+        end
+    })
+
+    SliderHealt:OnChanged(function(Value)
+        KillPercent = Value
+    end)
+
+    SliderHealt:SetValue(25)
+    
+    
+spawn(function()
+while task.wait(1) do
+if _G.UseSkill then
+pcall(function()
+  if _G.UseSkill then
+  for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+  if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health <= v.Humanoid.MaxHealth * KillPercent / 100 then
+  repeat game:GetService("RunService").Heartbeat:wait()
+  EquipTool(game.Players.LocalPlayer.Data.DevilFruit.Value)
+  Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+  PositionSkillMasteryDevilFruit = v.HumanoidRootPart.Position
+  if game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value) then
+  game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value).MousePos.Value = PositionSkillMasteryDevilFruit
+  local DevilFruitMastery = game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value).Level.Value
+  if SkillZ and DevilFruitMastery >= 1 then
+  game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
+  wait(0.1)
+  game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
+  end
+  if SkillX and DevilFruitMastery >= 2 then
+  game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+  wait(0.2)
+  game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+  end
+  if SkillC and DevilFruitMastery >= 3 then
+  game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
+  wait(0.3)
+  game:service('VirtualInputManager'):SendKeyEvent(false, "C", false, game)
+  end
+  if SkillV and DevilFruitMastery >= 4 then
+  game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
+  wait(0.4)
+  game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
+  end
+  if SkillF and DevilFruitMastery >= 5 then
+  game:GetService("VirtualInputManager"):SendKeyEvent(true, "F", false, game)
+  wait(0.5)
+  game:GetService("VirtualInputManager"):SendKeyEvent(false, "F", false, game)
+  end
+  end
+  until not AutoFarmMasDevilFruit or not _G.UseSkill or v.Humanoid.Health == 0
+  end
+  end
+  end
+  end)
+end
+end
+end)
+spawn(function()
+    while task.wait(.1) do
+    if AutoFarmMasDevilFruit and TypeMastery == 'Level' then
+    pcall(function()
+      CheckLevel(SelectMonster)
+      if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+      game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+      if BypassTP then
+        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude > 2500 then
+        to(CFrameQ)
+        wait(0.2)
+        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude < 2500 then
+        Tween(CFrameQ)
+        end
+        else
+          Tween(CFrameQ)
+        end
+      if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+      game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,QuestLv)
+      end
+      elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+      for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+      if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+      if v.Name == Ms then
+        repeat wait(_G.Fast_Delay)
+      if v.Humanoid.Health <= v.Humanoid.MaxHealth * KillPercent / 100 then
+      _G.UseSkill = true
+      else
+    _G.UseSkill = false
+	   AutoHaki()
+       bringmob = true
+      EquipTool(SelectWeapon)
+      Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+      v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+      v.HumanoidRootPart.Transparency = 1
+      v.Humanoid.JumpPower = 0
+      v.Humanoid.WalkSpeed = 0
+      v.HumanoidRootPart.CanCollide = false
+      FarmPos = v.HumanoidRootPart.CFrame
+      MonFarm = v.Name
+      
+      NormalAttack()
+      end
+      until not AutoFarmMasDevilFruit or not v.Parent or v.Humanoid.Health == 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or not TypeMastery == 'Level'
+      bringmob = false
+      _G.UseSkill = false
+      
+      end
+      end
+      end
+      end
+      end)
+---------Near Mas
+    elseif AutoFarmMasDevilFruit and TypeMastery == 'Near Mobs' then
+    pcall(function()
+      for i,v in pairs (game.Workspace.Enemies:GetChildren()) do
+      if v.Name and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+      if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v:FindFirstChild("HumanoidRootPart").Position).Magnitude <= 5000 then
+        repeat wait(_G.Fast_Delay)
+      if v.Humanoid.Health <= v.Humanoid.MaxHealth * KillPercent / 100 then
+      _G.UseSkill = true
+      else
+        _G.UseSkill = false
+		AutoHaki()
+        bringmob = true
+      EquipTool(SelectWeapon)
+      Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+      v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+      v.HumanoidRootPart.Transparency = 1
+      v.Humanoid.JumpPower = 0
+      v.Humanoid.WalkSpeed = 0
+      v.HumanoidRootPart.CanCollide = false
+  --v.Humanoid:ChangeState(11)
+  --v.Humanoid:ChangeState(14)
+      FarmPos = v.HumanoidRootPart.CFrame
+      MonFarm = v.Name
+      
+       NormalAttack()
+      end
+      until not AutoFarmMasDevilFruit or not MasteryType == 'Near Mobs' or not v.Parent or v.Humanoid.Health == 0 or not TypeMastery == 'Near Mobs'
+      bringmob = false
+      _G.UseSkill = false
+      
+    end
+end
+end
+end)
+end
+end
+end)
+
+if Third_Sea then
+local MiscFarm = Tabs.Main:AddSection("Bone Farm")
+
+local StatusBone = Tabs.Main:AddParagraph({
+    Title = "Bone Status",
+    Content = ""
+})
+	spawn(function()
+		pcall(function()
+			while wait() do
+				StatusBone:SetDesc("You Have : "..tostring(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Check").." Bones"))
+			end
+		end)
+	end)
+
+
+local ToggleBone = Tabs.Main:AddToggle("ToggleBone", {
+    Title = "Auto Bone",
+    Description = "Cày Xương", 
+    Default = false })
+ToggleBone:OnChanged(function(Value)
+    _G.AutoBone = Value
+    if Value == false then
+        wait()
+        Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+    end
+end)
+Options.ToggleBone:SetValue(false)
+local BoneCFrame = CFrame.new(-9515.75, 174.8521728515625, 6079.40625)
+local BoneCFrame2 = CFrame.new(-9359.453125, 141.32679748535156, 5446.81982421875)
+spawn(function()
+    while wait() do
+        if _G.AutoBone then
+            pcall(function()
+                local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+                if not string.find(QuestTitle, "Demonic Soul") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                 toTarget(BoneCFrame)
+                if (BoneCFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 then    
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest","HauntedQuest2",1)
+                    end
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy" then
+                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Demonic Soul") then
+                                        repeat wait(_G.Fast_Delay)
+                                            AttackNoCoolDown()
+                                            AutoHaki()
+                                            bringmob = true
+                                            EquipTool(SelectWeapon)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+			                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                            v.HumanoidRootPart.Transparency = 1
+                                            v.Humanoid.JumpPower = 0
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.HumanoidRootPart.CanCollide = false
+                                            FarmPos = v.HumanoidRootPart.CFrame
+                                            MonFarm = v.Name
+                                        until not _G.AutoBone or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    else
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                        bringmob = false
+                                    end
+                                end
+                            end
+                        end
+                    else
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local ToggleRandomBone = Tabs.Main:AddToggle("ToggleRandomBone", {Title = "Random Bone",Description = "Random Bone", Default = false })
+ToggleRandomBone:OnChanged(function(Value)  
+		_G.AutoRandomBone = Value
+end)
+Options.ToggleRandomBone:SetValue(false)
+	
+spawn(function()
+	while wait(0.0000000000000000000000000000000000000000000000000001) do
+	if _G.AutoRandomBone then
+	local args = {
+	 [1] = "Bones",
+	 [2] = "Buy",
+	 [3] = 1,
+	 [4] = 1
+	}
+	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+	end
+	end
+	end)
+end
+if Third_Sea then
+local MiscFarm = Tabs.Main:AddSection("Katakuri Farm")
+local Mob_Kill_Cake_Prince = Tabs.Main:AddParagraph({
+    Title = "Check Cake Mob",
+    Content = ""
+})
+
+spawn(function()
+	while wait() do
+		pcall(function()
+			if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
+				Mob_Kill_Cake_Prince:SetDesc("Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41).."")
+			elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
+				Mob_Kill_Cake_Prince:SetDesc("Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40).."")
+			elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
+				Mob_Kill_Cake_Prince:SetDesc("Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39).." ")
+			else
+				Mob_Kill_Cake_Prince:SetDesc("Cake Prince : 🟢 ")
+			end
+		end)
+	end
+end)
+
+
+local ToggleCake = Tabs.Main:AddToggle("ToggleCake", {
+    Title = "Auto Cake Prince",
+    Description = "Auto Dough Boss", 
+    Default = false })
+ToggleCake:OnChanged(function(Value)
+ _G.CakePrince = Value
+ if Value == false then
+    wait()
+    Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+    wait()
+end
+end)
+Options.ToggleCake:SetValue(false)
+spawn(function()
+		while wait() do
+			if _G.CakePrince then
+                pcall(function()
+                    local CakeCFrame = CFrame.new(-2142.66821,71.2588654,-12327.4619,0.996939838,-4.33107843e-08,0.078172572,4.20252917e-08,1,1.80894251e-08,-0.078172572,-1.47488439e-08, 0.996939838)
+                    toTarget(CakeCFrame)
+					if game.ReplicatedStorage:FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then   
+						if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
+								if v.Name == "Cake Prince" then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+										AutoHaki()
+										EquipTool(SelectWeapon)
+										v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+										v.HumanoidRootPart.CanCollide = false
+										Tween(v.HumanoidRootPart.CFrame * Pos)
+										--Click
+									until _G.CakePrince == false or not v.Parent or v.Humanoid.Health <= 0
+                                    bringmob = false
+                                end    
+							end    
+						else
+							Tween(CFrame.new(-2009.2802734375, 4532.97216796875, -14937.3076171875)) 
+						end
+					else
+                        if game.Workspace.Enemies:FindFirstChild("Baking Staff") or game.Workspace.Enemies:FindFirstChild("Head Baker") or game.Workspace.Enemies:FindFirstChild("Cake Guard") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter")  then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do  
+                                if (v.Name == "Baking Staff" or v.Name == "Head Baker" or v.Name == "Cake Guard" or v.Name == "Cookie Crafter") and v.Humanoid.Health > 0 then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+										AutoHaki()
+                                        bringmob = true
+										EquipTool(SelectWeapon)
+										v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)  
+										FarmPos = v.HumanoidRootPart.CFrame
+                                        MonFarm = v.Name
+										Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+									until _G.CakePrince == false or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") or not v.Parent or v.Humanoid.Health <= 0
+                                    bringmob = false
+                                end
+							end
+						else
+							Tween(CakeCFrame)
+						end
+					end
+				end)
+			end
+		end
+    end)
+
+
+    local ToggleSpawnCake = Tabs.Main:AddToggle("ToggleSpawnCake", {
+        Title = "Auto Spawn Cake Prince",
+        Description = "Auto Spawn Cake Prince", 
+        Default = true })
+    ToggleSpawnCake:OnChanged(function(Value)
+      _G.SpawnCakePrince = Value
+    end)
+    Options.ToggleSpawnCake:SetValue(true)
+end
+
+spawn(function()
+  while wait() do
+    if _G.SpawnCakePrince then
+      local args = {
+        [1] = "CakePrinceSpawner",
+        [2] = true
+      }
+      game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))                    
+      local args = {
+        [1] = "CakePrinceSpawner"
+      }
+      game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end
+  end
+end)
+end
+
+    if Second_Sea then
+	local MiscFarm = Tabs.Main:AddSection("Ectoplasm Farm")
+    local ToggleVatChatKiDi = Tabs.Main:AddToggle("ToggleVatChatKiDi", {
+        Title = "Auto Ectoplasm",
+        Description = "Auto Ectoplasm", 
+        Default = false })
+    ToggleVatChatKiDi:OnChanged(function(Value)
+        _G.Ectoplasm = Value
+    end)
+    Options.ToggleVatChatKiDi:SetValue(false)
+
+    spawn(function()
+        while wait(.1) do
+            pcall(function()
+                if _G.Ectoplasm then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Ship Steward" or v.Name == "Ship Engineer" or v.Name == "Ship Deckhand" or v.Name == "Ship Officer" and v:FindFirstChild("Humanoid") then
+                                if v.Humanoid.Health > 0 then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+                                        AutoHaki()
+                                        bringmob = true
+                                        EquipTool(SelectWeapon)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                        v.HumanoidRootPart.Transparency = 1
+                                        v.Humanoid.JumpPower = 0
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.CanCollide = false
+                                        FarmPos = v.HumanoidRootPart.CFrame
+                                        MonFarm = v.Name
+                                        --Click
+                                    until _G.Ectoplasm == false or not v.Parent or v.Humanoid.Health == 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name)
+                                    bringmob = false
+                                end
+                            end
+                        end
+                    else
+                        local Distance = (Vector3.new(904.4072265625, 181.05767822266, 33341.38671875) - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                        if Distance > 20000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                        end
+                        Tween(CFrame.new(904.4072265625, 181.05767822266, 33341.38671875))
+                    end
+                end
+            end)
+        end
+    end)
+end
+
+local boss = Tabs.Main:AddSection("Boss Farm")
+
+
+    if First_Sea then
+		tableBoss = {"The Gorilla King","Bobby","Yeti","Mob Leader","Vice Admiral","Warden","Chief Warden","Swan","Magma Admiral","Fishman Lord","Wysper","Thunder God","Cyborg","Saber Expert"}
+	elseif Second_Sea then
+		tableBoss = {"Diamond","Jeremy","Fajita","Don Swan","Smoke Admiral","Cursed Captain","Darkbeard","Order","Awakened Ice Admiral","Tide Keeper"}
+	elseif Third_Sea then
+		tableBoss = {"Stone","Island Empress","Kilo Admiral","Captain Elephant","Beautiful Pirate","rip_indra True Form","Longma","Soul Reaper","Cake Queen"}
+	end
+
+
+    local DropdownBoss = Tabs.Main:AddDropdown("DropdownBoss", {
+        Title = "Dropdown",
+        Description = "=) Boss",
+        Values = tableBoss,
+        Multi = false,
+        Default = 1,
+    })
+
+    DropdownBoss:SetValue("")
+    DropdownBoss:OnChanged(function(Value)
+		_G.SelectBoss = Value
+    end)
+
+	local ToggleAutoFarmBoss = Tabs.Main:AddToggle("ToggleAutoFarmBoss", {
+        Title = "Kill Boss",
+        Description = "Kill Boss", 
+        Default = false })
+
+    ToggleAutoFarmBoss:OnChanged(function(Value)
+		_G.AutoBoss = Value
+    end)
+
+    Options.ToggleAutoFarmBoss:SetValue(false)
+
+    spawn(function()
+        while wait() do
+            if _G.AutoBoss then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild(_G.SelectBoss) then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == _G.SelectBoss then
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+                                        AutoHaki()
+                                        EquipTool(SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
+                                        Tween(v.HumanoidRootPart.CFrame * Pos)
+                                        sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                    until not _G.AutoBoss or not v.Parent or v.Humanoid.Health <= 0
+                                end
+                            end
+                        end
+                    else
+                        if game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss) then
+                            toTarget(game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame * CFrame.new(5,10,7))
+                        end
+                    end
+                end)
+            end
+        end
+    end)
+
+    local Material = Tabs.Main:AddSection("Material Farm")
+
+    if First_Sea then
+        MaterialList = {
+          "Scrap Metal","Leather","Angel Wings","Magma Ore","Fish Tail"
+        } elseif Second_Sea then
+        MaterialList = {
+          "Scrap Metal","Leather","Radioactive Material","Mystic Droplet","Magma Ore","Vampire Fang"
+        } elseif Third_Sea then
+        MaterialList = {
+          "Scrap Metal","Leather","Demonic Wisp","Conjured Cocoa","Dragon Scale","Gunpowder","Fish Tail","Mini Tusk"
+        }
+        end
+
+    local DropdownMaterial = Tabs.Main:AddDropdown("DropdownMaterial", {
+        Title = "Dropdown",
+        Description = "ropdown",
+        Values = MaterialList,
+        Multi = false,
+        Default = 1,
+    })
+
+    DropdownMaterial:SetValue("Dragon Scale")
+
+    DropdownMaterial:OnChanged(function(Value)
+        SelectMaterial = Value
+    end)
+
+    local ToggleMaterial = Tabs.Main:AddToggle("ToggleMaterial", {
+        Title = "Auto Material",
+        Description = "Auto Material", 
+        Default = false })
+
+    ToggleMaterial:OnChanged(function(Value)
+        _G.AutoMaterial = Value
+        if Value == false then
+            wait()
+            Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+            wait()
+        end
+    end)
+    Options.ToggleMaterial:SetValue(false)
+    spawn(function()
+        while task.wait() do
+        if _G.AutoMaterial then
+        pcall(function()
+          MaterialMon(SelectMaterial)
+            toTarget(MPos)
+          if game:GetService("Workspace").Enemies:FindFirstChild(MMon) then
+          for i,v in pairs (game.Workspace.Enemies:GetChildren()) do
+          if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+          if v.Name == MMon then
+            repeat wait(_G.Fast_Delay)
+                AttackNoCoolDown()
+          AutoHaki()
+          bringmob = true
+          EquipTool(SelectWeapon)
+          Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+          v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+          v.HumanoidRootPart.Transparency = 1
+          v.Humanoid.JumpPower = 0
+          v.Humanoid.WalkSpeed = 0
+          v.HumanoidRootPart.CanCollide = false
+          FarmPos = v.HumanoidRootPart.CFrame
+          MonFarm = v.Name
+          --Click
+          until not _G.AutoMaterial or not v.Parent or v.Humanoid.Health <= 0
+          bringmob = false
+        end
+          end
+          end
+          else
+            for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+          if string.find(v.Name, Mon) then
+          if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
+          Tween(v.CFrame * CFrame.new(posX,posY,posZ))
+          end
+          end
+          end
+          end
+          end)
+        end
+        end
+      end)
+
+      if Third_Sea then
+      local RoughSea = Tabs.Main:AddSection("Kitsune")
+	 
+local StatusKitsune = Tabs.Main:AddParagraph({
+    Title = "Kistune Island",
+    Content = ""
+})
+function UpdateKitsune()
+    if game.Workspace._WorldOrigin.Locations:FindFirstChild('Kitsune Island') then
+        StatusKitsune:SetDesc("Kitsune Island : 🟢 ")
+    else
+        StatusKitsune:SetDesc("Kitsune Island : 🔴 ")
+     end
+end
+spawn(function()
+    pcall(function()
+        while wait() do
+            UpdateKitsune()
+        end
+    end)
+end)
+
+      local ToggleEspKitsune = Tabs.Main:AddToggle("ToggleEspKitsune", {Title = "Esp Kitsune Island",Description = "Esp Kitsune Island", Default = false })
+      ToggleEspKitsune:OnChanged(function(Value)
+        KitsuneIslandEsp = Value
+        while KitsuneIslandEsp do wait()
+            UpdateIslandKisuneESP() 
+        end
+    end)
+      Options.ToggleEspKitsune:SetValue(false)
+
+      function UpdateIslandKisuneESP() 
+        for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+            pcall(function()
+                if KitsuneIslandEsp then 
+                    if v.Name == "Kitsune Island" then
+                        if not v:FindFirstChild('NameEsp') then
+                            local bill = Instance.new('BillboardGui',v)
+                            bill.Name = 'NameEsp'
+                            bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                            bill.Size = UDim2.new(1,200,1,30)
+                            bill.Adornee = v
+                            bill.AlwaysOnTop = true
+                            local name = Instance.new('TextLabel',bill)
+                            name.Font = "Code"
+                            name.FontSize = "Size14"
+                            name.TextWrapped = true
+                            name.Size = UDim2.new(1,0,1,0)
+                            name.TextYAlignment = 'Top'
+                            name.BackgroundTransparency = 1
+                            name.TextStrokeTransparency = 0.5
+                            name.TextColor3 = Color3.fromRGB(80, 245, 245)
+                        else
+                            v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+                        end
+                    end
+                else
+                    if v:FindFirstChild('NameEsp') then
+                        v:FindFirstChild('NameEsp'):Destroy()
+                    end
+                end
+            end)
+        end
+    end
+
+      local ToggleTPKitsune = Tabs.Main:AddToggle("ToggleTPKitsune", {Title = "Tween To Kitsune Island",Description = "Tele To Kitsune Island", Default = false })
+      ToggleTPKitsune:OnChanged(function(Value)
+        _G.TweenToKitsune = Value
+      end)
+      Options.ToggleTPKitsune:SetValue(false)
+      spawn(function()
+        local kitsuneIsland
+        while not kitsuneIsland do
+            kitsuneIsland = game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland")
+            wait(1)
+        end
+        while wait() do
+            if _G.TweenToKitsune then
+                local shrineActive = kitsuneIsland:FindFirstChild("ShrineActive")
+                if shrineActive then
+                    for _, v in pairs(shrineActive:GetDescendants()) do
+                        if v:IsA("BasePart") and v.Name:find("NeonShrinePart") then
+                            Tween(v.CFrame)
+                        end
+                    end
+                end
+            end
+        end
+    end)
+
+
+      local ToggleCollectAzure = Tabs.Main:AddToggle("ToggleCollectAzure", {Title = "Collect Azure Ambers",Description = "Collect Azure Ambers..", Default = false })
+      ToggleCollectAzure:OnChanged(function(Value)
+         _G.CollectAzure = Value
+      end)
+      Options.ToggleCollectAzure:SetValue(false)
+spawn(function()
+    while wait() do
+        if _G.CollectAzure then
+            pcall(function()
+                if game:GetService("Workspace"):FindFirstChild("AttachedAzureEmber") then
+                    Tween(game:GetService("Workspace"):WaitForChild("EmberTemplate"):FindFirstChild("Part").CFrame)
+					print("Azure")
+                end
+            end)
+        end
+    end
+end)
+end
+
+if Third_Sea then
+    local RoughSea = Tabs.Main:AddSection("Rough Sea")
+
+    local ToggleSailBoat = Tabs.Main:AddToggle("ToggleSailBoat", {Title = "Auto buy Boat",Description = "Auto buy Boat", Default = false })
+    ToggleSailBoat:OnChanged(function(Value)
+        _G.SailBoat = Value
+    end)
+    Options.ToggleSailBoat:SetValue(false)
+
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.SailBoat then
+                    if not game:GetService("Workspace").Enemies:FindFirstChild("Shark") or not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+                        if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                            buyb = TweenBoat(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+                            if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                if buyb then buyb:Stop() end
+                                local args = {
+                                    [1] = "BuyBoat",
+                                    [2] = "PirateGrandBrigade"
+                                }
+    
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                        elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                            if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                                TweenBoat(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                            else
+                                for i,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                    if v.Name == "PirateGrandBrigade" then
+                                        repeat wait(_G.Fast_Delay)
+                                            if (CFrame.new(-17013.80078125, 10.962434768676758, 438.0169982910156).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
+                                            elseif (CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375))
+                                            elseif (CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
+                                            end 
+                                        until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or _G.SailBoat == false
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+    
+    spawn(function()
+		pcall(function()
+			while wait() do
+				if _G.SailBoat then
+					if game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+					    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+					end
+				end
+			end
+		end)
+	end)
+	
+	
+local ToggleNocliprock = Tabs.Main:AddToggle("ToggleNocliprock", {
+    Title = "No Clip Rock",
+    Description = "No Clip Rock.", 
+    Default = false })
+ToggleNocliprock:OnChanged(function(Value)
+    _G.Nocliprock = Value
+end)
+Options.ToggleNocliprock:SetValue(false)
+spawn(function()
+	while wait() do
+		if _G.Nocliprock then
+			if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+				for _, v in pairs(game.Workspace.Boats:GetDescendants()) do
+					if v:IsA("BasePart") and v.CanCollide == true then
+						v.CanCollide = false
+					end
+				end
+				for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+					if v:IsA("BasePart") and v.CanCollide == true then
+						v.CanCollide = false
+					end
+				end
+			elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+				for _, v in pairs(game.Workspace.Boats:GetDescendants()) do
+					if v:IsA("BasePart") and v.CanCollide == false then
+						v.CanCollide = true
+					end
+				end
+				for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+					if v:IsA("BasePart") and v.CanCollide == false then
+						v.CanCollide = true
+					end
+				end
+			end
+		end
+	end
+end)
+
+	
+	local SetSpeedBoatSlider = Tabs.Main:AddSlider("SliderSpeedBoat", {
+	Title = "Set Speed boat",
+	Description = "Set Speed boat",
+	Default = 300,
+	Min = 0,
+	Max = 1000,
+	Rounding = 1,
+	Callback = function(value)
+		SetSpeedBoat = value
+	end
+})
+
+SetSpeedBoatSlider:OnChanged(function(value)
+	SetSpeedBoat = value
+end)
+
+SetSpeedBoatSlider:SetValue(300)
+
+local SpeedBoatToggle = Tabs.Main:AddToggle("SpeedBoat_Toggle", {Title = "Speed Boat",Description = "Speed Boat", Default = false })
+Options.SpeedBoat_Toggle:SetValue(false)
+
+SpeedBoatToggle:OnChanged(function(value)
+	_G.SpeedBoat = value
+end)
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    if _G.SpeedBoat then
+        for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+            if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit then
+                v:FindFirstChild("VehicleSeat").MaxSpeed = SetSpeedBoat
+            end
+        end
+    end
+end)
+
+
+
+    local ToggleTerrorshark = Tabs.Main:AddToggle("ToggleTerrorshark", {Title = "Kill Terrorshark",Description = "Kill Terrorshark", Default = false })
+
+    ToggleTerrorshark:OnChanged(function(Value)
+        _G.AutoTerrorshark = Value
+    end)
+    Options.ToggleTerrorshark:SetValue(false)
+    spawn(function()
+        while wait() do
+            if _G.AutoTerrorshark then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Terrorshark" then
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+                                        AutoHaki()
+                                        EquipTool(SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                    until not _G.AutoTerrorshark or not v.Parent or v.Humanoid.Health <= 0
+                                end
+                            end
+                        end
+                    else
+                      
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark") then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        else
+                        end
+                    end
+                end)
+    
+            end
+        end
+     end)
+
+
+
+     local TogglePiranha = Tabs.Main:AddToggle("TogglePiranha", {Title = " Kill Piranha",Description = "Đánh Piranha", Default = false })
+
+     TogglePiranha:OnChanged(function(Value)
+        _G.farmpiranya = Value
+     end)
+     Options.TogglePiranha:SetValue(false)
+
+     spawn(function()
+        while wait() do
+            if _G.farmpiranya then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Piranha" then
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+                                        AutoHaki()
+                                        EquipTool(SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                    until not _G.farmpiranya or not v.Parent or v.Humanoid.Health <= 0
+                                end
+                            end
+                        end
+                    else
+                     
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Piranha") then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Piranha").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        else  
+                        end
+                    end
+        
+                end)
+            end
+        end
+     end)
+
+
+
+     local ToggleShark = Tabs.Main:AddToggle("ToggleShark", {Title = "Kill Shark",Description = "Kill Shark", Default = false })
+     ToggleShark:OnChanged(function(Value)
+        _G.AutoShark = Value
+     end)
+     Options.ToggleShark:SetValue(false)
+     spawn(function()
+        while wait() do
+            if _G.AutoShark then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Shark" then
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+                                        AutoHaki()
+                                        EquipTool(SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    until not _G.AutoShark or not v.Parent or v.Humanoid.Health <= 0
+                                end
+                            end
+                        end
+                    else
+                        Tween(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark") then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        else
+                        end
+                    end
+                end)
+    
+            end
+        end
+    end)
+
+
+
+    local ToggleFishCrew = Tabs.Main:AddToggle("ToggleFishCrew", {Title = " Kill Fish Crew",Description = "Kill Fish Crew", Default = false })
+    ToggleFishCrew:OnChanged(function(Value)
+       _G.AutoFishCrew = Value
+    end)
+    Options.ToggleFishCrew:SetValue(false)
+
+    spawn(function()
+        while wait() do
+            if _G.AutoFishCrew then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Fish Crew Member" then
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+                                        AutoHaki()
+                                        EquipTool(SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                            
+                                        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    until not _G.AutoFishCrew or not v.Parent or v.Humanoid.Health <= 0
+                                end
+                            
+                            end
+                        end
+                    else
+                  
+                        Tween(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member") then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        else
+                           
+                        end
+                    end
+        
+                end)
+            end
+        end
+    end)
+
+
+
+    local ToggleShip = Tabs.Main:AddToggle("ToggleShip", {Title = "Kill Ship",Description = "Kill Ship..", Default = false })
+    ToggleShip:OnChanged(function(Value)
+        _G.Ship = Value
+       end)
+       Options.ToggleShip:SetValue(false)
+       function CheckPirateBoat()
+        local checkmmpb = {"PirateGrandBrigade", "PirateBrigade"}
+        for r, v in next, game:GetService("Workspace").Enemies:GetChildren() do
+            if table.find(checkmmpb, v.Name) and v:FindFirstChild("Health") and v.Health.Value > 0 then
+                return v
+            end
+        end
+    end
+    
+    spawn(function()
+while wait() do
+    if _G.Ship then
+        pcall(function()
+            if CheckPirateBoat() then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,32,false,game)
+                wait(.5)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,32,false,game)
+                local v = CheckPirateBoat()
+                repeat
+                    wait()
+                    spawn(Tween(v.Engine.CFrame * CFrame.new(0, -20, 0)), 1)
+                    AimBotSkillPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -5, 0)
+                    Skillaimbot = true
+                    AutoSkill = false
+                until not v or not v.Parent or v.Health.Value <= 0 or not CheckPirateBoat()
+                Skillaimbot = true
+                AutoSkill = false
+            end
+        end)
+    end
+end
+end)
+
+
+
+    local ToggleGhostShip = Tabs.Main:AddToggle("ToggleGhostShip", {Title = "Kill Ghost Ship",Description = "Kill Ghost Ship.",Default = false })
+    ToggleGhostShip:OnChanged(function(Value)
+        _G.GhostShip = Value
+       end)
+       Options.ToggleGhostShip:SetValue(false)
+    
+       function CheckPirateBoat()
+        local checkmmpb = {"FishBoat"}
+        for r, v in next, game:GetService("Workspace").Enemies:GetChildren() do
+            if table.find(checkmmpb, v.Name) and v:FindFirstChild("Health") and v.Health.Value > 0 then
+                return v
+            end
+        end
+    end
+spawn(function()
+while wait() do
+    pcall(function()
+        if _G.bjirFishBoat then
+            if CheckPirateBoat() then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 32, false, game)
+                wait(0.5)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 32, false, game)
+                local v = CheckPirateBoat()
+                repeat
+                    wait()
+                    spawn(Tween(v.Engine.CFrame * CFrame.new(0, -20, 0), 1))
+                    AutoSkill = true
+                    Skillaimbot = true
+                    AimBotSkillPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -5, 0)
+                until v.Parent or v.Health.Value <= 0 or not CheckPirateBoat()
+                AutoSkill = false
+                Skillaimbot = false
+            end
+        end
+    end)
+end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.bjirFishBoat then
+               pcall(function()
+                    if CheckPirateBoat() then
+                        AutoHaki()
+                        game:GetService("VirtualUser"):CaptureController()
+                        game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                            if v:IsA("Tool") then
+                                if v.ToolTip == "Melee" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                                end
+                            end
+                        end
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                            if v:IsA("Tool") then
+                                if v.ToolTip == "Blox Fruit" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                                end
+                            end
+                        end
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(0.6)
+                        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                            if v:IsA("Tool") then
+                                if v.ToolTip == "Sword" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                                end
+                            end
+                        end
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(0.5)
+                        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                            if v:IsA("Tool") then
+                                if v.ToolTip == "Gun" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                                end
+                            end
+                        end
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                    end
+                end)
+            end
+    end
+      end)
+
+
+
+    local AutoElite = Tabs.Main:AddSection("Elite Hunter Farm")
+
+    local StatusElite = Tabs.Main:AddParagraph({
+        Title = "Check Elite",
+        Content = "Status: "
+    })
+    
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+                    StatusElite:SetDesc("Elite Boss : 🟢yes | Killed:  "..game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress"))	
+                else
+                    StatusElite:SetDesc("Elite Boss : 🔴no | Killed: "..game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress"))	
+                end
+            end)
+        end
+    end)
+    
+    local ToggleElite = Tabs.Main:AddToggle("ToggleElite", {Title = "Auto Elite Hunter",Description = "Auto Elite Hunter", Default = false })
+
+    ToggleElite:OnChanged(function(Value)
+       _G.AutoElite = Value
+       end)
+       Options.ToggleElite:SetValue(false)
+       spawn(function()
+           while task.wait() do
+               if _G.AutoElite then
+                   pcall(function()
+                       if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                           if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Deandre") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Urban") then
+                               if game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+                                   for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                       if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                           if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
+                                            repeat wait(_G.Fast_Delay)
+                                                AttackNoCoolDown()
+                                                   EquipTool(SelectWeapon)
+                                                   AutoHaki()
+                                                   toTarget(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                                   MonsterPosition = v.HumanoidRootPart.CFrame
+                                                   v.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+                                                   v.Humanoid.JumpPower = 0
+                                                   v.Humanoid.WalkSpeed = 0
+                                                   v.HumanoidRootPart.CanCollide = false
+                                                   v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                               until _G.AutoElite == false or v.Humanoid.Health <= 0 or not v.Parent
+                                           end
+                                       end
+                                   end
+                               else
+                                 
+                                   if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") then
+                                    toTarget(game:GetService("ReplicatedStorage"):FindFirstChild("Diablo").HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                   elseif game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") then
+                                    toTarget(game:GetService("ReplicatedStorage"):FindFirstChild("Deandre").HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                   elseif game:GetService("ReplicatedStorage"):FindFirstChild("Urban") then
+                                    toTarget(game:GetService("ReplicatedStorage"):FindFirstChild("Urban").HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                   end
+   
+                               end
+                         
+                           end
+                       else
+                           game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
+                       end
+                   end)
+               end
+           end
+       end)
+    end
+
+
+if Third_Sea then
+    local Sea = Tabs.Main:AddSection("Sea Beast")
+
+
+local ToggleSeaBeAst = Tabs.Main:AddToggle("ToggleSeaBeAst", {Title = "Auto Sea Beast",Description = "Auto Sea Beast", Default = false })
+
+ToggleSeaBeAst:OnChanged(function(Value)
+    _G.AutoSeaBeast = Value
+    end)
+    Options.ToggleSeaBeAst:SetValue(false)
+ 
+    
+    Skillz = true
+    Skillx = true
+    Skillc = true
+    Skillv = true
+    
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if AutoSkill then
+                    if Skillz then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
+                    end
+                    if Skillx then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+                    end
+                    if Skillc then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "C", false, game)
+                    end
+                    if Skillv then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
+                    end
+                end
+            end)
+        end
+    end)
+    task.spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.AutoSeaBeast then
+                    if not game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") then
+                        if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then 
+                            if not game:GetService("Workspace").Boats:FindFirstChild("PirateBasic") then
+                                if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                    buyb = TweenBoat(CFrame.new(-4513.90087890625, 16.76398277282715, -2658.820556640625))
+                                    if (CFrame.new(-4513.90087890625, 16.76398277282715, -2658.820556640625).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                        if buyb then buyb:Stop() end
+                                        local args = {
+                                            [1] = "BuyBoat",
+                                            [2] = "PirateGrandBrigade"
+                                        }
+            
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                    end
+                                elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                    if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                                        TweenBoat(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                    elseif game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == true then
+                                        repeat wait(_G.Fast_Delay)
+                                            if (game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(35.04552459716797, 17.750778198242188, 4819.267578125))
+                                            end
+                                        until game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") or _G.AutoSeaBeast == false
+                                    end
+                                end
+                            elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                for is,vs in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                    if vs.Name == "PirateGrandBrigade" then
+                                        if vs:FindFirstChild("VehicleSeat") then
+                                            repeat wait(_G.Fast_Delay)
+                                                game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                                TweenBoat(vs.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                            until not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") or _G.AutoSeaBeast == false
+                                        end
+                                    end
+                                end
+                            end
+                        elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                            for iss,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                if v.Name == "PirateGrandBrigade" then
+                                    if v:FindFirstChild("VehicleSeat") then
+                                        repeat wait(_G.Fast_Delay)
+                                            game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                            TweenBoat(v.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                        until not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") or _G.AutoSeaBeast == false
+                                    end
+                                end
+                            end
+                        end
+                    elseif game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") then  
+                        for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") then
+                                repeat wait(_G.Fast_Delay)
+                                    game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                    TweenBoat(v.HumanoidRootPart.CFrame * CFrame.new(0,500,0))
+                                    EquipAllWeapon()  
+                                    AutoSkill = true
+                                    AimBotSkillPosition = v.HumanoidRootPart
+                                    Skillaimbot = true
+                                until not v:FindFirstChild("HumanoidRootPart") or _G.AutoSeaBeast == false
+                                AutoSkill = false
+                                Skillaimbot = false
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+
+local ToggleAutoW = Tabs.Main:AddToggle("ToggleAutoW", {Title = "Auto Press W",Description = "Auto Press W", Default = false })
+ToggleAutoW:OnChanged(function(Value)
+    _G.AutoW = Value
+    end)
+ Options.ToggleAutoW:SetValue(false)
+ spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoW then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
+            end
+        end)
+    end
+    end)
+
+
+
+
+    local AutoMysticIsland = Tabs.Main:AddSection("Mirage Island")
+
+    local StatusMirage = Tabs.Main:AddParagraph({
+        Title = "Status",
+        Content = "Status:"
+    })
+    
+    task.spawn(function()
+    while task.wait() do
+    pcall(function()
+        if game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149431" then
+           FullMoonStatus = "100%"
+        elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149052" then
+            FullMoonStatus = "75%"
+        elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709143733" then
+            FullMoonStatus = "50%"
+        elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709150401" then
+            FullMoonStatus = "25%"
+        elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149680" then
+            FullMoonStatus = "15%"
+        else
+            FullMoonStatus = "0%"
+        end
+    end)
+    end
+    end)
+    
+    task.spawn(function()
+        while task.wait() do
+            pcall(function()
+            if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
+                MirageStatus = "🟢yes"
+            else
+                MirageStatus = '🔴no'
+             end
+        end)
+     end
+    end)
+    
+    
+    spawn(function()
+        pcall(function()
+            while wait() do
+                StatusMirage:SetDesc("Mirage Island: "..MirageStatus.." | Full Moon: "..FullMoonStatus)
+            end
+        end)
+    end)
+
+    Tabs.Main:AddButton({
+        Title = "Tween to Mirage Island",
+        Description = "Tele to Mirage Island",
+        Callback = function()
+            TweenMirage()
+        end
+    })
+    function TweenMirage()
+        repeat
+            wait()
+        until game:GetService("Workspace").Map:FindFirstChild("MysticIsland")
+        if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+            AllNPCS = getnilinstances()
+            for r, v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+                table.insert(AllNPCS, v)
+            end
+            for r, v in pairs(AllNPCS) do
+                if v.Name == "Advanced Fruit Dealer" then
+                    Tween2(v.HumanoidRootPart.CFrame)
+                end
+            end
+        end
+    end
+
+
+    Tabs.Main:AddButton({
+        Title = "Tween to Highest Point",
+        Description = "Tween to Highest Point",
+        Callback = function()
+            TwenetoHighestPoint()
+        end
+    })
+
+    function TwenetoHighestPoint()
+        HighestPoint = getHighestPoint()
+        if HighestPoint then
+            Tween2(HighestPoint.CFrame * CFrame.new(0, 211.88, 0))
+        end
+    end
+    function getHighestPoint()
+        if not game.workspace.Map:FindFirstChild("MysticIsland") then
+            return nil
+        end
+        for r, v in pairs(game:GetService("Workspace").Map.MysticIsland:GetDescendants()) do
+            if v:IsA("MeshPart") then
+                if v.MeshId == "rbxassetid://16435032782" then
+                    return v
+                end
+            end
+        end
+    end
+
+local ToggleTweenGear = Tabs.Main:AddToggle("ToggleTweenGear", {Title = "Tween To Gear",Description = "Tele To Gear", Default = false })
+ToggleTweenGear:OnChanged(function(Value)
+    _G.TweenToGear = Value
+end) 
+Options.ToggleTweenGear:SetValue(false)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.TweenToGear then
+				if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+					for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do 
+						if v:IsA("MeshPart")then 
+                            if v.Material ==  Enum.Material.Neon then  
+                                Tween2(v.CFrame)
+                            end
+                        end
+					end
+				end
+			end
+        end
+    end)
+    end)
+
+
+
+
+    local Togglelockmoon = Tabs.Main:AddToggle("Togglelockmoon", {Title = "Lock Moon and Use Race Skill",Description = "Lock Moon and Use Race Skill.", Default = false })
+    Togglelockmoon:OnChanged(function(Value)
+        _G.AutoLockMoon = Value
+    end) 
+    Options.Togglelockmoon:SetValue(false)
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.AutoLockMoon then
+                    local moonDir = game.Lighting:GetMoonDirection()
+                    local lookAtPos = game.Workspace.CurrentCamera.CFrame.p + moonDir * 100
+                    game.Workspace.CurrentCamera.CFrame = CFrame.lookAt(game.Workspace.CurrentCamera.CFrame.p, lookAtPos)
+                end
+            end)
+        end
+    end)
+
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.AutoLockMoon then
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"T",false,game)
+                    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"T",false,game)
+                end
+            end)
+        end
+    end)
+
+
+local ToggleMirage = Tabs.Main:AddToggle("ToggleMirage", {Title = "Auto Mirage Island",Description = "Auto Mirage Island.", Default = false })
+ToggleMirage:OnChanged(function(Value)
+ _G.AutoSeaBeast = Value
+end) 
+
+ Options.ToggleMirage:SetValue(false)
+
+ local AutoW = Tabs.Main:AddToggle("AutoW", {Title = "Auto Press W",Description = "Auto Press W", Default = false })
+ AutoW:OnChanged(function(Value)
+    _G.AutoW = Value
+     end)
+  Options.AutoW:SetValue(false)
+  spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoW then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
+            end
+        end)
+    end
+    end)
+end
+
+local Items = Tabs.Main:AddSection("Items Farm")
+
+if Third_Sea then
+    local ToggleHallow = Tabs.Main:AddToggle("ToggleHallow", {Title = "Auto Hallow Scythe [Fully]",Description = "Auto Hallow Scythe", Default = false })
+
+    ToggleHallow:OnChanged(function(Value)
+        AutoHallowSycthe = Value
+    end)
+    Options.ToggleHallow:SetValue(false)
+    spawn(function()
+        while wait() do
+            if AutoHallowSycthe then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if string.find(v.Name , "Soul Reaper") then
+                                repeat wait(_G.Fast_Delay)
+                                    AttackNoCoolDown()
+                                    AutoHaki()
+                                    EquipTool(SelectWeapon)
+                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                    toTarget(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                    v.HumanoidRootPart.Transparency = 1
+                                    sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+									--Click
+                                until v.Humanoid.Health <= 0 or AutoHallowSycthe == false
+                            end
+                        end
+                    elseif game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hallow Essence") then
+                        repeat toTarget(CFrame.new(-8932.322265625, 146.83154296875, 6062.55078125)) wait() until (CFrame.new(-8932.322265625, 146.83154296875, 6062.55078125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 8                        
+                      wait(0.5)
+                        EquipTool("Hallow Essence")
+                    else
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper") then
+                            toTarget(game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        else
+                        end
+                    end
+                end)
+    
+            end
+        end
+    end)
+	
+	
+	spawn(function()
+           while wait(0.001) do
+           if AutoHallowSycthe then
+           local args = {
+            [1] = "Bones",
+            [2] = "Buy",
+            [3] = 1,
+            [4] = 1
+           }
+          
+           game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+           end
+           end
+           end)
+        
+           
+           local ToggleYama = Tabs.Main:AddToggle("ToggleYama", {Title = "Auto Get Yama",Description = "Auto Get Yama", Default = false })
+           ToggleYama:OnChanged(function(Value)
+            _G.AutoYama = Value
+           end)
+           Options.ToggleYama:SetValue(false)
+           spawn(function()
+            while wait() do
+                if _G.AutoYama then
+                    if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress") >= 30 then
+                        repeat wait(.1)
+                            fireclickdetector(game:GetService("Workspace").Map.Waterfall.SealedKatana.Handle.ClickDetector)
+                        until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Yama") or not _G.AutoYama
+                    end
+                end
+            end
+        end)
+
+
+        local ToggleTushita = Tabs.Main:AddToggle("ToggleTushita", {Title = "Auto Tushita",Description = "Kill Boss Longma = Tushita", Default = false })
+        ToggleTushita:OnChanged(function(Value)
+            AutoTushita = Value
+        end)
+        Options.ToggleTushita:SetValue(false)
+           spawn(function()
+                   while wait() do
+                               if AutoTushita then
+                                   if game:GetService("Workspace").Enemies:FindFirstChild("Longma") then
+                                       for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                           if v.Name == ("Longma" or v.Name == "Longma") and v.Humanoid.Health > 0 and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+                                            repeat wait(_G.Fast_Delay)
+                                                AttackNoCoolDown()
+                                                   AutoHaki()
+                                                   if not game.Players.LocalPlayer.Character:FindFirstChild(SelectWeapon) then
+                                                       wait()
+                                                       EquipTool(SelectWeapon)
+                                                   end
+                                                   FarmPos = v.HumanoidRootPart.CFrame
+                                                     --Click
+                                                   v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                                   v.Humanoid.JumpPower = 0
+                                                   v.Humanoid.WalkSpeed = 0
+                                                   v.HumanoidRootPart.CanCollide = false
+                                                   v.Humanoid:ChangeState(11)
+                                                   Tween(v.HumanoidRootPart.CFrame * Pos)
+                                               until not AutoTushita or not v.Parent or v.Humanoid.Health <= 0
+                                           end
+                                       end
+                                   else
+                                       Tween(CFrame.new(-10238.875976563, 389.7912902832, -9549.7939453125))
+                                   end
+                               end
+                           end
+                   end)
+
+
+                   local ToggleHoly = Tabs.Main:AddToggle("ToggleHoly", {Title = "Auto Holy Torch",Description = "Auto Tushita..", Default = false })
+                   ToggleHoly:OnChanged(function(Value)
+                    _G.Auto_Holy_Torch = Value
+                   end)
+                   Options.ToggleHoly:SetValue(false)
+                   spawn(function()
+                    while wait() do
+                        if _G.Auto_Holy_Torch then
+                            pcall(function()
+                                wait(1)
+                                repeat Tween(CFrame.new(-10752, 417, -9366)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-10752, 417, -9366)).Magnitude <= 10
+                                wait(1)
+                                repeat Tween(CFrame.new(-11672, 334, -9474)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-11672, 334, -9474)).Magnitude <= 10
+                                wait(1)
+                                repeat Tween(CFrame.new(-12132, 521, -10655)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-12132, 521, -10655)).Magnitude <= 10
+                                wait(1)
+                                repeat Tween(CFrame.new(-13336, 486, -6985)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-13336, 486, -6985)).Magnitude <= 10
+                                wait(1)
+                                repeat Tween(CFrame.new(-13489, 332, -7925)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-13489, 332, -7925)).Magnitude <= 10
+                            end)
+                        end
+                    end
+                end)
+            end
+
+
+if Second_Sea then
+        local ToggleFactory = Tabs.Main:AddToggle("ToggleFactory", {Title = "Auto Farm Factory",Description = "Auto Farm Factory (Đánh nhà Máy)", Default = false })
+        ToggleFactory:OnChanged(function(Value)
+            _G.Factory = Value
+        end)
+        Options.ToggleFactory:SetValue(false)
+
+        spawn(function()
+            while wait() do
+                if _G.Factory then
+                    if game.Workspace.Enemies:FindFirstChild("Core") then
+                        for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                            if v.Name == "Core" and v.Humanoid.Health > 0 then
+                                repeat wait(_G.Fast_Delay)
+                                    AttackNoCoolDown()
+                                    repeat Tween(CFrame.new(448.46756, 199.356781, -441.389252))
+                                        wait()
+                                    until not _G.Factory or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(448.46756, 199.356781, -441.389252)).Magnitude <= 10
+                                    EquipTool(SelectWeapon)
+                                    AutoHaki()
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    v.HumanoidRootPart.Transparency = 1
+                                    v.Humanoid.JumpPower = 0
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    FarmPos = v.HumanoidRootPart.CFrame
+                                    MonFarm = v.Name
+                                    --Click
+                                until not v.Parent or v.Humanoid.Health <= 0  or _G.Factory == false
+                            end
+                        end
+                    elseif game.ReplicatedStorage:FindFirstChild("Core") then
+                        repeat Tween(CFrame.new(448.46756, 199.356781, -441.389252))
+                            wait()
+                        until not _G.Factory or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(448.46756, 199.356781, -441.389252)).Magnitude <= 10
+                    end
+        
+                end
+            end
+        end)
+
+    end
+
+        if Third_Sea then
+    local ToggleCakeV2 = Tabs.Main:AddToggle("ToggleCakeV2", {Title = "Kill Dought King [Need Spawn]",Description = "Auto Kill Dought King [Need Spawn]", Default = false })
+    ToggleCakeV2:OnChanged(function(Value)
+        _G.AutoCakeV2 = Value
+    end)
+        Options.ToggleCakeV2:SetValue(false)
+end
+    spawn(function()
+        while wait() do
+            if _G.AutoCakeV2 then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Dough King" then
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat wait(_G.Fast_Delay)
+                                        AttackNoCoolDown()
+                                        AutoHaki()
+                                        EquipTool(SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        Tween(v.HumanoidRootPart.CFrame * Pos)
+                                    until not _G.AutoCakeV2 or not v.Parent or v.Humanoid.Health <= 0
+                                end
+                            end
+                        end
+                    else
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
+                     Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Dough King").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        else
+                        end
+            
+                    end
+                end)
+            end
+        end
+    end)
+
+
+
+
+
+
+    
+if Second_Sea or Third_Sea then
+    local ToggleHakiColor = Tabs.Main:AddToggle("ToggleHakiColor", {Title = "Buy Haki Color",Description = "Buy Haki Color",Default = false })
+    ToggleHakiColor:OnChanged(function(Value)
+        _G.Auto_Buy_Enchancement = Value
+    end)
+        Options.ToggleHakiColor:SetValue(false)
+    spawn(function()
+            while wait() do
+                if _G.Auto_Buy_Enchancement then
+                    local args = {
+                        [1] = "ColorsDealer",
+                        [2] = "2"
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end 
+            end
+        end)
+end
+
+if Second_Sea then
+    local ToggleSwordLengend = Tabs.Main:AddToggle("ToggleSwordLengend", {Title = "Buy Sword Lengendary",Description = "Buy Sword Lengendary",Default = false })
+    ToggleSwordLengend:OnChanged(function(Value)
+        _G.BuyLengendSword = Value
+    end)
+        Options.ToggleSwordLengend:SetValue(false)
+
+        spawn(function()
+            while wait(.1) do
+                pcall(function()
+                    if _G.BuyLengendSword or Triple_A then
+                        local args = {
+                            [1] = "LegendarySwordDealer",
+                            [2] = "2"
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    else
+                        wait(2)
+                    end
+                end)
+            end
+        end)
+    end
+
+if Second_Sea then
+    local ToggleEvoRace = Tabs.Main:AddToggle("ToggleEvoRace", {Title = "Auto Evo Race",Description = "Auto Evo Race (Thức Tỉnh Tộc V2)",Default = false })
+    ToggleEvoRace:OnChanged(function(Value)
+        _G.AutoEvoRace = Value
+    end)
+        Options.ToggleEvoRace:SetValue(false)
+
+    spawn(function()
+        while task.wait() do
+            pcall(function()
+                if _G.AutoEvoRace then
+                    local Back = game.Players.LocalPlayer.Backpack
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","1")
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","2")
+                    if Back:FindFirstChild("Flower 2") then
+                        if Back:FindFirstChild("Flower 1") then
+                            Tween(CFrame.new(-5497.06152, 47.5923004, -795.237061))
+                            for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                                if v.Name == "Zombie" then
+                                    repeat task.wait()
+                                        EquipTool(SelectWeapon)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))		
+                                    until Back:FindFirstChild("Flower 3")
+                                end
+                            end
+                        else
+                            Tween(game.Workspace["Flower1"].CFrame)
+                        end
+                    else
+                        Tween(game.Workspace["Flower2"].CFrame)
+                    end
+                    if Back:FindFirstChild("Flower 1") and Back:FindFirstChild("Flower 2") and Back:FindFirstChild("Flower 3") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","1")
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","3")
+                    end
+                    for i,v in pairs(game.Workspace:GetChildren()) do
+                        if v.Name == "Flower1" or v.Name == "Flower2" then
+                            v.Size = Vector3.new(20,20,20)
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+end
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Setting
+local SettingFarm = Tabs.Setting:AddSection("Farming")
+
+local ToggleFast = Tabs.Setting:AddToggle("ToggleFast", {Title = "Enabled Fast Attack",Description = "Fast Attack (Đánh Nhanh)", Default = true })
+ToggleFast:OnChanged(function(Value)
+    _G.FastNe = Value
+end)
+Options.ToggleFast:SetValue(true)
+
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+y = debug.getupvalues(CombatFrameworkR)[2]
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastNe then
+            if typeof(y) == "table" then
+                pcall(function()
+                    CameraShaker:Stop()
+                    y.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
+                    y.activeController.timeToNextAttack = 0
+                    y.activeController.hitboxMagnitude = 60
+                    y.activeController.active = false
+                    y.activeController.timeToNextBlock = 0
+                    y.activeController.focusStart = 1655503339.0980349
+                    y.activeController.increment = 1
+                    y.activeController.blocking = false
+                    y.activeController.attacking = false
+                    y.activeController.humanoid.AutoRotate = true
+                end)
+            end
+        end
+    end)
+end)
+
+    local ToggleBringMob = Tabs.Setting:AddToggle("ToggleBringMob", {Title = "Enabled Bring Mob / Magnet",Description = "Bring Mob (Gom Quái)", Default = true })
+    ToggleBringMob:OnChanged(function(Value)
+        _G.BringMob = Value
+    end)
+    Options.ToggleBringMob:SetValue(true)
+        spawn(function()
+            while wait() do
+                pcall(function()
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if _G.BringMob and bringmob then
+                            if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == "Factory Staff" then
+                                    if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 250 then
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                        v.HumanoidRootPart.CFrame = FarmPos
+                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                    end
+                                elseif v.Name == MonFarm then
+                                    if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 250 then
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                        v.HumanoidRootPart.CFrame = FarmPos
+                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end)
+             end
+        end)
+        --[[
+            task.spawn(function()
+                while task.wait() do
+             if _G.BringMob and bringmob then
+            pcall(function()
+                for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                if v.Name == MonFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
+                if InMyNetWork(v.HumanoidRootPart) then
+                v.HumanoidRootPart.CFrame = FarmPos
+                v.Humanoid.JumpPower = 0
+                v.Humanoid.WalkSpeed = 0
+                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                v.HumanoidRootPart.CanCollide = false
+                v.Head.CanCollide = false
+                end
+                end
+                end
+                end)
+              end
+              end
+              end)
+            
+            task.spawn(function()
+              while true do wait()
+              if setscriptable then
+              setscriptable(game.Players.LocalPlayer,"SimulationRadius",true)
+              end
+              if sethiddenproperty then
+              sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+              end
+              end
+              end)
+            
+            function InMyNetWork(object)
+            if isnetworkowner then
+            return isnetworkowner(object)
+            else
+              if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
+            return true
+            end
+            return false
+            end
+            end
+     ]]
+         
+
+    local ToggleBypassTP = Tabs.Setting:AddToggle("ToggleBypassTP", {Title = "Enabled Bypass Tp",Description = "Enabled Bypass Tp (Di Chuyển Dạng Reset)", Default = false })
+    ToggleBypassTP:OnChanged(function(Value)
+        BypassTP = Value
+    end)
+    Options.ToggleBypassTP:SetValue(false)
+
+
+local ToggleRemove = Tabs.Setting:AddToggle("ToggleRemove", {Title = "Enabled Remove Dame Text",Description = "Enabled Remove Dame Text (Ẩn Dame Đánh Quái)", Default = true })
+ToggleRemove:OnChanged(function(Value)
+    _G.RemoveDameText = Value
+    end)
+    Options.ToggleRemove:SetValue(true)
+
+    spawn(function()
+        while wait() do
+            if _G.RemoveDameText then
+                game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+            else
+                game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
+            end
+        end
+        end)
+
+        
+local ToggleRemoveNotify = Tabs.Setting:AddToggle("ToggleRemoveNotify", {Title = "Enabled Remove All Notify",Description = "Enabled Remove All Notify (Ẩn hết Thông báo)", Default = false })
+ToggleRemoveNotify:OnChanged(function(Value)
+    RemoveNotify = Value
+    end)
+    Options.ToggleRemoveNotify:SetValue(false)
+
+    spawn(function()
+        while wait() do
+            if RemoveNotify then
+                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+            else
+                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+            end
+        end
+    end)
+
+
+
+    local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = "Enabled White Screen",Description = "Enabled White Screen (Màn hình Treo)", Default = false })
+    ToggleWhite:OnChanged(function(Value)
+       _G.WhiteScreen = Value
+       if _G.WhiteScreen == true then
+        game:GetService("RunService"):Set3dRenderingEnabled(false)
+    elseif _G.WhiteScreen == false then
+        game:GetService("RunService"):Set3dRenderingEnabled(true)
+            end
+        end)
+        Options.ToggleWhite:SetValue(false)
+      
+
+
+        local SKill = Tabs.Setting:AddSection("Skill Mastery")
+local ToggleZ = Tabs.Setting:AddToggle("ToggleZ", {Title = "Skill Z",Description = "Skill Z", Default = true })
+ToggleZ:OnChanged(function(Value)
+    SkillZ = Value
+end)
+Options.ToggleZ:SetValue(true)
+
+local ToggleX = Tabs.Setting:AddToggle("ToggleX", {Title = "Skill X", Description = "Skill X",Default = true })
+ToggleX:OnChanged(function(Value)
+    SkillX = Value
+end)
+Options.ToggleX:SetValue(true)
+
+
+local ToggleC = Tabs.Setting:AddToggle("ToggleC", {Title = "Skill C",Description = "Skill C", Default = true })
+ToggleC:OnChanged(function(Value)
+    SkillC = Value
+end)
+Options.ToggleC:SetValue(true)
+
+
+local ToggleV = Tabs.Setting:AddToggle("ToggleV", {Title = "Skill V",Description = "Skill V", Default = true })
+ToggleV:OnChanged(function(Value)
+    SkillV = Value
+end)
+Options.ToggleV:SetValue(true)
+
+
+local ToggleF = Tabs.Setting:AddToggle("ToggleF", {Title = "Skill F",Description = "Skill F", Default = false })
+ToggleF:OnChanged(function(Value)
+   SkillF = Value
+    end)
+Options.ToggleF:SetValue(false)
+
+
+local Pos = Tabs.Setting:AddSection("Distance Farm")
+
+local SliderPosX = Tabs.Setting:AddSlider("SliderPosX", {
+    Title = "Pos X",
+    Description = "Pos X",
+    Default = 0,
+    Min = -60,
+    Max = 60,
+    Rounding = 1,
+    Callback = function(Value)
+      posX = Value
+    end
+})
+SliderPosX:OnChanged(function(Value)
+  posX = Value
+end)
+SliderPosX:SetValue(0)
+
+local SliderPosY = Tabs.Setting:AddSlider("SliderPosY", {
+    Title = "Pos Y",
+    Description = "Pos Y",
+    Default = 30,
+    Min = -60,
+    Max = 60,
+    Rounding = 1,
+    Callback = function(Value)
+      posY = Value
+    end
+})
+SliderPosY:OnChanged(function(Value)
+  posY = Value
+end)
+SliderPosY:SetValue(30)
+
+local SliderPosZ = Tabs.Setting:AddSlider("SliderPosZ", {
+    Title = "Pos Z",
+    Description = "Pos Z",
+    Default = 0,
+    Min = -60,
+    Max = 60,
+    Rounding = 1,
+    Callback = function(Value)
+      posZ = Value
+    end
+})
+SliderPosZ:OnChanged(function(Value)
+     posZ = Value
+end)
+SliderPosZ:SetValue(0)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--Stats
+local ToggleMelee = Tabs.Stats:AddToggle("ToggleMelee", {Title = "Auto Melee",Description = "Auto Melee", Default = false })
+ToggleMelee:OnChanged(function(Value)
+    _G.Auto_Stats_Melee = Value
+    end)
+Options.ToggleMelee:SetValue(false)
+
+
+
+local ToggleDe = Tabs.Stats:AddToggle("ToggleDe", {Title = "Auto Defense",Description = "Auto Defense", Default = false })
+ToggleDe:OnChanged(function(Value)
+    _G.Auto_Stats_Defense = Value
+    end)
+Options.ToggleDe:SetValue(false)
+
+
+
+local ToggleSword = Tabs.Stats:AddToggle("ToggleSword", {Title = "Auto Sword",Description = "Auto Sword", Default = false })
+ToggleSword:OnChanged(function(Value)
+    _G.Auto_Stats_Sword = Value
+    end)
+Options.ToggleSword:SetValue(false)
+
+
+
+local ToggleGun = Tabs.Stats:AddToggle("ToggleGun", {Title = "Auto Gun", Description = "Auto Gun",Default = false })
+ToggleGun:OnChanged(function(Value)
+    _G.Auto_Stats_Gun = Value
+    end)
+Options.ToggleGun:SetValue(false)
+
+
+local ToggleFruit = Tabs.Stats:AddToggle("ToggleFruit", {Title = "Auto Demon Fruit",Description = "Auto Fruit", Default = false })
+ToggleFruit:OnChanged(function(Value)
+    _G.Auto_Stats_Devil_Fruit = Value
+    end)
+Options.ToggleFruit:SetValue(false)
+
+
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Devil_Fruit then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Demon Fruit",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Gun then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Gun",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Sword then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Sword",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Defense then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Defense",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Melee then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Melee",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Player
+
+local Playerslist = {}
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(Playerslist,v.Name)
+end
+
+local SelectedPly = Tabs.Player:AddDropdown("SelectedPly", {
+    Title = "Select Player",
+    Description = "Select Player",
+    Values = Playerslist,
+    Multi = false,
+    Default = 1,
+})
+
+SelectedPly:SetValue("nil")
+SelectedPly:OnChanged(function(Value)
+    _G.SelectPly = Value
+end)
+
+
+Tabs.Player:AddButton({
+    Title = "Refresh Player",
+    Description = "Refresh Player",
+    Callback = function()
+        table.clear(Playerslist)
+        for i,v in pairs(game:GetService("Players"):GetChildren()) do
+            table.insert(Playerslist,v.Name)
+        end
+    end
+})
+
+local ToggleTeleport = Tabs.Player:AddToggle("ToggleTeleport", {Title = "Teleport To Player", Description = "Teleport To Player",Default = false })
+ToggleTeleport:OnChanged(function(Value)
+    _G.TeleportPly = Value
+    if Value == false then
+        wait()
+        AutoHaki()
+        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+    end
+end)
+Options.ToggleTeleport:SetValue(false)
+
+spawn(function()
+	while wait() do
+		if _G.TeleportPly then
+			pcall(function()
+				if game.Players:FindFirstChild(_G.SelectPly) then
+					toTarget(game.Players[_G.SelectPly].Character.HumanoidRootPart.CFrame)
+				end
+			end)
+		end
+	end
+end)
+
+
+
+
+local ToggleQuanSat = Tabs.Player:AddToggle("ToggleQuanSat", {Title = "Spectate Player",Description = "Spectate Player", Default = false })
+ToggleQuanSat:OnChanged(function(Value)
+    SpectatePlys = Value
+    local plr1 = game:GetService("Players").LocalPlayer.Character.Humanoid
+    local plr2 = game:GetService("Players"):FindFirstChild(_G.SelectPly)
+    repeat wait(.1)
+        game:GetService("Workspace").Camera.CameraSubject = game:GetService("Players"):FindFirstChild(_G.SelectPly).Character.Humanoid
+    until SpectatePlys == false 
+    game:GetService("Workspace").Camera.CameraSubject = game:GetService("Players").LocalPlayer.Character.Humanoid
+end)
+Options.ToggleQuanSat:SetValue(false)
+
+
+
+
+
+
+local ToggleFastAttack = Tabs.Player:AddToggle("ToggleFastAttack", {Title = "Click Attack Player",Description = "Click Attack Player", Default = false })
+
+ToggleFastAttack:OnChanged(function(Value)
+ _G.FastAttackFaiFao = Value
+end)
+Options.ToggleFastAttack:SetValue(false)
+
+
+
+local SliderDelayAttackPlayer = Tabs.Player:AddSlider("SliderDelayAttackPlayer", {
+    Title = "Delay Fast (sec)",
+    Description = "Delay Fast (sec)",
+    Default = 0.1,
+    Min = 0,
+    Max = 5,
+    Rounding = 1,
+    Callback = function(Value)
+       _G.DelayAttackPlayer = Value
+    end
+})
+
+SliderDelayAttackPlayer:OnChanged(function(Value)
+   _G.DelayAttackPlayer = Value
+end)
+
+SliderDelayAttackPlayer:SetValue(0.1)
+
+spawn(function()
+while wait() do
+    pcall(function()
+        if _G.FastAttackFaiFao then
+            repeat wait(_G.DelayAttackPlayer)
+               AttackNoCoolDown()
+            until not _G.FastAttackFaiFao
+        end
+    end)
+end
+end)
+local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
+Camera:Stop()
+
+
+function getAllBladeHitsPlayers(Sizes)
+	local Hits = {}
+	local Client = game.Players.LocalPlayer
+	local Characters = game:GetService("Workspace").Characters:GetChildren()
+	for i=1,#Characters do local v = Characters[i]
+		local Human = v:FindFirstChildOfClass("Humanoid")
+		if v.Name ~= game.Players.LocalPlayer.Name and Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes+5 then
+			table.insert(Hits,Human.RootPart)
+		end
+	end
+	return Hits
+end
+
+function getAllBladeHits(Sizes)
+	local Hits = {}
+	local Client = game.Players.LocalPlayer
+	local Enemies = game:GetService("Workspace").Enemies:GetChildren()
+	for i=1,#Enemies do local v = Enemies[i]
+		local Human = v:FindFirstChildOfClass("Humanoid")
+		if Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes+5 then
+			table.insert(Hits,Human.RootPart)
+		end
+	end
+	return Hits
+end
+
+local Teleport = Tabs.Player:AddSection("Combat")
+
+
+local SlidershowFov = Tabs.Player:AddSlider("SlidershowFov", {
+    Title = "Size Fov",
+    Description = "Cỡ Fov",
+    Default = 100,
+    Min = 0,
+    Max = 500,
+    Rounding = 1,
+    Callback = function(Value)
+        _G.Select_Size_Fov = Value
+    end
+})
+
+SlidershowFov:OnChanged(function(Value)
+    _G.Select_Size_Fov = Value
+end)
+SlidershowFov:SetValue(100)
+
+
+local ToggleShowFov = Tabs.Player:AddToggle("ToggleShowFov", {Title = "Show Fov",Description = "Show Fov(Hiện Fov)", Default = false })
+ToggleShowFov:OnChanged(function(value)
+    _G.Show_Fov = value
+end)
+Options.ToggleShowFov:SetValue(false)
+
+
+local ToggleAimBotSkill = Tabs.Player:AddToggle("ToggleAimBotSkill", {Title = "Auto Aimbot Skill",Description = "Auto Aimbot Skill(Tự Động ngắm Skill)", Default = false })
+ToggleAimBotSkill:OnChanged(function(Value)
+    _G.Aimbot_Skill_Fov = Value
+end)
+Options.ToggleAimBotSkill:SetValue(false)
+local lp = game:GetService('Players').LocalPlayer
+local mouse = lp:GetMouse()
+spawn(function()
+	while wait() do
+		if _G.Aimbot_Skill_Fov then
+			pcall(function()
+				local MaxDist, Closest = math.huge
+				for i,v in pairs(game:GetService("Players"):GetChildren()) do 
+					local Head = v.Character:FindFirstChild("HumanoidRootPart")
+					local Pos, Vis = game.Workspace.CurrentCamera.WorldToScreenPoint(game.Workspace.CurrentCamera, Head.Position)
+					local MousePos, TheirPos = Vector2.new(mouse.X, mouse.Y), Vector2.new(Pos.X, Pos.Y)
+					local Dist = (TheirPos - MousePos).Magnitude
+					if Dist < MaxDist and Dist <= _G.Select_Size_Fov and v.Name ~= game.Players.LocalPlayer.Name then
+						MaxDist = Dist
+						_G.Aim_Players = v
+					end
+				end
+			end)
+		end
+	end
+end)
+spawn(function()
+	local gg = getrawmetatable(game)
+	local old = gg.__namecall
+	setreadonly(gg,false)
+	gg.__namecall = newcclosure(function(...)
+		local method = getnamecallmethod()
+		local args = {...}
+		if tostring(method) == "FireServer" then
+			if tostring(args[1]) == "RemoteEvent" then
+				if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+					if _G.Aimbot_Skill_Fov then
+						args[2] = _G.Aim_Players.Character.HumanoidRootPart.Position
+						return old(unpack(args))
+					end
+				end
+			end
+		end
+		return old(...)
+	end)
+end)
+
+
+local Circle = Drawing.new("Circle")
+Circle.Color =  Color3.fromRGB(0, 244, 0)
+Circle.Thickness = 1
+Circle.Radius = 250
+Circle.NumSides = 460
+Circle.Filled = false
+Circle.Transparency = 1
+
+game:GetService("RunService").Stepped:Connect(function()
+    Circle.Radius = _G.Select_Size_Fov
+    Circle.Thickness = 1
+    Circle.NumSides = 460
+    Circle.Position = game:GetService('UserInputService'):GetMouseLocation()
+    if _G.Show_Fov then
+        Circle.Visible = true
+    else
+        Circle.Visible = false
+    end
+end)
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+local Mastery = Tabs.Player:AddSection("Misc")
+
+
+local ToggleNoClip = Tabs.Player:AddToggle("ToggleNoClip", {Title = "No Clip",Description = "No Clip(Xuyên Tường)", Default = false })
+ToggleNoClip:OnChanged(function(value)
+    _G.LOf = value
+end)
+Options.ToggleNoClip:SetValue(false)
+spawn(function()
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if _G.LOf then
+                for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false    
+                    end
+                end
+            end
+        end)
+    end)
+end)
+
+
+local ToggleWalkonWater = Tabs.Player:AddToggle("ToggleWalkonWater", {Title = "Walk on Water",Description = "Walk on Water", Default = true })
+ToggleWalkonWater:OnChanged(function(Value)
+  _G.WalkonWater = Value
+end)
+Options.ToggleWalkonWater:SetValue(true)
+spawn(function()
+  while task.wait() do
+    pcall(function()
+      if _G.WalkonWater then
+        game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
+      else
+        game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+      end
+    end)
+  end
+end)
+
+
+local ToggleSpeedRun = Tabs.Player:AddToggle("ToggleSpeedRun", {Title = "Run Speed",Description = "Run Speed", Default = true })
+ToggleSpeedRun:OnChanged(function(Value)
+    InfAbility = Value
+    if Value == false then
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Agility"):Destroy()
+    end
+end)
+Options.ToggleSpeedRun:SetValue(true)
+spawn(function()
+    while wait() do
+        if InfAbility then
+            InfAb()
+        end
+    end
+end)
+function InfAb()
+    if InfAbility then
+        if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Agility") then
+            local inf = Instance.new("ParticleEmitter")
+            inf.Acceleration = Vector3.new(0,0,0)
+            inf.Archivable = true
+            inf.Drag = 20
+            inf.EmissionDirection = Enum.NormalId.Top
+            inf.Enabled = true
+            inf.Lifetime = NumberRange.new(0,0)
+            inf.LightInfluence = 0
+            inf.LockedToPart = true
+            inf.Name = "Agility"
+            inf.Rate = 500
+            local numberKeypoints2 = {
+                NumberSequenceKeypoint.new(0, 0);
+                NumberSequenceKeypoint.new(1, 4); 
+            }
+            inf.Size = NumberSequence.new(numberKeypoints2)
+            inf.RotSpeed = NumberRange.new(9999, 99999)
+            inf.Rotation = NumberRange.new(0, 0)
+            inf.Speed = NumberRange.new(30, 30)
+            inf.SpreadAngle = Vector2.new(0,0,0,0)
+            inf.Texture = ""
+            inf.VelocityInheritance = 0
+            inf.ZOffset = 2
+            inf.Transparency = NumberSequence.new(0)
+            inf.Color = ColorSequence.new(Color3.fromRGB(0,0,0),Color3.fromRGB(0,0,0))
+            inf.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+        end
+    else
+        if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Agility") then
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Agility"):Destroy()
+        end
+    end
+end
+
+
+
+local ToggleEnablePvp = Tabs.Player:AddToggle("ToggleEnablePvp", {Title = "Auto Enable PVP", Description = "Auto Enable PVP",Default = false })
+ToggleEnablePvp:OnChanged(function(Value)
+  _G.EnabledPvP = Value
+end)
+Options.ToggleEnablePvp:SetValue(false)
+
+spawn(function()
+  pcall(function()
+      while wait() do
+          if _G.EnabledPvP then
+              if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                  game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+              end
+          end
+      end
+  end)
+end)
+
+
 --[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.3) ~  Much Love, Ferib 
+local ToggleSoruNOCD = Tabs.Player:AddToggle("ToggleSoruNOCD", {Title = "Soru No Cooldown", Default = false })
+ToggleSoruNOCD:OnChanged(function(Value)
+    _G.SoruNoCd = Value
+	NoCooldown()
+end)
+Options.ToggleSoruNOCD:SetValue(false)
+function NoCooldown()
+	for i,v in next, getgc() do
+		if typeof(v) == "function" then
+			if getfenv(v).script == game.Players.LocalPlayer.Character:WaitForChild("Dodge") and _G.DashNoCd then
+				for i2,v2 in next, getupvalues(v) do
+					if tostring(v2) == "0.4" then
+						repeat wait(.1)
+							setupvalue(v,i2,0)
+						until not _G.DashNoCd
+					end
+				end
+			end
+			if getfenv(v).script == game.Players.LocalPlayer.Character:WaitForChild("Geppo") and _G.GeppoNoCd then
+				for i2,v2 in next, getupvalues(v) do
+					if tostring(v2) == "0" then
+						repeat wait(.1)
+							setupvalue(v,i2,0)
+						until not _G.GeppoNoCd
+					end
+				end
+			end
+			if getfenv(v).script == game.Players.LocalPlayer.Character:WaitForChild("Soru") and _G.SoruNoCd then
+				for i2,v2 in pairs(debug.getupvalues(v)) do
+					if type(v2) == 'table' then
+						if v2.LastUse then
+							repeat wait(_G.Fast_Delay)
+								setupvalue(v, i2, {LastAfter = 0,LastUse = 0})
+							until not _G.SoruNoCd
+						end
+					end
+				end
+			end
+		end
+	end
+end
+--------------------------------------------------------------------------------------------------------------------------------------------
+local ToggleGeppoNoCD = Tabs.Player:AddToggle("ToggleGeppoNoCD", {Title = "Geppo No Cooldown", Default = false })
+ToggleGeppoNoCD:OnChanged(function(Value)
+    _G.GeppoNoCd = Value
+		NoCooldown()
+end)
+Options.ToggleGeppoNoCD:SetValue(false)
+--------------------------------------------------------------------------------------------------------------------------------------------
+local ToggleDashNoCD = Tabs.Player:AddToggle("ToggleDashNoCD", {Title = "Dash No Cooldown", Default = false })
+ToggleDashNoCD:OnChanged(function(Value)
+    _G.DashNoCd = Value
+    DodgeNoCoolDown()
+end)
+Options.ToggleDashNoCD:SetValue(false)
+function DodgeNoCoolDown()
+    if _G.DashNoCd then
+        for i, v in next, getgc() do
+            if game.Players.LocalPlayer.Character.Dodge then
+                if typeof(v) == "function" and getfenv(v).script == game.Players.LocalPlayer.Character.Dodge then
+                    for i2, v2 in next, getupvalues(v) do
+                        if tostring(v2) == "0.4" then
+                            repeat
+                                wait(.1)
+                                setupvalue(v, i2, 0)
+                            until not _G.DashNoCd
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
 
-]]--
+--------------------------------------------------------------------------------------------------------------------------------------------
+local ToggleSpeedHack = Tabs.Player:AddToggle("ToggleSpeedHack", {Title = "Speed Hack", Default = true })
+ToggleSpeedHack:OnChanged(function(Value)
+    _G.SpeedHack = Value
+    InfAbility()
+end)
+Options.ToggleSpeedHack:SetValue(true)
 
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v95,v96) local v97={};for v281=1, #v95 do v6(v97,v0(v4(v1(v2(v95,v281,v281 + 1 )),v1(v2(v96,1 + (v281% #v96) ,1 + (v281% #v96) + 1 )))%256 ));end return v5(v97);end local v8=loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();local v9=loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))();local v10=loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))();local v11=v8:CreateWindow({[v7("\229\202\207\41\227","\126\177\163\187\69\134\219\167")]=v7("\0\248\30\241\221\26\141\2\240\222\110\239\38\202\228\99\235\56\208\245\55","\156\67\173\74\165"),[v7("\7\162\75\34\181\50\74\49","\38\84\215\41\118\220\70")]=v7("\114\15\98\16\247\94\30\35\17\245\85\4\46\29","\158\48\118\66\114"),[v7("\159\37\18\1\122\161\239\163","\155\203\68\112\86\19\197")]=160,[v7("\117\212\44\249","\152\38\189\86\156\32\24\133")]=UDim2.fromOffset(500,188 + 132 ),[v7("\221\84\181\95\240\94\164","\38\156\55\199")]=false,[v7("\156\117\121\37\22","\35\200\29\28\72\115\20\154")]=v7("\61\190\195\212","\84\121\223\177\191\237\76"),[v7("\150\95\199\169\55\89\42\196\144\83\208","\161\219\54\169\192\90\48\80")]=Enum.KeyCode.End});local v12={[v7("\100\67\9\43","\69\41\34\96")]=v11:AddTab({[v7("\136\202\195\6\7","\75\220\163\183\106\98")]=v7("\54\187\155\119\241\13\183\142","\185\98\218\235\87"),[v7("\226\63\40\232","\202\171\92\71\134\190")]=v7("\49\217","\232\73\161\76")}),[v7("\136\220\86\73\23\181\222","\126\219\185\34\61")]=v11:AddTab({[v7("\56\199\74\126\123","\135\108\174\62\18\30\23\147")]=v7("\130\232\58\139\43\171\39\211\191\231\45","\167\214\137\74\171\120\206\83"),[v7("\162\243\61\83","\199\235\144\82\61\152")]=v7("\31\14","\75\103\118\217")}),[v7("\244\64\113\0\170","\126\167\52\16\116\217")]=v11:AddTab({[v7("\252\39\52\140\177","\156\168\78\64\224\212\121")]=v7("\51\239\181\142\52\250\164\218\20","\174\103\142\197"),[v7("\127\43\80\54","\152\54\72\63\88\69\62")]=v7("\204\220","\60\180\164\142")}),[v7("\104\82\4\48\34\255","\114\56\62\101\73\71\141")]=v11:AddTab({[v7("\140\224\207\200\189","\164\216\137\187")]=v7("\230\231\33\242\150\242\10\203\227\35","\107\178\134\81\210\198\158"),[v7("\17\13\141\200","\202\88\110\226\166")]=v7("\219\23","\170\163\111\226\151")}),[v7("\37\53\190\61\94\56\59\5","\73\113\80\210\88\46\87")]=v11:AddTab({[v7("\181\37\217\30\226","\135\225\76\173\114")]=v7("\46\236\168\240\133\174\171\27\227\188","\199\122\141\216\208\204\221"),[v7("\132\222\31\254","\150\205\189\112\144\24")]=v7("\61\156","\112\69\228\223\44\100\232\113")}),[v7("\242\13\18\218\162","\230\180\127\103\179\214\28")]=v11:AddTab({[v7("\184\12\75\74\225","\128\236\101\63\38\132\33")]=v7("\152\168\1\4\144\249\218\165\189","\175\204\201\113\36\214\139"),[v7("\110\207\58\210","\100\39\172\85\188")]=v7("\181\96","\83\205\24\217\224")}),[v7("\212\196\196\57","\93\134\165\173")]=v11:AddTab({[v7("\138\251\213\206\63","\30\222\146\161\162\90\174\210")]=v7("\209\79\96\74\215\79\121\14","\106\133\46\16"),[v7("\113\35\124\242","\32\56\64\19\156\58")]=v7("\66\208","\224\58\168\133\54\58\146")}),[v7("\107\87\72\248","\107\57\54\43\157\21\230\231")]=v11:AddTab({[v7("\239\130\5\249\188","\175\187\235\113\149\217\188")]=v7("\8\174\145\12\209\120\123\57\239\183\24","\24\92\207\225\44\131\25"),[v7("\98\208\183\66","\29\43\179\216\44\123")]=v7("\165\193","\44\221\185\64")}),[v7("\50\239\71\79","\19\97\135\40\63")]=v11:AddTab({[v7("\154\85\39\55\42","\81\206\60\83\91\79")]=v7("\122\170\192\50\28\203\66\180","\196\46\203\176\18\79\163\45"),[v7("\145\33\113\16","\143\216\66\30\126\68\155")]=v7("\178\208","\129\202\168\109\171\165\195\183")}),[v7("\15\81\36\219","\134\66\56\87\184\190\116")]=v11:AddTab({[v7("\8\56\29\183\28","\85\92\81\105\219\121\139\65")]=v7("\201\178\64\5\81\214\238\176","\191\157\211\48\37\28"),[v7("\246\28\251\18","\90\191\127\148\124")]=v7("\96\159","\119\24\231\78")}),[v7("\170\34\181","\113\226\77\197\42\188\32")]=v11:AddTab({[v7("\14\31\224\185\63","\213\90\118\148")]=v7("\111\47\164\22\101\84\62","\45\59\78\212\54"),[v7("\57\85\140\133","\144\112\54\227\235\230\78\205")]=v7("\171\48","\59\211\72\111\156\176")})};local v13=v8.Options;do local v98=game.PlaceId;if (v98==2753915549) then First_Sea=true;elseif (v98==(4325013553 -  -117258630)) then Second_Sea=true;elseif (v98==(7449423645 -(6 + 4))) then Third_Sea=true;else game:Shutdown();end function AntiBan() for v462,v463 in pairs(game:GetService(v7("\126\139\226\52\75\149\240","\77\46\231\131")).LocalPlayer.Character:GetDescendants()) do if v463:IsA(v7("\150\91\181\65\182\103\181\82\179\68\162","\32\218\52\214")) then if ((v463.Name==v7("\105\18\63\173\227\177\73","\58\46\119\81\200\145\208\37")) or (v463.Name==v7("\24\132\57\170\189\177\57\40\135","\86\75\236\80\204\201\221")) or (v463.Name==v7("\84\64\123\137\218\138\127\64\112\128","\235\18\33\23\229\158")) or (v463.Name==v7("\4\238\149\239","\219\48\218\161")) or (v463.Name==v7("\199\112\113\107\212\77","\128\132\17\28\41\187\47")) or (v463.Name==v7("\43\39\11\42\126\37","\61\97\82\102\90")) or (v463.Name==v7("\128\33\164\64\206\89\25","\105\204\78\203\43\167\55\126")) or (v463.Name==v7("\151\191\45","\49\197\202\67\126\115\100\167"))) then v463:Destroy();end end end for v464,v465 in pairs(game:GetService(v7("\7\87\222\48\133\68\77","\62\87\59\191\73\224\54")).LocalPlayer.PlayerScripts:GetDescendants()) do if v465:IsA(v7("\203\13\249\200\235\49\249\219\238\18\238","\169\135\98\154")) then if ((v465.Name==v7("\249\120\38\88\242\43\229\196\99\43\70\171\23\234\222\112\2\93\229","\168\171\23\68\52\157\83")) or (v465.Name==v7("\215\125\244\163\54","\231\148\17\149\205\69\77")) or (v465.Name==v7("\163\168\195\254\68","\159\224\199\167\155\55")) or (v465.Name==v7("\212\230\47\198\248\254\26\221\229\240\57\244\254\246\48\214","\178\151\147\92")) or (v465.Name==v7("\161\248\66\39\48\64\117\131\249\127\34","\26\236\157\44\82\114\44")) or (v465.Name==v7("\26\34\212\66\47\60\249\82\57\58","\59\74\78\181"))) then v465:Destroy();end end end end AntiBan();game:GetService(v7("\21\221\91\67\182\55\194","\211\69\177\58\58")).LocalPlayer.Idled:connect(function() local v282=0;while true do if (v282==(2 -1)) then game:GetService(v7("\215\193\32\238\250\49\240\119\242\205\32","\34\129\168\82\154\143\80\156")):Button2Up(Vector2.new(853 -(629 + 224) ,0),workspace.CurrentCamera.CFrame);break;end if (v282==(0 -0)) then game:GetService(v7("\129\236\107\225\252\202\187\208\106\240\251","\171\215\133\25\149\137")):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame);wait(1);v282=1523 -(466 + 1056) ;end end end);First_Sea=false;Second_Sea=false;Third_Sea=false;local v99=game.PlaceId;if (v99==2753915549) then First_Sea=true;elseif (v99==(4442272948 -(485 + 280))) then Second_Sea=true;elseif (v99==(7449423726 -(51 + 40))) then Third_Sea=true;end function CheckLevel() local v283=game:GetService(v7("\181\190\50\18\77\92\154","\233\229\210\83\107\40\46")).LocalPlayer.Data.Level.Value;if First_Sea then if ((v283==(794 -(610 + 183))) or (v283<=(7 + 2)) or (SelectMonster==v7("\227\67\60\210\12\213","\101\161\34\82\182")) or (SelectArea=="")) then local v690=0 + 0 ;local v691;while true do if (v690==(0 + 0)) then v691=0 -0 ;while true do if (v691==(774 -(572 + 200))) then CFrameQ=CFrame.new(1060.9383544922,16.455066680908,3522.7841796875 -(1598 + 377) );CFrameMon=CFrame.new(2089.5533447266 -1051 ,41.296249389648 + 0 ,164.5098876953 + 1412 );break;end if (v691==(1278 -(881 + 397))) then Ms=v7("\202\12\87\250\210\246","\78\136\109\57\158\187\130\226");NameQuest=v7("\28\62\247\245\55\43\200\228\59\44\237\160","\145\94\95\153");v691=2 -1 ;end if (v691==(1214 -(892 + 321))) then QuestLv=1;NameMon=v7("\223\204\26\209\71\163","\215\157\173\116\181\46");v691=2;end end break;end end elseif ((v283==10) or (v283<=14) or (SelectMonster==v7("\24\187\133\249\223\44","\186\85\212\235\146")) or (SelectArea==v7("\232\148\24\249\53\235","\56\162\225\118\158\89\142"))) then local v799=627 -(441 + 186) ;while true do if ((2 + 0)==v799) then CFrameQ=CFrame.new( -(3022.6553955077998 -(606 + 815)),169.85213470459001 -133 ,144.38809204102 + 9 );CFrameMon=CFrame.new( -1448.1446533203,38.851993560791 + 12 ,63.60718536377);break;end if (v799==(1172 -(1055 + 117))) then local v1144=688 -(266 + 422) ;while true do if (v1144==(3 -2)) then v799=1892 -(1098 + 793) ;break;end if (v1144==(0 + 0)) then Ms=v7("\113\10\206\164\39\193","\184\60\101\160\207\66");NameQuest=v7("\27\151\114\187\61\135\77\169\52\145\104","\220\81\226\28");v1144=1560 -(12 + 1547) ;end end end if (v799==(1359 -(149 + 1209))) then local v1145=0 + 0 ;while true do if (v1145==(1014 -(6 + 1008))) then QuestLv=1;NameMon=v7("\62\218\140\240\239\222","\167\115\181\226\155\138");v1145=1347 -(603 + 743) ;end if (1==v1145) then v799=2;break;end end end end elseif ((v283==(255 -(152 + 88))) or (v283<=29) or (SelectMonster==v7("\197\45\245\85\119\125\199","\166\130\66\135\60\27\17")) or (SelectArea==v7("\110\95\192\114\60\65","\80\36\42\174\21"))) then Ms=v7("\105\31\37\115\66\28\54","\26\46\112\87");NameQuest=v7("\147\54\165\115\179\186\116\161\188\48\191","\212\217\67\203\20\223\223\37");QuestLv=319 -(207 + 110) ;NameMon=v7("\157\130\186\219\182\129\169","\178\218\237\200");CFrameQ=CFrame.new( -(3152.6553955077998 -1551),88.85213470459 -52 ,1986.38809204102 -(1401 + 432) );CFrameMon=CFrame.new( -(2082.6488037109 -940),40.462348937988, -515.39227294922);elseif ((v283==(1067 -(838 + 199))) or (v283<=(103 -64)) or (SelectMonster==v7("\134\188\244\209\162\176","\176\214\213\134")) or (SelectArea==v7("\214\184\177\211\177","\57\148\205\214\180\200\54"))) then Ms=v7("\34\244\39\53\98\23","\22\114\157\85\84");NameQuest=v7("\230\222\20\195\68\199\189\193\216\7\149","\200\164\171\115\164\61\150");QuestLv=1 -0 ;NameMon=v7("\142\253\17\68\151\187","\227\222\148\99\37");CFrameQ=CFrame.new( -(1570.1761474609 -(320 + 110)),9.752049446106 -5 ,3827.4057617188);CFrameMon=CFrame.new( -(2360.0881347656 -1159),18.628940582275 + 22 ,3994.5966796875 -(123 + 14) );elseif ((v283==(28 + 12)) or (v283<=59) or (SelectMonster==v7("\17\64\71\226\252","\153\83\50\50\150")) or (SelectArea==v7("\127\99\116\27\106","\45\61\22\19\124\19\203"))) then Ms=v7("\227\0\24\225\7","\217\161\114\109\149\98\16");NameQuest=v7("\48\53\63\123\165\69\7\37\43\104\237","\20\114\64\88\28\220");QuestLv=2;NameMon=v7("\19\19\199\160\253","\221\81\97\178\212\152\176");CFrameQ=CFrame.new( -(3177.1761474609 -2037),4.752049446106,3929.4057617188 -(62 + 40) );CFrameMon=CFrame.new( -1387.5324707031,57.592035293579 -33 ,4100.9575195313);elseif ((v283==60) or (v283<=74) or (SelectMonster==v7("\233\226\14\254\8\217\167\63\250\20\201\238\9","\122\173\135\125\155")) or (SelectArea==v7("\160\196\19\188\45\37","\168\228\161\96\217\95\81"))) then local v1551=1097 -(823 + 274) ;while true do if (0==v1551) then Ms=v7("\255\212\61\89\61\67\155\243\47\82\43\94\207","\55\187\177\78\60\79");NameQuest=v7("\9\203\76\238\84\219\177\56\203\76\255","\224\77\174\63\139\38\175");v1551=965 -(134 + 830) ;end if (v1551==2) then CFrameQ=CFrame.new(2385.5172119140598 -1489 ,19.4384617805481 -13 ,5971.1494140625 -(1430 + 151) );CFrameMon=CFrame.new(2342.99896240234 -(104 + 1254) ,440.109552383423 -(161 + 263) ,8356.91015625 -3939 );break;end if (v1551==(1397 -(317 + 1079))) then local v1739=0 -0 ;while true do if (v1739==(2 -1)) then v1551=317 -(76 + 239) ;break;end if (v1739==(373 -(349 + 24))) then QuestLv=1 -0 ;NameMon=v7("\160\68\75\43\150\85\24\12\133\79\92\39\144","\78\228\33\56");v1739=2 -1 ;end end end end elseif ((v283==(5 + 70)) or (v283<=89) or (SelectMonster==v7("\234\123\161\6\151\218\62\157\5\131\199\125\183\17","\229\174\30\210\99")) or (SelectArea==v7("\63\232\149\84\255\41","\89\123\141\230\49\141\93"))) then local v1695=0;local v1696;while true do if (v1695==(0 + 0)) then v1696=1634 -(1428 + 206) ;while true do if (v1696==(1505 -(1207 + 298))) then Ms=v7("\215\116\229\9\2\94\179\94\240\10\25\73\246\99","\42\147\17\150\108\112");NameQuest=v7("\43\163\62\122\245\252\62\179\40\108\243","\136\111\198\77\31\135");v1696=349 -(224 + 124) ;end if (v1696==(34 -(7 + 25))) then CFrameQ=CFrame.new(2260.5172119140598 -1364 ,1058.438461780548 -(886 + 166) ,6452.1494140625 -2062 );CFrameMon=CFrame.new(335.1510009766 + 1212 ,14.452038764954,4699.8002929688 -(142 + 176) );break;end if (v1696==(1 + 0)) then QuestLv=940 -(584 + 354) ;NameMon=v7("\38\12\180\83\175\240\87\134\4\15\174\85\184\246","\201\98\105\199\54\221\132\119");v1696=490 -(384 + 104) ;end end break;end end elseif ((v283==(260 -170)) or (v283<=(134 -(13 + 22))) or (SelectMonster==v7("\138\2\140\54\66\23\173\183\8\138\53","\204\217\108\227\65\98\85")) or (SelectArea==v7("\109\205\250\242","\160\62\163\149\133\76"))) then local v1770=0 + 0 ;while true do if (v1770==2) then CFrameQ=CFrame.new(912.8073730469 + 474 ,176.27278900146501 -89 , -(3592.3576660156 -2294));CFrameMon=CFrame.new(1356.3028564453,105.76865386963, -1328.2418212891);break;end if (v1770==(2 -1)) then local v1908=0 + 0 ;while true do if (v1908==(0 + 0)) then QuestLv=1;NameMon=v7("\11\8\2\250\120\36\12\227\60\15\25","\141\88\102\109");v1908=1;end if (1==v1908) then v1770=2;break;end end end if ((0 + 0)==v1770) then Ms=v7("\229\174\2\56\131\244\161\3\43\202\194","\163\182\192\109\79");NameQuest=v7("\7\40\15\215\196\33\35\19\212","\149\84\70\96\160");v1770=1;end end elseif ((v283==(49 + 51)) or (v283<=119) or (SelectMonster==v7("\128\93\197\103\23\60\91","\161\211\51\170\16\122\93\53")) or (SelectArea==v7("\200\160\189\63","\72\155\206\210"))) then local v1865=0 -0 ;while true do if (v1865==(254 -(106 + 146))) then CFrameQ=CFrame.new(2753.8073730469 -1367 ,160.27278900146501 -73 , -(1061.3576660156 + 237));CFrameMon=CFrame.new(1218.7956542969,138.01184082031, -(5499.0262451172 -4011));break;end if (v1865==(1019 -(75 + 943))) then QuestLv=1065 -(972 + 91) ;NameMon=v7("\192\225\87\193\40\87\253","\54\147\143\56\182\69");v1865=6 -4 ;end if (v1865==(0 -0)) then Ms=v7("\117\116\91\25\62\71\116","\83\38\26\52\110");NameQuest=v7("\107\25\40\81\105\2\34\85\76","\38\56\119\71");v1865=1347 -(918 + 428) ;end end elseif ((v283==120) or (v283<=(1746 -(1099 + 498))) or (SelectMonster==v7("\245\137\246\76\217\150\177\250\93\203\207\193\208\79\217\223\130\250\91","\191\182\225\159\41")) or (SelectArea==v7("\6\19\58\92\133\130","\162\75\114\72\53\235\231"))) then local v1915=0;while true do if (v1915==(1685 -(997 + 688))) then local v1974=0;local v1975;while true do if (v1974==0) then v1975=1422 -(1406 + 16) ;while true do if (0==v1975) then Ms=v7("\175\52\77\231\85\66\188\57\80\246\74\66\163\58\66\235\80\7\158","\98\236\92\36\130\51");NameQuest=v7("\137\24\30\179\75\173\132\37\161\10\24\232","\80\196\121\108\218\37\200\213");v1975=1 + 0 ;end if (v1975==(920 -(715 + 204))) then v1915=1 + 0 ;break;end end break;end end end if (v1915==1) then local v1976=0 + 0 ;while true do if (v1976==(663 -(275 + 388))) then QuestLv=1 -0 ;NameMon=v7("\35\123\11\122\77\78\186\5\103\22\102\11\33\140\6\122\1\122\89","\234\96\19\98\31\43\110");v1976=1 + 0 ;end if (v1976==(1 + 0)) then v1915=2 + 0 ;break;end end end if (v1915==2) then CFrameQ=CFrame.new( -(16226.49609375 -11191),9.677835464478001 + 19 ,14949.184082031301 -10625 );CFrameMon=CFrame.new( -(2268.1552734375 + 2663),45.793113708495994 + 20 ,348.8393554688 + 3773 );break;end end elseif ((v283==(715 -(5 + 560))) or (v283<=(580 -(77 + 329))) or (SelectMonster==v7("\53\20\75\135\142\115\133\2\22\70","\235\102\127\50\167\204\18")) or (SelectArea==v7("\99\170\236","\78\48\193\149\67\36"))) then local v1970=0;while true do if (v1970==(0 + 0)) then Ms=v7("\3\21\153\88\99\49\16\132\17\85","\33\80\126\224\120");NameQuest=v7("\223\163\26\245\73\233\187\23","\60\140\200\99\164");v1970=1 + 0 ;end if (v1970==(1953 -(397 + 1554))) then CFrameQ=CFrame.new( -(6099.1372070313 -(219 + 1038)),505.69543457031 + 212 , -(1305.0483398438 + 1318));CFrameMon=CFrame.new( -(10893.641113281301 -5938),365.46365356445, -(6301.1865234375 -3393));break;end if (v1970==(1 -0)) then local v1998=0 + 0 ;while true do if (v1998==(753 -(404 + 348))) then v1970=2;break;end if (v1998==(148 -(99 + 49))) then QuestLv=1 + 0 ;NameMon=v7("\180\255\29\102\128\134\250\0\47\182","\194\231\148\100\70");v1998=1970 -(1223 + 746) ;end end end end elseif ((v283==(275 -100)) or (v283<=(174 + 15)) or (SelectMonster==v7("\98\77\211\168\182\229\71\95\213\166\228","\168\38\44\161\195\150")) or (SelectArea==v7("\179\247\155","\118\224\156\226\22\80\136\214"))) then local v1992=0;while true do if (v1992==(1363 -(1247 + 114))) then CFrameQ=CFrame.new( -4842.1372070313,717.69543457031, -2623.0483398438);CFrameMon=CFrame.new( -5148.1650390625,1388.0457153320299 -949 , -2332.9611816406);break;end if (v1992==1) then QuestLv=2 + 0 ;NameMon=v7("\254\234\101\227\203\234\219\248\99\237\153","\167\186\139\23\136\235");v1992=4 -2 ;end if (v1992==(0 -0)) then Ms=v7("\102\239\75\139\2\195\88\147\86\235\75","\224\34\142\57");NameQuest=v7("\237\172\220\236\102\244\78\26","\110\190\199\165\189\19\145\61");v1992=1 -0 ;end end elseif ((v283==190) or (v283<=(2148 -(291 + 1648))) or (SelectMonster==v7("\42\167\129\30\21\187\141\31","\109\122\213\232")) or (SelectArea==v7("\222\229\171\35\225\249","\80\142\151\194"))) then Ms=v7("\51\212\126\95\12\200\114\94","\44\99\166\23");NameQuest=v7("\76\229\32\37\60\170\121\229\24\35\54\183\104","\196\28\151\73\86\83");QuestLv=2 -1 ;NameMon=v7("\195\17\32\3\141\86\29\100","\22\147\99\73\112\226\56\120");CFrameQ=CFrame.new(14228.60547 -8918 ,0.350014925 + 0 ,1605.946594 -1131 ,0.0175017118 + 0 ,1698 -(1584 + 114) ,0.999846935,0,1,0, -(0.999846935 -0),1765 -(957 + 808) ,0.0175017118);CFrameMon=CFrame.new(19986.31885 -15049 ,0.332031399,2702.574524 -2053 ,1071.694649816 -(435 + 636) ,0 + 0 , -(785.719348073 -(342 + 443)),0 -0 ,1 + 0 ,0 + 0 ,0.719348073,0 + 0 ,0.694649816);elseif ((v283==(742 -(321 + 211))) or (v283<=(993 -744)) or (SelectMonster==v7("\156\116\236\242\136\170\122\247\230\205\136\103\235\230\130\182\112\240","\237\216\21\130\149")) or (SelectArea==v7("\178\92\86\76\191\199","\62\226\46\63\63\208\169"))) then local v2017=0 + 0 ;local v2018;while true do if (v2017==(0 -0)) then v2018=0 -0 ;while true do if ((1244 -(506 + 736))==v2018) then CFrameQ=CFrame.new(5310.60547,1341.350014925 -(428 + 913) ,2325.946594 -(834 + 1017) ,1571.0175017118 -(1493 + 78) ,0 -0 ,0.999846935,0 + 0 ,1 + 0 ,0 + 0 , -(0.999846935 -0),0 + 0 ,186.0175017118 -(177 + 9) );CFrameMon=CFrame.new(6352.6626 -(236 + 1017) ,0.351562679 + 0 ,3034.7583 -(1237 + 742) ,0.898906827 -0 ,0 + 0 , -(0.438139856 + 0),0 + 0 ,1 + 0 ,0 + 0 ,0.438139856 -0 ,0 -0 ,1564.898906827 -(566 + 998) );break;end if (v2018==(1 + 0)) then QuestLv=1630 -(11 + 1617) ;NameMon=v7("\29\169\66\31\197\240\1\44\187\12\40\210\235\29\54\166\73\10","\110\89\200\44\120\160\130");v2018=2;end if (v2018==0) then Ms=v7("\193\24\91\132\26\31\32\75\246\89\101\145\22\30\32\80\224\11","\62\133\121\53\227\127\109\79");NameQuest=v7("\32\6\59\230\217\160\167\2\37\39\240\197\186","\194\112\116\82\149\182\206");v2018=1;end end break;end end elseif ((v283==(2115 -(1156 + 709))) or (v283<=(652 -378)) or (SelectMonster==v7("\159\204\76\71\3\125\58\95\185\202\68\84","\45\203\163\43\38\35\42\91")) or (SelectArea==v7("\241\138\208\44\148\186\81\199\136","\52\178\229\188\67\231\201"))) then local v2029=0 -0 ;while true do if (v2029==2) then CFrameQ=CFrame.new( -(3353.7890625 -1776),7.4151420593262, -(1468.4838867188 + 1516));CFrameMon=CFrame.new( -1872.5166015625,120.080215454102 -71 , -(4534.810546875 -1621));break;end if (0==v2029) then Ms=v7("\21\78\87\5\183\107\34\51\83\89\11\229","\67\65\33\48\100\151\60");NameQuest=v7("\252\232\162\215\224\204\226\187\213\194\202\226\189\204","\147\191\135\206\184");v2029=690 -(131 + 558) ;end if (v2029==(1 -0)) then QuestLv=1;NameMon=v7("\176\39\161\192\152\100\179\150\58\175\206\202","\210\228\72\198\161\184\51");v2029=2 + 0 ;end end elseif ((v283==(915 -640)) or (v283<=299) or (SelectMonster==v7("\17\69\242\20\122\207\34\70\225","\174\86\41\147\112\19")) or (SelectArea==v7("\120\15\129\4\54\28\20\190\86","\203\59\96\237\107\69\111\113"))) then Ms=v7("\3\26\173\229\56\241\195\43\4","\183\68\118\204\129\81\144");NameQuest=v7("\45\162\124\235\24\145\11\184\125\213\30\135\29\185","\226\110\205\16\132\107");QuestLv=2 -0 ;NameMon=v7("\204\207\225\221\72\234\215\239\203","\33\139\163\128\185");CFrameQ=CFrame.new( -1577.7890625,5.4151420593262 + 2 , -(1135.4838867188 + 1849));CFrameMon=CFrame.new( -1521.3740234375,4.203170776367003 + 77 , -(4711.3139648438 -(1417 + 228)));elseif ((v283==300) or (v283<=324) or (SelectMonster==v7("\122\81\8\215\67\89\22\199\23\107\11\210\83\81\1\204","\190\55\56\100")) or (SelectArea==v7("\123\174\59\19\18","\147\54\207\92\126\115\131"))) then local v2048=0 -0 ;while true do if (v2048==1) then QuestLv=1;NameMon=v7("\131\230\177\181\186\238\175\165\238\220\178\176\170\230\184\174","\220\206\143\221");v2048=1 + 1 ;end if (v2048==(0 -0)) then local v2058=394 -(134 + 260) ;while true do if (v2058==(0 -0)) then local v2065=0 + 0 ;while true do if ((0 + 0)==v2065) then Ms=v7("\32\56\57\116\25\127\31\40\117\78\2\114\9\56\48\111","\30\109\81\85\29\109");NameQuest=v7("\210\112\83\187\55\239\233\250\98\64","\156\159\17\52\214\86\190");v2065=1 -0 ;end if (v2065==(135 -(49 + 85))) then v2058=1 + 0 ;break;end end end if ((1 + 0)==v2058) then v2048=2 -1 ;break;end end end if (v2048==(1 + 1)) then CFrameQ=CFrame.new( -(4328.1157226563 + 988),12.262831687927,9894.00390625 -(922 + 455) );CFrameMon=CFrame.new( -(10838.000488281301 -5469),61.24352645874,1257.4921875 + 7299 );break;end end elseif ((v283==(386 -(31 + 30))) or (v283<=374) or (SelectMonster==v7("\171\116\33\30\204\205\192\159\61\30\7\193","\178\230\29\77\119\184\172")) or (SelectArea==v7("\216\191\13\22\118","\152\149\222\106\123\23"))) then Ms=v7("\240\47\250\74\161\220\52\239\3\134\205\63","\213\189\70\150\35");NameQuest=v7("\98\84\115\5\78\100\97\13\92\65","\104\47\53\20");QuestLv=2 + 0 ;NameMon=v7("\142\69\141\21\168\14\177\85\193\47\172\22","\111\195\44\225\124\220");CFrameQ=CFrame.new( -(12612.115722656301 -7296),10.262831687927 + 2 ,4601.00390625 + 3916 );CFrameMon=CFrame.new( -(1258.0029299999997 + 4529),115.8262634 -40 ,8651.69922,22.838590562 -(5 + 17) ,0 -0 , -(70.544762194 -(65 + 5)),0 + 0 ,1,0 -0 ,0.544762194 + 0 ,0,0.838590562 + 0 );elseif ((v283==(1216 -(685 + 156))) or (v283<=(1302 -903)) or (SelectMonster==v7("\254\79\19\123\166\170\214\6\55\114\185\185\209\73\18","\203\184\38\96\19\203")) or (SelectArea==v7("\31\122\106\73\195\56\125","\174\89\19\25\33"))) then local v2060=0 + 0 ;while true do if (v2060==3) then if (_G.AutoLevel and ((CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>3000)) then game:GetService(v7("\215\220\24\63\47\230\216\28\54\34\214\205\7\33\39\226\220","\70\133\185\104\83")).Remotes.CommF_:InvokeServer(v7("\22\64\85\63\204\23\81\97\36\221\22\68\74\41\204","\169\100\37\36\74"),Vector3.new(219614.8515625 -158451 ,743.6796875 -(620 + 112) ,1819.7841796875));end break;end if (v2060==0) then local v2066=0;while true do if (v2066==(2 -1)) then v2060=1;break;end if (0==v2066) then local v2068=0 -0 ;while true do if (v2068==1) then v2066=250 -(89 + 160) ;break;end if (v2068==(0 -0)) then Ms=v7("\9\27\65\70\250\134\5\111\37\83\92\229\142\4\61","\107\79\114\50\46\151\231");NameQuest=v7("\31\175\166\33\135\56\185\241\44\163\166\61","\160\89\198\213\73\234\89\215");v2068=1;end end end end end if (v2060==2) then CFrameQ=CFrame.new(62729.65234375 -(975 + 632) ,18.497442245483,2651.3997802734 -1082 );CFrameMon=CFrame.new(60844.10546875,96.462875366211 + 2 ,2266.3985595702998 -968 );v2060=513 -(358 + 152) ;end if (v2060==(1 -0)) then QuestLv=1;NameMon=v7("\110\120\167\246\200\73\127\244\201\196\90\99\189\241\215","\165\40\17\212\158");v2060=1113 -(727 + 384) ;end end elseif ((v283==400) or (v283<=449) or (SelectMonster==v7("\38\142\177\88\13\134\172\16\35\136\175\93\1\137\166\95","\48\96\231\194")) or (SelectArea==v7("\238\83\29\37\20\217\161","\227\168\58\110\77\121\184\207"))) then Ms=v7("\93\53\172\72\188\218\127\229\88\51\178\77\176\213\117\170","\197\27\92\223\32\209\187\17");NameQuest=v7("\37\86\208\243\14\94\205\202\22\90\208\239","\155\99\63\163");QuestLv=7 -5 ;NameMon=v7("\164\216\178\133\180\133\140\145\130\130\180\137\131\223\165\130","\228\226\177\193\237\217");CFrameQ=CFrame.new(165672.65234375 -104550 ,18.497442245483,4094.3997802734 -2525 );CFrameMon=CFrame.new(60925.3984375 + 813 ,1289.207321166992 -(804 + 421) ,6744.8375244141 -5311 );if (_G.AutoLevel and ((CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>(9856 -6856))) then game:GetService(v7("\6\181\51\234\61\179\34\242\49\180\16\242\59\162\34\225\49","\134\84\208\67")).Remotes.CommF_:InvokeServer(v7("\1\169\151\73\22\191\146\121\29\184\148\93\29\175\131","\60\115\204\230"),Vector3.new(61163.8515625,36.6796875 -25 ,1819.7841796875));end elseif ((v283==10) or (v283<=(1547 -(1029 + 44))) or (SelectMonster=="God's Guard") or (SelectArea==v7("\212\49\242\48\206\41\231\113\233\62","\16\135\90\139"))) then Ms="God's Guard";NameQuest=v7("\103\127\31\22\86\68\41\101\97\3\32\90","\24\52\20\102\83\46\52");QuestLv=1 + 0 ;NameMon="God's Guard";CFrameQ=CFrame.new( -4721.8603515625,602.30297851563 + 243 , -(1496.8489990234 + 457));CFrameMon=CFrame.new( -(5145.0498046875 -(139 + 378)),1118.92877197266 -(181 + 71) , -(1271.2352294922 + 660));if (_G.AutoLevel and ((CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>(10200 -7200))) then game:GetService(v7("\246\42\49\40\6\199\46\53\33\11\247\59\46\54\14\195\42","\111\164\79\65\68")).Remotes.CommF_:InvokeServer(v7("\212\220\146\203\43\249\210\252\141\202\60\235\200\218\134","\138\166\185\227\190\78"),Vector3.new( -4607.82275,1666.54248 -794 , -(2442.55688 -775)));end elseif ((v283==(774 -(243 + 56))) or (v283<=(667 -(56 + 87))) or (SelectMonster==v7("\248\124\196\57\86\34","\121\171\20\165\87\50\67")) or (SelectArea==v7("\245\51\160\118\144\17\202\57\183\50","\98\166\88\217\86\217"))) then Ms=v7("\197\254\120\15\130\221","\188\150\150\25\97\230");NameQuest=v7("\233\130\70\39\20\253\139\184\74\7\31\249","\141\186\233\63\98\108");QuestLv=2;NameMon=v7("\194\226\45\184\33\240","\69\145\138\76\214");CFrameQ=CFrame.new( -(17951.1596679688 -10088),1009.5190429688 + 4536 , -378.42266845703);CFrameMon=CFrame.new( -7685.1474609375,6448.0751953125 -(523 + 324) , -(414.38876342773 + 27));if (_G.AutoLevel and ((CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>(9893 -6893))) then game:GetService(v7("\66\202\153\133\182\21\113\219\140\141\140\2\127\221\136\142\186","\118\16\175\233\233\223")).Remotes.CommF_:InvokeServer(v7("\153\129\36\174\235\152\105\174\138\33\169\239\133\126\142","\29\235\228\85\219\142\235"),Vector3.new( -(7496.6176757813 + 398),13510.1416015625 -7963 , -(900.29119873047 -520)));end elseif ((v283==(402 + 123)) or (v283<=549) or (SelectMonster==v7("\15\219\163\220\123\14\20\67\40\213\190","\50\93\180\218\189\23\46\71")) or (SelectArea==v7("\237\175\66\12\109\207\68\223\170\95","\40\190\196\59\44\36\188"))) then local v2075=0 + 0 ;local v2076;while true do if (v2075==(890 -(9 + 881))) then v2076=0;while true do if (v2076==(1486 -(1429 + 56))) then QuestLv=1;NameMon=v7("\40\77\58\162\51\9\214\31\15\67\39","\110\122\34\67\195\95\41\133");v2076=2;end if (0==v2076) then Ms=v7("\14\74\197\181\246\61\62\45\80\221\176","\109\92\37\188\212\154\29");NameQuest=v7("\55\228\189\230\41\74\86\222\177\198\34\78","\58\100\143\196\163\81");v2076=1;end if (v2076==(3 -1)) then CFrameQ=CFrame.new( -(10377.3828125 -2474),5635.9897460938, -(1744.923828125 -(295 + 39)));CFrameMon=CFrame.new( -7654.2514648438,5995.1079101563 -(223 + 135) , -(2939.7550048827998 -1532));break;end end break;end end elseif ((v283==(1042 -492)) or (v283<=(2563 -(1472 + 467))) or (SelectMonster==v7("\71\190\66\75\218\53\130\84\70\210\124\180\73","\182\21\209\59\42")) or (SelectArea==v7("\132\92\220\93\8\173\187\86\203\25","\222\215\55\165\125\65"))) then local v2077=0 + 0 ;local v2078;while true do if (v2077==(0 + 0)) then v2078=0;while true do if (v2078==(122 -(103 + 19))) then Ms=v7("\30\222\223\27\254\129\222\69\32\213\207\31\224","\42\76\177\166\122\146\161\141");NameQuest=v7("\150\129\28\235\97\102\247\187\16\203\106\98","\22\197\234\101\174\25");v2078=1;end if (2==v2078) then CFrameQ=CFrame.new( -(9736.3828125 -(1172 + 661)),5635.9897460938, -1410.923828125);CFrameMon=CFrame.new( -(2164.4106445313 + 5596),894.9077148438 + 4785 , -(3711.8112792969 -1827));break;end if (1==v2078) then QuestLv=1074 -(373 + 699) ;NameMon=v7("\31\59\188\221\122\239\228\137\33\48\172\217\100","\230\77\84\197\188\22\207\183");v2078=1551 -(331 + 1218) ;end end break;end end elseif ((v283==625) or (v283<=(1084 -435)) or (SelectMonster==v7("\222\21\202\240\137\184\176\5\240\6\199\232\137","\85\153\116\166\156\236\193\144")) or (SelectArea==v7("\130\239\88\189\240\1\173\238","\96\196\128\45\211\132"))) then local v2080=0;while true do if (v2080==1) then local v2087=0 -0 ;while true do if (v2087==(1 + 0)) then v2080=2;break;end if ((0 + 0)==v2087) then QuestLv=925 -(169 + 755) ;NameMon=v7("\44\134\168\72\14\158\228\116\2\149\165\80\14","\36\107\231\196");v2087=98 -(23 + 74) ;end end end if (v2080==2) then CFrameQ=CFrame.new(5258.2788085938,2000.526931762695 -(935 + 1027) ,1340.044921875 + 2710 );CFrameMon=CFrame.new(4669.1684570313 + 888 ,2021.32717895508 -(287 + 1582) ,10856.775878906301 -6858 );break;end if ((0 -0)==v2080) then Ms=v7("\18\140\119\83\215\182\244\232\60\159\122\75\215","\184\85\237\27\63\178\207\212");NameQuest=v7("\46\86\28\81\28\88\0\81\57\76\12\76\28","\63\104\57\105");v2080=1 + 0 ;end end elseif ((v283>=(133 + 517)) or (SelectMonster==v7("\122\180\174\139\88\172\226\164\92\165\182\134\84\187","\231\61\213\194")) or (SelectArea==v7("\47\162\40\125\29\172\52\125","\19\105\205\93"))) then local v2084=543 -(198 + 345) ;while true do if (v2084==0) then Ms=v7("\142\9\210\141\58\176\72\253\128\47\189\9\215\143","\95\201\104\190\225");NameQuest=v7("\137\196\212\192\187\202\200\192\158\222\196\221\187","\174\207\171\161");v2084=2 -1 ;end if (v2084==(1 + 0)) then QuestLv=987 -(135 + 850) ;NameMon=v7("\202\255\1\255\253\206\173\221\12\227\236\214\228\240","\183\141\158\109\147\152");v2084=2;end if (2==v2084) then CFrameQ=CFrame.new(18776.2788085938 -13518 ,105.526931762695 -67 ,4050.044921875);CFrameMon=CFrame.new(6535.6772460938 -(150 + 708) ,262.786109924316 -170 ,4966.6323242188);break;end end end end if Second_Sea then if ((v283==(2367 -1667)) or (v283<=724) or (SelectMonster==v7("\30\8\239\8\41\27","\108\76\105\134")) or (SelectArea==v7("\202\215\180\224\142\186","\174\139\165\209\129"))) then local v692=0 + 0 ;while true do if (v692==(1 + 0)) then QuestLv=1;NameMon=v7("\207\39\12\22\12\50","\64\157\70\101\114\105");v692=36 -(28 + 6) ;end if (v692==(527 -(380 + 147))) then Ms=v7("\145\178\235\197\195\17","\24\195\211\130\161\166\99\16");NameQuest=v7("\103\17\236\45\2\39\83\6\250\56","\118\38\99\137\76\51");v692=1 + 0 ;end if (v692==(7 -5)) then CFrameQ=CFrame.new( -427.72567749023,979.99634552002 -(875 + 32) ,9021.9426269531 -7186 );CFrameMon=CFrame.new(25.874565124512003 + 43 ,93.635643005371,2429.6752929688);break;end end elseif ((v283==725) or (v283<=(1653 -(611 + 268))) or (SelectMonster==v7("\109\173\181\224\21\78\169\181\250","\112\32\200\199\131")) or (SelectArea==v7("\13\66\89\185\131\250","\66\76\48\60\216\163\203"))) then local v800=0 -0 ;local v801;while true do if (v800==0) then v801=0 + 0 ;while true do if (v801==(575 -(196 + 378))) then QuestLv=2;NameMon=v7("\215\73\240\255\114\244\77\240\229","\23\154\44\130\156");v801=7 -5 ;end if (v801==(0 -0)) then Ms=v7("\151\131\107\240\90\192\37\168\159","\68\218\230\25\147\63\174");NameQuest=v7("\140\56\86\77\231\156\63\86\95\162","\214\205\74\51\44");v801=562 -(549 + 12) ;end if ((4 -2)==v801) then CFrameQ=CFrame.new( -427.72567749023,216.99634552002 -144 ,2975.9426269531 -1140 );CFrameMon=CFrame.new( -864.85009765625,122.47104644775,1265.1505126953 + 188 );break;end end break;end end elseif ((v283==(567 + 208)) or (v283<=(2658 -(1370 + 489))) or (SelectMonster==v7("\34\177\172\160\118\35\24\180\172\186\51","\115\113\198\205\206\86")) or (SelectArea==v7("\165\69\251\91\196\5","\58\228\55\158"))) then Ms=v7("\135\158\209\32\124\157\60\166\136\196\43","\85\212\233\176\78\92\205");NameQuest=v7("\107\74\141\227\24\105\157\231\89\76","\130\42\56\232");QuestLv=1 + 0 ;NameMon=v7("\217\162\37\237\0\15\227\167\37\247\69","\95\138\213\68\131\32");CFrameQ=CFrame.new(2402.61151123047 -1767 ,73.096351623535,851.81298828125 + 66 );CFrameMon=CFrame.new(3022.3669433594 -1957 ,25.64012145996 + 112 ,1324.3798828125);elseif ((v283==(143 + 657)) or (v283<=(708 + 166)) or (SelectMonster==v7("\12\41\162\87\121\56\49\225\112\98\43\46\167","\22\74\72\193\35")) or (SelectArea==v7("\13\107\225\89\108\43","\56\76\25\132"))) then Ms=v7("\120\192\168\50\192\76\216\235\21\219\95\199\173","\175\62\161\203\70");NameQuest=v7("\29\207\198\18\103\13\200\198\0\33","\85\92\189\163\115");QuestLv=1268 -(1059 + 207) ;NameMon=v7("\15\173\51\44\38\190\41\120\26\184\49\62\47","\88\73\204\80");CFrameQ=CFrame.new(635.61151123047,35.096351623535 + 38 ,917.81298828125);CFrameMon=CFrame.new(275.22045898438 + 258 ,128.46876525879,207.62615966797 + 148 );elseif ((v283==875) or (v283<=(2382 -(392 + 1091))) or (SelectMonster==v7("\3\130\2\79\39\223\110\175\25\67\60\206\43\141\17\72","\186\78\227\112\38\73")) or (SelectArea==v7("\209\86\239\92\93\127","\26\156\55\157\53\51"))) then Ms=v7("\161\217\4\208\182\85\204\244\31\220\173\68\137\214\23\215\172","\48\236\184\118\185\216");NameQuest=v7("\200\188\69\57\193\49\212\168\82\35\219\103","\84\133\221\55\80\175");QuestLv=1 + 0 ;NameMon=v7("\144\230\54\175\201\89\253\203\45\163\210\72\184\233\37\168\211","\60\221\135\68\198\167");CFrameQ=CFrame.new( -(4567.9934082030995 -2127),73.04190826416, -3217.7082519531);CFrameMon=CFrame.new( -(8862.262207031301 -6373),84.613594055176, -(1492.8830566406 + 1659));elseif ((v283==(3462 -2562)) or (v283<=(1663 -714)) or (SelectMonster==v7("\195\188\234\138\76\220\174\158\249\147\86\216\231\179","\185\142\221\152\227\34")) or (SelectArea==v7("\117\196\69\243\77\54","\151\56\165\55\154\35\83"))) then local v1552=0 -0 ;while true do if (v1552==(3 -2)) then QuestLv=4 -2 ;NameMon=v7("\37\61\8\73\10\8\189\43\61\10\84\5\4\243","\157\104\92\122\32\100\109");v1552=1416 -(791 + 623) ;end if (v1552==0) then Ms=v7("\141\66\23\231\174\70\69\205\161\83\17\239\169\77","\142\192\35\101");NameQuest=v7("\251\116\59\170\233\137\157\3\211\102\61\240","\118\182\21\73\195\135\236\204");v1552=2 -1 ;end if (v1552==2) then CFrameQ=CFrame.new( -(4330.9934082030995 -(1704 + 186)),41.04190826416 + 32 , -(3843.7082519531 -(406 + 220)));CFrameMon=CFrame.new( -(8949.202636718801 -6614),1874.786659240723 -(779 + 1016) , -(2047.8674316406 + 1198));break;end end elseif ((v283==(501 + 449)) or (v283<=(75 + 899)) or (SelectMonster==v7("\153\169\194\200\52\34","\203\195\198\175\170\93\71\237")) or (SelectArea==v7("\20\68\51\215\88\20","\156\78\43\94\181\49\113"))) then local v1697=0;while true do if ((5 -3)==v1697) then CFrameQ=CFrame.new( -(5884.3413085938 -(79 + 311)),162.505931854248 -(90 + 24) , -(2155.5909423828098 -1361));CFrameMon=CFrame.new( -(297.4970703125 + 5239),40.08577728271 + 61 , -(2019.59075927734 -(298 + 886)));break;end if (v1697==0) then Ms=v7("\72\231\201\161\2\70","\25\18\136\164\195\107\35");NameQuest=v7("\210\34\164\77\123\185\240\173\237\62\189","\216\136\77\201\47\18\220\161");v1697=1;end if (v1697==(1 + 0)) then QuestLv=1;NameMon=v7("\23\227\38\216\1\217","\226\77\140\75\186\104\188");v1697=2;end end elseif ((v283==(36 + 939)) or (v283<=999) or (SelectMonster==v7("\143\207\221\47\70\171\203","\47\217\174\176\95")) or (SelectArea==v7("\130\210\123\0\187\81","\70\216\189\22\98\210\52\24"))) then local v1771=0 + 0 ;while true do if (v1771==(0 -0)) then Ms=v7("\236\222\174\151\218\200\218","\179\186\191\195\231");NameQuest=v7("\195\48\21\230\240\58\41\241\252\44\12","\132\153\95\120");v1771=1;end if (v1771==(1 -0)) then QuestLv=2 + 0 ;NameMon=v7("\135\179\3\61\254\200\165","\192\209\210\110\77\151\186");v1771=2 -0 ;end if (v1771==(1 + 1)) then CFrameQ=CFrame.new( -5494.3413085938,1525.505931854248 -(956 + 521) , -794.59094238281);CFrameMon=CFrame.new( -(11855.109863281301 -6049),20.722528457642 -4 , -(2894.4384765625 -1730));break;end end elseif ((v283==(2463 -1463)) or (v283<=(1895 -846)) or (SelectMonster==v7("\211\13\45\254\191\240\242\12\45\249\250\214","\164\128\99\66\137\159")) or (SelectArea==v7("\51\135\230\169\64\164\230\171\14\157\232\183\14","\222\96\233\137"))) then local v1866=0;local v1867;while true do if (v1866==(0 -0)) then v1867=0 -0 ;while true do if ((1 + 1)==v1867) then CFrameQ=CFrame.new(198.05963134766 + 409 ,274.44781494141 + 127 , -(3188.5546875 + 2182));CFrameMon=CFrame.new(535.21051025391,1214.74209594727 -782 , -5484.9165039063);break;end if (v1867==(1 + 0)) then QuestLv=1;NameMon=v7("\228\214\72\40\151\236\85\48\216\200\66\45","\95\183\184\39");v1867=1 + 1 ;end if (v1867==(1326 -(1010 + 316))) then Ms=v7("\138\189\168\8\200\199\226\182\188\183\26\154","\144\217\211\199\127\232\147");NameQuest=v7("\203\33\49\63\248\74\23\74\236\46\55\38\228\80\7\87\236","\36\152\79\94\72\181\37\98");v1867=1;end end break;end end elseif ((v283==(882 + 168)) or (v283<=1099) or (SelectMonster==v7("\130\54\233\50\81\146\66\130\62\245\52\93\143\16","\98\213\95\135\70\52\224")) or (SelectArea==v7("\205\173\198\96\20\211\172\220\121\64\255\170\199","\52\158\195\169\23"))) then Ms=v7("\77\181\60\96\131\39\59\188\123\174\32\125\137\39","\235\26\220\82\20\230\85\27");NameQuest=v7("\187\175\230\213\89\135\180\231\214\117\129\175\216\215\113\155\181","\20\232\193\137\162");QuestLv=5 -3 ;NameMon=v7("\21\214\203\178\226\158\87\70\35\205\215\175\232\158","\17\66\191\165\198\135\236\119");CFrameQ=CFrame.new(607.05963134766,401.44781494141, -5370.5546875);CFrameMon=CFrame.new(176.44494628910002 + 1058 ,456.95419311523, -(2191.130859375 + 2983));elseif ((v283==1100) or (v283<=(425 + 699)) or (SelectMonster==v7("\35\174\172\83\204\253\238\222\29\171\167\29\254\252\233","\177\111\207\206\115\159\136\140")) or (SelectArea==v7("\44\138\21\84\242\70\77\0","\63\101\233\112\116\180\47"))) then Ms=v7("\239\58\239\82\203\35\193\52\255\22\241\56\194\47\232","\86\163\91\141\114\152");NameQuest=v7("\122\8\113\64\51\87\14\69\102\63\64\31","\90\51\107\20\19");QuestLv=1;NameMon=v7("\161\241\135\175\14\152\242\138\253\57\132\254\132\251\56","\93\237\144\229\143");CFrameQ=CFrame.new( -(7280.841796875 -(1130 + 89)),2.9266719818119995 + 13 , -4902.0385742188);CFrameMon=CFrame.new( -(7481.5576171875 -(1437 + 324)),52.309471130371 + 11 , -(5722.6103515625 -(87 + 851)));elseif ((v283==(1048 + 77)) or (v283<=(3728 -2554)) or (SelectMonster==v7("\61\249\226\23\14\66\85\193\241\11\25\79\26\228","\38\117\150\144\121\107")) or (SelectArea==v7("\4\184\235\122\11\178\252\63","\90\77\219\142"))) then Ms=v7("\206\11\51\55\73\3\58\209\5\51\43\69\8\104","\26\134\100\65\89\44\103");NameQuest=v7("\216\224\53\16\173\245\230\1\54\161\226\247","\196\145\131\80\67");QuestLv=2 + 0 ;NameMon=v7("\54\191\20\6\29\236\94\135\7\26\10\225\17\162","\136\126\208\102\104\120");CFrameQ=CFrame.new( -(18383.841796875 -12322),15.926671981812, -(5864.0385742188 -(105 + 857)));CFrameMon=CFrame.new( -(7217.751953125 -(859 + 66)),132.18198394775402 -41 , -(15313.649902343801 -9811));elseif ((v283==(1885 -710)) or (v283<=(194 + 1005)) or (SelectMonster==v7("\85\139\201\78\174\18\19\88\118\128\207","\49\24\234\174\35\207\50\93")) or (SelectArea==v7("\37\241\248\200\87\5\224\248","\17\108\146\157\232"))) then Ms=v7("\102\194\19\224\46\232\101\202\26\231\46","\200\43\163\116\141\79");NameQuest=v7("\153\63\47\134\131\253\231\186\7\40\134\163\224","\131\223\86\93\227\208\148");QuestLv=1;NameMon=v7("\206\68\177\187\28\245\205\76\184\188\28","\213\131\37\214\214\125");CFrameQ=CFrame.new( -(3038.0473632813 + 2391),15.977565765381, -(2646.9614257813 + 2651));CFrameMon=CFrame.new( -(15452.8388671875 -9991),506.36347961426 -376 , -5836.4702148438);elseif ((v283==1200) or (v283<=(4423 -3174)) or (SelectMonster==v7("\10\42\51\190\161\22\34\55\190\245\35","\129\70\75\69\223")) or (SelectArea==v7("\111\200\246\169\90\230\84\206","\143\38\171\147\137\28"))) then local v2019=0 -0 ;while true do if (v2019==(1 + 1)) then CFrameQ=CFrame.new( -(10180.047363281301 -4751),30.977565765381 -15 , -5297.9614257813);CFrameMon=CFrame.new( -(791.1889648438 + 4460),55.164535522461, -(5439.4096679688 -(203 + 462)));break;end if (v2019==(1 -0)) then QuestLv=269 -(250 + 17) ;NameMon=v7("\102\182\10\212\1\188\170\88\182\8\208","\195\42\215\124\181\33\236");v2019=8 -6 ;end if ((0 -0)==v2019) then Ms=v7("\252\131\175\242\67\211\221\194\131\173\246","\180\176\226\217\147\99\131");NameQuest=v7("\245\176\61\2\224\176\43\2\226\172\42\20\199","\103\179\217\79");v2019=1 + 0 ;end end elseif ((v283==(2379 -1129)) or (v283<=(114 + 1160)) or (SelectMonster==v7("\62\81\62\46\101\220\8\90\60\54\36\246\9","\152\109\57\87\94\69")) or (SelectArea==v7("\202\223\3\179","\200\153\183\106\195\222\178\52"))) then Ms=v7("\1\235\129\45\9\126\55\224\131\53\72\84\54","\58\82\131\232\93\41");NameQuest=v7("\176\95\217\5\108\42\134\68\196\68","\95\227\55\176\117\61");QuestLv=1;NameMon=v7("\43\118\42\91\235\60\123\32\64\163\25\112\39","\203\120\30\67\43");CFrameQ=CFrame.new(1040.2927246094,1395.08293151855 -(506 + 764) ,32911.0390625);CFrameMon=CFrame.new(72.12365722656 + 849 ,125.9839553833,33088.328125);if (_G.AutoLevel and ((CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>20000)) then game:GetService(v7("\195\32\93\227\208\242\36\89\234\221\194\49\66\253\216\246\32","\185\145\69\45\143")).Remotes.CommF_:InvokeServer(v7("\152\26\8\179\217\153\11\60\168\200\152\30\23\165\217","\188\234\127\121\198"),Vector3.new(830.21252441406 + 93 ,31.9760055542 + 95 ,13295.83203125 + 19557 ));end elseif ((v283==(3827 -2552)) or (v283<=1299) or (SelectMonster==v7("\11\58\26\147\120\23\29\132\49\60\22\134\42","\227\88\82\115")) or (SelectArea==v7("\112\23\179\183","\19\35\127\218\199\98"))) then local v2034=0;while true do if (v2034==(259 -(144 + 113))) then CFrameQ=CFrame.new(1298.2927246094 -(159 + 99) ,61.08293151855 + 64 ,33606.0390625 -(601 + 94) );CFrameMon=CFrame.new(1274.28179931641 -388 ,71.47790145874 -31 ,15894.83203125 + 16906 );v2034=6 -3 ;end if (v2034==(2 + 1)) then if (_G.AutoLevel and ((CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>(20595 -(110 + 485)))) then game:GetService(v7("\205\229\162\181\1\61\254\244\183\189\59\42\240\242\179\190\13","\94\159\128\210\217\104")).Remotes.CommF_:InvokeServer(v7("\66\252\23\170\90\108\237\95\94\237\20\190\81\124\252","\26\48\153\102\223\63\31\153"),Vector3.new(2062.2125244140598 -(316 + 823) ,7.9760055542 + 119 ,32852.83203125));end break;end if (v2034==(1580 -(122 + 1458))) then Ms=v7("\47\243\3\242\92\222\4\229\21\245\15\231\14","\130\124\155\106");NameQuest=v7("\230\195\255\191\146\227\121\172\193\154","\223\181\171\150\207\195\150\28");v2034=1 + 0 ;end if ((1 -0)==v2034) then QuestLv=2;NameMon=v7("\127\50\234\190\73\105\52\228\167\7\73\63\241","\105\44\90\131\206");v2034=818 -(666 + 150) ;end end elseif ((v283==1300) or (v283<=(354 + 970)) or (SelectMonster==v7("\49\72\228\227\66\115\249\246\21\65\255\247","\147\98\32\141")) or (SelectArea==v7("\43\75\234\218","\43\120\35\131\170\102\54"))) then local v2049=0 + 0 ;local v2050;while true do if (v2049==0) then v2050=0 + 0 ;while true do if (v2050==(0 -0)) then Ms=v7("\103\14\142\166\229\131\144\81\17\134\164\161","\228\52\102\231\214\197\208");NameQuest=v7("\45\232\124\218\219\158\28\197\10\178","\182\126\128\21\170\138\235\121");v2050=1;end if (v2050==1) then QuestLv=1 + 0 ;NameMon=v7("\184\210\60\246\198\32\36\3\156\219\39\226","\102\235\186\85\134\230\115\80");v2050=2;end if (v2050==(3 + 0)) then if (_G.AutoLevel and ((CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>(20452 -(424 + 28)))) then game:GetService(v7("\101\9\46\83\123\215\35\67\9\58\108\102\219\48\86\11\59","\66\55\108\94\63\18\180")).Remotes.CommF_:InvokeServer(v7("\6\136\148\34\34\74\0\168\139\35\53\88\26\142\128","\57\116\237\229\87\71"),Vector3.new(923.21252441406,728.9760055542 -(407 + 195) ,32852.83203125));end break;end if (v2050==2) then CFrameQ=CFrame.new(971.42065429688,262.08293151855 -137 ,107230.54296875 -73985 );CFrameMon=CFrame.new(479.85504150391 + 464 ,6.581832885739999 + 123 ,33444.3671875);v2050=7 -4 ;end end break;end end elseif ((v283==(2494 -1169)) or (v283<=1349) or (SelectMonster==v7("\153\185\228\247\55\193\65\172\184\238\226\101","\39\202\209\141\135\23\142")) or (SelectArea==v7("\204\59\0\26","\152\159\83\105\106\82"))) then local v2054=0 + 0 ;while true do if (v2054==(2 -0)) then CFrameQ=CFrame.new(2738.42065429688 -1767 ,125.08293151855,32909.54296875 + 336 );CFrameMon=CFrame.new(3099.38458251953 -2144 ,431.08335876465003 -250 ,23164.890625 + 10167 );v2054=10 -7 ;end if (v2054==(11 -8)) then if (_G.AutoLevel and ((CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>(11847 + 8153))) then game:GetService(v7("\129\211\221\205\192\162\68\167\211\201\242\221\174\87\178\209\200","\37\211\182\173\161\169\193")).Remotes.CommF_:InvokeServer(v7("\229\63\92\204\45\104\173\210\52\89\203\41\117\186\242","\217\151\90\45\185\72\27"),Vector3.new(923.21252441406,112.9760055542 + 14 ,34044.83203125 -(274 + 918) ));end break;end if (v2054==(0 + 0)) then Ms=v7("\178\206\88\226\137\115\135\192\88\241\204\78","\60\225\166\49\146\169");NameQuest=v7("\28\22\38\58\48\18\42\13\59\120","\103\79\126\79\74\97");v2054=4 -3 ;end if ((1 + 0)==v2054) then local v2063=0 + 0 ;while true do if (v2063==(1813 -(1030 + 783))) then QuestLv=1 + 1 ;NameMon=v7("\137\119\218\99\30\53\188\121\218\112\91\8","\122\218\31\179\19\62");v2063=1;end if (v2063==1) then v2054=2 -0 ;break;end end end end elseif ((v283==(32 + 1318)) or (v283<=(466 + 908)) or (SelectMonster==v7("\226\110\228\6\95\192\60\208\19\68\209\117\232\0","\54\163\28\135\114")) or (SelectArea==v7("\14\201\82\145\90","\31\72\187\61\226\46"))) then Ms=v7("\226\20\64\198\78\125\100\244\7\81\192\78\113\54","\68\163\102\35\178\39\30");NameQuest=v7("\152\98\213\212\23\132\150\20\173\100","\113\222\16\186\167\99\213\227");QuestLv=704 -(167 + 536) ;NameMon=v7("\15\28\248\226\39\13\187\193\47\28\233\255\33\28","\150\78\110\155");CFrameQ=CFrame.new(5668.1372070313,14.202531814575 + 14 , -(17501.6005859375 -11017));CFrameMon=CFrame.new(4244.4541015625 + 1691 ,54.26016998291 + 23 , -(7927.7568359375 -(1304 + 151)));if (_G.AutoLevel and ((CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>(15491 + 4509))) then game:GetService(v7("\183\192\55\237\173\29\190\84\128\193\20\245\171\12\190\71\128","\32\229\165\71\129\196\126\223")).Remotes.CommF_:InvokeServer(v7("\209\140\213\148\132\198\215\172\202\149\147\212\205\138\193","\181\163\233\164\225\225"),Vector3.new( -6508.5581054688,34.034996032715 + 55 , -(36.83953857422 + 96)));end elseif ((v283==1375) or (v283<=(4852 -3428)) or (SelectMonster==v7("\99\133\49\96\16\167\43\101\91\142\44","\23\48\235\94")) or (SelectArea==v7("\90\200\215\78\67","\178\28\186\184\61\55\83"))) then Ms=v7("\247\195\72\43\178\34\224\214\198\66\46","\149\164\173\39\92\146\110");NameQuest=v7("\213\53\31\12\14\42\230\34\3\11","\123\147\71\112\127\122");QuestLv=2;NameMon=v7("\255\195\141\102\6\224\216\144\122\67\222","\38\172\173\226\17");CFrameQ=CFrame.new(3697.1372070313 + 1971 ,28.202531814575, -(6131.6005859375 + 353));CFrameMon=CFrame.new(6136.482421875 -(471 + 37) ,57.574996948242, -(7644.3481445313 -(557 + 469)));elseif ((v283==(920 + 505)) or (v283<=(3304 -1855)) or (SelectMonster==v7("\126\20\45\175\126\30\32\235\68\20\62","\143\45\113\76")) or (SelectArea==v7("\158\183\14\59\183\172\8\57\182","\92\216\216\124"))) then Ms=v7("\104\55\173\0\206\84\62\168\73\248\73","\157\59\82\204\32");NameQuest=v7("\30\49\241\253\230\254\199\180\54\15\246\255\250\254","\209\88\94\131\154\137\138\179");QuestLv=1 -0 ;NameMon=v7("\27\164\197\60\45\44\61\38\33\164\214","\66\72\193\164\28\126\67\81");CFrameQ=CFrame.new( -3054.5827636719,236.87213134766, -10147.790039063);CFrameMon=CFrame.new( -(4562.0153808594005 -(513 + 864)),58.789089202881, -(25931.6064453125 -16268));elseif ((v283>=1450) or (SelectMonster==v7("\208\45\188\93\52\54\193\37\175\80\50\115\245","\22\135\76\200\56\70")) or (SelectArea==v7("\171\63\234\35\82\245\153\53\246","\129\237\80\152\68\61"))) then local v2069=0;local v2070;while true do if (v2069==(0 -0)) then v2070=0 -0 ;while true do if (v2070==1) then QuestLv=401 -(187 + 212) ;NameMon=v7("\19\14\182\66\54\79\132\78\35\7\182\66\54","\39\68\111\194");v2070=2;end if (v2070==(80 -(35 + 43))) then CFrameQ=CFrame.new( -3054.5827636719,1350.87213134766 -(209 + 905) , -(104.79003906300022 + 10043));CFrameMon=CFrame.new( -3262.9301757813,1034.69036865234 -(555 + 181) , -(15384.529296875 -4832));break;end if (v2070==0) then Ms=v7("\102\169\16\246\14\87\126\88\175\12\231\25\5","\56\49\200\100\147\124\119");NameQuest=v7("\234\49\173\247\195\42\171\245\194\15\170\245\223\42","\144\172\94\223");v2070=986 -(953 + 32) ;end end break;end end end end if Third_Sea then if ((v283==(5883 -4383)) or (v283<=(1937 -413)) or (SelectMonster==v7("\230\175\245\198\109\178\150\139\238\203\117\190\217\168\230\206\107\178","\215\182\198\135\167\25")) or (SelectArea==v7("\189\64\248\73\153\76\170\120\130\91\254","\40\237\41\138"))) then Ms=v7("\247\125\232\249\94\194\52\215\241\70\203\125\245\246\75\206\102\255","\42\167\20\154\152");NameQuest=v7("\122\247\176\67\101\36\122\241\176\86\64\52\79\237\182","\65\42\158\194\34\17");QuestLv=1 -0 ;NameMon=v7("\42\46\64\13\57\232\91\195\19\43\94\5\34\227\26\231\8\34","\142\122\71\50\108\77\141\123");CFrameQ=CFrame.new( -289.61752319336,83.819011688232 -40 ,6083.0903320313 -(412 + 91) );CFrameMon=CFrame.new( -(707.68109130859 -(53 + 219)),1838.69866943359 -(145 + 1504) ,5551.0756835938);elseif ((v283==(1752 -(101 + 126))) or (v283<=1574) or (SelectMonster==v7("\37\171\236\12\52\25\226\221\17\55\25\171\240\22\58\28\176\250","\91\117\194\159\120")) or (SelectArea==v7("\42\20\44\25\33\244\100\42\18\44\12","\68\122\125\94\120\85\145"))) then Ms=v7("\39\21\220\74\199\213\250\53\21\195\82\193\214\180\22\21\221\91","\218\119\124\175\62\168\185");NameQuest=v7("\149\249\90\197\177\245\120\203\183\228\121\209\160\227\92","\164\197\144\40");QuestLv=2 + 0 ;NameMon=v7("\179\249\185\159\210\186\195\210\163\135\209\191\140\254\171\130\207\179","\214\227\144\202\235\189");CFrameQ=CFrame.new( -289.61752319336,43.819011688232,5580.0903320313);CFrameMon=CFrame.new( -236.53652954102,183.46676635742 + 34 ,6632.0883789063 -(153 + 473) );elseif ((v283==(1225 + 350)) or (v283<=(1321 + 278)) or (SelectMonster==v7("\201\183\134\124\31\189\19\31\255\160\144\59\39\178\65\46\228\170\149","\92\141\197\231\27\112\211\51")) or (SelectArea==v7("\199\242\139\185\222\232","\177\134\159\234\195"))) then Ms=v7("\153\249\62\167\198\179\171\28\178\204\170\171\8\161\219\175\226\48\178","\169\221\139\95\192");NameQuest=v7("\255\134\126\37\45\40\239\158\122\44\54","\70\190\235\31\95\66");QuestLv=1 + 0 ;NameMon=v7("\158\240\27\225\234\180\162\57\244\224\173\162\45\231\247\168\235\21\244","\133\218\130\122\134");CFrameQ=CFrame.new(4193.1147460938 + 1640 ,148.60498046875 -97 , -(2072.0693359375 -(752 + 217)));CFrameMon=CFrame.new(6301.9975585938,104.77153015137, -(2188.6075439452998 -1106));elseif ((v283==1600) or (v283<=(4619 -2995)) or (SelectMonster==v7("\24\237\226\195\211\173\120\31\237\230\211\156\130\42\63\247\230\214","\88\92\159\131\164\188\195")) or (SelectArea==v7("\161\35\190\81\216\229","\189\224\78\223\43\183\139"))) then local v1227=0 + 0 ;while true do if (v1227==(0 -0)) then local v1470=0 -0 ;while true do if (v1470==(0 + 0)) then Ms=v7("\10\238\139\17\206\32\188\169\4\196\57\188\171\4\194\38\249\152","\161\78\156\234\118");NameQuest=v7("\134\186\200\198\168\185\248\201\162\164\221","\188\199\215\169");v1470=1344 -(103 + 1240) ;end if (v1470==(1 + 0)) then v1227=1;break;end end end if ((1 + 1)==v1227) then CFrameQ=CFrame.new(5833.1147460938,4.60498046875 + 47 , -(2314.0693359375 -(16 + 1195)));CFrameMon=CFrame.new(6831.1171875,441.76708984375,1850.58615112305 -1404 );break;end if (v1227==(1 -0)) then local v1471=1612 -(1541 + 71) ;while true do if (v1471==1) then v1227=2;break;end if (v1471==0) then QuestLv=2 + 0 ;NameMon=v7("\216\27\94\124\231\242\73\124\105\237\235\73\126\105\235\244\12\77","\136\156\105\63\27");v1471=1 + 0 ;end end end end elseif ((v283==(8095 -6470)) or (v283<=(6734 -5085)) or (SelectMonster==v7("\61\137\116\53\23\137\57\29\8\128\120\58\31\137\107","\84\123\236\25")) or (SelectArea==v7("\209\134\171\13\163\187","\213\144\235\202\119\204"))) then local v1447=1644 -(1359 + 285) ;while true do if (v1447==(0 -0)) then Ms=v7("\5\29\211\43\36\38\13\10\11\210\43\38\39\72\49","\45\67\120\190\74\72\67");NameQuest=v7("\1\47\236\191\246\134\223\252\37\49\249\247","\137\64\66\141\197\153\232\142");v1447=1;end if (v1447==(1 + 1)) then CFrameQ=CFrame.new(5446.8793945313,2488.62945556641 -(1178 + 709) ,1048.4567260742201 -299 );CFrameMon=CFrame.new(5792.5166015625,2219.1439208984402 -1371 ,2514.1818847656 -(1052 + 378) );break;end if (v1447==1) then QuestLv=1691 -(1170 + 520) ;NameMon=v7("\37\213\47\167\132\6\144\11\181\132\2\222\38\163\154","\232\99\176\66\198");v1447=2;end end elseif ((v283==(2367 -(689 + 28))) or (v283<=(3332 -(534 + 1099))) or (SelectMonster==v7("\203\40\41\8\111\205\208\63\224\32\38\2\126\159","\76\140\65\72\102\27\237\153")) or (SelectArea==v7("\107\215\23\200\216\15","\222\42\186\118\178\183\97"))) then local v1553=1844 -(686 + 1158) ;while true do if ((0 -0)==v1553) then Ms=v7("\122\229\69\132\73\172\109\153\81\237\74\142\88\254","\234\61\140\36");NameQuest=v7("\0\208\187\104\0\47\236\175\119\28\53\143","\111\65\189\218\18");v1553=1 + 0 ;end if (v1553==(843 -(93 + 749))) then local v1740=0;while true do if (v1740==(0 + 0)) then QuestLv=98 -(81 + 15) ;NameMon=v7("\100\66\26\59\31\28\134\80\71\26\59\15\89\189","\207\35\43\123\85\107\60");v1740=2 -1 ;end if ((1 -0)==v1740) then v1553=2;break;end end end if (v1553==2) then CFrameQ=CFrame.new(14906.879394531301 -9460 ,601.62945556641,1813.4567260742201 -1064 );CFrameMon=CFrame.new(3477.5068359375 + 1532 ,664.11071777344, -(48.960144042969 -8));break;end end elseif ((v283==(6928 -5228)) or (v283<=(3950 -2226)) or (SelectMonster==v7("\93\171\178\227\119\117\234\131\229\116\125\165\164\229\107\117","\25\16\202\192\138")) or (SelectArea==v7("\208\202\191\235\167\241\189\255\191\231\172","\148\157\171\205\130\201"))) then local v1698=1368 -(1363 + 5) ;while true do if ((1 + 0)==v1698) then QuestLv=384 -(233 + 150) ;NameMon=v7("\250\233\176\37\217\237\226\15\216\229\175\35\211\231\176\41","\76\183\136\194");v1698=2 + 0 ;end if (v1698==0) then Ms=v7("\14\213\102\32\223\243\99\247\123\36\220\249\39\219\102\44","\150\67\180\20\73\177");NameQuest=v7("\160\25\8\68\131\29\46\95\136\29\51\94\129\25\20\73","\45\237\120\122");v1698=1;end if (v1698==2) then CFrameQ=CFrame.new(2179.98828125,138.731239318848 -110 , -6740.0551757813);CFrameMon=CFrame.new(9190.006347656301 -6992 ,407.71075439453 -279 , -7109.5043945313);break;end end elseif ((v283==(2914 -(762 + 427))) or (v283<=1774) or (SelectMonster==v7("\87\231\247\49\94\74\84\72\227\228\42\16\110\16\119\239\247\57\92","\116\26\134\133\88\48\47")) or (SelectArea==v7("\51\192\178\237\179\119\94\245\178\225\184","\18\126\161\192\132\221"))) then Ms=v7("\114\41\188\13\88\90\104\156\1\87\77\104\143\0\91\86\58\175\8","\54\63\72\206\100");NameQuest=v7("\229\88\87\115\235\126\252\75\64\127\204\104\196\88\75\126","\27\168\57\37\26\133");QuestLv=2;NameMon=v7("\0\171\110\161\217\40\234\78\173\214\63\234\93\172\218\36\184\125\164","\183\77\202\28\200");CFrameQ=CFrame.new(2179.98828125,53.731239318848 -25 , -(8007.0551757813 -(273 + 994)));CFrameMon=CFrame.new(2652.3142089844 + 642 ,385.41125488281, -(8737.634277343801 -(1434 + 255)));elseif ((v283==(2743 -(361 + 607))) or (v283<=(1834 -(30 + 5))) or (SelectMonster==v7("\49\58\154\0\26\50\135\72\37\50\128\12\18\33","\104\119\83\233")) or (SelectArea==v7("\209\253\34\50\3\211\247\53\39\80\225","\35\149\152\71\66"))) then local v1868=0 + 0 ;while true do if (v1868==0) then Ms=v7("\63\225\81\184\55\24\230\2\130\59\16\236\71\162","\90\121\136\34\208");NameQuest=v7("\227\11\80\14\225\1\71\27\212\26\124\13\203\15\91\26\148","\126\167\110\53");v1868=1;end if (v1868==(1 + 0)) then QuestLv=1;NameMon=v7("\27\25\61\240\209\62\51\80\28\249\213\59\56\2","\95\93\112\78\152\188");v1868=2;end if ((3 -1)==v1868) then CFrameQ=CFrame.new( -(11225.759765625 -(602 + 41)),810.78845214844 -479 , -8757.666015625);CFrameMon=CFrame.new( -(22602.268554688002 -12049),1160.38439941406 -(483 + 156) , -(4878.9458007813 + 3298));break;end end elseif ((v283==1800) or (v283<=1824) or (SelectMonster==v7("\231\252\150\29\233\191\220\129\214\132\5\240\191\219\207","\178\161\149\229\117\132\222")) or (SelectArea==v7("\172\222\216\188\225\48\169\49\141\200\201","\67\232\187\189\204\193\118\198"))) then local v1916=0;while true do if (1==v1916) then QuestLv=1848 -(1633 + 213) ;NameMon=v7("\163\234\252\209\14\167\139\163\204\216\19\178\132\234\225","\198\229\131\143\185\99");v1916=2;end if (v1916==0) then Ms=v7("\173\39\166\40\54\3\225\203\13\180\48\47\3\230\133","\143\235\78\213\64\91\98");NameQuest=v7("\169\77\129\249\86\185\159\77\151\253\89\165\129\73\138\237\35","\214\237\40\228\137\16");v1916=2 -1 ;end if (2==v1916) then CFrameQ=CFrame.new( -(1764.099609375 + 8819),331.78845214844, -8759.4638671875);CFrameMon=CFrame.new( -10789.401367188,427.18637084961, -(5397.4423828125 + 3734));break;end end elseif ((v283==(2430 -(115 + 490))) or (v283<=(2951 -(706 + 396))) or (SelectMonster==v7("\119\131\186\118\66\152\232\67\88\158\169\103\84","\19\49\236\200")) or (SelectArea==v7("\218\50\243\167\164\156\241\37\243\164\240","\218\158\87\150\215\132"))) then local v1971=0 + 0 ;local v1972;while true do if (v1971==0) then v1972=0 -0 ;while true do if (v1972==(898 -(301 + 595))) then CFrameQ=CFrame.new( -13232.662109375,184.40396118164 + 148 , -(33941.4819335938 -26315));CFrameMon=CFrame.new( -(66255.397460938 -52766),400.30349731445, -7770.251953125);break;end if ((1624 -(610 + 1013))==v1972) then QuestLv=4 -3 ;NameMon=v7("\147\33\166\120\151\161\110\132\116\150\180\58\177","\228\213\78\212\29");v1972=4 -2 ;end if (v1972==(0 -0)) then local v2020=0 + 0 ;while true do if (v2020==0) then Ms=v7("\221\17\203\231\37\54\141\203\23\203\227\34\39","\173\155\126\185\130\86\66");NameQuest=v7("\193\163\191\215\174\227\247\163\169\211\161\255\233\167\180\195","\140\133\198\218\167\232");v2020=1;end if (v2020==1) then v1972=1;break;end end end end break;end end elseif ((v283==(5199 -3349)) or (v283<=1899) or (SelectMonster==v7("\170\85\162\13\228\139\67\177\12\232\134\64\246\53\226\149\77\162\0","\139\231\44\214\101")) or (SelectArea==v7("\253\234\3\78\80\151\62\4\220\252\18","\118\185\143\102\62\112\209\81"))) then Ms=v7("\113\105\61\238\170\25\19\63\85\115\40\234\229\37\21\42\93\100\44","\88\60\16\73\134\197\117\124");NameQuest=v7("\116\239\253\216\103\95\248\253\219\85\121\249\244\201\79\84","\33\48\138\152\168");QuestLv=7 -5 ;NameMon=v7("\95\15\36\89\206\59\125\17\57\82\192\59\50\38\57\67\192\35\119","\87\18\118\80\49\161");CFrameQ=CFrame.new( -(14635.662109375 -(150 + 1253)),1451.40396118164 -(74 + 1045) , -(3535.4819335938 + 4091));CFrameMon=CFrame.new( -13508.616210938,1107.46228027344 -(435 + 90) , -6985.3037109375);elseif ((v283==(3299 -(259 + 1140))) or (v283<=1924) or (SelectMonster==v7("\102\11\212\167\188\73\94\234\169\162\77\10\223","\208\44\126\186\192")) or (SelectArea==v7("\211\31\161\214\84\218\198\92\242\9\176","\46\151\122\196\166\116\156\169"))) then Ms=v7("\207\248\72\29\247\224\173\118\19\233\228\249\67","\155\133\141\38\122");NameQuest=v7("\1\47\169\81\105\112\183\32\57\184\104\92\115\164\43\46\254","\197\69\74\204\33\47\31");QuestLv=1114 -(670 + 443) ;NameMon=v7("\218\90\84\128\252\74\26\183\249\93\91\147\245","\231\144\47\58");CFrameQ=CFrame.new( -(25749.096679688002 -13067),390.88653564453, -(45669.1240234375 -35767));CFrameMon=CFrame.new( -12267.103515625,374.75262451172 + 85 , -(10342.200195313 -(38 + 27)));elseif ((v283==(1182 + 743)) or (v283<=(281 + 1693)) or (SelectMonster==v7("\159\205\201\126\29\41\202\60\160\152\234\124\10\60\219\60","\89\210\184\186\21\120\93\175")) or (SelectArea==v7("\149\86\121\197\57\28\190\65\121\198\109","\90\209\51\28\181\25"))) then local v2021=0 + 0 ;while true do if (v2021==0) then Ms=v7("\253\110\68\229\186\196\126\82\252\255\224\114\69\239\171\213","\223\176\27\55\142");NameQuest=v7("\0\190\203\165\2\180\220\176\55\175\231\166\40\186\192\177\118","\213\68\219\174");v2021=1;end if (1==v2021) then local v2031=0 -0 ;while true do if (v2031==(835 -(341 + 494))) then QuestLv=2;NameMon=v7("\38\245\48\236\47\209\58\122\25\160\19\238\56\196\43\122","\31\107\128\67\135\74\165\95");v2031=1 + 0 ;end if (v2031==(1 + 0)) then v2021=1 + 1 ;break;end end end if (v2021==(1617 -(1276 + 339))) then CFrameQ=CFrame.new( -(100.09667968800022 + 12582),239.88653564453 + 151 , -9902.1240234375);CFrameMon=CFrame.new( -13291.5078125,1510.47338867188 -990 , -(24708.638671875 -14804));break;end end elseif ((v283==(7079 -5104)) or (v283<=(1440 + 559)) or (SelectMonster==v7("\234\237\254\66\83\191\152\219\247\72\77\180\204\231\242","\209\184\136\156\45\33")) or (SelectArea==v7("\47\201\96\6\172\2\204\53\43\185\20\220\121\13","\216\103\168\21\104"))) then local v2030=0;while true do if (v2030==(0 -0)) then local v2038=0;while true do if (v2038==(0 + 0)) then Ms=v7("\74\168\65\171\106\163\3\151\115\168\79\161\108\162\77","\196\24\205\35");NameQuest=v7("\6\138\246\8\58\142\231\55\59\142\240\18\127","\102\78\235\131");v2038=1 + 0 ;end if (v2038==1) then v2030=1085 -(76 + 1008) ;break;end end end if (v2030==(2 + 0)) then CFrameQ=CFrame.new( -9480.80762,142.130661,7954.37305 -2388 , -(0.00655503059 + 0),1841.0000000452953 -(1431 + 410) , -0.999978542,2.0492047e-8 + 0 ,1 + 0 ,4.5162068e-8 -0 ,0.999978542, -(2.0195568e-8 -0), -(78.00655503059 -(46 + 32)));CFrameMon=CFrame.new( -8761.77148,183.431747,6168.33301,0.978073597 -0 , -(0.000013950732 + 0), -(0.208259016 + 0), -(166.00000108073925 -(92 + 74)),1 -0 , -(0.00007206303 + 0),0.208259016 + 0 ,0.00007070804,933.978073597 -(237 + 696) );break;end if (v2030==1) then local v2039=0 + 0 ;while true do if (v2039==(1 + 0)) then v2030=7 -5 ;break;end if (v2039==(0 -0)) then QuestLv=1;NameMon=v7("\200\43\54\75\85\55\247\7\241\43\56\65\83\54\185","\84\154\78\84\36\39\89\215");v2039=1 + 0 ;end end end end elseif ((v283==2000) or (v283<=(2508 -484)) or (SelectMonster==v7("\209\232\64\81\11\250\161\108\87\8\255\232\83","\101\157\129\54\56")) or (SelectArea==v7("\53\168\159\165\55\124\25\233\169\170\48\109\17\172","\25\125\201\234\203\67"))) then Ms=v7("\85\253\14\10\26\32\83\67\251\21\1\29\34","\115\25\148\120\99\116\71");NameQuest=v7("\36\60\172\42\85\9\57\136\49\68\31\41\232","\33\108\93\217\68");QuestLv=8 -6 ;NameMon=v7("\247\66\183\164\213\76\225\151\212\70\163\164\222","\205\187\43\193");CFrameQ=CFrame.new( -(2264.8076199999996 + 7216),2022.130661 -(1225 + 655) ,6516.37305 -(184 + 766) , -(1809.00655503059 -(199 + 1610)),4.5295423e-8 + 0 , -0.999978542,2.0492047e-8 + 0 ,1 + 0 ,4.5162068e-8,0.999978542 -0 , -2.0195568e-8, -(0.00655503059 -0));CFrameMon=CFrame.new( -(15808.7529 -5705),238.565979,6179.75977,0.999474227 -0 ,2.7754714e-8,0.0324240364 -0 , -2.5800633e-8,1, -(6.068485e-8 -0), -0.0324240364,5.981639e-8 + 0 ,0.999474227 -0 );elseif ((v283==(3582 -(1278 + 279))) or (v283<=(2457 -(148 + 260))) or (SelectMonster==v7("\218\119\8\208\240\123\6\159\205\125\16\211","\191\158\18\101")) or (SelectArea==v7("\237\194\146\185\187\192\199\199\148\174\214\215\139\178","\207\165\163\231\215"))) then Ms=v7("\226\252\244\89\42\121\197\185\202\89\49\124","\16\166\153\153\54\68");NameQuest=v7("\250\178\213\72\32\36\253\227\166\197\85\32\115","\153\178\211\160\38\84\65");QuestLv=1;NameMon=v7("\166\14\87\36\140\2\89\107\177\4\79\39","\75\226\107\58");CFrameQ=CFrame.new( -9516.9931640625,103.00651550293 + 75 ,2761.4653320313 + 3317 );CFrameMon=CFrame.new( -(1495.03125 + 8217),278.69589233398 -74 ,6193.322265625);elseif ((v283==(473 + 1577)) or (v283<=(1315 + 759)) or (SelectMonster==v7("\104\209\2\127\2\209\200\92\158\60\111\28\207\212","\173\56\190\113\26\113\162")) or (SelectArea==v7("\227\223\56\11\227\206\218\109\38\246\216\202\33\0","\151\171\190\77\101"))) then local v2055=0 -0 ;while true do if (2==v2055) then CFrameQ=CFrame.new( -(21418.9931640625 -11902),496.00651550293003 -318 ,7028.4653320313 -(606 + 344) );CFrameMon=CFrame.new( -9545.7763671875,51.619895935059006 + 18 ,17982.5615234375 -11643 );break;end if (v2055==1) then local v2064=0 + 0 ;while true do if (v2064==1) then v2055=1 + 1 ;break;end if (v2064==(808 -(715 + 93))) then QuestLv=790 -(744 + 44) ;NameMon=v7("\225\39\207\241\194\59\217\240\145\5\201\249\220\49","\148\177\72\188");v2064=1192 -(665 + 526) ;end end end if (v2055==(0 + 0)) then Ms=v7("\245\32\235\172\235\110\14\193\111\213\188\245\112\18","\107\165\79\152\201\152\29");NameQuest=v7("\127\79\253\197\64\122\83\127\253\206\71\107\5","\31\55\46\136\171\52");v2055=1002 -(253 + 748) ;end end elseif ((v283==(1978 + 97)) or (v283<=(3126 -(914 + 113))) or (SelectMonster==v7("\150\179\86\221\179\162\23\224\165\185\66\199","\179\198\214\55")) or (SelectArea==v7("\222\25\102\54\108\192\252\13\124\114","\179\144\108\18\22\37"))) then local v2061=0;local v2062;while true do if (v2061==(1757 -(1188 + 569))) then v2062=1372 -(822 + 550) ;while true do if (v2062==(0 -0)) then Ms=v7("\246\166\26\135\218\210\227\40\138\192\211\183","\175\166\195\123\233");NameQuest=v7("\193\215\73\90\217\252\206\92\71\244\222\215\88\90\228","\144\143\162\61\41");v2062=1 -0 ;end if (v2062==1) then local v2071=0 + 0 ;local v2072;while true do if (v2071==(856 -(273 + 583))) then v2072=0 + 0 ;while true do if (v2072==(1 + 0)) then v2062=2;break;end if (v2072==(0 + 0)) then QuestLv=474 -(368 + 105) ;NameMon=v7("\208\214\28\94\103\147\115\211\208\18\69\102","\83\128\179\125\48\18\231");v2072=1;end end break;end end end if (v2062==(2 + 0)) then CFrameQ=CFrame.new( -(2485.53198 -(332 + 48)),30.249599500000002 + 7 , -10195.5088, -(0.766061664 -0),0, -0.642767608,0 + 0 ,1,0 + 0 ,1248.642767608 -(967 + 281) ,0 -0 , -(0.766061664 + 0));CFrameMon=CFrame.new( -(9214.587890625 -7064),244.49767303467002 -122 , -10358.994140625);break;end end break;end end elseif ((v283==2100) or (v283<=(2035 + 89)) or (SelectMonster==v7("\109\178\242\211\82\10\29\135\225\216\84\23\89\178\253\201","\126\61\215\147\189\39")) or (SelectArea==v7("\86\234\9\5\81\236\17\68\118\251","\37\24\159\125"))) then Ms=v7("\234\163\116\76\207\178\53\114\200\163\102\75\222\163\123\86","\34\186\198\21");NameQuest=v7("\214\29\209\78\235\235\4\196\83\198\201\29\192\78\214","\162\152\104\165\61");QuestLv=1018 -(103 + 913) ;NameMon=v7("\253\42\179\115\101\241\141\31\160\120\99\236\201\42\188\105","\133\173\79\210\29\16");CFrameQ=CFrame.new( -(9769.53198 -7664),67.2495995 -30 , -(17014.5088 -6819), -0.766061664,0 + 0 , -(784.642767608 -(23 + 761)),0,1,0 -0 ,1771.642767608 -(179 + 1592) ,0, -(0.766061664 + 0));CFrameMon=CFrame.new( -(355.587890625 + 1795),122.49767303467, -(19378.994140625 -9020));elseif ((v283==(3100 -975)) or (v283<=(1499 + 650)) or (SelectMonster==v7("\164\127\232\107\174\110\232\42\128\60\206\35\136\122","\75\237\28\141")) or (SelectArea==v7("\245\92\201\241\12\9\226\224\209\31\229\162\35\26\233\229","\129\188\63\172\209\79\123\135"))) then local v2067=156 -(48 + 108) ;while true do if ((0 + 0)==v2067) then local v2073=1990 -(1371 + 619) ;local v2074;while true do if (0==v2073) then v2074=0;while true do if (v2074==(155 -(143 + 12))) then Ms=v7("\105\231\227\141\99\246\227\204\77\164\197\197\69\226","\173\32\132\134");NameQuest=v7("\103\24\13\204\188\52\204\67\50\27\227\175\63\201\127\14\13\252\186","\173\46\123\104\143\206\81");v2074=689 -(92 + 596) ;end if (v2074==1) then v2067=1;break;end end break;end end end if (v2067==(4 -2)) then CFrameQ=CFrame.new( -(2358.376709 -1539),64.9259796, -(11543.2832 -(274 + 302)), -(0.766061664 -0),0,0.642767608,0,1,0 + 0 , -(1468.642767608 -(1060 + 408)),0 -0 , -(1701.766061664 -(180 + 1521)));CFrameMon=CFrame.new( -789.941528,782.382889 -573 , -(30846.980499999998 -19837), -(1358.0703101531 -(521 + 837)),v7("\199\179","\126\234\131\214\85"), -(1129.997525156 -(889 + 240)),v7("\201\133","\47\228\181\41\58"),146.00000012 -(4 + 141) ,v7("\235\172","\127\198\156\185\91\99\80"),0.997525275 -0 ,1662 -(1588 + 74) , -(0.0703101456 + 0));break;end if (v2067==(1 + 0)) then QuestLv=1;NameMon=v7("\157\30\39\202\102\145\4\181\16\98\169\77\134\7","\97\212\125\66\234\37\227");v2067=4 -2 ;end end elseif ((v283==(4129 -(1612 + 367))) or (v283<=(3624 -(538 + 887))) or (SelectMonster==v7("\220\25\201\176\132\25\60\223\248\90\239\255\170\6\56\208\241\31\222","\190\149\122\172\144\199\107\89")) or (SelectArea==v7("\27\6\244\190\221\32\0\240\243\190\27\22\253\255\240\54","\158\82\101\145\158"))) then Ms=v7("\89\253\7\86\103\98\251\3\27\4\83\241\15\27\69\126\250\7\4","\36\16\158\98\118");NameQuest=v7("\233\21\198\216\74\237\38\232\233\5\207\250\86\236\22\240\197\5\215","\133\160\118\163\155\56\136\71");QuestLv=4 -2 ;NameMon=v7("\223\161\116\178\149\13\176\247\175\49\209\185\18\184\247\172\117\247\164","\213\150\194\17\146\214\127");CFrameQ=CFrame.new( -(2344.376709 -(1121 + 404)),64.9259796, -(11315.2832 -(325 + 23)), -(0.766061664 -0),0 -0 ,0.642767608 -0 ,0,287 -(145 + 141) ,633 -(52 + 581) , -(1150.642767608 -(1118 + 32)),0 -0 , -(1185.766061664 -(647 + 538)));CFrameMon=CFrame.new( -789.941528,461.382889 -252 , -(12380.9805 -(695 + 676)), -(0.0703101531 -0),v7("\86\249","\86\123\201\196\180\38\196\194"), -(0.997525156 -0),v7("\186\184","\207\151\136\185"),1.00000012,v7("\229\211","\17\200\227\72\226\20\24"),0.997525275 + 0 ,0, -(0.0703101456 + 0));elseif ((v283==(4415 -2215)) or (v283<=(204 + 2020)) or (SelectMonster==v7("\147\78\20\220\192\244\175\220\162\64\29\195\204\227","\159\208\33\123\183\169\145\143")) or (SelectArea==v7("\209\91\51\51\178\115\43\58\243\84\60","\86\146\58\88"))) then Ms=v7("\123\208\229\203\167\236\118\217\74\222\236\212\171\251","\154\56\191\138\160\206\137\86");NameQuest=v7("\165\88\254\130\77\47\132\223\146\8","\172\230\57\149\231\28\90\225");QuestLv=1 + 0 ;NameMon=v7("\33\165\137\217\33\222\66\137\148\211\46\207\7\184","\187\98\202\230\178\72");CFrameQ=CFrame.new( -(3351.2985799999997 -1329),13.927589400000002 + 23 , -12030.9766, -(0.961273909 + 0),0 -0 , -(0.275594592 + 0),0 + 0 ,1296 -(542 + 753) ,0 + 0 ,1969.275594592 -(1008 + 961) ,0, -(0.961273909 -0));CFrameMon=CFrame.new( -(7104.71216 -4783),36.699482, -12216.7871, -0.780074954,0 + 0 ,0.625686109 + 0 ,0 + 0 ,2 -1 ,0, -(0.625686109 -0),0 + 0 , -(0.780074954 + 0));elseif ((v283==(2258 -(18 + 15))) or (v283<=2249) or (SelectMonster==v7("\2\224\175\53\10\6\244\165\34\78","\42\65\129\196\80")) or (SelectArea==v7("\33\75\86\223\87\46\17\226\3\68\89","\142\98\42\61\186\119\103\98"))) then local v2079=0 -0 ;while true do if (v2079==0) then Ms=v7("\27\190\9\13\120\152\23\9\42\187","\104\88\223\98");NameQuest=v7("\103\246\233\203\51\248\65\228\246\159","\141\36\151\130\174\98");v2079=1 + 0 ;end if (v2079==2) then CFrameQ=CFrame.new( -2022.29858,1914.9275894 -(1811 + 67) , -(10780.9766 + 1250), -(0.961273909 + 0),0 + 0 , -(446.275594592 -(218 + 228)),1567 -(471 + 1096) ,1262 -(640 + 621) ,0 -0 ,0.275594592 + 0 ,0 + 0 , -0.961273909);CFrameMon=CFrame.new( -(1190.11011 + 228),24.671894100000003 + 12 , -(46301.7324 -34046),0.0677844882 -0 ,0 -0 ,0.997700036,0,1,0, -(0.997700036 -0),0,0.0677844882);break;end if (v2079==(466 -(92 + 373))) then QuestLv=2;NameMon=v7("\167\123\201\8\196\93\215\12\150\126","\109\228\26\162");v2079=2;end end elseif ((v283==(10291 -8041)) or (v283<=(433 + 1841)) or (SelectMonster==v7("\124\228\246\113\238\225\30\214\233\121\230\224","\134\62\133\157\24\128")) or (SelectArea==v7("\36\164\17\220\111\152\197\11\164\20\221","\182\103\197\122\185\79\209"))) then local v2081=968 -(868 + 100) ;local v2082;local v2083;while true do if (v2081==(4 -3)) then while true do if (v2082==(784 -(133 + 651))) then v2083=0 + 0 ;while true do if (v2083==(0 + 0)) then Ms=v7("\209\134\234\126\14\79\179\180\245\118\6\78","\40\147\231\129\23\96");NameQuest=v7("\86\249\135\64\138\185\217\102\236\222","\188\21\152\236\37\219\204");v2083=1327 -(329 + 997) ;end if (v2083==2) then CFrameQ=CFrame.new( -(2756.31763 -828),605.7296638 -(471 + 97) , -12840.626,0.951068401 -0 ,v7("\231\184","\57\202\136\96\198\79\153\43"), -(0.308980465 -0),0,1 + 0 ,v7("\230\115","\152\203\67\202\199\237\199"),0.308980465 + 0 ,0 + 0 ,0.951068401 -0 );CFrameMon=CFrame.new( -1980.43848,67.6716766 -(24 + 7) , -(14120.8418 -(204 + 933)), -0.254443765,321 -(164 + 157) , -(1716.967087567 -(1169 + 547)),0 -0 ,910 -(619 + 290) ,0 -0 ,0.967087567,0 + 0 , -0.254443765);break;end if (v2083==1) then QuestLv=1 + 0 ;NameMon=v7("\98\232\60\5\78\238\119\63\84\232\49\10","\108\32\137\87");v2083=2 + 0 ;end end break;end end break;end if (v2081==0) then v2082=0 -0 ;v2083=nil;v2081=1;end end elseif ((v283==(2213 + 62)) or (v283<=(2482 -(107 + 76))) or (SelectMonster==v7("\210\70\161\11\95\87\120\237\255\81","\134\154\35\192\111\127\21\25")) or (SelectArea==v7("\155\39\2\15\96\251\171\42\8\4\36","\178\216\70\105\106\64"))) then local v2085=0 -0 ;local v2086;while true do if (v2085==0) then v2086=0;while true do if (v2086==(886 -(865 + 21))) then Ms=v7("\23\46\123\242\137\247\213\139\58\57","\224\95\75\26\150\169\181\180");NameQuest=v7("\40\219\211\45\117\185\115\24\206\138","\22\107\186\184\72\36\204");v2086=1 -0 ;end if (v2086==2) then CFrameQ=CFrame.new( -1928.31763,37.7296638, -(10941.626 + 1899),0.951068401,v7("\174\102","\91\131\86\108\139\174\211"), -(0.308980465 + 0),0,1,v7("\182\123","\61\155\75\216\119"),0.308980465,0,0.951068401 + 0 );CFrameMon=CFrame.new( -(883.5790999999999 + 1368),52.2714615, -(13115.3965 -(74 + 8)), -0.991971016,0 -0 , -(0.126466095 + 0),0 + 0 ,3 -2 ,0 -0 ,0.126466095 -0 ,0 + 0 , -0.991971016);break;end if (v2086==1) then QuestLv=4 -2 ;NameMon=v7("\207\184\37\74\78\197\188\47\75\28","\110\135\221\68\46");v2086=1276 -(552 + 722) ;end end break;end end elseif ((v283==(777 + 1523)) or (v283<=(3408 -(884 + 200))) or (SelectMonster==v7("\39\164\177\51\89\73\234\5\185\160\53\87\27","\189\100\203\210\92\56\105")) or (SelectArea==v7("\12\89\242\43\32\17\212\59\35\80\243\44","\72\79\49\157"))) then Ms=v7("\171\191\50\179\137\240\6\189\154\162\56\179\154","\220\232\208\81");NameQuest=v7("\214\182\234\51\29\79\164\230\170\180","\193\149\222\133\80\76\58");QuestLv=1;NameMon=v7("\229\82\76\221\199\29\120\211\212\79\70\221\212","\178\166\61\47");CFrameQ=CFrame.new(231.75,18.9003029 + 5 , -12200.292, -(1 + 0),0 -0 ,0,0,1,1135 -(629 + 506) ,0 + 0 ,0 + 0 , -(1 + 0));CFrameMon=CFrame.new(167.978516,16.2254658 + 10 , -(30674.874 -18436), -(0.939700961 + 0),0,419.341998369 -(348 + 71) ,0 -0 ,1837 -(242 + 1594) ,0 -0 , -0.341998369,0, -(78.939700961 -(60 + 18)));elseif ((v283==2325) or (v283<=(1505 + 844)) or (SelectMonster==v7("\216\66\231\121\197\50\250\94\237\58\232\63\233\10\202\123\222\42\247\79\250","\94\155\42\136\26\170")) or (SelectArea==v7("\167\55\41\182\139\127\15\166\136\62\40\177","\213\228\95\70"))) then local v2088=0 -0 ;while true do if (v2088==(28 -(20 + 6))) then CFrameQ=CFrame.new(231.75,1250.9003029 -(1060 + 167) , -(8859.292 + 3341), -(1 + 0),0 + 0 ,0,998 -(46 + 952) ,1 -0 ,0 -0 ,0,0 + 0 , -(1288 -(690 + 597)));CFrameMon=CFrame.new(445.31207300000005 + 256 ,25.5824986, -(3770.2147999999997 + 8938), -(0.342042685 + 0),0 -0 , -0.939684391,0 + 0 ,1 + 0 ,522 -(402 + 120) ,0.939684391,1966 -(1058 + 908) , -0.342042685);break;end if (v2088==(2 -1)) then QuestLv=4 -2 ;NameMon=v7("\103\230\199\53\28\220\38\80\235\136\20\18\194\103\102\239\220\34\31\213\53","\71\36\142\168\86\115\176");v2088=3 -1 ;end if (v2088==0) then local v2090=1957 -(1344 + 613) ;while true do if (v2090==(714 -(576 + 138))) then Ms=v7("\9\179\205\135\120\38\186\214\129\55\8\186\208\196\85\43\175\214\136\114\56","\23\74\219\162\228");NameQuest=v7("\26\238\73\172\10\44\227\85\187\106","\91\89\134\38\207");v2090=1;end if (v2090==(1 + 0)) then v2088=1 -0 ;break;end end end end elseif ((v283==(2582 -(104 + 128))) or (v283<=(1096 + 1278)) or (SelectMonster==v7("\236\182\119\186\23\254\98\65\214\164\116","\41\191\193\18\223\99\222\54")) or (SelectArea==v7("\136\46\200\41\165\235\15\212\38\171\165\34","\202\203\70\167\74"))) then local v2089=0 -0 ;while true do if (v2089==(1625 -(1424 + 200))) then QuestLv=396 -(334 + 61) ;NameMon=v7("\211\235\5\85\251\160\200\8\89\234\230","\143\128\156\96\48");v2089=2;end if ((9 -7)==v2089) then CFrameQ=CFrame.new(151.198242,23.8907146, -12774.6172,1826.422592998 -(1668 + 158) ,856 -(148 + 708) ,1807.906319618 -(1739 + 68) ,0 + 0 ,1 -0 ,1493 -(501 + 992) , -0.906319618,0 -0 ,0.422592998 -0 );CFrameMon=CFrame.new( -(678.258301 -538),54.5824986 -29 , -(12924.3115 -(85 + 187)),39.173624337 -(15 + 24) ,v7("\245\129","\119\216\177\144\114"), -(0.984811902 + 0),0 -0 ,1 + 0 ,v7("\132\121","\34\169\73\153"),41.984811902 -(7 + 34) ,0 + 0 ,0.173624337 -0 );break;end if (v2089==(0 + 0)) then Ms=v7("\31\22\217\54\101\108\53\212\58\116\42","\17\76\97\188\83");NameQuest=v7("\166\47\214\52\1\150\78\176\145\117","\195\229\71\185\87\80\227\43");v2089=727 -(185 + 541) ;end end elseif ((v283==(3728 -1353)) or (v283<=2400) or (SelectMonster==v7("\137\237\5\143\179\172\57\142\168\233\7","\235\202\140\107")) or (SelectArea==v7("\47\124\59\171\230\103\222\214\0\117\58\172","\165\108\20\84\200\137\71\151"))) then local v2091=0 + 0 ;while true do if (v2091==(1774 -(1547 + 225))) then CFrameQ=CFrame.new(273.198242 -122 ,45.890714599999995 -22 , -(42589.6172 -29815),1722.422592998 -(797 + 925) ,1061 -(93 + 968) ,0.906319618 + 0 ,0 + 0 ,2 -1 ,0 -0 , -0.906319618,0,0.422592998);CFrameMon=CFrame.new(47.9231453,540.5824986 -(209 + 306) , -(13898.2402 -(21 + 848)), -0.819156051,867 -(362 + 505) , -(0.573571265 -0),0,1 + 0 ,0,0.573571265 -0 ,0, -(24.819156051 -(6 + 18)));break;end if (1==v2091) then QuestLv=6 -4 ;NameMon=v7("\120\174\196\212\231\27\157\207\210\251\87","\158\59\207\170\176");v2091=1 + 1 ;end if (v2091==0) then local v2093=889 -(860 + 29) ;while true do if (v2093==(1 + 0)) then v2091=1357 -(60 + 1296) ;break;end if (v2093==(13 -(7 + 6))) then local v2095=0;while true do if (v2095==0) then Ms=v7("\89\181\37\140\99\244\25\141\120\177\39","\232\26\212\75");NameQuest=v7("\20\65\125\235\198\34\76\97\252\165","\151\87\41\18\136");v2095=1 + 0 ;end if ((1341 -(501 + 839))==v2095) then v2093=1 + 0 ;break;end end end end end end elseif ((v283==(3044 -(580 + 64))) or (v283<=2424) or (SelectMonster==v7("\108\95\61\77\149\15\110\58\91\141\91\91","\236\47\62\83\41")) or (SelectArea==v7("\217\168\46\63\179\194\211\186\44\58\164\134","\226\154\201\64\91\202"))) then local v2092=0 + 0 ;while true do if (v2092==(1 + 1)) then CFrameQ=CFrame.new( -(2970.328 -1821),13.5759039, -(1032.6142999999993 + 13413), -(0.156446099 -0),0 -0 , -(1524.987686574 -(37 + 1487)),0,1,0,0.987686574 + 0 ,0 -0 , -(0.156446099 + 0));CFrameMon=CFrame.new( -1437.56348,17.1481285, -(14191.6934 + 194),0.173624337 + 0 ,v7("\10\89","\138\39\105\189\206\123"), -0.984811902,0,2 -1 ,v7("\82\87","\159\127\103\233\77\147\153\175"),0.984811902 + 0 ,1306 -(885 + 421) ,0.173624337 -0 );break;end if (1==v2092) then local v2094=0 + 0 ;while true do if (v2094==(3 -2)) then v2092=7 -5 ;break;end if ((1830 -(252 + 1578))==v2094) then QuestLv=1;NameMon=v7("\87\120\58\30\242\119\193\174\102\120\32\31","\199\20\25\84\122\139\87\145");v2094=4 -3 ;end end end if (v2092==(0 -0)) then Ms=v7("\226\72\19\28\83\252\241\64\15\25\94\185","\220\161\41\125\120\42");NameQuest=v7("\159\112\174\10\165\64\181\11\175\101\241","\110\220\17\192");v2092=3 -2 ;end end elseif ((v283==2425) or (v283<=2449) or (SelectMonster==v7("\52\254\235\189\0\239\2\253\235\164","\171\103\144\132\202\32")) or (SelectArea==v7("\51\46\231\8\9\111\192\31\28\46\231\8","\108\112\79\137"))) then Ms=v7("\12\204\123\63\237\37\236\56\48\204","\85\95\162\20\72\205\97\137");NameQuest=v7("\212\252\36\216\20\201\216\242\238\62\141","\173\151\157\74\188\109\152");QuestLv=2;NameMon=v7("\23\6\55\202\156\112\208\254\43\6","\147\68\104\88\189\188\52\181");CFrameQ=CFrame.new( -(2061.328 -912),3.5759039 + 10 , -14445.6143, -(0.156446099 + 0),0 -0 , -0.987686574,940 -(53 + 887) ,1 + 0 ,0,0.987686574 -0 ,794 -(339 + 455) , -0.156446099);CFrameMon=CFrame.new( -(2576.222656 -(1458 + 202)),98.1481285 -(63 + 18) , -(13411.8125 + 1227),0.866007268 + 0 ,1931 -(393 + 1538) ,0.500031412,0 + 0 ,1,1204 -(852 + 352) , -(188.500031412 -(137 + 51)),0,0.866007268);elseif ((v283==(10996 -8546)) or (v283<=2474) or (SelectMonster==v7("\51\155\135\213\90\167\158\196\22\137\156","\176\122\232\235")) or (SelectArea==v7("\180\124\49\70\174\175\96\46\95\225\147\97","\142\224\21\90\47"))) then local v2096=0;while true do if (v2096==(1063 -(854 + 207))) then CFrameQ=CFrame.new( -16549.890625,1363.6863555908203 -(350 + 958) , -(247.91360473632812 -68));CFrameMon=CFrame.new( -(1086.8193359375 + 15076),10.6863374710083 + 1 , -(364.45481872558594 -(15 + 253)));break;end if (v2096==(1051 -(232 + 818))) then QuestLv=534 -(129 + 404) ;NameMon=v7("\216\246\253\85\177\202\228\68\253\228\230","\48\145\133\145");v2096=2 + 0 ;end if (v2096==(0 -0)) then Ms=v7("\93\199\43\83\228\164\144\96\216\38\65","\229\20\180\71\54\196\235");NameQuest=v7("\29\119\202\234\196\191\133\58\106\144","\224\73\30\161\131\149\202");v2096=2 -1 ;end end elseif ((v283==(2547 -(20 + 52))) or (v283<=(5041 -2542)) or (SelectMonster==v7("\115\95\185\239\223\40\26\110\186\247","\76\58\44\213\142\177")) or (SelectArea==v7("\255\45\25\36\56\228\49\6\61\119\216\48","\24\171\68\114\77"))) then Ms=v7("\198\14\92\83\137\218\68\143\224\4","\205\143\125\48\50\231\190\100");NameQuest=v7("\245\174\31\12\208\246\218\177\213\246","\194\161\199\116\101\129\131\191");QuestLv=2 + 0 ;NameMon=v7("\197\55\196\169\249\166\172\6\199\177","\194\140\68\168\200\151");CFrameQ=CFrame.new( -(30287.890625 -13738),55.68635559082031, -(1252.9136047363281 -(163 + 910)));CFrameMon=CFrame.new( -(31379.130859375 -14467),1561.7874431610107 -(1149 + 401) , -133.0850830078125);elseif ((v283==(3344 -(473 + 371))) or (v283<=(1096 + 1328))) then local v2097=0;while true do if (v2097==(5 -3)) then CFrameQ=CFrame.new( -(9469.078125 + 7070),345.68632888793945 -(252 + 38) ,1080.5738525390625 -(17 + 12) );CFrameMon=CFrame.new( -(17648.8779296875 -(939 + 360)),92.0808334350586,200.4169921875 + 923 );break;end if (v2097==(0 + 0)) then Ms=v7("\113\238\219\104\254\75\232\198\32\241\2\204\212\55\231\75\244\199","\149\34\155\181\69");QuestLv=1 -0 ;v2097=1501 -(13 + 1487) ;end if (v2097==1) then NameQuest=v7("\55\244\222\243\50\232\208\233\23\175","\154\99\157\181");NameMon=v7("\134\6\255\179\233\137","\140\237\111\140\192");v2097=1 + 1 ;end end elseif ((v283>=2525) or (SelectMonster==v7("\47\10\113\29\70\58\117\25\11\9\116\23\8","\120\102\121\29")) or (SelectArea==v7("\152\234\178\50\236\204\172\47\188\236\170\47","\91\204\131\217"))) then Ms=v7("\231\236\89\209\243\254\246\207\242\69\221\188\211","\158\174\159\53\180\211\189");NameQuest=v7("\102\244\230\212\70\160\87\238\249\143","\213\50\157\141\189\23");QuestLv=1904 -(778 + 1124) ;NameMon=v7("\215\53\136\165\50\135\246\39\137\176\123\171\240","\196\158\70\228\192\18");CFrameQ=CFrame.new( -(14272.447265625 + 2270),103.68632888793945 -48 ,355.41650390625 + 689 );CFrameMon=CFrame.new( -(29973.94140625 -13125),7.686334609985352 + 14 ,1041.4490966796875);end end end if First_Sea then tableMon={v7("\104\94\31\74\208\94","\185\42\63\113\46"),v7("\249\210\47\50\30\205","\123\180\189\65\89"),v7("\229\131\226\237\133\206\141","\233\162\236\144\132"),v7("\130\205\236\27\173\243","\63\210\164\158\122\217\150"),v7("\17\217\227\248\76","\152\83\171\150\140\41"),v7("\166\224\144\54\198\15\72\160\228\141\55\221\15","\104\226\133\227\83\180\123"),v7("\39\14\48\85\17\31\99\127\5\13\42\83\6\25","\48\99\107\67"),v7("\237\168\114\199\109\89\223\168\121\217\57","\27\190\198\29\176\77"),v7("\220\69\242\35\164\79\225","\46\143\43\157\84\201"),v7("\116\112\95\199\89\83\248\82\108\66\219\31\60\206\81\113\85\199\77","\168\55\24\54\162\63\115"),v7("\36\241\57\192\240\207\25\254\41\148","\174\119\154\64\224\178"),v7("\14\127\215\112\69\138\27\247\62\123\215","\132\74\30\165\27\101\199\122"),v7("\31\245\246\180\168\187\177\61","\212\79\135\159\199\199\213"),v7("\93\161\187\64\89\197\23\108\179\245\119\78\222\11\118\174\176\85","\120\25\192\213\39\60\183"),v7("\44\79\56\73\88\119\62\90\10\73\48\90","\40\120\32\95"),v7("\29\167\56\126\166\30\46\164\43","\127\90\203\89\26\207"),v7("\240\60\163\194\29\252\207\44\239\248\6\241\217\60\170\217","\157\189\85\207\171\105"),v7("\235\168\212\188\23\199\179\193\245\48\214\184","\99\166\193\184\213"),v7("\240\190\147\179\1\139\216\247\183\186\30\152\223\184\146","\234\182\215\224\219\108"),v7("\230\136\168\61\205\128\181\117\227\142\182\56\193\143\191\58","\85\160\225\219"),"God's Guard",v7("\111\13\130\199\50\221","\43\60\101\227\169\86\188"),v7("\66\199\200\190\86\140\138\38\101\201\213","\87\16\168\177\223\58\172\217"),v7("\6\194\64\220\55\116\254\86\209\63\61\200\75","\91\84\173\57\189"),v7("\55\184\0\240\165\207\80\137\5\238\161\194\21","\182\112\217\108\156\192"),v7("\141\9\68\227\142\179\72\107\238\155\190\9\65\225","\235\202\104\40\143")};elseif Second_Sea then tableMon={v7("\63\138\18\189\8\153","\217\109\235\123"),v7("\10\140\108\85\117\222\204\175\62","\221\71\233\30\54\16\176\173"),v7("\7\235\95\177\116\204\87\173\53\232\91","\223\84\156\62"),v7("\240\253\225\201\184\41\207\188\209\201\182\61\208","\91\182\156\130\189\215"),v7("\83\114\190\92\112\118\236\121\119\118\185\65\123\125\173\91\106","\53\30\19\204"),v7("\212\225\98\141\169\252\160\83\133\183\237\225\121\138","\199\153\128\16\228"),v7("\235\37\232\27\174\212","\199\177\74\133\121"),v7("\142\200\177\238\62\212\47","\74\216\169\220\158\87\166"),v7("\219\45\28\59\26\220\49\28\35\74\237\49","\58\136\67\115\76"),v7("\198\163\214\77\128\50\235\106\240\184\202\80\138\50","\61\145\202\184\57\229\64\203"),v7("\112\83\139\7\111\71\139\72\78\86\128\73\93\70\140","\39\60\50\233"),v7("\50\60\177\34\135\44\242\148\27\33\177\37\141\58","\195\122\83\195\76\226\72\210"),v7("\201\213\60\243\32\164\250\50\240\43\229","\65\132\180\91\158"),v7("\41\125\199\47\69\76\216\60\4\104\212","\78\101\28\177"),v7("\22\188\233\65\101\144\229\82\46\188\225\95\33","\49\69\212\128"),v7("\36\4\217\226\161\50\2\215\251\239\18\9\194","\129\119\108\176\146"),v7("\15\199\14\221\101\61\8\57\216\6\223\33","\124\92\175\103\173\69\110"),v7("\242\48\10\39\129\23\5\49\200\59\6\37","\87\161\88\99"),v7("\51\235\236\216\190\211\99\37\248\253\222\190\223\49","\67\114\153\143\172\215\176"),v7("\141\172\225\25\254\142\251\28\181\167\252","\110\222\194\142"),v7("\36\220\26\233\97\174\27\221\18\172\64","\193\119\185\123\201\50"),v7("\64\9\237\35\29\57\57\126\15\241\50\10\107","\127\23\104\153\70\111\25")};elseif Third_Sea then tableMon={v7("\57\14\180\174\63\41\247\158\0\11\170\166\36\34\182\186\27\2","\211\105\103\198\207\75\76\215"),v7("\234\181\177\232\113\2\250\149\220\162\167\175\73\13\168\164\199\168\162","\214\174\199\208\143\30\108\218"),v7("\53\150\10\173\170\88\152\106\3\129\28\234\132\68\219\65\20\150","\41\113\228\107\202\197\54\184"),v7("\92\136\53\93\118\136\120\117\105\129\57\82\126\136\42","\60\26\237\88"),v7("\255\35\117\232\186\152\3\103\234\175\214\46\113\244","\206\184\74\20\134"),v7("\21\229\252\184\253\79\120\239\55\233\227\190\247\69\42\201","\172\88\132\142\209\147\42\88"),v7("\170\139\222\4\56\240\254\181\143\205\31\118\212\186\138\131\222\12\58","\222\231\234\172\109\86\149"),v7("\203\230\211\16\224\238\206\88\223\238\201\28\232\253","\120\141\143\160"),v7("\102\165\165\90\77\173\184\18\99\173\166\70\65\165\184","\50\32\204\214"),v7("\160\72\39\124\160\5\198\119\60\107\178\5\131","\113\230\39\85\25\211"),v7("\243\162\18\224\40\199\164\76\215\184\7\228\103\251\162\89\223\175\3","\43\190\219\102\136\71\171\203"),v7("\8\107\62\94\46\123\112\105\43\108\49\77\39","\57\66\30\80"),v7("\4\205\179\30\129\45\241\129\59\152\144\28\150\56\224\129","\228\73\184\192\117\228\89\148"),v7("\253\140\119\27\221\135\53\39\196\140\121\17\219\134\123","\116\175\233\21"),v7("\210\241\168\79\213\54\127\196\247\179\68\210\52","\95\158\152\222\38\187\81"),v7("\220\184\56\189\173\193\251\253\6\189\182\196","\168\152\221\85\210\195"),v7("\155\209\230\130\184\205\240\131\235\243\224\138\166\199","\231\203\190\149"),v7("\253\56\226\255\169\225\91\254\62\236\228\168","\123\173\93\131\145\220\149"),v7("\38\193\236\47\97\237\86\244\255\36\103\240\18\193\227\53","\153\118\164\141\65\20"),v7("\199\49\131\162\212\18\235\51\139\162\212\8\235\52","\96\142\82\230\130\151"),v7("\102\179\74\2\199\252\74\177\66\2\199\225\66\189\78\76\224\235\93","\142\47\208\47\34\132"),v7("\213\177\11\9\82\89\182\157\22\3\93\72\243\172","\60\150\222\100\98\59"),v7("\102\61\92\83\155\157\36\68\46\83","\81\37\92\55\54\187\218"),v7("\34\69\166\62\143\7\4\158\35\128\6\66","\225\96\36\205\87"),v7("\193\163\67\125\60\109\8\226\163\80","\105\137\198\34\25\28\47"),v7("\50\166\66\121\193\81\158\64\100\210\24\166\83","\160\113\201\33\22"),v7("\247\80\163\164\166\161\213\76\169\231\139\172\198\24\142\166\189\185\216\93\190","\205\180\56\204\199\201"),v7("\176\201\57\29\151\158\8\16\138\219\58","\120\227\190\92"),v7("\30\93\17\127\58\28\235\231\63\89\19","\130\93\60\127\27\67\60\185"),v7("\107\51\54\74\249\3\77\65\32\57\90\229","\29\40\82\88\46\128\35"),v7("\8\75\219\10\65\156\62\72\219\19","\216\91\37\180\125\97"),v7("\12\101\16\198\23\10\99\8\207\86\50","\55\69\22\124\163"),v7("\81\192\80\233\209\117\16\214\119\202","\148\24\179\60\136\191\17\48"),v7("\155\57\245\165\182\145\34\248\173\230\187\37\247","\150\210\74\153\192")};end if First_Sea then AreaList={v7("\201\221\54\141\121\127","\212\131\168\88\234\21\26"),v7("\103\97\142\139\33","\71\37\20\233\236\88"),v7("\233\67\163\19\82\248","\60\173\38\208\118\32\140\44"),v7("\114\60\238\196","\175\33\82\129\179\64"),v7("\195\238\34\198\50\183","\210\142\143\80\175\92"),v7("\138\226\234","\166\217\137\147"),v7("\211\177\123\181\254\72","\38\131\195\18\198\145"),v7("\112\217\54\228\43\71\86\195\55","\52\51\182\90\139\88"),v7("\219\184\215\234\66","\35\150\217\176\135"),v7("\223\89\24\4\122\66\120","\22\153\48\107\108\23\35"),v7("\61\142\162\90\86\102\77\232\0\129","\137\110\229\219\122\31\21\33"),v7("\60\178\45\117\34\74\45\112","\30\122\221\88\27\86\43\68")};elseif Second_Sea then AreaList={v7("\25\58\238\135\120\121","\230\88\72\139"),v7("\83\166\19\26\67\90","\56\18\212\118\123\99\104"),v7("\36\230\245\209\214\219","\190\126\137\152\179\191"),v7("\5\3\96\194\164\69","\32\72\98\18\171\202"),v7("\55\134\61\99\183\41\135\39\122\227\5\129\60","\151\100\232\82\20"),v7("\86\218\243\72\121\208\228\13","\104\31\185\150"),v7("\239\177\250\231","\160\188\217\147\151\135\172\128"),v7("\41\207\31\227\46","\169\111\189\112\144\90"),v7("\235\140\55\170\176\148\29\135\195","\226\173\227\69\205\223\224\105")};elseif Third_Sea then AreaList={v7("\104\55\48\90\219\30\24\14\45\73\219","\123\56\94\66\59\175"),v7("\219\78\114\251\21\240","\225\154\35\19\129\122\158"),v7("\119\1\249\94\251\226\144\0\72\5\238","\84\58\96\139\55\149\135\176"),v7("\55\58\166\16\14\233\49\1\58\176\20","\94\115\95\195\96\46\175"),v7("\107\74\42\51\58\40\131\160\96\74\44\41\34\40","\128\35\43\95\93\78\77\231"),v7("\138\8\34\116\62\109\165\165\19\50","\201\196\125\86\84\119\30"),v7("\234\237\1\255\224\252\1\190\206\174\45\172\207\239\10\187","\223\163\142\100"),v7("\161\23\200\180\248\171\5\207\176\182\134","\216\226\118\163\209"),v7("\157\248\20\2\88\48\22\173\252\26\15\83","\95\222\144\123\97\55\16"),v7("\58\133\180\71\250\89\173\169\79\226\23\128","\131\121\228\218\35"),v7("\237\217\41\8\57\52\204\196\50\14\106\15","\123\185\176\66\97\25")};end function CheckBossQuest() local v284=0;while true do if (v284==1) then if Third_Sea then if (SelectBoss==v7("\176\64\23\140\134","\226\227\52\120")) then BossMon=v7("\54\255\227\170\79","\217\101\139\140\196\42\223\183");NameBoss=v7("\41\27\160\20\65","\36\122\111\207\122");NameQuestBoss=v7("\60\1\246\185\172\49\60\7\246\172\137\33\9\27\240","\84\108\104\132\216\216");QuestLvBoss=803 -(136 + 664) ;RewardBoss="Reward:\n$25,000\n40,000,000 Exp.";CFrameQBoss=CFrame.new( -(1587.76705932617 -(763 + 535)),151.819011688232 -108 ,11435.9384765625 -5856 );CFrameBoss=CFrame.new( -(534.6512451172 + 493),92.404174804688,6578.8530273438);elseif (SelectBoss==v7("\229\8\202\89\238\160\2\233\22\214\74\229\183\81","\34\172\123\166\56\128\196")) then local v1146=0 -0 ;local v1147;while true do if ((0 + 0)==v1146) then v1147=0;while true do if (v1147==(5 -3)) then RewardBoss="Reward:\n$30,000\n52,000,000 Exp.";CFrameQBoss=CFrame.new(6037.9541015625 -(487 + 105) ,1491.62945556641 -890 ,2618.43792724609 -1867 );v1147=3;end if (v1147==(0 -0)) then BossMon=v7("\141\186\164\202\68\119\149\49\169\185\186\206\89\96","\116\196\201\200\171\42\19\181");NameBoss=v7("\95\149\247\92\27\4\92\83\139\235\79\16\19\15","\124\22\230\155\61\117\96");v1147=1;end if (v1147==(1 + 0)) then NameQuestBoss=v7("\228\166\231\241\241\227\196\208\174\245\255\172","\149\165\203\134\139\158\141");QuestLvBoss=1 + 2 ;v1147=4 -2 ;end if (v1147==3) then CFrameBoss=CFrame.new(5543.86328125,668.97399902344,372.0341796875 -173 );break;end end break;end end elseif (SelectBoss==v7("\24\165\76\41\115\141\68\43\58\190\65\42","\70\83\204\32")) then BossMon=v7("\37\136\7\143\78\160\15\141\7\147\10\140","\224\110\225\107");NameBoss=v7("\223\127\209\62\112\229\192\249\127\207\48\60","\164\148\22\189\81\80\164");NameQuestBoss=v7("\159\129\101\186\41\78\67\160\133\114\154\52\71\118\188\132","\23\210\224\23\211\71\43");QuestLvBoss=518 -(171 + 344) ;RewardBoss="Reward:\n$35,000\n56,000,000 Exp.";CFrameQBoss=CFrame.new(1633.3010253906 + 546 ,28.731239318848, -(7188.9741210938 -(188 + 261)));CFrameBoss=CFrame.new(2764.2233886719,114.46154785156 + 318 , -7144.4580078125);elseif (SelectBoss==v7("\138\135\0\163\84\34\210\176\140\138\21\167\93\42\210\228","\144\201\230\112\215\53\75\188")) then local v1472=0 -0 ;while true do if (v1472==(222 -(24 + 197))) then NameQuestBoss=v7("\39\239\181\202\209\198\180\6\249\164\243\228\197\167\13\238","\198\99\138\208\186\151\169");QuestLvBoss=3;v1472=7 -5 ;end if ((0 + 0)==v1472) then BossMon=v7("\118\196\9\254\247\172\91\133\60\230\243\181\93\196\23\254","\197\53\165\121\138\150");NameBoss=v7("\206\222\201\52\236\214\215\96\200\211\220\48\229\222\215\52","\64\141\191\185");v1472=1 + 0 ;end if (v1472==3) then CFrameBoss=CFrame.new( -(37333.7578125 -23957),956.2868957519499 -523 , -(11335.392578125 -3264));break;end if ((1124 -(768 + 354))==v1472) then RewardBoss="Reward:\n$40,000\n67,000,000 Exp.";CFrameQBoss=CFrame.new( -(42767.682617188 -29535),102.40396118164 + 230 , -(4263.01171875 + 3363));v1472=3;end end elseif (SelectBoss==v7("\47\240\130\75\25\252\133\75\1\181\179\87\31\244\151\91","\62\109\149\227")) then local v1640=0 + 0 ;while true do if (v1640==0) then BossMon=v7("\209\141\136\193\20\250\142\156\216\64\195\129\155\213\20\246","\96\147\232\233\180");NameBoss=v7("\10\61\27\94\153\48\46\45\22\11\189\48\58\57\14\78","\89\72\88\122\43\237");v1640=221 -(34 + 186) ;end if ((1 -0)==v1640) then local v1772=0 -0 ;while true do if (v1772==(0 + 0)) then NameQuestBoss=v7("\8\190\160\38\61\35\169\160\37\15\5\168\169\55\21\40\233","\123\76\219\197\86");QuestLvBoss=3;v1772=1;end if (v1772==1) then v1640=1 + 1 ;break;end end end if (v1640==(7 -4)) then CFrameBoss=CFrame.new(4927.609375 + 356 ,253.56223487854 -(53 + 178) , -(200.78285217285 -90));break;end if (v1640==(8 -6)) then RewardBoss="Reward:\n$50,000\n70,000,000 Exp.";CFrameQBoss=CFrame.new( -(60679.096679688 -47997),472.88653564453 -82 , -(7966.1240234375 + 1936));v1640=3;end end elseif (SelectBoss==v7("\123\217\30\9\174\14\77\221\16\2","\95\56\184\117\108\142")) then BossMon=v7("\211\195\45\233\176\243\51\233\245\204","\140\144\162\70");NameBoss=v7("\243\41\82\119\174\225\61\92\119\224","\142\176\72\57\18");NameQuestBoss=v7("\143\50\21\7\180\52\17\41\143\34\28\37\168\53\33\49\163\34\4","\68\198\81\112");QuestLvBoss=3;RewardBoss="Reward:\n$30,000\n112,500,000 Exp.";CFrameQBoss=CFrame.new( -819.376709,64.9259796, -10967.2832, -(459.766061664 -(343 + 116)),0,0.642767608 + 0 ,0,1 -0 ,0 -0 , -(1988.642767608 -(1830 + 158)),779 -(460 + 319) , -(0.766061664 -0));CFrameBoss=CFrame.new( -(1939.648804 -(1071 + 190)),381.353943, -(36502.201199999996 -25388), -0.908641815,0.00149294338,0.41757378 + 0 ,1745.00837114919 -(1739 + 6) ,0.999857843 -0 ,646.0146408929 -(55 + 591) , -(1502.417492568 -(1500 + 2)),0.0167988986, -(0.90852499 -0));elseif (SelectBoss==v7("\155\0\190\19\65\28","\125\215\111\208\116\44")) then local v1842=0;local v1843;while true do if (v1842==(0 -0)) then v1843=0;while true do if ((1 + 0)==v1843) then CFrameBoss=CFrame.new( -10238.875976563,1301.7912902832 -912 , -(9786.7939453125 -(68 + 169)));break;end if (v1843==(0 -0)) then BossMon=v7("\43\72\65\244\117\93","\60\103\39\47\147\24");NameBoss=v7("\192\5\249\135\219\242","\46\140\106\151\224\182\147");v1843=1 -0 ;end end break;end end elseif (SelectBoss==v7("\216\34\104\78\171\31\120\67\251\40\111","\34\139\77\29")) then local v1909=0;while true do if (v1909==(1 + 0)) then CFrameBoss=CFrame.new( -9524.7890625,1034.80429077148 -(381 + 338) ,6655.7192382813);break;end if (v1909==0) then BossMon=v7("\131\255\8\88\105\130\245\28\68\44\162","\73\208\144\125\52");NameBoss=v7("\25\227\159\199\135\34\86\202\58\233\152","\171\74\140\234\171\167\112\51");v1909=1 -0 ;end end elseif (SelectBoss==v7("\61\7\92\96\248\163\43\28\77\31\197\191\58\11\12\121\254\191\34","\205\79\110\44\63\145")) then local v1951=0 -0 ;while true do if (v1951==(1795 -(1025 + 769))) then CFrameBoss=CFrame.new( -(6630.3920898438 -(789 + 426)),1528.74133300781 -(895 + 128) , -(2502.0166015625 + 312));break;end if (v1951==(99 -(37 + 62))) then BossMon=v7("\181\86\47\247\189\5\160\14\166\31\11\218\161\14\228\58\168\77\50","\124\199\63\95\168\212\107\196");NameBoss=v7("\20\161\67\5\173\249\141\225\7\232\103\40\177\242\201\213\9\186\94","\147\102\200\51\90\196\151\233");v1951=1;end end end end break;end if (v284==(0 + 0)) then if First_Sea then if (SelectBoss==v7("\252\7\28\17\50\32\74\56\196\3\24\17\62\38\86\54","\81\168\111\121\49\117\79\56")) then BossMon=v7("\243\2\224\246\224\5\247\191\203\6\228\246\236\3\235\177","\214\167\106\133");NameBoss=v7("\29\48\73\15\19\112\203\59\49\64\78\116\84\208\39\63","\185\73\88\44\47\84\31");NameQuestBoss=v7("\162\194\20\167\223\250\185\194\31\179\199","\159\232\183\122\192\179");QuestLvBoss=3;RewardBoss="Reward:\n$2,000\n7,000 Exp.";CFrameQBoss=CFrame.new( -(4732.6553955078 -3131),118.85213470459 -82 ,219.38809204102 -(24 + 42) );CFrameBoss=CFrame.new( -(1448.75977 -360),17.134637830000003 -9 , -(1929.559906 -(1310 + 131)), -(1204.707134247 -(1195 + 9)),0 + 0 ,81.707079291 -(22 + 59) ,0 + 0 ,1 + 0 ,1543 -(1488 + 55) , -0.707079291,0 + 0 , -(0.707134247 -0));elseif (SelectBoss==v7("\6\61\170\35\61","\65\68\82\200")) then local v1148=0;while true do if ((2 + 0)==v1148) then local v1448=473 -(204 + 269) ;while true do if (v1448==(0 + 0)) then RewardBoss="Reward:\n$8,000\n35,000 Exp.";CFrameQBoss=CFrame.new( -(2291.1761474609 -(963 + 188)),4.752049446106,3827.4057617188);v1448=1;end if (v1448==1) then v1148=3;break;end end end if (v1148==(1 + 2)) then CFrameBoss=CFrame.new( -1087.3760986328,46.949409484863,10585.1462402344 -6545 );break;end if (v1148==(1640 -(1560 + 80))) then BossMon=v7("\7\95\112\34\214","\30\69\48\18\64\175\175");NameBoss=v7("\210\35\29\238\34","\91\144\76\127\140");v1148=1;end if (v1148==(4 -3)) then local v1449=0 + 0 ;while true do if (v1449==0) then NameQuestBoss=v7("\194\29\65\38\202\139\192\213\243\28\23","\176\128\104\38\65\179\218\181");QuestLvBoss=3;v1449=505 -(444 + 60) ;end if (v1449==(1 + 0)) then v1148=2;break;end end end end elseif (SelectBoss==v7("\228\204\199\85\227\197\213","\117\176\164\162")) then local v1322=0 -0 ;while true do if (v1322==(0 -0)) then local v1554=874 -(674 + 200) ;while true do if (0==v1554) then BossMon=v7("\176\202\0\176\233\120\147","\25\228\162\101\144\186");NameBoss=v7("\124\62\188\78\193\229\95","\132\40\86\217\110\146");v1554=1;end if (v1554==(1819 -(1288 + 530))) then v1322=1800 -(626 + 1173) ;break;end end end if (v1322==(503 -(83 + 419))) then CFrameBoss=CFrame.new( -784.89715576172,118.427383422852 -46 ,1603.5822753906);break;end end elseif (SelectBoss==v7("\71\206\51\181","\62\30\171\71\220\199\19\156")) then local v1473=0 + 0 ;while true do if (v1473==0) then BossMon=v7("\121\64\184\63","\45\32\37\204\86\61\169\79");NameBoss=v7("\108\80\17\181","\28\53\53\101\220\213");v1473=1 + 0 ;end if (1==v1473) then NameQuestBoss=v7("\62\82\7\86\107\180\85\204\25","\191\109\60\104\33\58\193\48");QuestLvBoss=3 + 0 ;v1473=2 + 0 ;end if (v1473==(3 -1)) then RewardBoss="Reward:\n$10,000\n180,000 Exp.";CFrameQBoss=CFrame.new(1386.8073730469,87.272789001465, -(2722.3576660156 -1424));v1473=3;end if (v1473==3) then CFrameBoss=CFrame.new(1218.7956542969,450.01184082031 -312 , -(2360.0262451172002 -872));break;end end elseif (SelectBoss==v7("\170\216\26\167\171\210\25\227\130\197","\135\231\183\120")) then local v1641=0 + 0 ;while true do if (v1641==1) then CFrameBoss=CFrame.new( -(4827.7307128905995 -1983),27.4180502891541 -20 ,5356.6723632813);break;end if (v1641==(0 + 0)) then BossMon=v7("\203\5\78\164\25\31\168\226\15\94","\201\134\106\44\132\85\122");NameBoss=v7("\27\3\117\127\45\9\201\39\51\30","\67\86\108\23\95\97\108\168");v1641=1;end end elseif (SelectBoss==v7("\146\49\79\15\228\5\209\93\173\42\77\6","\48\196\88\44\106\196\68\181")) then BossMon=v7("\180\214\223\38\192\133\166\33\139\205\221\47","\76\226\191\188\67\224\196\194");NameBoss=v7("\239\33\4\245\189\248\44\10\249\239\216\36","\157\185\72\103\144");NameQuestBoss=v7("\116\178\152\115\166\180\104\166\143\105\188\227","\209\57\211\234\26\200");QuestLvBoss=5 -3 ;RewardBoss="Reward:\n$10,000\n180,000 Exp.";CFrameQBoss=CFrame.new( -(5815.2465820313 -(347 + 432)),28.677835464478,6416.56640625 -2092 );CFrameBoss=CFrame.new( -5006.5454101563,500.032081604004 -(335 + 77) ,612.162109375 + 3741 );elseif (SelectBoss==v7("\50\207\164\132\66\146\36\214\182\132\66\198","\178\97\174\198\225\48")) then local v1844=881 -(211 + 670) ;while true do if (v1844==(0 -0)) then local v1917=0 -0 ;while true do if (v1917==(1 + 0)) then v1844=1 + 0 ;break;end if (v1917==(1667 -(350 + 1317))) then NameBoss=v7("\252\87\6\244\106\166\42\215\70\1\227\108","\111\175\54\100\145\24\134");BossMon=v7("\112\24\34\16\81\89\5\13\83\28\50\1","\117\35\121\64");v1917=4 -3 ;end end end if (v1844==1) then CFrameBoss=CFrame.new( -(682.8950199999999 + 776),1627.8870335 -(828 + 770) , -(237.633564 -187));break;end end elseif (SelectBoss==v7("\234\188\252\210\38\65","\47\189\221\142\182\67")) then BossMon=v7("\23\190\53\207\77\167","\73\64\223\71\171\40\201\64");NameBoss=v7("\61\140\214\93\165\115","\29\106\237\164\57\192");NameQuestBoss=v7("\152\169\247\191\217\227\181\247\162\176","\146\209\196\135\218\181\178\192");QuestLvBoss=2 -1 ;RewardBoss="Reward:\n$6,000\n850,000 Exp.";CFrameBoss=CFrame.new(11670.04932 -6392 ,1392.15167475 -(1265 + 125) ,138.10192900000004 + 806 ,0.220546961, -0.000004499464,0.975376427, -(0.000019541258 + 0),1 + 0 ,0.000009031621 + 0 , -(1987.975376427 -(250 + 1737)), -0.000021051976,0.220546961);CFrameQBoss=CFrame.new(25938.86133 -20747 ,7.84020686 -5 ,580.438721 + 106 , -(0.731384635 -0),0,0.681965172 + 0 ,0,1 + 0 ,0, -(1793.681965172 -(711 + 1082)),0, -(389.731384635 -(155 + 234)));elseif (SelectBoss==v7("\14\56\138\20\86\231\26\49\145\21\85\169","\199\77\80\227\113\48")) then local v1952=0 + 0 ;while true do if (v1952==1) then NameQuestBoss=v7("\192\15\45\181\55\251\15\236\17\41","\122\137\98\93\208\91\170");QuestLvBoss=2;v1952=522 -(222 + 298) ;end if (v1952==(1646 -(612 + 1032))) then RewardBoss="Reward:\n$10,000\n1,000,000 Exp.";CFrameBoss=CFrame.new(9316.92578 -4110 ,0.997753382 -0 ,2697.9767460000003 -1883 ,0.342041343, -(0.00062915677 + 0),0.939684749 -0 ,438.00191645394 -(76 + 362) ,0.999998152, -(1460.0000280422337 -(1053 + 407)), -(0.939682961 + 0),0.00181045406 + 0 ,686.342041939 -(355 + 331) );v1952=676 -(287 + 386) ;end if (v1952==(0 + 0)) then BossMon=v7("\9\55\87\200\44\127\105\204\56\59\91\195","\173\74\95\62");NameBoss=v7("\229\17\85\51\205\71\139\199\11\88\51\197","\220\166\121\60\86\171\103");v1952=1;end if (v1952==3) then CFrameQBoss=CFrame.new(4011.8613299999997 + 1180 ,1552.84020686 -(1382 + 168) ,1914.438721 -1228 , -(0.731384635 + 0),387 -(370 + 17) ,890.681965172 -(175 + 715) ,0 + 0 ,1,0 -0 , -0.681965172,0 -0 , -0.731384635);break;end end elseif (SelectBoss==v7("\180\246\29\65","\170\231\129\124\47\181\210\201")) then BossMon=v7("\184\172\59\62","\74\235\219\90\80\106");NameBoss=v7("\127\212\90\53","\146\44\163\59\91\90\148\26");NameQuestBoss=v7("\92\32\168\132\69\68\56\189\146\93","\41\21\77\216\225");QuestLvBoss=3;RewardBoss="Reward:\n$15,000\n1,600,000 Exp.";CFrameBoss=CFrame.new(862.0961900000002 + 4463 ,11.03906584 -4 ,242.57067900000004 + 477 , -(0.309060812 -0),1834 -(1262 + 572) ,0.951042235 -0 ,0,1,0 + 0 , -(155.951042235 -(24 + 131)),0 -0 , -0.309060812);CFrameQBoss=CFrame.new(6475.86133 -(795 + 489) ,2.84020686,686.438721, -(0.731384635 + 0),0 -0 ,1195.681965172 -(989 + 206) ,0 -0 ,1,0 -0 , -(986.681965172 -(449 + 537)),0, -(1807.731384635 -(632 + 1175)));elseif (SelectBoss==v7("\57\76\117\72\21\13\83\65\25\68\96\68\24","\37\116\45\18")) then local v1999=0 -0 ;while true do if (v1999==0) then BossMon=v7("\226\254\81\175\170\143\222\82\175\162\221\254\90","\203\175\159\54\194");NameBoss=v7("\86\207\30\54\91\15\227\127\195\16\41\91\67","\162\27\174\121\91\58\47");v1999=1 -0 ;end if (v1999==2) then RewardBoss="Reward:\n$15,000\n2,800,000 Exp.";CFrameQBoss=CFrame.new( -5314.6220703125,9.262420654297 + 3 ,10079.279296875 -(626 + 936) );v1999=3 + 0 ;end if (v1999==(1 + 2)) then CFrameBoss=CFrame.new( -5765.8969726563,1604.92064666748 -(855 + 667) ,20831.3046875 -12113 );break;end if (v1999==(898 -(269 + 628))) then NameQuestBoss=v7("\254\196\24\248\62\232\198\192\12\225","\185\179\165\127\149\95");QuestLvBoss=1 + 2 ;v1999=2;end end elseif (SelectBoss==v7("\119\124\220\252\26\80\123\143\216\24\67\113","\119\49\21\175\148")) then BossMon=v7("\113\188\5\85\32\72\132\181\123\186\4\89","\149\55\213\118\61\77\41\234");NameBoss=v7("\59\15\217\206\228\56\161\91\49\9\216\194","\123\125\102\170\166\137\89\207");NameQuestBoss=v7("\104\9\75\53\3\130\167\127\21\93\46\26","\201\46\96\56\93\110\227");QuestLvBoss=6 -3 ;RewardBoss="Reward:\n$15,000\n4,000,000 Exp.";CFrameQBoss=CFrame.new(61122.65234375,18.497442245483,1569.3997802734);CFrameBoss=CFrame.new(61260.15234375,30.950881958008 + 0 ,2581.4329833984 -1388 );elseif (SelectBoss==v7("\140\26\253\233\16\211","\161\219\99\142\153\117")) then BossMon=v7("\75\168\181\99\200\110","\173\28\209\198\19");NameBoss=v7("\66\245\164\171\112\254","\219\21\140\215");NameQuestBoss=v7("\123\179\223\130\64\88\233\247\178\93\91\172","\56\40\216\166\199");QuestLvBoss=3 + 0 ;RewardBoss="Reward:\n$15,000\n4,800,000 Exp.";CFrameQBoss=CFrame.new( -(505.947265625 + 7356),25240.517578125 -19695 , -(73.85974121094 + 306));CFrameBoss=CFrame.new( -7866.1333007813,18860.4311523438 -13284 , -(304.74816894531 + 242));elseif (SelectBoss==v7("\18\188\0\33\34\177\7\111\1\187\17","\79\70\212\117")) then local v2032=0;local v2033;while true do if ((0 -0)==v2032) then v2033=1343 -(102 + 1241) ;while true do if ((1094 -(118 + 976))==v2033) then BossMon=v7("\147\30\244\200\253\8\181\86\198\201\253","\109\199\118\129\166\153");NameBoss=v7("\5\184\98\248\53\181\101\182\22\191\115","\150\81\208\23");v2033=1 -0 ;end if (v2033==1) then local v2059=0 + 0 ;while true do if (v2059==(0 + 0)) then NameQuestBoss=v7("\202\206\249\174\225\213\178\186\236\192\243\159","\235\153\165\128");QuestLvBoss=825 -(331 + 491) ;v2059=1;end if (v2059==1) then v2033=421 -(260 + 159) ;break;end end end if (v2033==(1134 -(930 + 201))) then CFrameBoss=CFrame.new( -(21840.984375 -13846),5761.025390625, -2088.6479492188);break;end if (v2033==(2 -0)) then RewardBoss="Reward:\n$20,000\n5,800,000 Exp.";CFrameQBoss=CFrame.new( -(113.3828125 + 7790),5635.9897460938, -(2152.923828125 -742));v2033=790 -(604 + 183) ;end end break;end end elseif (SelectBoss==v7("\152\80\160\32\84\33","\158\219\41\194\79\38\70\202")) then local v2040=0;while true do if ((3 -0)==v2040) then CFrameBoss=CFrame.new(1535.0249023438 + 4559 ,34.770050048828 + 39 ,253.73486328130002 + 3572 );break;end if (v2040==(1729 -(1466 + 262))) then local v2056=0 -0 ;while true do if (1==v2056) then v2040=87 -(41 + 44) ;break;end if (v2056==(80 -(77 + 3))) then NameQuestBoss=v7("\129\140\224\11\68\48\174\141\196\16\85\34\179","\81\199\227\149\101\48");QuestLvBoss=4 -1 ;v2056=1 + 0 ;end end end if (v2040==(667 -(84 + 581))) then local v2057=0 + 0 ;while true do if (v2057==(2 -1)) then v2040=2 + 1 ;break;end if (v2057==0) then RewardBoss="Reward:\n$20,000\n7,500,000 Exp.";CFrameQBoss=CFrame.new(9176.278808593801 -3918 ,611.526931762695 -(441 + 132) ,4050.044921875);v2057=1087 -(424 + 662) ;end end end if (v2040==0) then BossMon=v7("\96\60\45\13\252\209","\232\35\69\79\98\142\182");NameBoss=v7("\90\25\29\242\107\7","\157\25\96\127");v2040=1600 -(386 + 1213) ;end end elseif (SelectBoss==v7("\84\81\254\81\215\130\49\178\111\83\247","\219\29\50\155\113\150\230\92")) then local v2051=0 -0 ;local v2052;while true do if (v2051==(0 + 0)) then v2052=0;while true do if (v2052==0) then BossMon=v7("\248\35\192\59\222\76\64\216\50\196\119","\45\177\64\165\27\159\40");NameBoss=v7("\52\21\10\234\83\25\27\6\184\115\17","\18\125\118\111\202");v2052=1 + 0 ;end if (v2052==(3 -2)) then CFrameBoss=CFrame.new(1959.08948 -693 ,389.1757946 -(29 + 334) , -(5375.57678 -3976), -(0.573599219 -0),1822 -(1552 + 270) , -(0.81913656 + 0),0 + 0 ,1 -0 ,0,0.81913656,34 -(30 + 4) , -(0.573599219 -0));break;end end break;end end elseif (SelectBoss==v7("\119\46\92\227\50\168\198\233\84","\155\48\92\57\154\80\205\167")) then BossMon=v7("\158\223\190\166\250\174\68\171\201","\37\217\173\219\223\152\203");NameBoss=v7("\46\23\26\47\77\173\247\27\1","\150\105\101\127\86\47\200");CFrameBoss=CFrame.new( -(9382.345214843801 -4301),85.221641540527,4733.3588867188 -(103 + 373) );end end if Second_Sea then if (SelectBoss==v7("\234\251\242\184\200\206\202","\160\174\146\147\213\167")) then local v883=1889 -(1215 + 674) ;while true do if (v883==3) then CFrameBoss=CFrame.new( -1576.7166748047,198.59265136719,1164.724286079407 -(185 + 966) );break;end if (v883==2) then local v1228=1513 -(1156 + 357) ;while true do if (v1228==(1 + 0)) then v883=952 -(190 + 759) ;break;end if (v1228==0) then RewardBoss="Reward:\n$25,000\n9,000,000 Exp.";CFrameQBoss=CFrame.new( -(516.5666809081999 -(51 + 38)),73.313781738281,1193.4208984375 + 642 );v1228=80 -(8 + 71) ;end end end if (v883==0) then BossMon=v7("\100\237\27\73\3\79\68","\33\32\132\122\36\108");NameBoss=v7("\157\29\115\70\115\183\16","\28\217\116\18\43");v883=2 -1 ;end if (v883==1) then local v1229=0 -0 ;while true do if (v1229==0) then NameQuestBoss=v7("\243\69\211\85\129\159\41\215\68\194","\92\178\55\182\52\176\206");QuestLvBoss=4 -1 ;v1229=1177 -(285 + 891) ;end if (v1229==(1 + 0)) then v883=1 + 1 ;break;end end end end elseif (SelectBoss==v7("\48\48\99\16\23\44","\117\122\85\17")) then local v1149=0 + 0 ;local v1150;while true do if (v1149==(0 + 0)) then v1150=0 + 0 ;while true do if (v1150==3) then CFrameBoss=CFrame.new(5101.9261474609 -3095 ,757.95666503906 -309 ,1391.98284912109 -538 );break;end if (v1150==0) then BossMon=v7("\162\234\56\65\171\196","\189\232\143\74\36\198");NameBoss=v7("\214\175\24\75\218\19","\106\156\202\106\46\183");v1150=939 -(342 + 596) ;end if (v1150==1) then NameQuestBoss=v7("\28\11\126\50\120\12\12\126\32\62","\74\93\121\27\83");QuestLvBoss=1606 -(1278 + 325) ;v1150=2;end if (v1150==(3 -1)) then RewardBoss="Reward:\n$25,000\n11,500,000 Exp.";CFrameQBoss=CFrame.new(128.79943847656 + 508 ,345.413787841797 -(194 + 78) ,324.00415039063 + 594 );v1150=8 -5 ;end end break;end end elseif (SelectBoss==v7("\91\186\236\119\105\186","\30\29\219\134")) then local v1323=0 + 0 ;local v1324;while true do if (v1323==(0 + 0)) then v1324=0;while true do if ((1 + 1)==v1324) then RewardBoss="Reward:\n$25,000\n15,000,000 Exp.";CFrameQBoss=CFrame.new( -(3591.986328125 -(1094 + 56)),1310.359344482422 -(547 + 690) , -(2530.5324707031 + 687));v1324=868 -(69 + 796) ;end if (v1324==(0 + 0)) then BossMon=v7("\115\166\19\243\224\94","\110\53\199\121\154\148\63\120");NameBoss=v7("\39\27\245\54\77\253","\156\97\122\159\95\57");v1324=40 -(28 + 11) ;end if ((1 -0)==v1324) then NameQuestBoss=v7("\227\183\200\241\5\7\14\219\179\201\236\88","\95\174\214\186\152\107\98");QuestLvBoss=9 -6 ;v1324=774 -(720 + 52) ;end if (v1324==3) then CFrameBoss=CFrame.new( -(573.7399902344 + 1599),101.32216644287 + 2 , -(9583.025390625 -5568));break;end end break;end end elseif (SelectBoss==v7("\173\1\127\203\32\209\136\0","\166\233\110\17\235\115")) then local v1474=0;while true do if (0==v1474) then BossMon=v7("\92\1\202\129\193\169\125\118","\28\24\110\164\161\146\222");NameBoss=v7("\127\204\88\101\104\212\87\43","\69\59\163\54");v1474=3 -2 ;end if (v1474==1) then CFrameBoss=CFrame.new(1055.2004394531 + 1231 ,15.177839279175,2491.8388671875 -1628 );break;end end elseif (SelectBoss==v7("\131\165\197\65\54\141\151\180\165\195\88\50\193","\214\208\200\170\42\83\173")) then BossMon=v7("\234\44\125\171\112\153\0\118\173\124\203\32\126","\21\185\65\18\192");NameBoss=v7("\205\91\82\16\164\190\119\89\22\168\236\87\81","\193\158\54\61\123");NameQuestBoss=v7("\28\18\37\138\60\21\37\136\32\20\51\173","\217\85\113\64");QuestLvBoss=1 + 2 ;RewardBoss="Reward:\n$20,000\n25,000,000 Exp.";CFrameQBoss=CFrame.new( -(10066.047363281301 -4637),15.977565765381, -(7291.9614257813 -(41 + 1953)));CFrameBoss=CFrame.new( -5275.1987304688,20.757257461548, -5260.6669921875);elseif (SelectBoss==v7("\106\24\205\203\234\140\224\79\79\229\195\234\194\196\79\2\197\210\238\142","\133\43\111\172\160\143\226")) then BossMon=v7("\234\180\81\218\197\197\166\84\145\233\200\166\16\240\196\198\170\66\208\204","\160\171\195\48\177");NameBoss=v7("\242\20\119\38\89\207\170\195\147\42\117\40\28\224\171\202\218\17\119\33","\167\179\99\22\77\60\161\207");NameQuestBoss=v7("\39\109\132\75\88\48\106\142\75\88","\44\97\31\235\56");QuestLvBoss=630 -(581 + 46) ;RewardBoss="Reward:\n$20,000\n36,000,000 Exp.";CFrameQBoss=CFrame.new(5668.9780273438,4.519989013671999 + 24 , -6483.3520507813);CFrameBoss=CFrame.new(7422.5439453125 -(971 + 48) ,153.29766845703 + 187 , -(6310.5595703125 + 584));elseif (SelectBoss==v7("\197\7\252\161\177\37\253\161\225\11\234","\196\145\110\152")) then local v1845=1232 -(607 + 625) ;local v1846;while true do if (v1845==(595 -(325 + 270))) then v1846=0;while true do if (v1846==(1929 -(1785 + 143))) then NameQuestBoss=v7("\52\58\179\0\234\58\64\27\28\4\180\2\246\58","\126\114\85\193\103\133\78\52");QuestLvBoss=11 -8 ;v1846=2;end if (v1846==(7 -5)) then RewardBoss="Reward:\n$12,500\n38,000,000 Exp.";CFrameQBoss=CFrame.new( -(3949.9814453125 -(738 + 158)),447.18954467773 -210 , -10145.0390625);v1846=1943 -(489 + 1451) ;end if (v1846==0) then local v1977=0 + 0 ;while true do if (v1977==(0 + 0)) then BossMon=v7("\108\39\250\247\24\5\251\247\72\43\236","\146\56\78\158");NameBoss=v7("\25\210\75\227\26\6\222\74\246\95\63","\58\77\187\47\134");v1977=1;end if (v1977==1) then v1846=1 -0 ;break;end end end if (v1846==3) then CFrameBoss=CFrame.new( -3795.6423339844,105.88877105713, -11421.307617188);break;end end break;end end elseif (SelectBoss==v7("\224\218\32\115\198\222\51\106\192","\24\164\187\82")) then local v1910=0;while true do if ((0 + 0)==v1910) then BossMon=v7("\213\219\78\161\243\244\219\78\174","\145\145\186\60\202");NameBoss=v7("\194\209\33\15\228\213\50\22\226","\100\134\176\83");v1910=1 + 0 ;end if (v1910==1) then CFrameMon=CFrame.new(3677.08203125,5.7519378662110014 + 57 , -3144.8332519531);break;end end elseif (SelectBoss==v7("\240\212\80\174\182\17\147\226\67\173\167\20\218\207","\117\179\161\34\221\211")) then BossMon=v7("\110\165\232\213\1\251\229\110\177\234\210\5\246\171","\197\45\208\154\166\100\159");NameBoss=v7("\10\225\148\175\54\45\180\165\189\35\61\245\143\178","\83\73\148\230\220");CFrameBoss=CFrame.new(1111.928589 -(52 + 143) ,257.09277299999997 -76 ,33422);elseif (SelectBoss==v7("\28\205\242\229\253","\233\83\191\150\128\143")) then local v1978=0;while true do if (v1978==(1 -0)) then CFrameBoss=CFrame.new( -6217.2021484375,28.047645568848, -(6220.1357421875 -(109 + 1058)));break;end if (v1978==(0 -0)) then BossMon=v7("\216\148\203\119\31","\109\151\230\175\18");NameBoss=v7("\143\232\69\65\146","\224\192\154\33\36");v1978=1;end end end end v284=593 -(374 + 218) ;end end end function MaterialMon() if (SelectMaterial==v7("\9\241\235\196\177\225\56\47\249\249\200\254\205\58\47\245\253\196\191\236","\91\91\144\143\173\222\128")) then local v535=687 -(266 + 421) ;local v536;while true do if (v535==(0 + 0)) then v536=0;while true do if (v536==1) then SP=v7("\32\211\40\163\49\168\17","\101\100\182\78\194\68\196");break;end if ((0 + 0)==v536) then local v1008=1822 -(964 + 858) ;while true do if (v1008==1) then v536=1;break;end if (v1008==(0 + 0)) then MMon=v7("\5\161\79\69\164\92\58\224\127\69\170\72\37","\46\67\192\44\49\203");MPos=CFrame.new(295,73, -(205 -149));v1008=1 + 0 ;end end end end break;end end elseif (SelectMaterial==v7("\101\81\35\225\132\72\56\241\90\71\32\249\136\95","\181\40\40\80\149\237\43\24")) then local v693=0;while true do if ((0 + 0)==v693) then MMon=v7("\34\179\49\55\168\10\52\28\181\45\38\191\88","\114\117\210\69\82\218\42");MPos=CFrame.new( -(13410 -10025),239, -(29353 -18811));v693=1 -0 ;end if (v693==(1 + 0)) then SP=v7("\96\211\94\114\185\72\194","\204\36\182\56\19");break;end end elseif (SelectMaterial==v7("\196\74\219\142\124\120\61\251\78","\114\137\43\188\227\29\88")) then if First_Sea then local v1009=0;local v1010;while true do if (v1009==(0 -0)) then v1010=0;while true do if (v1010==0) then local v1555=1998 -(1007 + 991) ;local v1556;while true do if (v1555==(0 -0)) then v1556=0;while true do if (v1556==0) then MMon=v7("\201\20\164\25\240\28\186\9\164\46\184\9","\112\132\125\200");MPos=CFrame.new( -5815,1470 -(183 + 1203) ,8252 + 568 );v1556=1 -0 ;end if (v1556==1) then v1010=1;break;end end break;end end end if (1==v1010) then SP=v7("\217\189\245\114\79\249\233","\149\157\216\147\19\58");break;end end break;end end elseif Second_Sea then MMon=v7("\228\135\31\197\200\198\54\193\199\140\25","\168\169\230\120");MPos=CFrame.new( -(13214 -7786),78, -5959);SP=v7("\216\136\130\22\233\129\144","\119\156\237\228");end elseif (SelectMaterial==v7("\226\223\7\123\207\145\55\119\205\214\19","\30\163\177\96")) then local v1011=0 + 0 ;while true do if ((347 -(120 + 227))==v1011) then MMon="God's Guard";MPos=CFrame.new( -4698,1781 -936 , -(1834 + 78));v1011=1;end if (v1011==(1 + 0)) then SP=v7("\62\37\83\136\40\39\192","\180\122\64\53\233\93\75");if ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new( -(24505.098140000002 -16646),5544.19043, -381.476196)).Magnitude>=(7189 -2189)) then game:GetService(v7("\228\18\3\49\223\20\18\41\211\19\32\41\217\5\18\58\211","\93\182\119\115")).Remotes.CommF_:InvokeServer(v7("\144\26\194\153\178\237\150\58\221\152\165\255\140\28\214","\158\226\127\179\236\215"),Vector3.new( -7859.09814,3940.1904299999997 + 1604 , -381.476196));end break;end end elseif (SelectMaterial==v7("\221\197\200\194\249\197\219","\182\145\160\169")) then if First_Sea then local v1450=1550 -(935 + 615) ;while true do if (v1450==(389 -(109 + 279))) then SP=v7("\155\178\8\71\170\187\26","\38\223\215\110");break;end if ((940 -(311 + 629))==v1450) then MMon=v7("\27\50\37\2\162","\111\89\64\80\118\199");MPos=CFrame.new( -(2090 -(917 + 28)),1870 -(622 + 1233) ,4350);v1450=1 + 0 ;end end elseif Second_Sea then local v1557=0;while true do if (v1557==1) then SP=v7("\221\113\78\63\100\242\196","\176\153\20\40\94\17\158");break;end if (v1557==(0 + 0)) then local v1741=0;while true do if (v1741==(1 -0)) then v1557=1777 -(1073 + 703) ;break;end if (v1741==(891 -(785 + 106))) then MMon=v7("\115\218\30\204\165\91\155\47\196\187\74\218\5\203","\203\62\187\108\165");MPos=CFrame.new( -(980.5059814453125 + 1030),1941.0011596679688 -(1578 + 290) , -(9300.620849609375 -5974));v1741=1;end end end end elseif Third_Sea then local v1699=0 -0 ;local v1700;while true do if (v1699==(0 -0)) then v1700=0 + 0 ;while true do if (v1700==(1 + 0)) then SP=v7("\227\239\114\122\196\185\168","\132\167\138\20\27\177\213\220");break;end if (v1700==(0 + 0)) then local v1918=0;while true do if (v1918==1) then v1700=1 -0 ;break;end if (v1918==(0 + 0)) then MMon=v7("\130\38\181\84\201\173\115\139\90\215\169\39\190","\165\200\83\219\51");MPos=CFrame.new( -(4946.78515625 + 7029),1453.7734069824219 -1122 , -(8450.0302734375 + 2170));v1918=320 -(42 + 277) ;end end end end break;end end end elseif (SelectMaterial==v7("\193\214\241\77\44\178\248\230\88\61\254","\92\146\181\131\44")) then if First_Sea then local v1558=0 -0 ;local v1559;while true do if ((1127 -(1113 + 14))==v1558) then v1559=0 + 0 ;while true do if (v1559==(3 -2)) then SP=v7("\122\197\75\80\157\82\212","\232\62\160\45\49");break;end if (v1559==0) then MMon=v7("\105\236\84\146\187","\189\43\158\33\230\222\32\119");MPos=CFrame.new( -(1992 -(833 + 14)),8 + 7 ,5675 -(832 + 493) );v1559=1;end end break;end end elseif Second_Sea then local v1701=0;while true do if (v1701==(0 -0)) then MMon=v7("\71\196\244\162\225\68\218\231\173\181\113","\193\20\179\149\204");MPos=CFrame.new(1832 -(508 + 446) ,560 -438 ,1235);v1701=1 + 0 ;end if (v1701==(1 + 0)) then SP=v7("\243\4\135\195\194\13\149","\162\183\97\225");break;end end elseif Third_Sea then MMon=v7("\3\208\234\240\16\231\225\25\204\246\246\8\231","\193\73\165\132\151\124\130");MPos=CFrame.new( -(7052 + 5055),332, -10549);SP=v7("\233\199\175\90\163\186\217","\214\173\162\201\59\214");end elseif (SelectMaterial==v7("\5\112\185\73\151\20\34\112\166","\64\67\25\202\33\183")) then if Third_Sea then local v1702=0 -0 ;local v1703;while true do if (v1702==(0 -0)) then v1703=1354 -(227 + 1127) ;while true do if (v1703==(0 -0)) then MMon=v7("\207\231\98\180\35\211\77\169\220\112\181\42\215\81","\35\137\142\17\220\78\178");MPos=CFrame.new( -(5555 + 5438),332, -(9623 -(629 + 54)));v1703=1680 -(149 + 1530) ;end if (v1703==1) then SP=v7("\9\75\35\0\56\66\49","\97\77\46\69");break;end end break;end end elseif First_Sea then local v1773=0 + 0 ;while true do if (v1773==(2 -1)) then SP=v7("\238\44\235\79\77\228\89","\45\170\73\141\46\56\136");if ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(61163.8515625,5.342342376708984,3227.7841796875 -(1012 + 396) )).Magnitude>=(12995 + 4005)) then game:GetService(v7("\179\10\221\233\166\132\6\149\10\201\214\187\136\21\128\8\200","\103\225\111\173\133\207\231")).Remotes.CommF_:InvokeServer(v7("\94\129\228\64\73\151\225\112\66\144\231\84\66\135\240","\53\44\228\149"),Vector3.new(266437.8515625 -205274 ,12.342342376708984 -7 ,3419.7841796875 -(587 + 1013) ));end break;end if (0==v1773) then MMon=v7("\249\214\19\173\210\222\14\229\232\222\18\183\214\208\18","\197\191\191\96");MPos=CFrame.new(61146 -(11 + 12) ,2011 -(1909 + 83) ,2304 -(394 + 341) );v1773=1661 -(217 + 1443) ;end end end elseif (SelectMaterial==v7("\233\222\54\10\197\45\206\155\12\12\216\52","\68\173\187\91\101\171")) then local v1704=0;while true do if (v1704==(0 -0)) then MMon=v7("\216\10\31\200\71\139\126\153\207\0\7\203","\185\156\111\114\167\41\226\29");MPos=CFrame.new( -(7967 + 1540),172,15392 -9234 );v1704=1 + 0 ;end if (v1704==1) then SP=v7("\47\0\16\33\161\239\31","\131\107\101\118\64\212");break;end end elseif (SelectMaterial==v7("\247\215\33\59\78\210\204\129\240\45\37\64","\169\161\182\76\75\39\160")) then MMon=v7("\239\83\186\155\18\48\173","\200\185\50\215\235\123\66");MPos=CFrame.new( -6033,11 -4 , -(1798 -(217 + 264)));SP=v7("\214\132\223\227\159\122\14","\122\146\225\185\130\234\22");elseif (SelectMaterial==v7("\154\237\206\197\250\169\188\230\128\236\224\184\182\227","\219\217\130\160\175\143")) then local v1869=0 -0 ;while true do if (v1869==1) then SP=v7("\43\205\199\139\207\251\233","\157\111\168\161\234\186\151");break;end if (v1869==(0 -0)) then MMon=v7("\29\180\77\62\49\176\67\41\59\252\96\60\44\252\96\60\42\168\78\56\44","\93\94\220\34");MPos=CFrame.new(1515.6344604492188 -(318 + 577) ,337.9364471435547 -259 , -12581.369140625);v1869=2 -1 ;end end elseif (SelectMaterial==v7("\95\82\116\54\205\183\242\182\120\65\121\52","\229\27\32\21\81\162\217\210")) then local v1919=1044 -(156 + 888) ;local v1920;local v1921;while true do if (v1919==(0 -0)) then v1920=0 + 0 ;v1921=nil;v1919=1 -0 ;end if (v1919==(1680 -(99 + 1580))) then while true do if (v1920==(0 -0)) then v1921=0 -0 ;while true do if (v1921==0) then MMon=v7("\8\222\250\61\69\34\140\216\40\79\59\140\218\40\73\36\201\233","\42\76\172\155\90");MPos=CFrame.new(5973 + 621 ,1769 -(1282 + 104) ,139);v1921=613 -(92 + 520) ;end if (v1921==(1352 -(1259 + 92))) then SP=v7("\214\136\135\40\21\254\153","\96\146\237\225\73");break;end end break;end end break;end end elseif (SelectMaterial==v7("\207\107\6\248\70\109\166\237\108","\194\136\30\104\136\41\26")) then MMon=v7("\236\223\16\92\27\188\233\13\213\218\15\65\27\190\168\38\206\211","\79\188\182\99\40\116\208\201");MPos=CFrame.new( -(827 -358),291 -217 ,5654 + 250 );SP=v7("\89\198\44\64\54\51\105","\95\29\163\74\33\67");elseif (SelectMaterial==v7("\81\59\78\62\63\190\17\111\57","\100\28\82\32\87\31\234")) then MMon=v7("\28\75\244\121\244\218\231\57\56\81\225\125\187\230\225\44\48\70\229","\94\81\50\128\17\155\182\136");MPos=CFrame.new( -(10096 + 3449),1388 -918 , -(8313 -(1298 + 98)));SP=v7("\175\57\226\56\247\184\8","\231\235\92\132\89\130\212\124");end end function UpdateIslandESP() for v466,v467 in pairs(game:GetService(v7("\201\187\230\52\194\85\255\183\241","\37\158\212\148\95\177"))[v7("\75\43\171\149\1\112\51\182\142\10\125\18","\109\20\124\196\231")].Locations:GetChildren()) do pcall(function() if IslandESP then if (v467.Name~=v7("\147\184\117","\64\192\221\20\197\81")) then if  not v467:FindFirstChild(v7("\129\247\239\167\130\188\230","\199\207\150\130\194")) then local v1012=0;local v1013;local v1014;while true do if (0==v1012) then v1013=Instance.new(v7("\151\67\119\228\65\186\75\105\236\100\160\67","\35\213\42\27\136"),v467);v1013.Name=v7("\142\134\54\186\253\225\176","\146\192\231\91\223\184");v1013.ExtentsOffset=Vector3.new(0 + 0 ,1,0 -0 );v1012=1;end if (v1012==(2 + 2)) then v1014.BackgroundTransparency=1 + 0 ;v1014.TextStrokeTransparency=0.5;v1014.TextColor3=Color3.fromRGB(7 + 1 ,0 -0 ,0 + 0 );break;end if (v1012==(1 + 0)) then v1013.Size=UDim2.new(1 + 0 ,163 + 37 ,1,30);v1013.Adornee=v467;v1013.AlwaysOnTop=true;v1012=2 + 0 ;end if (v1012==(11 -8)) then v1014.TextWrapped=true;v1014.Size=UDim2.new(1,457 -(206 + 251) ,1,170 -(162 + 8) );v1014.TextYAlignment=v7("\178\141\23","\82\230\226\103\101\189");v1012=4;end if (v1012==(145 -(26 + 117))) then v1014=Instance.new(v7("\110\244\238\61\253\181\5\11\86","\110\58\145\150\73\177\212\103"),v1013);v1014.Font=v7("\211\59\222\250\74\198\203\251\56\206","\137\148\84\170\146\43\171");v1014.FontSize=v7("\50\214\101\248\38\85","\23\97\191\31\157");v1012=2 + 1 ;end end else v467[v7("\165\43\190\180\49\152\58","\116\235\74\211\209")].TextLabel.Text=v467.Name   .. "   \n"   .. round((game:GetService(v7("\24\48\223\60\45\46\205","\69\72\92\190")).LocalPlayer.Character.Head.Position-v467.Position).Magnitude/3 )   .. v7("\118\31\237\199\191\169\24\180\51","\215\86\91\132\180\203\200\118") ;end end elseif v467:FindFirstChild(v7("\29\239\139\214\22\253\150","\179\83\142\230")) then v467:FindFirstChild(v7("\244\46\240\48\28\12\231","\191\186\79\157\85\89\127\151")):Destroy();end end);end end function isnil(v285) return v285==nil ;end local function v100(v286) return math.floor(tonumber(v286) + 0.5 );end Number=math.random(3 -2 ,1000000);function UpdatePlayerChams() for v468,v469 in pairs(game:GetService(v7("\198\118\165\215\129\87\229","\37\150\26\196\174\228")):GetChildren()) do pcall(function() if  not isnil(v469.Character) then if ESPPlayer then if ( not isnil(v469.Character.Head) and  not v469.Character.Head:FindFirstChild(v7("\231\241\191\80\18\154\217","\233\169\144\210\53\87")   .. Number )) then local v1016=0 -0 ;local v1017;local v1018;while true do if (v1016==1) then v1017.Adornee=v469.Character.Head;v1017.AlwaysOnTop=true;v1018=Instance.new(v7("\67\17\20\36\243\36\185\252\123","\153\23\116\108\80\191\69\219"),v1017);v1018.Font=Enum.Font.GothamSemibold;v1016=2;end if (v1016==(996 -(591 + 405))) then local v1343=0;while true do if (v1343==(0 + 0)) then v1017=Instance.new(v7("\0\79\225\208\32\73\236\206\38\97\248\213","\188\66\38\141"),v469.Character.Head);v1017.Name=v7("\207\81\0\52\86\81\24","\168\129\48\109\81\19\34\104")   .. Number ;v1343=1 + 0 ;end if (v1343==(1 + 1)) then v1016=285 -(279 + 5) ;break;end if (v1343==1) then v1017.ExtentsOffset=Vector3.new(0,2 -1 ,0 + 0 );v1017.Size=UDim2.new(1 + 0 ,38 + 162 ,1,24 + 6 );v1343=2;end end end if (v1016==(1303 -(960 + 340))) then v1018.TextYAlignment=v7("\149\243\252","\182\193\156\140");v1018.BackgroundTransparency=1 + 0 ;v1018.TextStrokeTransparency=0.5;if (v469.Team==game.Players.LocalPlayer.Team) then v1018.TextColor3=Color3.new(0 + 0 ,0 -0 ,112 + 142 );else v1018.TextColor3=Color3.new(51 + 204 ,0,0);end break;end if (v1016==(4 -2)) then v1018.FontSize=v7("\122\22\231\221\169\219","\22\41\127\157\184\152\235");v1018.TextWrapped=true;v1018.Text=v469.Name   .. " \n"   .. v100((game:GetService(v7("\39\203\224\211\18\213\242","\170\119\167\129")).LocalPlayer.Character.Head.Position-v469.Character.Head.Position).Magnitude/(64 -(24 + 37)) )   .. v7("\154\212\181\96\151\95\212\243\185","\62\186\144\220\19\227") ;v1018.Size=UDim2.new(1 + 0 ,0,1 -0 ,0 -0 );v1016=764 -(363 + 398) ;end end else v469.Character.Head[v7("\239\77\27\183\195\44\209","\95\161\44\118\210\134")   .. Number ].TextLabel.Text=v469.Name   .. v7("\166\92\83","\206\134\32\115\109\26\182\133")   .. v100((game:GetService(v7("\6\244\206\10\88\79\37","\61\86\152\175\115\61")).LocalPlayer.Character.Head.Position-v469.Character.Head.Position).Magnitude/(5 -2) )   .. " Distance\nHealth : "   .. v100((v469.Character.Humanoid.Health * 100)/v469.Character.Humanoid.MaxHealth )   .. "%" ;end elseif v469.Character.Head:FindFirstChild(v7("\135\0\209\53\244\146\51","\167\201\97\188\80\177\225\67")   .. Number ) then v469.Character.Head:FindFirstChild(v7("\96\9\137\170\217\146\94","\225\46\104\228\207\156")   .. Number ):Destroy();end end end);end end function UpdateChestChams() for v470,v471 in pairs(game.Workspace:GetChildren()) do pcall(function() if string.find(v471.Name,v7("\137\200\182\93\35","\223\202\160\211\46\87\51\210")) then if ChestESP then if string.find(v471.Name,v7("\245\225\31\103\25","\109\182\137\122\20")) then if  not v471:FindFirstChild(v7("\124\168\31\255\197\196\250","\28\50\201\114\154\128\183\138")   .. Number ) then local v1230=736 -(328 + 408) ;local v1231;local v1232;while true do if (v1230==(4 -1)) then v1232.BackgroundTransparency=1637 -(1462 + 174) ;v1232.TextStrokeTransparency=0.5 -0 ;if (v471.Name==v7("\235\141\188\191\43\153","\95\168\229\217\204")) then v1232.TextColor3=Color3.fromRGB(109,109,495 -(295 + 91) );v1232.Text=v7("\169\51\131\154\158\123\215","\233\234\91\230")   .. " \n"   .. v100((game:GetService(v7("\97\77\131\106\162\67\82","\199\49\33\226\19")).LocalPlayer.Character.Head.Position-v471.Position).Magnitude/(3 -0) )   .. v7("\18\127\74\12\211\83\85\64\26","\167\50\59\35\127") ;end if (v471.Name==v7("\107\27\87\255\188\26","\200\40\115\50\140")) then v1232.TextColor3=Color3.fromRGB(477 -304 ,158,21);v1232.Text=v7("\208\37\114\12\231\109\37","\127\147\77\23")   .. " \n"   .. v100((game:GetService(v7("\187\234\244\109\117\153\245","\16\235\134\149\20")).LocalPlayer.Character.Head.Position-v471.Position).Magnitude/3 )   .. v7("\154\111\71\181\24\134\2\217\78","\108\186\43\46\198\108\231") ;end v1230=4;end if (v1230==(1 + 0)) then v1231.Adornee=v471;v1231.AlwaysOnTop=true;v1232=Instance.new(v7("\52\192\5\245\235\1\199\24\237","\167\96\165\125\129"),v1231);v1232.Font=Enum.Font.GothamSemibold;v1230=2 + 0 ;end if (v1230==4) then if (v471.Name==v7("\17\183\240\18\104\97","\28\82\223\149\97")) then local v1646=1616 -(423 + 1193) ;while true do if (v1646==0) then v1232.TextColor3=Color3.fromRGB(85 + 0 ,1635 -(806 + 574) ,198 + 57 );v1232.Text=v7("\142\61\72\77\185\117\30","\62\205\85\45")   .. " \n"   .. v100((game:GetService(v7("\69\0\160\176\7\155\26","\105\21\108\193\201\98\233")).LocalPlayer.Character.Head.Position-v471.Position).Magnitude/(1725 -(16 + 1706)) )   .. v7("\0\161\18\237\215\63\212\67\128","\186\32\229\123\158\163\94") ;break;end end end break;end if (v1230==(2 + 0)) then v1232.FontSize=v7("\52\223\12\67\19\114","\232\103\182\118\38\34\70\43");v1232.TextWrapped=true;v1232.Size=UDim2.new(1,1243 -(1032 + 211) ,1647 -(312 + 1334) ,0);v1232.TextYAlignment=v7("\1\88\63","\17\85\55\79\131\80");v1230=5 -2 ;end if (v1230==(702 -(644 + 58))) then v1231=Instance.new(v7("\136\143\21\254\168\137\24\224\174\161\12\251","\146\202\230\121"),v471);v1231.Name=v7("\192\238\227\27\226\161\176","\94\142\143\142\126\167\210\192")   .. Number ;v1231.ExtentsOffset=Vector3.new(0 + 0 ,1424 -(966 + 457) ,1343 -(120 + 1223) );v1231.Size=UDim2.new(1 + 0 ,600 -(249 + 151) ,1 + 0 ,49 -19 );v1230=1 + 0 ;end end else v471[v7("\42\34\124\207\60\182\39","\87\100\67\17\170\121\197")   .. Number ].TextLabel.Text=v471.Name   .. "   \n"   .. v100((game:GetService(v7("\222\135\187\153\82\167\253","\213\142\235\218\224\55")).LocalPlayer.Character.Head.Position-v471.Position).Magnitude/3 )   .. v7("\72\134\240\214\28\163\247\198\13","\165\104\194\153") ;end end elseif v471:FindFirstChild(v7("\169\49\212\174\220\78\157","\237\231\80\185\203\153\61")   .. Number ) then v471:FindFirstChild(v7("\139\49\141\119\96\182\32","\37\197\80\224\18")   .. Number ):Destroy();end end end);end end function UpdateDevilChams() for v472,v473 in pairs(game.Workspace:GetChildren()) do pcall(function() if DevilFruitESP then if string.find(v473.Name,v7("\63\80\89\79\160","\212\121\34\44\38")) then if  not v473.Handle:FindFirstChild(v7("\148\187\39\0\91\190\226","\62\218\218\74\101\30\205\146")   .. Number ) then local v1020=0;local v1021;local v1022;while true do if (v1020==2) then v1022=Instance.new(v7("\140\255\40\210\86\185\248\53\202","\26\216\154\80\166"),v1021);v1022.Font=Enum.Font.GothamSemibold;v1022.FontSize=v7("\255\192\247\70\44\120","\76\172\169\141\35\29");v1020=14 -11 ;end if ((1 + 0)==v1020) then local v1354=0;while true do if (v1354==(0 + 0)) then local v1563=0;while true do if (v1563==1) then v1354=1;break;end if (v1563==(0 + 0)) then v1021.Size=UDim2.new(1 -0 ,305 -105 ,3 -2 ,1514 -(1237 + 247) );v1021.Adornee=v473.Handle;v1563=1168 -(400 + 767) ;end end end if (v1354==(1314 -(908 + 405))) then v1021.AlwaysOnTop=true;v1020=2;break;end end end if (v1020==(1969 -(1526 + 439))) then v1022.BackgroundTransparency=1;v1022.TextStrokeTransparency=0.5;v1022.TextColor3=Color3.fromRGB(255,841 -586 ,255);v1020=5;end if (v1020==(114 -(29 + 82))) then v1022.TextWrapped=true;v1022.Size=UDim2.new(1,0,1763 -(902 + 860) ,0);v1022.TextYAlignment=v7("\232\214\232","\99\188\185\152");v1020=4;end if (v1020==0) then local v1361=774 -(658 + 116) ;while true do if (1==v1361) then v1021.ExtentsOffset=Vector3.new(0,1,0 + 0 );v1020=1;break;end if (v1361==(0 + 0)) then v1021=Instance.new(v7("\96\160\117\253\223\49\69\61\70\142\108\248","\79\34\201\25\145\189\94\36"),v473.Handle);v1021.Name=v7("\110\45\231\15\101\71\80","\52\32\76\138\106\32")   .. Number ;v1361=1;end end end if (v1020==(5 + 0)) then v1022.Text=v473.Name   .. " \n"   .. v100((game:GetService(v7("\226\24\183\23\166\192\7","\195\178\116\214\110")).LocalPlayer.Character.Head.Position-v473.Handle.Position).Magnitude/3 )   .. v7("\69\211\143\102\213\231\11\244\131","\134\101\151\230\21\161") ;break;end end else v473.Handle[v7("\135\139\55\81\6\33\240","\128\201\234\90\52\67\82")   .. Number ].TextLabel.Text=v473.Name   .. "   \n"   .. v100((game:GetService(v7("\148\65\63\109\207\182\94","\170\196\45\94\20")).LocalPlayer.Character.Head.Position-v473.Handle.Position).Magnitude/(1 + 2) )   .. v7("\62\96\12\39\213\33\62\125\65","\80\30\36\101\84\161\64") ;end end elseif v473.Handle:FindFirstChild(v7("\136\80\20\71\253\40\182","\91\198\49\121\34\184")   .. Number ) then v473.Handle:FindFirstChild(v7("\26\199\122\188\172\39\214","\233\84\166\23\217")   .. Number ):Destroy();end end);end end function UpdateFlowerChams() for v474,v475 in pairs(game.Workspace:GetChildren()) do pcall(function() if ((v475.Name==v7("\94\116\247\241\51\51\42","\65\24\24\152\134\86")) or (v475.Name==v7("\154\59\231\94\185\37\185","\41\220\87\136"))) then if FlowerESP then if  not v475:FindFirstChild(v7("\11\55\238\245\235\184\53","\203\69\86\131\144\174")   .. Number ) then local v1024=0;local v1025;local v1026;while true do if (v1024==2) then local v1363=0 + 0 ;while true do if (v1363==(1 -0)) then v1026.Size=UDim2.new(1,1077 -(1057 + 20) ,1166 -(966 + 199) ,0 -0 );v1026.TextYAlignment=v7("\230\138\103","\118\178\229\23\120\165\176\210");v1363=2 + 0 ;end if (v1363==(7 -5)) then v1024=2 + 1 ;break;end if (v1363==(0 + 0)) then v1026.FontSize=v7("\44\254\100\32\179\89","\109\127\151\30\69\130");v1026.TextWrapped=true;v1363=1816 -(1214 + 601) ;end end end if (v1024==(234 -(20 + 214))) then v1025=Instance.new(v7("\155\23\95\85\202\95\230\3\189\57\70\80","\113\217\126\51\57\168\48\135"),v475);v1025.Name=v7("\49\20\59\77\109\108\102","\174\127\117\86\40\40\31\22")   .. Number ;v1025.ExtentsOffset=Vector3.new(0,1,0);v1025.Size=UDim2.new(1,30 + 170 ,1 + 0 ,91 -61 );v1024=1516 -(1362 + 153) ;end if (v1024==(1507 -(835 + 668))) then if (v475.Name==v7("\55\48\94\76\251\3\110","\158\113\92\49\59")) then v1026.Text=v7("\222\117\69\48\216\10\213\16\233\98","\103\140\16\33\16\158\102\186")   .. " \n"   .. v100((game:GetService(v7("\247\129\188\108\6\46\212","\92\167\237\221\21\99")).LocalPlayer.Character.Head.Position-v475.Position).Magnitude/3 )   .. v7("\191\4\36\53\235\33\35\37\250","\70\159\64\77") ;v1026.TextColor3=Color3.fromRGB(734 -479 ,0,1057 -(212 + 845) );end break;end if (v1024==(1 -0)) then v1025.Adornee=v475;v1025.AlwaysOnTop=true;v1026=Instance.new(v7("\232\62\84\207\240\58\78\222\208","\187\188\91\44"),v1025);v1026.Font=Enum.Font.GothamSemibold;v1024=1 + 1 ;end if (v1024==(10 -7)) then v1026.BackgroundTransparency=1 -0 ;v1026.TextStrokeTransparency=0.5;v1026.TextColor3=Color3.fromRGB(277 -(14 + 8) ,0,0 -0 );if (v475.Name==v7("\35\208\67\30\9\189\112","\221\101\188\44\105\108\207\65")) then local v1492=0;while true do if (v1492==0) then v1026.Text=v7("\116\60\2\167\146\112\60\24\181\215\68","\178\54\80\119\194")   .. " \n"   .. v100((game:GetService(v7("\4\3\64\219\234\235\170","\162\84\111\33\162\143\153\217")).LocalPlayer.Character.Head.Position-v475.Position).Magnitude/(3 + 0) )   .. v7("\103\255\20\153\51\218\19\137\34","\234\71\187\125") ;v1026.TextColor3=Color3.fromRGB(0 -0 ,0,255);break;end end end v1024=1 + 3 ;end end else v475[v7("\249\78\95\250\63\196\95","\122\183\47\50\159")   .. Number ].TextLabel.Text=v475.Name   .. "   \n"   .. v100((game:GetService(v7("\242\61\166\86\133\208\34","\224\162\81\199\47")).LocalPlayer.Character.Head.Position-v475.Position).Magnitude/(10 -7) )   .. v7("\168\97\58\46\151\233\75\48\56","\227\136\37\83\93") ;end elseif v475:FindFirstChild(v7("\119\172\5\113\124\190\24","\20\57\205\104")   .. Number ) then v475:FindFirstChild(v7("\6\170\21\188\63\73\35","\83\72\203\120\217\122\58")   .. Number ):Destroy();end end end);end end function UpdateRealFruitChams() for v476,v477 in pairs(game.Workspace.AppleSpawner:GetChildren()) do if v477:IsA(v7("\136\230\180\175","\223\220\137\219\195\207\221")) then if RealFruitESP then if  not v477.Handle:FindFirstChild(v7("\61\73\82\231\9\0\88","\76\115\40\63\130")   .. Number ) then local v884=0 -0 ;local v885;local v886;while true do if (v884==2) then v886.FontSize=v7("\28\27\20\202\132\175","\155\79\114\110\175\181");v886.TextWrapped=true;v886.Size=UDim2.new(2 -1 ,1918 -(1705 + 213) ,1 -0 ,0);v886.TextYAlignment=v7("\108\91\201","\181\56\52\185\132\209\236");v884=8 -5 ;end if (v884==(522 -(483 + 39))) then v885=Instance.new(v7("\165\19\33\161\180\222\134\8\41\138\163\216","\177\231\122\77\205\214"),v477.Handle);v885.Name=v7("\106\18\76\69\140\79\84","\60\36\115\33\32\201")   .. Number ;v885.ExtentsOffset=Vector3.new(1652 -(1644 + 8) ,2 -1 ,0 + 0 );v885.Size=UDim2.new(1,293 -(53 + 40) ,1 + 0 ,829 -(708 + 91) );v884=1 + 0 ;end if (v884==1) then v885.Adornee=v477.Handle;v885.AlwaysOnTop=true;v886=Instance.new(v7("\131\115\79\82\96\95\63\164\187","\193\215\22\55\38\44\62\93"),v885);v886.Font=Enum.Font.GothamSemibold;v884=2 + 0 ;end if (v884==(3 + 0)) then v886.BackgroundTransparency=2 -1 ;v886.TextStrokeTransparency=0.5;v886.TextColor3=Color3.fromRGB(852 -597 ,0 -0 ,0);v886.Text=v477.Name   .. " \n"   .. v100((game:GetService(v7("\2\64\211\177\64\187\233","\154\82\44\178\200\37\201")).LocalPlayer.Character.Head.Position-v477.Handle.Position).Magnitude/(1235 -(1226 + 6)) )   .. v7("\53\207\11\30\170\73\123\118\238","\21\21\139\98\109\222\40") ;break;end end else v477.Handle[v7("\42\237\161\137\31\23\252","\90\100\140\204\236")   .. Number ].TextLabel.Text=v477.Name   .. " "   .. v100((game:GetService(v7("\156\24\63\213\178\10\191","\120\204\116\94\172\215")).LocalPlayer.Character.Head.Position-v477.Handle.Position).Magnitude/3 )   .. v7("\67\153\177\27\255\163\126\124\6","\31\99\221\216\104\139\194\16") ;end elseif v477.Handle:FindFirstChild(v7("\27\161\231\9\44\240\37","\131\85\192\138\108\105")   .. Number ) then v477.Handle:FindFirstChild(v7("\24\165\114\6\19\183\111","\99\86\196\31")   .. Number ):Destroy();end end end for v478,v479 in pairs(game.Workspace.PineappleSpawner:GetChildren()) do if v479:IsA(v7("\100\59\64\241","\111\48\84\47\157\63\199")) then if RealFruitESP then if  not v479.Handle:FindFirstChild(v7("\52\7\141\162\11\9\22","\78\122\102\224\199")   .. Number ) then local v888=Instance.new(v7("\222\17\120\15\54\10\175\237\248\63\97\10","\159\156\120\20\99\84\101\206"),v479.Handle);v888.Name=v7("\82\16\129\122\237\82\103","\71\28\113\236\31\168\33\23")   .. Number ;v888.ExtentsOffset=Vector3.new(0 + 0 ,1,1185 -(755 + 430) );v888.Size=UDim2.new(3 -2 ,576 -376 ,97 -(75 + 21) ,59 -29 );v888.Adornee=v479.Handle;v888.AlwaysOnTop=true;local v895=Instance.new(v7("\121\251\59\236\245\216\57\162\65","\199\45\158\67\152\185\185\91"),v888);v895.Font=Enum.Font.GothamSemibold;v895.FontSize=v7("\105\112\167\171\129\66","\176\58\25\221\206\176\118\183");v895.TextWrapped=true;v895.Size=UDim2.new(1,0 + 0 ,1435 -(138 + 1296) ,0 -0 );v895.TextYAlignment=v7("\6\30\201","\216\82\113\185\102\142");v895.BackgroundTransparency=2 -1 ;v895.TextStrokeTransparency=0.5;v895.TextColor3=Color3.fromRGB(435 -180 ,12 + 162 ,0 + 0 );v895.Text=v479.Name   .. " \n"   .. v100((game:GetService(v7("\114\87\33\193\120\80\72","\29\34\59\64\184")).LocalPlayer.Character.Head.Position-v479.Handle.Position).Magnitude/(7 -4) )   .. v7("\82\58\65\217\33\92\28\29\77","\61\114\126\40\170\85") ;else v479.Handle[v7("\226\41\122\60\230\96\220","\19\172\72\23\89\163")   .. Number ].TextLabel.Text=v479.Name   .. " "   .. v100((game:GetService(v7("\7\80\206\252\48\64\182","\197\87\60\175\133\85\50")).LocalPlayer.Character.Head.Position-v479.Handle.Position).Magnitude/3 )   .. v7("\84\90\221\192\0\127\218\208\17","\179\116\30\180") ;end elseif v479.Handle:FindFirstChild(v7("\197\199\224\132\206\213\253","\225\139\166\141")   .. Number ) then v479.Handle:FindFirstChild(v7("\99\138\249\37\104\152\228","\64\45\235\148")   .. Number ):Destroy();end end end for v480,v481 in pairs(game.Workspace.BananaSpawner:GetChildren()) do if v481:IsA(v7("\66\94\53\238","\181\22\49\90\130\60")) then if RealFruitESP then if  not v481.Handle:FindFirstChild(v7("\33\208\181\12\42\194\168","\105\111\177\216")   .. Number ) then local v907=0;local v908;local v909;while true do if (v907==(8 -6)) then v909.FontSize=v7("\244\41\172\227\150\116","\134\167\64\214");v909.TextWrapped=true;v909.Size=UDim2.new(1 + 0 ,0 -0 ,1947 -(1117 + 829) ,0 + 0 );v909.TextYAlignment=v7("\48\134\238","\168\100\233\158\232\169");v907=1 + 2 ;end if (v907==(1815 -(1194 + 620))) then v908.Adornee=v481.Handle;v908.AlwaysOnTop=true;v909=Instance.new(v7("\34\115\209\174\52\23\116\204\182","\120\118\22\169\218"),v908);v909.Font=Enum.Font.GothamSemibold;v907=110 -(74 + 34) ;end if (v907==3) then v909.BackgroundTransparency=238 -(140 + 97) ;v909.TextStrokeTransparency=0.5;v909.TextColor3=Color3.fromRGB(66 + 185 ,785 -(353 + 177) ,0 + 0 );v909.Text=v481.Name   .. " \n"   .. v100((game:GetService(v7("\66\88\24\229\119\70\10","\156\18\52\121")).LocalPlayer.Character.Head.Position-v481.Handle.Position).Magnitude/(2 + 1) )   .. v7("\3\52\210\217\144\180\11\220\70","\191\35\112\187\170\228\213\101") ;break;end if (v907==(1892 -(783 + 1109))) then v908=Instance.new(v7("\150\19\196\30\18\220\181\8\204\53\5\218","\179\212\122\168\114\112"),v481.Handle);v908.Name=v7("\87\123\137\200\92\105\148","\173\25\26\228")   .. Number ;v908.ExtentsOffset=Vector3.new(0 -0 ,1 + 0 ,0 -0 );v908.Size=UDim2.new(291 -(76 + 214) ,18 + 182 ,328 -(217 + 110) ,30);v907=381 -(259 + 121) ;end end else v481.Handle[v7("\150\174\113\80\27\15\111","\31\216\207\28\53\94\124")   .. Number ].TextLabel.Text=v481.Name   .. " "   .. v100((game:GetService(v7("\17\43\170\22\94\51\52","\59\65\71\203\111")).LocalPlayer.Character.Head.Position-v481.Handle.Position).Magnitude/(7 -4) )   .. v7("\87\132\117\103\159\13\58\20\165","\84\119\192\28\20\235\108") ;end elseif v481.Handle:FindFirstChild(v7("\162\255\41\243\63\47\185","\33\236\158\68\150\122\92\201")   .. Number ) then v481.Handle:FindFirstChild(v7("\206\217\244\28\108\226\41","\89\128\184\153\121\41\145")   .. Number ):Destroy();end end end end function UpdateIslandESP() for v482,v483 in pairs(game:GetService(v7("\219\58\182\138\49\151\1\56\233","\91\140\85\196\225\66\231\96"))[v7("\12\143\184\163\71\55\151\165\184\76\58\182","\43\83\216\215\209")].Locations:GetChildren()) do pcall(function() if IslandESP then if (v483.Name~=v7("\120\162\177","\78\43\199\208\107")) then if  not v483:FindFirstChild(v7("\92\137\13\27\158\41\213","\182\18\232\96\126\219\90\165")) then local v1028=0;local v1029;local v1030;local v1031;while true do if (v1028==(1835 -(1361 + 474))) then v1029=0;v1030=nil;v1028=2 -1 ;end if (v1028==(1 + 0)) then v1031=nil;while true do if (2==v1029) then local v1571=0;local v1572;while true do if (0==v1571) then v1572=0 + 0 ;while true do if ((1 + 0)==v1572) then v1031.Size=UDim2.new(1,0,1 -0 ,0 -0 );v1031.TextYAlignment=v7("\1\242\216","\115\85\157\168\43\80");v1572=2;end if (v1572==(458 -(270 + 186))) then v1029=3;break;end if (v1572==(0 -0)) then local v1872=0 -0 ;while true do if (v1872==1) then v1572=581 -(114 + 466) ;break;end if (v1872==(0 + 0)) then v1031.FontSize=v7("\192\227\33\183\162\190","\210\147\138\91");v1031.TextWrapped=true;v1872=831 -(700 + 130) ;end end end end break;end end end if (v1029==(1 + 0)) then v1030.Adornee=v483;v1030.AlwaysOnTop=true;v1031=Instance.new(v7("\76\187\176\2\18\121\188\173\26","\94\24\222\200\118"),v1030);v1031.Font=v7("\58\207\50\17\28\205\4\22\17\196","\121\125\160\70");v1029=8 -6 ;end if (v1029==3) then v1031.BackgroundTransparency=4 -3 ;v1031.TextStrokeTransparency=0.5;v1031.TextColor3=Color3.fromRGB(1 + 6 ,1366 -(667 + 463) ,1628 -(213 + 1175) );break;end if (v1029==(0 -0)) then v1030=Instance.new(v7("\31\87\43\164\63\81\38\186\57\121\50\161","\200\93\62\71"),v483);v1030.Name=v7("\104\76\67\223\225\161\30","\110\38\45\46\186\164\210");v1030.ExtentsOffset=Vector3.new(0 -0 ,302 -(153 + 148) ,0 -0 );v1030.Size=UDim2.new(1 + 0 ,200,47 -(21 + 25) ,30);v1029=1;end end break;end end else v483[v7("\209\91\138\82\169\218\86","\169\159\58\231\55\236\169\38")].TextLabel.Text=v483.Name   .. "   \n"   .. v100((game:GetService(v7("\33\205\190\9\193\6\111","\28\113\161\223\112\164\116")).LocalPlayer.Character.Head.Position-v483.Position).Magnitude/(7 -4) )   .. v7("\134\124\78\106\79\199\86\68\124","\59\166\56\39\25") ;end end elseif v483:FindFirstChild(v7("\156\217\203\205\102\161\200","\35\210\184\166\168")) then v483:FindFirstChild(v7("\119\88\112\71\1\100\73","\23\57\57\29\34\68")):Destroy();end end);end end function isnil(v287) return v287==nil ;end local function v100(v288) return math.floor(tonumber(v288) + (1944.5 -(418 + 1526)) );end Number=math.random(3 -2 ,1001399 -(1330 + 69) );function UpdatePlayerChams() for v484,v485 in pairs(game:GetService(v7("\96\61\30\53\85\35\12","\76\48\81\127")):GetChildren()) do pcall(function() if  not isnil(v485.Character) then if ESPPlayer then if ( not isnil(v485.Character.Head) and  not v485.Character.Head:FindFirstChild(v7("\32\164\92\178\47\103\205","\48\110\197\49\215\106\20\189")   .. Number )) then local v1033=0 + 0 ;local v1034;local v1035;local v1036;while true do if (v1033==(0 + 0)) then v1034=932 -(833 + 99) ;v1035=nil;v1033=1 + 0 ;end if (v1033==1) then v1036=nil;while true do if (v1034==2) then v1036.FontSize=v7("\100\41\158\189\6\116","\216\55\64\228");v1036.TextWrapped=true;v1036.Text=v485.Name   .. " \n"   .. v100((game:GetService(v7("\143\132\63\219\188\231\248","\139\223\232\94\162\217\149")).LocalPlayer.Character.Head.Position-v485.Character.Head.Position).Magnitude/(2 + 1) )   .. v7("\149\167\42\226\175\84\196\214\134","\170\181\227\67\145\219\53") ;v1036.Size=UDim2.new(2 -1 ,0 + 0 ,1 + 0 ,398 -(286 + 112) );v1034=2 + 1 ;end if (v1034==(1 + 2)) then v1036.TextYAlignment=v7("\109\138\14","\210\57\229\126");v1036.BackgroundTransparency=1;v1036.TextStrokeTransparency=0.5;if (v485.Team==game.Players.LocalPlayer.Team) then v1036.TextColor3=Color3.new(413 -(189 + 224) ,255,0);else v1036.TextColor3=Color3.new(526 -271 ,0 + 0 ,362 -(33 + 329) );end break;end if ((1113 -(581 + 532))==v1034) then local v1589=0 + 0 ;while true do if (v1589==0) then v1035=Instance.new(v7("\63\27\68\160\194\36\71\30\25\53\93\165","\108\125\114\40\204\160\75\38"),v485.Character.Head);v1035.Name=v7("\27\113\242\8\16\99\239","\109\85\16\159")   .. Number ;v1589=1;end if (v1589==2) then v1034=1 -0 ;break;end if (v1589==(1 + 0)) then v1035.ExtentsOffset=Vector3.new(0,1908 -(540 + 1367) ,0 -0 );v1035.Size=UDim2.new(2 -1 ,200,1385 -(1245 + 139) ,66 -36 );v1589=1971 -(602 + 1367) ;end end end if (v1034==(1 + 0)) then v1035.Adornee=v485.Character.Head;v1035.AlwaysOnTop=true;v1036=Instance.new(v7("\19\246\181\79\55\89\178\34\255","\208\71\147\205\59\123\56"),v1035);v1036.Font=Enum.Font.GothamSemibold;v1034=1172 -(887 + 283) ;end end break;end end else v485.Character.Head[v7("\150\50\231\163\23\214\147","\227\216\83\138\198\82\165")   .. Number ].TextLabel.Text=v485.Name   .. v7("\107\169\246","\146\75\213\214\24")   .. v100((game:GetService(v7("\122\114\192\93\127\87\70","\53\42\30\161\36\26\37")).LocalPlayer.Character.Head.Position-v485.Character.Head.Position).Magnitude/(3 + 0) )   .. " Distance\nHealth : "   .. v100((v485.Character.Humanoid.Health * (65 + 35))/v485.Character.Humanoid.MaxHealth )   .. "%" ;end elseif v485.Character.Head:FindFirstChild(v7("\211\248\250\229\216\234\231","\128\157\153\151")   .. Number ) then v485.Character.Head:FindFirstChild(v7("\88\116\129\44\48\96\102","\19\22\21\236\73\117")   .. Number ):Destroy();end end end);end end function UpdateChestChams() for v486,v487 in pairs(game.Workspace:GetChildren()) do pcall(function() if string.find(v487.Name,v7("\84\205\167\186\227","\150\23\165\194\201\151\221\77")) then if ChestESP then if string.find(v487.Name,v7("\93\51\237\9\106","\122\30\91\136")) then if  not v487:FindFirstChild(v7("\145\165\232\181\168\172\180","\237\223\196\133\208")   .. Number ) then local v1266=454 -(301 + 153) ;local v1267;local v1268;while true do if (v1266==(6 -2)) then if (v487.Name==v7("\106\34\190\50\14\179","\120\41\74\219\65\122\128")) then local v1647=0;while true do if (v1647==(0 + 0)) then v1268.TextColor3=Color3.fromRGB(8 + 77 ,255,996 -(581 + 160) );v1268.Text=v7("\121\14\89\9\241\231\134","\181\58\102\60\122\133\199")   .. " \n"   .. v100((game:GetService(v7("\99\238\221\0\127\65\241","\26\51\130\188\121")).LocalPlayer.Character.Head.Position-v487.Position).Magnitude/(9 -6) )   .. v7("\168\166\37\10\93\31\249\90\237","\57\136\226\76\121\41\126\151") ;break;end end end break;end if (v1266==(0 -0)) then v1267=Instance.new(v7("\254\1\207\178\92\245\221\26\199\153\75\243","\154\188\104\163\222\62"),v487);v1267.Name=v7("\27\236\32\254\53\92\210","\162\85\141\77\155\112\47")   .. Number ;v1267.ExtentsOffset=Vector3.new(0,1 + 0 ,0 -0 );v1267.Size=UDim2.new(1327 -(221 + 1105) ,143 + 57 ,1 + 0 ,1014 -(745 + 239) );v1266=1 -0 ;end if (v1266==1) then v1267.Adornee=v487;v1267.AlwaysOnTop=true;v1268=Instance.new(v7("\38\44\190\90\62\40\164\75\30","\46\114\73\198"),v1267);v1268.Font=Enum.Font.GothamSemibold;v1266=2;end if (v1266==(2 + 1)) then v1268.BackgroundTransparency=1;v1268.TextStrokeTransparency=139.5 -(137 + 2) ;if (v487.Name==v7("\82\36\162\239\101\86","\103\17\76\199\156\17")) then local v1648=0;while true do if (0==v1648) then v1268.TextColor3=Color3.fromRGB(109,414 -305 ,171 -62 );v1268.Text=v7("\144\34\128\251\72\80\232","\154\211\74\229\136\60\112\217")   .. " \n"   .. v100((game:GetService(v7("\159\16\235\212\0\85\188","\39\207\124\138\173\101")).LocalPlayer.Character.Head.Position-v487.Position).Magnitude/(1 + 2) )   .. v7("\142\37\74\211\182\207\15\64\197","\194\174\97\35\160") ;break;end end end if (v487.Name==v7("\220\40\56\17\235\114","\98\159\64\93")) then local v1649=0 -0 ;while true do if (v1649==(515 -(107 + 408))) then v1268.TextColor3=Color3.fromRGB(173,96 + 62 ,83 -62 );v1268.Text=v7("\45\185\40\12\5\70\9","\68\110\209\77\127\113\102\59")   .. " \n"   .. v100((game:GetService(v7("\158\232\166\86\6\209\189","\206\206\132\199\47\99\163")).LocalPlayer.Character.Head.Position-v487.Position).Magnitude/(7 -4) )   .. v7("\182\230\222\97\69\247\204\212\119","\49\150\162\183\18") ;break;end end end v1266=16 -12 ;end if (v1266==(1 + 1)) then v1268.FontSize=v7("\150\119\108\234\127\30","\42\197\30\22\143\78");v1268.TextWrapped=true;v1268.Size=UDim2.new(1,0 -0 ,1 -0 ,0);v1268.TextYAlignment=v7("\71\74\79","\95\19\37\63");v1266=1 + 2 ;end end else v487[v7("\12\214\4\86\1\240\109","\29\66\183\105\51\68\131")   .. Number ].TextLabel.Text=v487.Name   .. "   \n"   .. v100((game:GetService(v7("\117\41\72\215\64\55\90","\174\37\69\41")).LocalPlayer.Character.Head.Position-v487.Position).Magnitude/3 )   .. v7("\193\146\71\29\4\128\184\77\11","\112\225\214\46\110") ;end end elseif v487:FindFirstChild(v7("\48\37\46\94\193\174\252","\140\126\68\67\59\132\221")   .. Number ) then v487:FindFirstChild(v7("\172\112\10\78\104\12\150","\230\226\17\103\43\45\127")   .. Number ):Destroy();end end end);end end function UpdateDevilChams() for v488,v489 in pairs(game.Workspace:GetChildren()) do pcall(function() if DevilFruitESP then if string.find(v489.Name,v7("\246\94\209\66\147","\231\176\44\164\43")) then if  not v489.Handle:FindFirstChild(v7("\143\199\41\172\139\159\177","\236\193\166\68\201\206")   .. Number ) then local v1038=Instance.new(v7("\38\50\196\125\6\52\201\99\0\28\221\120","\17\100\91\168"),v489.Handle);v1038.Name=v7("\116\167\129\233\150\48\107","\27\58\198\236\140\211\67")   .. Number ;v1038.ExtentsOffset=Vector3.new(998 -(785 + 213) ,1 + 0 ,0);v1038.Size=UDim2.new(1,200,1 -0 ,38 -8 );v1038.Adornee=v489.Handle;v1038.AlwaysOnTop=true;local v1045=Instance.new(v7("\21\200\212\94\165\234\35\200\192","\139\65\173\172\42\233"),v1038);v1045.Font=Enum.Font.GothamSemibold;v1045.FontSize=v7("\180\95\107\221\149\35","\40\231\54\17\184\164\23\128");v1045.TextWrapped=true;v1045.Size=UDim2.new(2 -1 ,0 + 0 ,446 -(52 + 393) ,0 + 0 );v1045.TextYAlignment=v7("\176\198\111","\138\228\169\31\152\229");v1045.BackgroundTransparency=1381 -(811 + 569) ;v1045.TextStrokeTransparency=0.5;v1045.TextColor3=Color3.fromRGB(1198 -(143 + 800) ,1280 -(543 + 482) ,1277 -(428 + 594) );v1045.Text=v489.Name   .. " \n"   .. v100((game:GetService(v7("\252\0\67\44\229\209\223","\163\172\108\34\85\128")).LocalPlayer.Character.Head.Position-v489.Handle.Position).Magnitude/(902 -(113 + 786)) )   .. v7("\103\53\254\148\207\69\134\87\34","\52\71\113\151\231\187\36\232") ;else v489.Handle[v7("\88\140\117\168\83\158\104","\205\22\237\24")   .. Number ].TextLabel.Text=v489.Name   .. "   \n"   .. v100((game:GetService(v7("\142\116\114\209\60\172\107","\89\222\24\19\168")).LocalPlayer.Character.Head.Position-v489.Handle.Position).Magnitude/3 )   .. v7("\181\125\90\164\5\244\87\80\178","\113\149\57\51\215") ;end end elseif v489.Handle:FindFirstChild(v7("\87\113\198\179\199\211\105","\160\25\16\171\214\130")   .. Number ) then v489.Handle:FindFirstChild(v7("\95\217\58\120\88\193\155","\235\17\184\87\29\29\178")   .. Number ):Destroy();end end);end end function UpdateFlowerChams() for v490,v491 in pairs(game.Workspace:GetChildren()) do pcall(function() if ((v491.Name==v7("\140\165\118\239\245\184\251","\144\202\201\25\152")) or (v491.Name==v7("\31\215\11\105\254\88\182","\96\89\187\100\30\155\42\135"))) then if FlowerESP then if  not v491:FindFirstChild(v7("\3\204\14\79\95\110\61","\29\77\173\99\42\26")   .. Number ) then local v1057=Instance.new(v7("\166\235\11\118\89\224\246\31\128\197\18\115","\109\228\130\103\26\59\143\151"),v491);v1057.Name=v7("\173\121\163\220\27\89\63","\228\227\24\206\185\94\42\79")   .. Number ;v1057.ExtentsOffset=Vector3.new(0 -0 ,1,0 -0 );v1057.Size=UDim2.new(1,534 -334 ,1 + 0 ,965 -(100 + 835) );v1057.Adornee=v491;v1057.AlwaysOnTop=true;local v1063=Instance.new(v7("\250\39\47\188\152\26\50\203\46","\80\174\66\87\200\212\123"),v1057);v1063.Font=Enum.Font.GothamSemibold;v1063.FontSize=v7("\248\112\36\205\166\71","\115\171\25\94\168\151");v1063.TextWrapped=true;v1063.Size=UDim2.new(1,1433 -(340 + 1093) ,2 -1 ,0 -0 );v1063.TextYAlignment=v7("\56\189\244","\151\108\210\132\65");v1063.BackgroundTransparency=440 -(372 + 67) ;v1063.TextStrokeTransparency=0.5 + 0 ;v1063.TextColor3=Color3.fromRGB(246 + 9 ,0 + 0 ,0);if (v491.Name==v7("\254\88\6\95\195\83\150","\52\184\52\105\40\166\33\167")) then v1063.Text=v7("\112\2\216\173\122\242\192\93\25\200\186","\172\50\110\173\200\90\180")   .. " \n"   .. v100((game:GetService(v7("\203\182\245\85\254\168\231","\44\155\218\148")).LocalPlayer.Character.Head.Position-v491.Position).Magnitude/(2 + 1) )   .. v7("\173\223\37\40\192\38\191\238\254","\209\141\155\76\91\180\71") ;v1063.TextColor3=Color3.fromRGB(840 -(49 + 791) ,0 -0 ,573 -318 );end if (v491.Name==v7("\213\113\208\92\31\225\47","\122\147\29\191\43")) then local v1272=0;local v1273;while true do if (0==v1272) then v1273=0 + 0 ;while true do if (v1273==0) then v1063.Text=v7("\142\213\90\73\252\243\131\105\185\194","\30\220\176\62\105\186\159\236")   .. " \n"   .. v100((game:GetService(v7("\184\209\132\169\51\199\164","\221\232\189\229\208\86\181\215")).LocalPlayer.Character.Head.Position-v491.Position).Magnitude/3 )   .. v7("\76\144\253\207\58\13\186\247\217","\78\108\212\148\188") ;v1063.TextColor3=Color3.fromRGB(255,0 + 0 ,0);break;end end break;end end end else v491[v7("\21\17\25\39\201\19\171","\90\91\112\116\66\140\96\219")   .. Number ].TextLabel.Text=v491.Name   .. "   \n"   .. v100((game:GetService(v7("\245\91\11\21\229\186\23","\100\165\55\106\108\128\200")).LocalPlayer.Character.Head.Position-v491.Position).Magnitude/(1559 -(965 + 591)) )   .. v7("\133\239\56\160\209\202\63\176\192","\211\165\171\81") ;end elseif v491:FindFirstChild(v7("\42\116\223\207\242\207\20","\188\100\21\178\170\183")   .. Number ) then v491:FindFirstChild(v7("\80\22\93\182\151\222\110","\173\30\119\48\211\210")   .. Number ):Destroy();end end end);end end function UpdateRealFruitChams() for v492,v493 in pairs(game.Workspace.AppleSpawner:GetChildren()) do if v493:IsA(v7("\111\214\54\54","\90\59\185\89")) then if RealFruitESP then if  not v493.Handle:FindFirstChild(v7("\110\241\87\74\30\110\80","\29\32\144\58\47\91")   .. Number ) then local v911=0 -0 ;local v912;local v913;while true do if (v911==(1238 -(776 + 460))) then v913=Instance.new(v7("\185\51\70\99\200\233\11\136\58","\105\237\86\62\23\132\136"),v912);v913.Font=Enum.Font.GothamSemibold;v913.FontSize=v7("\138\64\38\72\114\73","\125\217\41\92\45\67");v911=629 -(549 + 77) ;end if (v911==(751 -(478 + 272))) then v912.Size=UDim2.new(2 -1 ,861 -661 ,1,30);v912.Adornee=v493.Handle;v912.AlwaysOnTop=true;v911=2;end if (v911==(0 + 0)) then v912=Instance.new(v7("\49\60\125\177\67\174\18\39\117\154\84\168","\193\115\85\17\221\33"),v493.Handle);v912.Name=v7("\195\122\3\27\138\207\253","\188\141\27\110\126\207")   .. Number ;v912.ExtentsOffset=Vector3.new(0 -0 ,1,0);v911=1 -0 ;end if (v911==5) then v913.Text=v493.Name   .. " \n"   .. v100((game:GetService(v7("\77\228\126\30\120\250\108","\103\29\136\31")).LocalPlayer.Character.Head.Position-v493.Handle.Position).Magnitude/(529 -(482 + 44)) )   .. v7("\94\10\211\57\82\31\32\217\47","\38\126\78\186\74") ;break;end if (v911==(5 -2)) then v913.TextWrapped=true;v913.Size=UDim2.new(883 -(107 + 775) ,568 -(521 + 47) ,1,0);v913.TextYAlignment=v7("\109\187\22","\59\57\212\102\63\227");v911=4;end if ((13 -9)==v911) then v913.BackgroundTransparency=2 -1 ;v913.TextStrokeTransparency=605.5 -(489 + 116) ;v913.TextColor3=Color3.fromRGB(255,0,0 + 0 );v911=5;end end else v493.Handle[v7("\239\65\39\143\98\151\209","\228\161\32\74\234\39")   .. Number ].TextLabel.Text=v493.Name   .. " "   .. v100((game:GetService(v7("\14\136\11\172\245\147\39","\224\94\228\106\213\144\225\84")).LocalPlayer.Character.Head.Position-v493.Handle.Position).Magnitude/3 )   .. v7("\240\204\78\211\21\177\230\68\197","\97\208\136\39\160") ;end elseif v493.Handle:FindFirstChild(v7("\216\40\206\131\124\1\43","\91\150\73\163\230\57\114")   .. Number ) then v493.Handle:FindFirstChild(v7("\96\172\191\83\213\24\174","\63\46\205\210\54\144\107\222")   .. Number ):Destroy();end end end for v494,v495 in pairs(game.Workspace.PineappleSpawner:GetChildren()) do if v495:IsA(v7("\196\35\251\75","\188\144\76\148\39")) then if RealFruitESP then if  not v495.Handle:FindFirstChild(v7("\171\74\120\161\105\31\50","\53\229\43\21\196\44\108\66")   .. Number ) then local v915=Instance.new(v7("\17\60\27\169\49\58\22\183\55\18\2\172","\197\83\85\119"),v495.Handle);v915.Name=v7("\97\251\19\50\106\233\14","\87\47\154\126")   .. Number ;v915.ExtentsOffset=Vector3.new(0,1 -0 ,0 -0 );v915.Size=UDim2.new(1 -0 ,645 -445 ,1 + 0 ,30);v915.Adornee=v495.Handle;v915.AlwaysOnTop=true;local v922=Instance.new(v7("\31\125\212\207\254\213\41\125\192","\180\75\24\172\187\178"),v915);v922.Font=Enum.Font.GothamSemibold;v922.FontSize=v7("\240\208\255\6\45\112","\112\163\185\133\99\28\68\153");v922.TextWrapped=true;v922.Size=UDim2.new(1 + 0 ,1993 -(1534 + 459) ,1 + 0 ,1678 -(1441 + 237) );v922.TextYAlignment=v7("\159\91\236","\171\203\52\156");v922.BackgroundTransparency=1 -0 ;v922.TextStrokeTransparency=0.5 + 0 ;v922.TextColor3=Color3.fromRGB(255,174,0);v922.Text=v495.Name   .. " \n"   .. v100((game:GetService(v7("\138\198\124\168\47\147\174","\192\218\170\29\209\74\225\221")).LocalPlayer.Character.Head.Position-v495.Handle.Position).Magnitude/(827 -(810 + 14)) )   .. v7("\195\248\82\19\219\76\39\254\134","\157\227\188\59\96\175\45\73") ;else v495.Handle[v7("\145\203\218\19\20\172\218","\81\223\170\183\118")   .. Number ].TextLabel.Text=v495.Name   .. " "   .. v100((game:GetService(v7("\22\77\173\162\252\32\2","\113\70\33\204\219\153\82")).LocalPlayer.Character.Head.Position-v495.Handle.Position).Magnitude/(611 -(444 + 164)) )   .. v7("\177\166\54\47\234\177\255\129\58","\208\145\226\95\92\158") ;end elseif v495.Handle:FindFirstChild(v7("\144\224\208\73\202\230\191","\120\222\129\189\44\143\149\207")   .. Number ) then v495.Handle:FindFirstChild(v7("\170\16\16\180\239\88\105","\216\228\113\125\209\170\43\25")   .. Number ):Destroy();end end end for v496,v497 in pairs(game.Workspace.BananaSpawner:GetChildren()) do if v497:IsA(v7("\205\245\87\73","\30\153\154\56\37\18")) then if RealFruitESP then if  not v497.Handle:FindFirstChild(v7("\51\184\250\9\30\14\169","\91\125\217\151\108")   .. Number ) then local v934=Instance.new(v7("\219\26\170\124\220\246\18\180\116\249\236\26","\190\153\115\198\16"),v497.Handle);v934.Name=v7("\20\122\167\130\31\104\186","\231\90\27\202")   .. Number ;v934.ExtentsOffset=Vector3.new(0 -0 ,1,747 -(686 + 61) );v934.Size=UDim2.new(1608 -(1092 + 515) ,423 -223 ,1661 -(1524 + 136) ,22 + 8 );v934.Adornee=v497.Handle;v934.AlwaysOnTop=true;local v941=Instance.new(v7("\181\129\64\182\114\128\134\93\174","\62\225\228\56\194"),v934);v941.Font=Enum.Font.GothamSemibold;v941.FontSize=v7("\37\176\163\40\37\1","\53\118\217\217\77\20");v941.TextWrapped=true;v941.Size=UDim2.new(3 -2 ,0 -0 ,1 + 0 ,0);v941.TextYAlignment=v7("\157\16\244","\79\201\127\132\190");v941.BackgroundTransparency=1 -0 ;v941.TextStrokeTransparency=0.5 -0 ;v941.TextColor3=Color3.fromRGB(1194 -(473 + 470) ,1871 -(93 + 1523) ,508 -(14 + 494) );v941.Text=v497.Name   .. " \n"   .. v100((game:GetService(v7("\24\24\232\208\45\6\250","\169\72\116\137")).LocalPlayer.Character.Head.Position-v497.Handle.Position).Magnitude/(4 -1) )   .. v7("\57\94\192\181\109\123\199\165\124","\198\25\26\169") ;else v497.Handle[v7("\103\114\208\35\162\66\107","\31\41\19\189\70\231\49\27")   .. Number ].TextLabel.Text=v497.Name   .. " "   .. v100((game:GetService(v7("\135\223\80\255\178\193\66","\134\215\179\49")).LocalPlayer.Character.Head.Position-v497.Handle.Position).Magnitude/(2 + 1) )   .. v7("\161\208\95\245\65\18\239\247\83","\115\129\148\54\134\53") ;end elseif v497.Handle:FindFirstChild(v7("\199\134\93\78\253\27\3","\115\137\231\48\43\184\104")   .. Number ) then v497.Handle:FindFirstChild(v7("\247\232\23\230\140\179\47","\95\185\137\122\131\201\192")   .. Number ):Destroy();end end end end spawn(function() while wait() do pcall(function() if MobESP then for v739,v740 in pairs(game:GetService(v7("\65\57\213\24\54\102\55\196\22","\69\22\86\167\115")).Enemies:GetChildren()) do if v740:FindFirstChild(v7("\112\145\74\128\75\40\81\128\117\142\74\51\104\133\85\149","\71\56\228\39\225\37")) then if  not v740:FindFirstChild(v7("\157\238\230\12\251\253","\66\208\129\132\73\154\141")) then local v1151=Instance.new(v7("\104\86\218\241\72\80\215\239\78\120\195\244","\157\42\63\182"));local v1152=Instance.new(v7("\239\59\49\232\227\218\60\44\240","\175\187\94\73\156"));v1151.Parent=v740;v1151.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;v1151.Active=true;v1151.Name=v7("\11\48\77\5\26\51","\160\70\95\47\64\123\67");v1151.AlwaysOnTop=true;v1151.LightInfluence=1;v1151.Size=UDim2.new(0,200,0 -0 ,36 + 14 );v1151.StudsOffset=Vector3.new(0,2.5,0);v1152.Parent=v1151;v1152.BackgroundColor3=Color3.fromRGB(155 + 100 ,155 + 100 ,32 + 223 );v1152.BackgroundTransparency=1;v1152.Size=UDim2.new(0 -0 ,683 -(385 + 98) ,0,121 -71 );v1152.Font=Enum.Font.GothamBold;v1152.TextColor3=Color3.fromRGB(7,573 -337 ,1680 -(945 + 495) );v1152.Text.Size=28 + 7 ;end local v953=math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v740.HumanoidRootPart.Position).Magnitude);v740.MobEap.TextLabel.Text=v740.Name   .. v7("\158\23\52","\81\190\58\20")   .. v953   .. v7("\12\105\191\100\151\40\81\48\73","\83\44\45\214\23\227\73\63") ;end end else for v741,v742 in pairs(game:GetService(v7("\194\181\84\181\51\229\187\69\187","\64\149\218\38\222")).Enemies:GetChildren()) do if v742:FindFirstChild(v7("\55\168\200\245\27\183","\176\122\199\170")) then v742.MobEap:Destroy();end end end end);end end);spawn(function() while wait() do pcall(function() if SeaESP then for v743,v744 in pairs(game:GetService(v7("\37\4\162\219\34\59\19\8\181","\75\114\107\208\176\81")).SeaBeasts:GetChildren()) do if v744:FindFirstChild(v7("\209\62\36\116\247\36\32\113\203\36\38\97\201\42\59\97","\21\153\75\73")) then local v955=0 + 0 ;local v956;while true do if (v955==(1062 -(835 + 227))) then local v1290=0;while true do if (v1290==(1 + 0)) then v955=4 -3 ;break;end if (v1290==(0 -0)) then if  not v744:FindFirstChild(v7("\58\22\76\247\161\86\26","\38\105\115\45\146\210")) then local v1650=Instance.new(v7("\32\31\0\122\49\13\23\30\114\20\23\31","\83\98\118\108\22"));local v1651=Instance.new(v7("\125\238\97\57\137\133\33\76\231","\67\41\139\25\77\197\228"));v1650.Parent=v744;v1650.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;v1650.Active=true;v1650.Name=v7("\219\171\207\47\69\248\251","\136\136\206\174\74\54");v1650.AlwaysOnTop=true;v1650.LightInfluence=1;v1650.Size=UDim2.new(0 + 0 ,200,0,47 + 3 );v1650.StudsOffset=Vector3.new(0 -0 ,1779.5 -(404 + 1373) ,44 -(38 + 6) );v1651.Parent=v1650;v1651.BackgroundColor3=Color3.fromRGB(1605 -(1213 + 137) ,255,570 -315 );v1651.BackgroundTransparency=1 + 0 ;v1651.Size=UDim2.new(0,106 + 94 ,0 -0 ,105 -55 );v1651.Font=Enum.Font.GothamBold;v1651.TextColor3=Color3.fromRGB(1589 -(1566 + 16) ,236,1432 -(635 + 557) );v1651.Text.Size=35;end v956=math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v744.HumanoidRootPart.Position).Magnitude);v1290=4 -3 ;end end end if (v955==1) then v744.Seaesps.TextLabel.Text=v744.Name   .. v7("\100\190\198","\219\68\147\230\229\51\196")   .. v956   .. v7("\60\106\255\243\18\70\21\127\75","\123\28\46\150\128\102\39") ;break;end end end end else for v745,v746 in pairs(game:GetService(v7("\50\70\15\92\8\153\58\118\0","\21\101\41\125\55\123\233\91")).SeaBeasts:GetChildren()) do if v746:FindFirstChild(v7("\177\238\175\246\31\34\145","\82\226\139\206\147\108")) then v746.Seaesps:Destroy();end end end end);end end);spawn(function() while wait() do pcall(function() if NpcESP then for v747,v748 in pairs(game:GetService(v7("\198\9\95\186\223\225\7\78\180","\172\145\102\45\209")).NPCs:GetChildren()) do if v748:FindFirstChild(v7("\220\24\1\65\133\113\253\9\62\79\132\106\196\12\30\84","\30\148\109\108\32\235")) then local v957=0;local v958;while true do if (v957==1) then v748.NpcEspes.TextLabel.Text=v748.Name   .. v7("\63\148\75","\131\31\185\107\236")   .. v958   .. v7("\235\143\67\55\191\170\68\39\174","\68\203\203\42") ;break;end if (v957==0) then local v1293=0 + 0 ;while true do if (v1293==(0 + 0)) then if  not v748:FindFirstChild(v7("\58\87\18\122\7\87\20\76","\63\116\39\113")) then local v1669=0 -0 ;local v1670;local v1671;while true do if (3==v1669) then v1670.StudsOffset=Vector3.new(0 -0 ,2.5,0);v1671.Parent=v1670;v1671.BackgroundColor3=Color3.fromRGB(1839 -(1521 + 63) ,245 + 10 ,90 + 165 );v1669=4;end if (v1669==(747 -(729 + 16))) then v1670.AlwaysOnTop=true;v1670.LightInfluence=1 -0 ;v1670.Size=UDim2.new(0,103 + 97 ,913 -(550 + 363) ,50);v1669=7 -4 ;end if (v1669==(1915 -(865 + 1050))) then v1670=Instance.new(v7("\26\89\203\224\18\39\169\42\84\224\249\25","\200\88\48\167\140\112\72"));v1671=Instance.new(v7("\246\91\48\191\206\195\92\45\167","\130\162\62\72\203"));v1670.Parent=v748;v1669=1450 -(1014 + 435) ;end if (v1669==4) then v1671.BackgroundTransparency=1;v1671.Size=UDim2.new(0 -0 ,81 + 119 ,0,507 -(5 + 452) );v1671.Font=Enum.Font.GothamBold;v1669=4 + 1 ;end if (v1669==(382 -(233 + 148))) then v1670.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;v1670.Active=true;v1670.Name=v7("\141\167\190\85\148\144\234\238","\157\195\215\221\16\231\224\143");v1669=2;end if (v1669==5) then v1671.TextColor3=Color3.fromRGB(7,28 + 208 ,240);v1671.Text.Size=12 + 23 ;break;end end end v958=math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v748.HumanoidRootPart.Position).Magnitude);v1293=2 -1 ;end if (v1293==(804 -(11 + 792))) then v957=1 + 0 ;break;end end end end end end else for v749,v750 in pairs(game:GetService(v7("\116\88\103\210\80\71\116\218\70","\185\35\55\21")).NPCs:GetChildren()) do if v750:FindFirstChild(v7("\157\233\188\161\160\233\186\151","\228\211\153\223")) then v750.NpcEspes:Destroy();end end end end);end end);function isnil(v289) return v289==nil ;end local function v100(v290) return math.floor(tonumber(v290) + (1894.5 -(1202 + 692)) );end Number=math.random(1 + 0 ,3509627 -2509627 );function UpdateIslandMirageESP() for v498,v499 in pairs(game:GetService(v7("\99\224\74\54\41\22\85\236\93","\102\52\143\56\93\90"))[v7("\121\32\175\58\233\66\56\178\33\226\79\25","\133\38\119\192\72")].Locations:GetChildren()) do pcall(function() if MirageIslandESP then if (v499.Name==v7("\218\168\102\250\240\164\52\210\228\173\117\245\243","\155\151\193\20")) then if  not v499:FindFirstChild(v7("\0\165\13\75\94\61\180","\27\78\196\96\46")) then local v1074=840 -(90 + 750) ;local v1075;local v1076;while true do if ((1 + 0)==v1074) then v1075.Size=UDim2.new(612 -(589 + 22) ,200,1,10 + 20 );v1075.Adornee=v499;v1075.AlwaysOnTop=true;v1074=1702 -(85 + 1615) ;end if (v1074==2) then v1076=Instance.new(v7("\132\184\46\193\210\177\191\51\217","\158\208\221\86\181"),v1075);v1076.Font=v7("\195\78\238\14","\88\128\33\138\107\64\223");v1076.FontSize=v7("\242\251\111\112\252\47","\142\161\146\21\21\205\27");v1074=692 -(538 + 151) ;end if (v1074==(1 + 2)) then v1076.TextWrapped=true;v1076.Size=UDim2.new(1 -0 ,0 + 0 ,1 -0 ,0);v1076.TextYAlignment=v7("\36\245\108","\172\112\154\28\99\122\153");v1074=17 -13 ;end if (v1074==4) then v1076.BackgroundTransparency=1;v1076.TextStrokeTransparency=0.5;v1076.TextColor3=Color3.fromRGB(1768 -(1281 + 407) ,1382 -(338 + 799) ,536 -291 );break;end if (v1074==(690 -(177 + 513))) then local v1385=0 -0 ;while true do if (v1385==1) then v1075.ExtentsOffset=Vector3.new(0,3 -2 ,0 + 0 );v1074=3 -2 ;break;end if (v1385==(1970 -(1839 + 131))) then v1075=Instance.new(v7("\200\242\190\180\120\75\77\248\255\149\173\115","\44\138\155\210\216\26\36"),v499);v1075.Name=v7("\149\76\180\95\216\168\93","\157\219\45\217\58");v1385=792 -(420 + 371) ;end end end end else v499[v7("\229\246\173\27\238\228\176","\126\171\151\192")].TextLabel.Text=v499.Name   .. "   \n"   .. v100((game:GetService(v7("\14\18\248\5\2\232\74","\57\94\126\153\124\103\154")).LocalPlayer.Character.Head.Position-v499.Position).Magnitude/(1644 -(339 + 1302)) )   .. v7("\87\234","\33\119\167\41\121\182") ;end end elseif v499:FindFirstChild(v7("\105\181\54\83\142\64\12","\88\39\212\91\54\203\51\124")) then v499:FindFirstChild(v7("\2\173\185\143\94\221\216","\168\76\204\212\234\27\174")):Destroy();end end);end end function isnil(v291) return v291==nil ;end local function v100(v292) return math.floor(tonumber(v292) + 0.5 + 0 );end Number=math.random(233 -(196 + 36) ,1000000);function UpdateAfdESP() for v500,v501 in pairs(game:GetService(v7("\187\11\33\79\26\246\79\143\1","\46\236\100\83\36\105\134")).NPCs:GetChildren()) do pcall(function() if AfdESP then if (v501.Name==v7("\24\254\145\129\143\12\60\254\199\166\147\26\48\238\199\164\132\14\53\255\149","\111\89\154\231\224\225")) then if  not v501:FindFirstChild(v7("\211\219\11\160\9\234\204","\177\157\186\102\197\76\153\188")) then local v1078=0;local v1079;local v1080;while true do if (v1078==(1222 -(655 + 563))) then v1080.BackgroundTransparency=266 -(259 + 6) ;v1080.TextStrokeTransparency=0.5;v1080.TextColor3=Color3.fromRGB(80,349 -104 ,467 -(205 + 17) );break;end if (v1078==(1008 -(897 + 109))) then v1080=Instance.new(v7("\242\38\212\41\159\3\196\38\192","\98\166\67\172\93\211"),v1079);v1080.Font=v7("\196\236\211\208","\130\135\131\183\181\98\42");v1080.FontSize=v7("\240\191\33\230\113\151","\64\163\214\91\131");v1078=7 -4 ;end if (v1078==0) then v1079=Instance.new(v7("\128\183\44\163\160\177\33\189\166\153\53\166","\207\194\222\64"),v501);v1079.Name=v7("\53\116\218\69\173\192\11","\179\123\21\183\32\232");v1079.ExtentsOffset=Vector3.new(0,2 -1 ,0);v1078=1;end if ((1 + 2)==v1078) then v1080.TextWrapped=true;v1080.Size=UDim2.new(1 -0 ,0,1198 -(899 + 298) ,0 + 0 );v1080.TextYAlignment=v7("\37\32\8","\95\113\79\120\86");v1078=4;end if ((3 -2)==v1078) then v1079.Size=UDim2.new(1,200,1,82 -52 );v1079.Adornee=v501;v1079.AlwaysOnTop=true;v1078=6 -4 ;end end else v501[v7("\133\245\45\181\163\30\47","\169\203\148\64\208\230\109\95")].TextLabel.Text=v501.Name   .. "   \n"   .. v100((game:GetService(v7("\248\27\7\171\47\9\47","\134\168\119\102\210\74\123\92")).LocalPlayer.Character.Head.Position-v501.Position).Magnitude/3 )   .. v7("\235\35","\57\203\110\124") ;end end elseif v501:FindFirstChild(v7("\128\210\24\44\37\189\195","\96\206\179\117\73")) then v501:FindFirstChild(v7("\175\34\122\32\164\48\103","\69\225\67\23")):Destroy();end end);end end function UpdateAuraESP() for v502,v503 in pairs(game:GetService(v7("\243\142\33\190\207\147\216\120\193","\27\164\225\83\213\188\227\185")).NPCs:GetChildren()) do pcall(function() if AuraESP then if (v503.Name==v7("\165\14\145\234\194\154\79\141\248\135\173\1\138\255\201\139\10\143\251\201\156","\167\232\111\226\158")) then if  not v503:FindFirstChild(v7("\106\37\34\29\62\78\224","\209\36\68\79\120\123\61\144")) then local v1082=Instance.new(v7("\110\232\95\55\2\67\224\65\63\39\89\232","\96\44\129\51\91"),v503);v1082.Name=v7("\59\14\1\163\214\251\227","\147\117\111\108\198\147\136");v1082.ExtentsOffset=Vector3.new(0,645 -(204 + 440) ,0 + 0 );v1082.Size=UDim2.new(1,112 + 88 ,1,30);v1082.Adornee=v503;v1082.AlwaysOnTop=true;local v1088=Instance.new(v7("\62\179\218\64\38\183\192\81\6","\52\106\214\162"),v1082);v1088.Font=v7("\38\0\218\161","\145\101\111\190\196");v1088.FontSize=v7("\99\196\155\233\30\4","\47\48\173\225\140");v1088.TextWrapped=true;v1088.Size=UDim2.new(937 -(97 + 839) ,947 -(301 + 646) ,1814 -(466 + 1347) ,0);v1088.TextYAlignment=v7("\119\194\145","\204\35\173\225\184\75");v1088.BackgroundTransparency=1852 -(909 + 942) ;v1088.TextStrokeTransparency=0.5;v1088.TextColor3=Color3.fromRGB(80,245,245);else v503[v7("\192\69\238\136\195\181\30","\110\142\36\131\237\134\198")].TextLabel.Text=v503.Name   .. "   \n"   .. v100((game:GetService(v7("\75\76\178\233\61\105\83","\88\27\32\211\144")).LocalPlayer.Character.Head.Position-v503.Position).Magnitude/(2 + 1) )   .. v7("\205\134","\16\237\203\222\92\171\205\59") ;end end elseif v503:FindFirstChild(v7("\207\176\176\141\58\160\241","\211\129\209\221\232\127")) then v503:FindFirstChild(v7("\39\78\75\33\217\14\160","\38\105\47\38\68\156\125\208")):Destroy();end end);end end function UpdateLSDESP() for v504,v505 in pairs(game:GetService(v7("\187\143\183\79\239\56\141\131\160","\72\236\224\197\36\156")).NPCs:GetChildren()) do pcall(function() if LADESP then if (v505.Name==v7("\232\174\67\143\202\175\69\152\221\235\119\157\203\185\64\202\224\174\69\134\193\185","\234\164\203\36")) then if  not v505:FindFirstChild(v7("\37\236\141\39\169\77\97","\18\107\141\224\66\236\62\17")) then local v1098=0 -0 ;local v1099;local v1100;while true do if (3==v1098) then local v1399=0;local v1400;while true do if (0==v1399) then v1400=0;while true do if ((0 + 0)==v1400) then v1100.TextWrapped=true;v1100.Size=UDim2.new(1800 -(259 + 1540) ,0,1 + 0 ,0 + 0 );v1400=1;end if (v1400==(4 -3)) then v1100.TextYAlignment=v7("\100\78\40","\159\48\33\88\47");v1098=166 -(52 + 110) ;break;end end break;end end end if (v1098==2) then v1100=Instance.new(v7("\143\1\3\217\151\5\25\200\183","\173\219\100\123"),v1099);v1100.Font=v7("\151\39\72\14","\115\212\72\44\107");v1100.FontSize=v7("\191\230\78\119\172\122","\36\236\143\52\18\157\78\206");v1098=3;end if (1==v1098) then v1099.Size=UDim2.new(1 + 0 ,431 -231 ,3 -2 ,45 -15 );v1099.Adornee=v505;v1099.AlwaysOnTop=true;v1098=1485 -(1242 + 241) ;end if ((0 + 0)==v1098) then v1099=Instance.new(v7("\137\166\16\251\169\160\29\229\175\136\9\254","\151\203\207\124"),v505);v1099.Name=v7("\250\27\252\7\197\154\14","\164\180\122\145\98\128\233\126");v1099.ExtentsOffset=Vector3.new(0,1,0);v1098=1;end if (v1098==(7 -3)) then v1100.BackgroundTransparency=1;v1100.TextStrokeTransparency=0.5 + 0 ;v1100.TextColor3=Color3.fromRGB(297 -(22 + 195) ,1728 -(235 + 1248) ,245);break;end end else v505[v7("\49\67\20\247\150\242\39","\87\127\34\121\146\211\129\87")].TextLabel.Text=v505.Name   .. "   \n"   .. v100((game:GetService(v7("\155\237\132\245\32\44\220","\20\203\129\229\140\69\94\175")).LocalPlayer.Character.Head.Position-v505.Position).Magnitude/(2 + 1) )   .. v7("\239\235","\130\207\166\52\86\143") ;end end elseif v505:FindFirstChild(v7("\100\91\30\232\143\104\49","\65\42\58\115\141\202\27")) then v505:FindFirstChild(v7("\101\5\88\196\10\88\20","\79\43\100\53\161")):Destroy();end end);end end function UpdateGeaESP() for v506,v507 in pairs(game:GetService(v7("\199\203\221\68\71\92\55\71\245","\36\144\164\175\47\52\44\86")).Map.MysticIsland:GetChildren()) do pcall(function() if GearESP then if (v507.Name==v7("\29\10\232\172\79\49\29\239","\31\80\111\155\196")) then if  not v507:FindFirstChild(v7("\125\88\236\209\10\64\73","\79\51\57\129\180")) then local v1102=Instance.new(v7("\21\187\60\84\219\56\179\34\92\254\34\187","\185\87\210\80\56"),v507);v1102.Name=v7("\232\17\163\93\88\234\69","\53\166\112\206\56\29\153");v1102.ExtentsOffset=Vector3.new(390 -(334 + 56) ,1,0 -0 );v1102.Size=UDim2.new(1,200,1,70 -40 );v1102.Adornee=v507;v1102.AlwaysOnTop=true;local v1108=Instance.new(v7("\70\22\78\30\217\46\112\22\90","\79\18\115\54\106\149"),v1102);v1108.Font=v7("\105\93\74\91","\198\42\50\46\62\69\29\237");v1108.FontSize=v7("\241\179\12\60\121\244","\59\162\218\118\89\72\192\110");v1108.TextWrapped=true;v1108.Size=UDim2.new(1 -0 ,0,1,0 -0 );v1108.TextYAlignment=v7("\177\241\160","\97\229\158\208\63\40\97\18");v1108.BackgroundTransparency=1 -0 ;v1108.TextStrokeTransparency=0.5 + 0 ;v1108.TextColor3=Color3.fromRGB(634 -(223 + 331) ,245,245);else v507[v7("\3\207\127\67\169\62\222","\236\77\174\18\38")].TextLabel.Text=v507.Name   .. "   \n"   .. v100((game:GetService(v7("\176\81\206\12\133\79\220","\117\224\61\175")).LocalPlayer.Character.Head.Position-v507.Position).Magnitude/3 )   .. v7("\171\106","\232\139\39\166") ;end end elseif v507:FindFirstChild(v7("\205\80\94\64\82\209\243","\162\131\49\51\37\23")) then v507:FindFirstChild(v7("\113\120\243\47\81\76\105","\20\63\25\158\74")):Destroy();end end);end end function Tween2(v293) local v294=0 -0 ;local v295;while true do if (v294==2) then _G.Clip2=true;wait(v295/Speed );v294=3;end if ((159 -(140 + 19))==v294) then v295=(v293.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude;if (v295>=1) then Speed=813 -513 ;end v294=1064 -(844 + 219) ;end if (v294==(1784 -(1230 + 553))) then local v611=0;while true do if (v611==(0 -0)) then game:GetService(v7("\78\205\89\168\113\227\45\171\108\211\95\168","\217\26\186\60\205\31\176\72")):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(v295/Speed ,Enum.EasingStyle.Linear),{[v7("\248\87\20\237\214\116","\140\187\17\102")]=v293}):Play();if _G.CancelTween2 then game:GetService(v7("\24\156\161\68\34\184\161\83\58\130\167\68","\33\76\235\196")):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(v295/Speed ,Enum.EasingStyle.Linear),{[v7("\43\204\224\94\161\53","\229\104\138\146\63\204\80\229")]=v293}):Cancel();end v611=1 + 0 ;end if (v611==1) then v294=1917 -(1658 + 257) ;break;end end end if (v294==(353 -(325 + 25))) then _G.Clip2=false;break;end end end function Com(v296,...) local v297=776 -(141 + 635) ;local v298;while true do if (v297==(1063 -(152 + 911))) then v298=game:GetService(v7("\146\120\14\197\169\126\31\221\165\121\45\221\175\111\31\206\165","\169\192\29\126")).Remotes:FindFirstChild(v7("\18\202\8\134","\235\81\165\101")   .. v296 );if v298:IsA(v7("\74\129\82\22\145\1\233\110\129\81\13","\172\24\228\63\121\229\100")) then v298:FireServer(...);elseif v298:IsA(v7("\184\75\216\194\158\75\243\216\132\77\193\196\133\64","\173\234\46\181")) then v298:InvokeServer(...);end break;end end end function BTP(v299) local v300=0;local v301;while true do if (v300==(0 -0)) then v301=0 -0 ;while true do if (v301==(353 -(31 + 322))) then game.Players.LocalPlayer.Character.Head:Destroy();game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v299;v301=1133 -(811 + 321) ;end if ((1 + 0)==v301) then local v803=0;while true do if (v803==1) then v301=2;break;end if (v803==(0 + 0)) then wait(0.5 + 0 );game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v299;v803=1 + 0 ;end end end if ((2 -0)==v301) then game:GetService(v7("\237\55\251\51\42\220\51\255\58\39\236\38\228\45\34\216\55","\67\191\82\139\95")).Remotes.CommF_:InvokeServer(v7("\14\232\83\241\252\234\42\227\119\205\229\229\41","\139\93\141\39\162\140"));break;end end break;end end end function BTPZ(v302) local v303=0 -0 ;local v304;while true do if ((1710 -(1709 + 1))==v303) then v304=0 + 0 ;while true do if (v304==(0 + 0)) then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v302;task.wait();v304=1;end if (1==v304) then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v302;break;end end break;end end end function GetIsLand(...) local v305={...};local v306=v305[1 + 0 ];local v307;if (type(v306)==v7("\58\166\10\195\17\62","\126\76\195\105\183")) then v307=v306;elseif (type(v306)==v7("\74\91\161\99\93\181\75\73","\212\63\40\196\17\57")) then v307=v306.Position;elseif (type(v306)==v7("\167\222\253\248\172\217","\154\201\171\144")) then local v806=1781 -(1565 + 216) ;local v807;while true do if (0==v806) then v807=0 + 0 ;while true do if (v807==(0 + 0)) then v307=CFrame.new(unpack(v305));v307=v307.p;break;end end break;end end end local v308;local v309=math.huge;if game.Players.LocalPlayer.Team then local v537=0;while true do if (v537==(1496 -(325 + 1171))) then for v808,v809 in pairs(game.Workspace._WorldOrigin.PlayerSpawns:FindFirstChild(tostring(game.Players.LocalPlayer.Team)):GetChildren()) do local v810=(v307-v809:GetModelCFrame().p).Magnitude;if (v810<v309) then local v1118=0 -0 ;while true do if (v1118==0) then v309=v810;v308=v809.Name;break;end end end end if v308 then return v308;end break;end end end end function toTarget(...) local v310=0 + 0 ;local v311;local v312;local v313;local v314;local v315;local v316;local v317;local v318;local v319;local v320;while true do if (v310==(1410 -(1179 + 228))) then v320=nil;while true do if (v311==(1 + 0)) then if (game.Players.LocalPlayer.Character:WaitForChild(v7("\99\157\60\3\32\166\198\119","\19\43\232\81\98\78\201\175")).Health==(0 + 0)) then local v1119=551 -(502 + 49) ;while true do if (v1119==(1494 -(824 + 670))) then if tween then tween:Cancel();end repeat wait(_G.Fast_Delay);until game.Players.LocalPlayer.Character:WaitForChild(v7("\99\198\245\167\202\226\131\79","\234\43\179\152\198\164\141")).Health>(0 + 0)  v1119=1 + 0 ;end if (v1119==1) then wait(0.2);break;end end end v315={};v316=(v314.Position-game:GetService(v7("\149\86\125\199\130\161\222","\231\197\58\28\190\231\211\173")).LocalPlayer.Character:WaitForChild(v7("\123\199\51\45\217\131\90\214\12\35\216\152\99\211\44\56","\236\51\178\94\76\183")).Position).Magnitude;if (v316<(690 + 310)) then Speed=872 -557 ;elseif (v316>=(1741 -(661 + 80))) then Speed=863 -563 ;end v311=4 -2 ;end if (3==v311) then v315.Stop=function(v959) tween:Cancel();end;v315.Wait=function(v960) tween.Completed:Wait();end;return v315;end if (v311==(1538 -(464 + 1074))) then v312={...};v313=v312[1313 -(425 + 887) ];v314=nil;if (type(v313)==v7("\148\235\171\217\185\29","\221\226\142\200\173\214\111\223")) then v314=CFrame.new(v313);elseif (type(v313)==v7("\27\93\186\35\172\15\90\190","\200\110\46\223\81")) then v314=v313;elseif (type(v313)==v7("\24\82\49\54\39\192","\34\118\39\92\84\66\178")) then v314=CFrame.new(unpack(v312));end v311=1 + 0 ;end if (v311==(7 -5)) then if BypassTP then if ((v316>(3470 -(130 + 340))) and  not AutoNextIsland and  not (game.Players.LocalPlayer.Backpack:FindFirstChild(v7("\217\221\215\64\227\204\222\3\199\196\209\81\229\206\218\74\250","\35\138\173\178")) or game.Players.LocalPlayer.Character:FindFirstChild(v7("\242\19\77\223\91\124\205\67\101\213\81\111\206\0\64\213\66","\29\161\99\40\188\50")) or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild(v7("\81\43\172\235\1\45\74\201\106\57\165\233\13\63","\140\25\74\192\135\110\90\106")) or game.Players.LocalPlayer.Character:FindFirstChild(v7("\10\80\72\254\165\181\98\116\87\225\175\172\33\84","\194\66\49\36\146\202")) or game.Players.LocalPlayer.Character:FindFirstChild(v7("\184\38\200\7\209\203\18\197\3\201\130\50\200","\165\235\81\173\98")) or game.Players.LocalPlayer.Backpack:FindFirstChild(v7("\24\146\172\51\173\164\8\141\168\58\176\231\46","\132\75\229\201\86\217"))) and  not ((Name==v7("\164\123\182\173\143\115\171\229\161\125\168\168\131\124\161\170","\197\226\18\197")) or (Name==v7("\58\216\18\89\17\208\15\17\43\208\19\67\21\222\19","\49\124\177\97")))) then pcall(function() tween:Cancel();fkwarp=false;if (game:GetService(v7("\176\49\193\167\133\47\211","\222\224\93\160"))[v7("\199\242\113\32\52\219\241\115\56\61\249","\88\139\157\18\65")].Data:FindFirstChild(v7("\121\10\19\6\197\122\21\27\31\223","\171\42\122\114\113")).Value==tostring(GetIsLand(v314))) then local v1506=0;while true do if (v1506==(0 -0)) then wait(1171.1 -(27 + 1144) );Com(v7("\171\151","\130\237\200\172"),v7("\18\213\162\11\54\223\188\26\18\223\157\30\39\199\160","\110\70\176\206"));break;end end elseif (game:GetService(v7("\69\28\60\242\63\103\3","\90\21\112\93\139"))[v7("\45\212\119\183\172\49\215\117\175\165\19","\192\97\187\20\214")].Data:FindFirstChild(v7("\38\90\32\220\179\26\90\36\198\176\5\82\61\220","\224\106\59\83\168")).Value==tostring(GetIsLand(v314))) then game:GetService(v7("\151\233\3\226\75\154\90","\41\199\133\98\155\46\232")).LocalPlayer.Character:WaitForChild(v7("\52\179\236\71\179\0\239\24","\134\124\198\129\38\221\111")):ChangeState(7 + 8 );wait(0.1);repeat wait(_G.Fast_Delay);until game:GetService(v7("\200\227\176\57\253\253\162","\64\152\143\209")).LocalPlayer.Character:WaitForChild(v7("\31\92\200\13\68\34\117\3","\103\87\41\165\108\42\77\28")).Health>(0 -0)  else local v1672=0 -0 ;while true do if (v1672==(4 -2)) then wait(0.1 + 0 );Com(v7("\223\76","\234\153\19\142\106\126"),v7("\18\33\169\43\49\37\170\22\17\43\180\22\53","\120\65\68\221"));break;end if (v1672==1) then game:GetService(v7("\140\138\162\177\92\56\175","\74\220\230\195\200\57")).LocalPlayer.Character:WaitForChild(v7("\141\159\221\30\5\222\172\142","\177\197\234\176\127\107")):ChangeState(15);repeat wait(_G.Fast_Delay);until game:GetService(v7("\67\198\199\81\143\102\76","\63\19\170\166\40\234\20")).LocalPlayer.Character:WaitForChild(v7("\30\29\0\41\46\34\201\50","\160\86\104\109\72\64\77")).Health>0  v1672=2 -0 ;end if (v1672==(0 + 0)) then if (game:GetService(v7("\146\223\21\238\115\242\177","\128\194\179\116\151\22")).LocalPlayer.Character:WaitForChild(v7("\47\39\14\166\210\59\143\3","\230\103\82\99\199\188\84")).Health>(0 + 0)) then local v1873=0 -0 ;while true do if (v1873==(0 -0)) then if (fkwarp==false) then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v314;end fkwarp=true;break;end end end wait(0.08 -0 );v1672=1;end end end wait(1217.2 -(1195 + 22) );return;end);end end v317=game:service(v7("\44\162\224\185\22\134\224\174\14\188\230\185","\220\120\213\133"));v318=TweenInfo.new((v314.Position-game:GetService(v7("\104\34\198\73\47\74\61","\74\56\78\167\48")).LocalPlayer.Character:WaitForChild(v7("\204\9\38\193\4\5\49\224\46\36\207\30\58\57\246\8","\88\132\124\75\160\106\106")).Position).Magnitude/Speed ,Enum.EasingStyle.Linear);v319,v320=pcall(function() local v961=0 + 0 ;while true do if (v961==(1343 -(364 + 979))) then tween=v317:Create(game.Players.LocalPlayer.Character['HumanoidRootPart'],v318,{[v7("\55\16\159\70\22\175","\96\116\86\237\39\123\202\80")]=v314});tween:Play();break;end end end);v311=6 -3 ;end end break;end if (v310==(880 -(447 + 433))) then v311=0 -0 ;v312=nil;v313=nil;v310=1;end if ((238 -(84 + 152))==v310) then v317=nil;v318=nil;v319=nil;v310=3;end if ((1284 -(399 + 884))==v310) then v314=nil;v315=nil;v316=nil;v310=2 -0 ;end end end TweenSpeed=1211 -(336 + 535) ;function Tween(v321) local v322=964 -(619 + 345) ;local v323;while true do if (v322==(1009 -(345 + 663))) then game:GetService(v7("\21\3\180\120\140\159\170\51\2\184\126\135","\207\65\116\209\29\226\204")):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(v323/Speed ,Enum.EasingStyle.Linear),{[v7("\147\118\153\15\189\85","\110\208\48\235")]=v321}):Play();if _G.StopTween then game:GetService(v7("\145\190\134\136\171\154\134\159\179\160\128\136","\237\197\201\227")):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(v323/Speed ,Enum.EasingStyle.Linear),{[v7("\152\5\13\127\168\54","\26\219\67\127\30\197\83")]=v321}):Cancel();end break;end if (v322==(0 -0)) then local v612=0;while true do if (v612==(1 + 0)) then v322=199 -(197 + 1) ;break;end if (v612==(0 + 0)) then v323=(v321.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude;if (v323>=(736 -(122 + 613))) then Speed=TweenSpeed;end v612=2 -1 ;end end end end end function CancelTween(v324) if  not v324 then local v538=0 + 0 ;local v539;while true do if (0==v538) then v539=1141 -(757 + 384) ;while true do if (v539==(0 -0)) then _G.StopTween=true;wait();v539=533 -(447 + 85) ;end if ((5 -3)==v539) then _G.StopTween=false;break;end if (v539==1) then local v1120=0 -0 ;while true do if (v1120==(1 -0)) then v539=2;break;end if (v1120==0) then Tween(game:GetService(v7("\197\20\223\99\21\235\230","\153\149\120\190\26\112")).LocalPlayer.Character.HumanoidRootPart.CFrame);wait();v1120=1;end end end end break;end end end end function toTargetP(v325) if ((game.Players.LocalPlayer.Character:WaitForChild(v7("\36\0\199\161\36\255\247\19","\119\108\117\170\192\74\144\158")).Health<=(0 -0)) or  not game:GetService(v7("\215\37\128\56\226\59\146","\65\135\73\225")).LocalPlayer.Character:WaitForChild(v7("\55\70\92\161\26\16\90\85","\116\127\51\49\192"))) then tween:Cancel();repeat wait(_G.Fast_Delay);until game:GetService(v7("\43\12\82\228\235\12\17","\98\123\96\51\157\142\126")).LocalPlayer.Character:WaitForChild(v7("\229\235\171\207\40\194\247\162","\70\173\158\198\174")) and (game:GetService(v7("\192\51\78\247\245\45\92","\142\144\95\47")).LocalPlayer.Character:WaitForChild(v7("\63\56\93\15\25\34\89\10","\110\119\77\48")).Health>0)  wait(9 -2 );return;end if ((game:GetService(v7("\219\51\37\76\225\249\44","\132\139\95\68\53"))[v7("\208\39\254\52\240\24\241\52\229\45\239","\85\156\72\157")].Character.HumanoidRootPart.Position-v325.Position).Magnitude<=(49 + 101)) then pcall(function() local v613=0;while true do local v695=0 -0 ;while true do if (v695==0) then if (v613==(0 + 0)) then tween:Cancel();game:GetService(v7("\75\62\124\56\223\58\153","\234\27\82\29\65\186\72"))[v7("\220\192\234\191\15\192\195\232\167\6\226","\99\144\175\137\222")].Character.HumanoidRootPart.CFrame=v325;v613=1044 -(239 + 804) ;end if (v613==(3 -2)) then return;end break;end end end end);end local v326=game:service(v7("\100\99\137\4\55\118\180\66\98\133\2\60","\209\48\20\236\97\89\37"));local v327=TweenInfo.new((game:GetService(v7("\204\77\95\48\71\238\82","\34\156\33\62\73"))[v7("\36\125\237\80\4\66\226\80\17\119\252","\49\104\18\142")].Character.HumanoidRootPart.Position-v325.Position).Magnitude/325 ,Enum.EasingStyle.Linear);tween=v326:Create(game.Players.LocalPlayer.Character['HumanoidRootPart'],v327,{[v7("\210\195\110\10\252\224","\107\145\133\28")]=v325});tween:Play();local v328={};v328.Stop=function(v508) tween:Cancel();end;return v328;end function TweenShip(v330) local v331=game:service(v7("\246\73\182\187\204\109\182\172\212\87\176\187","\222\162\62\211"));local v332=TweenInfo.new((game:GetService(v7("\148\126\28\16\34\147\203\160\116","\170\195\17\110\123\81\227")).Boats.MarineBrigade.VehicleSeat.CFrame.Position-v330.Position).Magnitude/300 ,Enum.EasingStyle.Linear);tween=v331:Create(game:GetService(v7("\131\59\242\203\238\164\53\227\197","\157\212\84\128\160")).Boats.MarineBrigade.VehicleSeat,v332,{[v7("\170\85\242\68\43\141","\163\233\19\128\37\70\232\142")]=v330});tween:Play();local v333={};v333.Stop=function(v509) tween:Cancel();end;return v333;end function TweenBoat(v335) local v336=0 + 0 ;local v337;local v338;local v339;while true do if ((0 + 0)==v336) then local v614=0;while true do if ((0 + 0)==v614) then if ((game.Players.LocalPlayer.Character:WaitForChild(v7("\203\64\49\24\237\90\53\29","\121\131\53\92")).Health<=(15 -(7 + 8))) or  not game:GetService(v7("\78\192\74\153\123\222\88","\224\30\172\43")).LocalPlayer.Character:WaitForChild(v7("\45\178\114\223\227\10\174\123","\141\101\199\31\190"))) then local v1121=0;while true do local v1172=0 -0 ;while true do if (0==v1172) then if (v1121==1) then local v1597=0 + 0 ;while true do if (v1597==(755 -(468 + 287))) then wait(7);return;end end end if (v1121==0) then tween:Cancel();repeat wait(_G.Fast_Delay);until game:GetService(v7("\107\75\2\222\223\171\188","\207\59\39\99\167\186\217")).LocalPlayer.Character:WaitForChild(v7("\47\83\182\83\70\242\169\239","\139\103\38\219\50\40\157\192")) and (game:GetService(v7("\214\180\55\219\227\170\37","\162\134\216\86")).LocalPlayer.Character:WaitForChild(v7("\22\250\90\88\62\77\248\171","\207\94\143\55\57\80\34\145")).Health>(757 -(92 + 665)))  v1121=1 + 0 ;end break;end end end end v337=game:service(v7("\22\198\38\127\190\104\18\171\52\216\32\127","\217\66\177\67\26\208\59\119"));v614=3 -2 ;end if (v614==(3 -2)) then v336=1 + 0 ;break;end end end if (v336==(1 + 2)) then v339.Stop=function(v696) tween:Cancel();end;return v339;end if (2==v336) then local v616=0;local v617;while true do if (v616==(0 -0)) then v617=0 + 0 ;while true do if (v617==(0 -0)) then tween:Play();v339={};v617=1;end if (v617==(312 -(53 + 258))) then v336=5 -2 ;break;end end break;end end end if (v336==(1 + 0)) then v338=TweenInfo.new((game:GetService(v7("\19\210\203\179\85\248\235","\152\67\190\170\202\48\138"))[v7("\247\38\86\241\215\25\89\241\194\44\71","\144\187\73\53")].Character.HumanoidRootPart.Position-v335.Position).Magnitude/(36 + 289) ,Enum.EasingStyle.Linear);tween=v337:Create(game.Players.LocalPlayer.Character['HumanoidRootPart'],v338,{[v7("\53\157\40\214\175\182","\211\118\219\90\183\194")]=v335});v336=2;end end end function EquipTool(v340) if game.Players.LocalPlayer.Backpack:FindFirstChild(v340) then local v540=game.Players.LocalPlayer.Backpack:FindFirstChild(v340);wait(0.5 -0 );game.Players.LocalPlayer.Character.Humanoid:EquipTool(v540);end end spawn(function() local v341=0;local v342;local v343;local v344;while true do if (v341==(0 -0)) then v342=1406 -(532 + 874) ;v343=nil;v341=4 -3 ;end if (v341==(1 + 0)) then v344=nil;while true do if (v342==(0 -0)) then v343=getrawmetatable(game);v344=v343.__namecall;v342=1;end if (v342==(2 -1)) then setreadonly(v343,false);v343.__namecall=newcclosure(function(...) local v962=getnamecallmethod();local v963={...};if (tostring(v962)==v7("\222\164\154\238\105\244\234\187\141\249","\145\152\205\232\139\58")) then if (tostring(v963[1 + 0 ])==v7("\129\247\179\176\79\173\43\165\247\176\171","\110\211\146\222\223\59\200")) then if ((tostring(v963[2 -0 ])~=v7("\71\70\247\10","\34\51\52\130\111")) and (tostring(v963[2])~=v7("\200\52\52\208\7","\55\174\85\88\163\98\92"))) then if _G.UseSkill then local v1673=0 + 0 ;while true do if (v1673==(1487 -(229 + 1258))) then local v1799=374 -(140 + 234) ;while true do if (v1799==0) then if (type(v963[1902 -(614 + 1286) ])==v7("\219\77\5\145\57\223","\86\173\40\102\229")) then v963[1 + 1 ]=PositionSkillMasteryDevilFruit;else v963[2 + 0 ]=CFrame.new(PositionSkillMasteryDevilFruit);end return v344(unpack(v963));end end end end end end end end return v344(...);end);break;end end break;end end end);spawn(function() pcall(function() while task.wait() do for v618,v619 in pairs(game:GetService(v7("\52\168\78\148\1\182\92","\237\100\196\47")).LocalPlayer.Backpack:GetChildren()) do if v619:IsA(v7("\120\67\132\166","\116\44\44\235\202\87\232")) then if v619:FindFirstChild(v7("\49\210\91\42\22\183\212\22\217\85\49\11\189\252\48\223\89\42\22","\146\99\183\54\69\98\210")) then CurrentEquipGun=v619.Name;end end end end end);end);spawn(function() while task.wait() do pcall(function() if (_G.TeleportIsland or _G.AutoEvoRace or AutoFarmChest or _G.chestsea2 or _G.chestsea3 or _G.CastleRaid or _G.CollectAzure or _G.TweenToKitsune or _G.AutoCandy or _G.GhostShip or _G.Ship or _G.SailBoat or _G.Auto_Holy_Torch or _G.FindMirageIsland or _G.TeleportPly or _G.Tweenfruit or _G.AutoFishCrew or _G.AutoShark or _G.AutoCakeV2 or _G.AutoMysticIsland or _G.AutoQuestRace or _G.AutoBuyBoat or _G.dao or _G.AutoMirage or AutoFarmAcient or _G.AutoQuestRace or Auto_Law or _G.AutoAllBoss or AutoTushita or _G.AutoHolyTorch or _G.AutoTerrorshark or _G.farmpiranya or _G.DriveMytic or _G.AutoCakeV2V2 or PirateShip or _G.AutoSeaBeast or _G.AutoNear or _G.BossRaid or _G.GrabChest or AutoCitizen or _G.Ectoplasm or AutoEvoRace or AutoBartilo or AutoFactory or BringChestz or BringFruitz or _G.AutoLevel or _G.Clip2 or AutoFarmNoQuest or _G.AutoBone or AutoFarmSelectMonsterQuest or AutoFarmSelectMonsterNoQuest or _G.AutoBoss or AutoFarmBossQuest or AutoFarmMasGun or AutoFarmMasDevilFruit or AutoFarmSelectArea or AutoSecondSea or AutoThirdSea or AutoDeathStep or AutoSuperhuman or AutoSharkman or AutoElectricClaw or AutoDragonTalon or AutoGodhuman or AutoRengoku or AutoBuddySword or AutoPole or AutoHallowSycthe or AutoCavander or AutoTushita or AutoDarkDagger or _G.CakePrince or _G.AutoElite or AutoRainbowHaki or AutoSaber or AutoFarmKen or AutoKenHop or AutoKenV2 or _G.AutoKillPlayerMelee or _G.AutoKillPlayerGun or _G.AutoKillPlayerFruit or AutoDungeon or AutoNextIsland or AutoAdvanceDungeon or Musketeer or RipIndra or Auto_Serpent_Bow or AutoTorch or AutoSoulGuitar or Auto_Cursed_Dual_Katana or _G.AutoMaterial or Auto_Quest_Yama_1 or Auto_Quest_Yama_2 or Auto_Quest_Yama_3 or Auto_Quest_Tushita_1 or Auto_Quest_Tushita_2 or Auto_Quest_Tushita_3 or _G.Factory or _G.SwanGlasses or AutoBartilo or AutoEvoRace or _G.Ectoplasm) then if  not game:GetService(v7("\215\243\180\188\57\165\244","\215\135\159\213\197\92")).LocalPlayer.Character.HumanoidRootPart:FindFirstChild(v7("\145\170\236\245\144\169\225\252","\140\211\197\136")) then local v818=0 -0 ;local v819;while true do if (v818==(2 -1)) then v819.Parent=game:GetService(v7("\220\234\176\106\71\221\165","\214\140\134\209\19\34\175")).LocalPlayer.Character.HumanoidRootPart;v819.MaxForce=Vector3.new(2761 + 97239 ,101082 -(148 + 934) ,4280 + 95720 );v818=2;end if (v818==(0 + 0)) then v819=Instance.new(v7("\18\195\56\109\250\53\192\51\119\197\36\213","\172\80\172\92\20"));v819.Name=v7("\60\117\213\1\83\197\202\152","\232\126\26\177\120\16\169\163");v818=1;end if (v818==(3 -1)) then v819.Velocity=Vector3.new(0 + 0 ,0 -0 ,0 + 0 );break;end end end else game:GetService(v7("\100\43\169\179\81\53\187","\202\52\71\200")).LocalPlayer.Character.HumanoidRootPart:FindFirstChild(v7("\204\71\113\158\205\68\124\151","\231\142\40\21")):Destroy();end end);end end);spawn(function() pcall(function() game:GetService(v7("\66\39\203\57\87\17\194\121\49\192","\180\16\82\165\106\50\99")).Stepped:Connect(function() if (_G.TeleportIsland or _G.AutoEvoRace or _G.CastleRaid or AutoFarmChest or _G.CollectAzure or _G.TweenToKitsune or _G.AutoCandy or _G.GhostShip or _G.Ship or _G.SailBoat or _G.Auto_Holy_Torch or _G.Tweenfruit or _G.FindMirageIsland or _G.TeleportPly or _G.AutoFishCrew or _G.AutoShark or _G.AutoMysticIsland or _G.AutoCakeV2 or _G.AutoQuestRace or _G.AutoBuyBoat or _G.dao or AutoFarmAcient or _G.AutoMirage or Auto_Law or _G.AutoQuestRace or _G.AutoAllBoss or _G.AutoHolyTorch or AutoTushita or _G.farmpiranya or _G.AutoTerrorshark or _G.AutoNear or _G.AutoCakeV2V2 or PirateShip or _G.AutoSeaBeast or _G.DriveMytic or _G.BossRaid or _G.GrabChest or AutoCitizen or _G.Ectoplasm or AutoEvoRace or AutoBartilo or AutoFactory or BringChestz or BringFruitz or _G.AutoLevel or _G.Clip2 or AutoFarmNoQuest or _G.AutoBone or AutoFarmSelectMonsterQuest or AutoFarmSelectMonsterNoQuest or _G.AutoBoss or AutoFarmBossQuest or AutoFarmMasGun or AutoFarmMasDevilFruit or AutoFarmSelectArea or AutoSecondSea or AutoThirdSea or AutoDeathStep or AutoSuperhuman or AutoSharkman or AutoElectricClaw or AutoDragonTalon or AutoGodhuman or AutoRengoku or AutoBuddySword or AutoPole or AutoHallowSycthe or AutoCavander or AutoTushita or AutoDarkDagger or _G.CakePrince or _G.AutoElite or AutoRainbowHaki or AutoSaber or AutoFarmKen or AutoKenHop or AutoKenV2 or _G.AutoKillPlayerMelee or _G.AutoKillPlayerGun or _G.AutoKillPlayerFruit or AutoDungeon or AutoNextIsland or AutoAdvanceDungeon or Musketeer or RipIndra or Auto_Serpent_Bow or AutoTorch or AutoSoulGuitar or Auto_Cursed_Dual_Katana or _G.AutoMaterial or Auto_Quest_Yama_1 or Auto_Quest_Yama_2 or Auto_Quest_Yama_3 or Auto_Quest_Tushita_1 or Auto_Quest_Tushita_2 or Auto_Quest_Tushita_3 or _G.Factory or _G.SwanGlasses or AutoBartilo or AutoEvoRace or _G.Ectoplasm) then for v751,v752 in pairs(game:GetService(v7("\15\89\126\231\6\45\70","\99\95\53\31\158")).LocalPlayer.Character:GetDescendants()) do if v752:IsA(v7("\208\43\99\84\194\43\98\69","\49\146\74\16")) then v752.CanCollide=false;end end end end);end);end);task.spawn(function() if game.Players.LocalPlayer.Character:FindFirstChild(v7("\215\69\159\84","\226\132\49\234\58")) then game.Players.LocalPlayer.Character.Stun.Changed:connect(function() pcall(function() if game.Players.LocalPlayer.Character:FindFirstChild(v7("\233\108\165\234","\56\186\24\208\132\122\153\114")) then game.Players.LocalPlayer.Character.Stun.Value=0;end end);end);end end);function CheckMaterial(v345) local v346=639 -(322 + 317) ;local v347;while true do if (v346==0) then v347=0 + 0 ;while true do if (v347==(0 -0)) then for v966,v967 in pairs(game:GetService(v7("\241\19\48\93\139\192\23\52\84\134\240\2\47\67\131\196\19","\226\163\118\64\49")).Remotes.CommF_:InvokeServer(v7("\254\201\43\151\19\239\201\49\170\18\235\213","\125\153\172\95\222"))) do if (type(v967)==v7("\111\199\225\193\232","\131\27\166\131\173\141\186")) then if (v967.Type==v7("\222\114\83\34\225\122\70\43","\71\147\19\39")) then if (v967.Name==v345) then return v967.Count;end end end end return 1814 -(1658 + 156) ;end end break;end end end local v101=game.Players.LocalPlayer;local v102=debug.getupvalues(require(v101.PlayerScripts.CombatFramework));local v103=v102[2];function GetCurrentBlade() local v348=0;local v349;local v350;local v351;while true do if ((1 + 0)==v348) then v351=nil;while true do local v697=0 -0 ;while true do if (v697==(2 -1)) then if ((2 + 0)==v349) then return v351;end break;end if (v697==(0 + 0)) then if (v349==(1796 -(1667 + 129))) then v350=v103.activeController;v351=v350.blades[1 -0 ];v349=1;end if (v349==1) then local v1180=0 + 0 ;while true do if (v1180==(1 + 0)) then v349=677 -(405 + 270) ;break;end if (v1180==(1361 -(944 + 417))) then if  not v351 then return;end while v351.Parent~=game.Players.LocalPlayer.Character  do v351=v351.Parent;end v1180=1;end end end v697=1;end end end break;end if (v348==0) then v349=0;v350=nil;v348=1 -0 ;end end end function AttackNoCoolDown() local v352=v103.activeController;for v510=1 + 0 ,2 -1  do local v511=require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(v101.Character,{v101.Character.HumanoidRootPart},174 -114 );local v512={};local v513={};for v541,v542 in pairs(v511) do if (v542.Parent:FindFirstChild(v7("\45\47\235\172\189\229\243\38\55\53\233\185\131\235\232\54","\66\101\90\134\205\211\138\154")) and  not v513[v542.Parent]) then local v698=0 + 0 ;local v699;while true do if (v698==0) then v699=600 -(60 + 540) ;while true do if (v699==(1597 -(1591 + 6))) then table.insert(v512,v542.Parent.HumanoidRootPart);v513[v542.Parent]=true;break;end end break;end end end end v511=v512;if ( #v511>(0 + 0)) then local v620=918 -(657 + 261) ;local v621;local v622;local v623;local v624;local v625;local v626;local v627;while true do if (v620==(392 -(248 + 143))) then v623=nil;v624=nil;v620=3 -1 ;end if (v620==2) then local v821=0 -0 ;while true do if (v821==0) then v625=nil;v626=nil;v821=1;end if (v821==1) then v620=3;break;end end end if ((7 -4)==v620) then v627=nil;while true do if (v621==(2 + 2)) then if (v101.Character:FindFirstChildOfClass(v7("\40\67\118\160","\71\124\44\25\204\229")) and v352.blades and v352.blades[2 -1 ]) then local v1412=323 -(210 + 113) ;while true do if ((1 + 0)==v1412) then game:GetService(v7("\12\15\172\129\246\61\11\168\136\251\13\30\179\159\254\57\15","\159\94\106\220\237")).RigControllerEvent:FireServer(v7("\165\19\16","\35\205\122\100"),v511,v510,"");break;end if (v1412==(889 -(110 + 779))) then game:GetService(v7("\32\255\57\72\203\186\19\238\44\64\241\173\29\232\40\67\199","\217\114\154\73\36\162")).RigControllerEvent:FireServer(v7("\43\160\187\189\14\134\35\52\164\180\170\4","\96\92\197\218\205\97\232"),tostring(GetCurrentBlade()));game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor((v626/1099511627776) * (16777452 -(141 + 96)) ),v625);v1412=193 -(30 + 162) ;end end end break;end if (v621==1) then v625=debug.getupvalue(v352.attack,7);v626=((v622 * (799055 -(431 + 219))) + (v624 * 727595))%v623 ;v627=(v624 * (1370972 -572567))(function() local v1295=0 -0 ;local v1296;while true do if ((0 -0)==v1295) then v1296=0;while true do if (v1296==(1 -0)) then v624=v626-(v622 * v623) ;break;end if ((493 -(20 + 473))==v1296) then local v1711=0 -0 ;while true do if (v1711==1) then v1296=1;break;end if (v1711==(0 -0)) then local v1847=0 + 0 ;while true do if (v1847==(489 -(319 + 169))) then v1711=117 -(26 + 90) ;break;end if (v1847==(781 -(155 + 626))) then v626=((v626 * v623) + v627)%(1099511629527 -(1167 + 584)) ;v622=math.floor(v626/v623 );v1847=1;end end end end end end break;end end end)();v621=1417 -(744 + 671) ;end if (v621==0) then v622=debug.getupvalue(v352.attack,3 + 2 );v623=debug.getupvalue(v352.attack,1 + 5 );v624=debug.getupvalue(v352.attack,18 -14 );v621=683 -(111 + 571) ;end if (v621==(2 + 1)) then debug.setupvalue(v352.attack,12 -8 ,v624);debug.setupvalue(v352.attack,7,v625);pcall(function() for v1413,v1414 in pairs(v352.animator.anims.basic) do v1414:Play();end end);v621=2 + 2 ;end if (v621==2) then local v1181=0 -0 ;while true do if (0==v1181) then v625=v625 + (4 -3) ;debug.setupvalue(v352.attack,1980 -(317 + 1658) ,v622);v1181=838 -(505 + 332) ;end if (v1181==(678 -(54 + 623))) then debug.setupvalue(v352.attack,1184 -(787 + 391) ,v623);v621=6 -3 ;break;end end end end break;end if (v620==(0 -0)) then v621=0 + 0 ;v622=nil;v620=305 -(47 + 257) ;end end end end end function NormalAttack() if  not _G.NormalAttack then local v543=0 + 0 ;local v544;local v545;local v546;while true do if (v543==(161 -(15 + 145))) then v546=require(game.ReplicatedStorage.Util.CameraShaker);v546:Stop();v543=2 + 0 ;end if ((138 -(90 + 48))==v543) then v544=require(game.Players.LocalPlayer.PlayerScripts.CombatFramework);v545=debug.getupvalues(v544)[7 -5 ];v543=2 -1 ;end if (v543==4) then game:GetService(v7("\148\242\46\69\19\173\194\151\232\57\67","\174\194\155\92\49\102\204")):Button1Down(Vector2.new(3648 -2368 ,672));break;end if (v543==(3 + 0)) then v545.activeController.hitboxMagnitude=385 -205 ;game:GetService(v7("\148\80\21\83\183\88\11\114\177\92\21","\39\194\57\103")):CaptureController();v543=2 + 2 ;end if (v543==2) then v545.activeController.attacking=false;v545.activeController.timeToNextAttack=0 + 0 ;v543=356 -(333 + 20) ;end end end end function GetWeaponInventory(v353) local v354=0 -0 ;local v355;local v356;while true do if (v354==(0 + 0)) then v355=0;v356=nil;v354=1;end if (v354==(1 + 0)) then while true do if (v355==(0 -0)) then v356=1769 -(1338 + 431) ;while true do if (v356==(0 -0)) then local v1182=0;while true do if (v1182==(1137 -(475 + 662))) then for v1508,v1509 in pairs(game:GetService(v7("\246\141\73\123\142\201\239\208\141\93\68\147\197\252\197\143\92","\142\164\232\57\23\231\170")).Remotes.CommF_:InvokeServer(v7("\176\175\200\212\28\161\175\210\233\29\165\179","\114\215\202\188\157"))) do if (type(v1509)==v7("\37\164\240\92\183","\229\81\197\146\48\210\227\139")) then if (v1509.Type==v7("\177\69\84\104\215","\54\226\50\59\26\179\155\61")) then if (v1509.Name==v353) then return true;end end end end return false;end end end end break;end end break;end end end Type1=1;spawn(function() while wait(0.1) do if (Type==(2 -1)) then Pos=CFrame.new(10,72 -32 ,10);elseif (Type==(8 -6)) then Pos=CFrame.new( -(1961 -(768 + 1163)),7 + 3 , -30);elseif (Type==(2 + 1)) then Pos=CFrame.new(1609 -(1098 + 501) ,10, -(1977 -(1272 + 665)));elseif (Type==(1627 -(1278 + 345))) then Pos=CFrame.new( -(9 + 31),10,1774 -(666 + 1098) );end end end);spawn(function() while wait(0.1) do Type=507 -(501 + 5) ;wait(1 + 0 );Type=5 -3 ;wait(1 + 0 );Type=3;wait(3 -2 );Type=2 + 2 ;wait(1 -0 );end end);function AutoHaki() if  not game:GetService(v7("\250\50\57\65\26\216\45","\127\170\94\88\56")).LocalPlayer.Character:FindFirstChild(v7("\200\198\167\224\173\46\246","\198\128\167\212\162\216\93\153")) then game:GetService(v7("\152\63\244\210\163\57\229\202\175\62\215\202\165\40\229\217\175","\190\202\90\132")).Remotes.CommF_:InvokeServer(v7("\165\204\96\216","\70\231\185\19\183\194"));end end function to(v357) repeat local v514=0;while true do if (v514==0) then wait(0.5);game.Players.LocalPlayer.Character.Humanoid:ChangeState(12 + 3 );v514=793 -(159 + 633) ;end if (v514==(1 + 1)) then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v357;break;end if (v514==(4 -3)) then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v357;task.wait();v514=6 -4 ;end end until (v357.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<=2000  end function to(v358) pcall(function() if (((v358.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude>=2000) and  not Auto_Raid and (game.Players.LocalPlayer.Character.Humanoid.Health>(0 + 0))) then if (NameMon==v7("\253\201\247\172\190\218\206\213\177\182\200\212","\211\187\160\132\196")) then local v757=0;local v758;while true do if (v757==(0 + 0)) then v758=0 -0 ;while true do if (0==v758) then Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame);wait();v758=1 + 0 ;end if ((1185 -(27 + 1157))==v758) then game:GetService(v7("\30\133\255\241\65\191\243\56\133\235\206\92\179\224\45\135\234","\146\76\224\143\157\40\220")).Remotes.CommF_:InvokeServer(v7("\73\122\167\103\163\42\234\126\113\162\96\167\55\253\94","\158\59\31\214\18\198\89"),Vector3.new(14115.8515625 + 47048 ,15.6796875 -4 ,4162.7841796875 -2343 ));break;end end break;end end elseif (Mon=="God's Guard") then local v968=0 + 0 ;while true do if (v968==(0 + 0)) then Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame);wait();v968=2 -1 ;end if ((4 -3)==v968) then game:GetService(v7("\111\12\87\6\84\10\70\30\88\13\116\30\82\27\70\13\88","\106\61\105\39")).Remotes.CommF_:InvokeServer(v7("\247\187\42\250\6\209\102\192\176\47\253\2\204\113\224","\18\133\222\91\143\99\162"),Vector3.new( -4607.82275,2453.54248 -1581 , -(2401.55688 -(11 + 723))));break;end end elseif (NameMon==v7("\68\52\181\123\193\44\18\227\98\58\191\74","\178\23\95\204\62\185\92\35")) then local v1183=0 + 0 ;while true do if (v1183==0) then Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame);wait();v1183=2 -1 ;end if ((2 -1)==v1183) then game:GetService(v7("\19\243\207\250\84\34\247\203\243\89\18\226\208\228\92\38\243","\61\65\150\191\150")).Remotes.CommF_:InvokeServer(v7("\88\208\152\172\210\18\222\111\219\157\171\214\15\201\79","\170\42\181\233\217\183\97"),Vector3.new( -(6386.6176757813 + 1508),8348.1416015625 -2801 , -(292.29119873047 + 88)));break;end end elseif (NameMon==v7("\255\115\230\197\67\94\201\104\251\132","\43\172\27\143\181\18")) then local v1415=0;while true do if (v1415==0) then Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame);wait();v1415=1;end if (v1415==1) then game:GetService(v7("\225\44\183\181\116\208\40\179\188\121\224\61\168\171\124\212\44","\29\179\73\199\217")).Remotes.CommF_:InvokeServer(v7("\107\164\108\216\124\178\105\232\119\181\111\204\119\162\120","\173\25\193\29"),Vector3.new(3107.2125244140598 -2184 ,126.9760055542,33603.83203125 -(542 + 209) ));break;end end elseif (NameMon==v7("\105\120\94\15\156\31\211\107\78\34","\24\58\16\55\127\205\106\182")) then local v1510=0 -0 ;while true do if (v1510==(1 -0)) then game:GetService(v7("\149\2\199\85\41\164\6\195\92\36\148\19\216\75\33\160\2","\64\199\103\183\57")).Remotes.CommF_:InvokeServer(v7("\54\74\66\76\246\55\91\118\87\231\54\78\93\90\246","\147\68\47\51\57"),Vector3.new(923.21252441406,386.9760055542 -260 ,32852.83203125));break;end if (v1510==0) then local v1712=0;while true do if ((0 + 0)==v1712) then Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame);wait();v1712=1638 -(44 + 1593) ;end if (v1712==(1 + 0)) then v1510=1 + 0 ;break;end end end end elseif (NameMon==v7("\175\93\19\47\146\113\156\74\15\40","\32\233\47\124\92\230")) then local v1674=0 + 0 ;while true do if (1==v1674) then game:GetService(v7("\185\68\146\183\181\205\248\159\68\134\136\168\193\235\138\70\135","\153\235\33\226\219\220\174")).Remotes.CommF_:InvokeServer(v7("\147\88\74\7\132\78\79\55\143\73\73\19\143\94\94","\114\225\61\59"),Vector3.new( -(6713.5581054688 -(14 + 191)),59.034996032715 + 30 , -132.83953857422));break;end if (0==v1674) then local v1800=0;while true do if ((1 -0)==v1800) then v1674=1;break;end if (v1800==0) then Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame);wait();v1800=1;end end end end else local v1675=0;while true do if (v1675==(0 + 0)) then repeat local v1848=0;while true do if (v1848==(5 -3)) then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v358;break;end if (v1848==0) then wait(0.5 + 0 );game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v358;v1848=1 + 0 ;end if (1==v1848) then local v1924=0;while true do if (v1924==0) then wait(0.05);game.Players.LocalPlayer.Character.Head:Destroy();v1924=1 -0 ;end if (v1924==(976 -(738 + 237))) then v1848=1 + 1 ;break;end end end end until ((v358.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<(2281 + 219)) and (game.Players.LocalPlayer.Character.Humanoid.Health>0)  wait();break;end end end end end);end local v104=Instance.new(v7("\239\112\54\136\217\125\3\152\213","\237\188\19\68"));local v105=Instance.new(v7("\212\229\239\31\229\223\253\250\12\239\243","\128\157\136\142\120"));local v106=Instance.new(v7("\135\44\166\81\188\199\87\239","\157\210\101\229\62\206\169\50"));v104.Parent=game.CoreGui;v104.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;v105.Parent=v104;v105.BackgroundColor3=Color3.fromRGB(0 -0 ,0,0 -0 );v105.BorderSizePixel=0 + 0 ;v105.Position=UDim2.new(0.120833337,0,0.0952890813 -0 ,1553 -(392 + 1161) );v105.Size=UDim2.new(0,120 -70 ,0,1641 -(987 + 604) );v105.Draggable=true;v105.Image="http://www.roblox.com/asset/?id=16906622093";v105.MouseButton1Down:connect(function() game:GetService(v7("\123\47\93\166\12\169\21\228\67\54\90\166\52\169\23\204\74\35\93","\173\45\70\47\210\121\200\121")):SendKeyEvent(true,Enum.KeyCode.End,false,game);end);if game:GetService(v7("\3\186\149\93\56\188\132\69\52\187\182\69\62\173\132\86\52","\49\81\223\229")).Effect.Container:FindFirstChild(v7("\22\131\184\225\58","\149\82\230\217")) then game:GetService(v7("\10\87\106\166\49\81\123\190\61\86\73\190\55\64\123\173\61","\202\88\50\26")).Effect.Container.Death:Destroy();end if game:GetService(v7("\7\124\246\219\140\84\52\109\227\211\182\67\58\107\231\208\128","\55\85\25\134\183\229")).Effect.Container:FindFirstChild(v7("\73\49\6\191\231\63\117","\72\27\84\117\207\134")) then game:GetService(v7("\157\195\68\49\4\84\132\43\170\194\103\41\2\69\132\56\170","\95\207\166\52\93\109\55\229")).Effect.Container.Respawn:Destroy();end local v118=loadstring(game:HttpGet("https://github.com/LeVanNhatIT/GringoHub/raw/main/Loading_Ui/Loading"))();local v119=v12.Main:AddSection(v7("\251\194\52\143\225\56\170","\205\189\163\70\226\136\86"));local v120={v7("\108\222\151\224\17\231\2\240\145\249\17\232\73","\139\34\177\229\141\112"),v7("\5\236\107\160\144\2\249\108\181\211\40","\176\67\141\24\212"),v7("\224\204\84\239\61\20\203\210\202\80\170\14\64\249\210\218\79","\141\179\185\36\138\79\52")};local v121=v12.Main:AddDropdown(v7("\223\41\80\179\255\52\72\173\223\62\83\162\226\26\75\183\250\56\84","\195\155\91\63"),{[v7("\226\74\219\240\200","\57\182\35\175\156\173\179")]=v7("\238\167\181\218\12\16\248\251\163\170\203\79\37\172\201\163\186\212","\216\189\194\217\191\111\100"),[v7("\137\75\82\119\34\67\189\90\72\123\62","\42\205\46\33\20\80")]=v7("\119\9\58\163\17\41\61\163\80\11\34","\215\49\104\73"),[v7("\224\21\10\29\211\7","\104\182\116\102")]=v120,[v7("\11\253\240\245\183","\222\70\136\156\129\222\88")]=false,[v7("\230\129\130\184\215\136\144","\217\162\228\228")]=1175 -(320 + 854) });v121:SetValue(v7("\136\220\220\204\238\252\219\204\175\222\196","\184\206\189\175"));v121:OnChanged(function(v359) local v360=787 -(72 + 715) ;local v361;while true do if (v360==(0 -0)) then v361=0;while true do if ((1329 -(656 + 673))==v361) then _G.FastAttackFaiFao_Mode=v359;if (_G.FastAttackFaiFao_Mode==v7("\122\79\234\163\140\120\200\72\79\250\188","\188\60\46\153\215\172\57")) then _G.Fast_Delay=1677.1 -(812 + 865) ;elseif (_G.FastAttackFaiFao_Mode==v7("\58\254\47\95\56\40\84\208\41\70\56\39\31","\68\116\145\93\50\89")) then _G.Fast_Delay=0.15 -0 ;elseif (_G.FastAttackFaiFao_Mode==v7("\156\77\186\166\228\19\137\89\185\183\182\114\187\76\171\160\253","\51\207\56\202\195\150")) then _G.Fast_Delay=1421 -(720 + 701) ;end break;end end break;end end end);local v122=v12.Main:AddDropdown(v7("\153\90\244\83\133\137\233\173\142\77\247\70\130\146\201\166\188\88\244\77","\195\221\40\155\35\225\230\158"),{[v7("\242\116\210\85\253","\98\166\29\166\57\152")]=v7("\158\23\128\218\50\167","\93\201\114\225\170"),[v7("\200\229\232\235\103\190\213\250\229\239\245","\142\140\128\155\136\21\215\165")]=v7("\98\165\9\81\243\46\184\141\68\172\22\81\238","\218\33\205\102\62\128\75\152"),[v7("\194\122\82\209\243\231","\150\148\27\62\164")]={v7("\15\236\230\197\39","\160\66\137\138"),v7("\51\212\45\173\59","\16\96\163\66\223\95\138\42"),v7("\162\216\222\22\154\47\146\193\216\26","\105\224\180\177\110\186")},[v7("\140\31\174\86\41","\199\193\106\194\34\64\60\91")]=false,[v7("\27\179\10\167\42\186\24","\198\95\214\108")]=1});v122:SetValue(v7("\55\56\166\133\236","\85\122\93\202\224\137\108\154"));v122:OnChanged(function(v362) ChooseWeapon=v362;end);task.spawn(function() while wait() do pcall(function() if (ChooseWeapon==v7("\169\85\94\174\198","\204\228\48\50\203\163")) then for v759,v760 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if (v760.ToolTip==v7("\243\178\69\162\10","\88\190\215\41\199\111\47\181")) then if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v760.Name)) then SelectWeapon=v760.Name;end end end elseif (ChooseWeapon==v7("\103\32\67\91\116","\190\52\87\44\41\16\161")) then for v969,v970 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if (v970.ToolTip==v7("\112\1\8\166\31","\124\35\118\103\212\123\65")) then if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v970.Name)) then SelectWeapon=v970.Name;end end end elseif (ChooseWeapon==v7("\30\231\163\167\62\122\46\254\165\171","\60\92\139\204\223\30")) then for v1185,v1186 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if (v1186.ToolTip==v7("\4\17\224\149\133\0\15\250\132\209","\165\70\125\143\237")) then if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v1186.Name)) then SelectWeapon=v1186.Name;end end end else for v1187,v1188 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if (v1188.ToolTip==v7("\153\62\249\65\85","\48\212\91\149\36")) then if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v1188.Name)) then SelectWeapon=v1188.Name;end end end end end);end end);local v123=v12.Main:AddToggle(v7("\112\17\61\3\72\27\22\1\82\27\54","\100\36\126\90"),{[v7("\37\205\195\81\19","\82\113\164\183\61\118\113\82")]=v7("\218\87\229\184\228\227\239\237\71\253","\138\155\34\145\215\196\175"),[v7("\144\252\29\193\27\50\77\212\189\246\0","\160\212\153\110\162\105\91\61")]=v7("\129\45\190\208\224\30\184\222\173\120\134\218\182\61\166","\191\192\88\202"),[v7("\85\200\239\31\29\192\101","\172\17\173\137\126\104")]=false});v123:OnChanged(function(v363) local v364=0;while true do if (v364==(0 -0)) then _G.AutoLevel=v363;if (v363==false) then wait();toTarget(game:GetService(v7("\237\112\44\46\211\241\11","\120\189\28\77\87\182\131")).LocalPlayer.Character.HumanoidRootPart.CFrame);wait();end break;end end end);v13.ToggleLevel:SetValue(false);spawn(function() while task.wait() do if _G.AutoLevel then pcall(function() CheckLevel();if ( not string.find(game:GetService(v7("\252\33\16\233\23\234\196","\183\172\77\113\144\114\152")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,NameMon) or (game:GetService(v7("\205\116\57\240\71\215\30","\109\157\24\88\137\34\165")).LocalPlayer.PlayerGui.Main.Quest.Visible==false)) then local v822=752 -(751 + 1) ;while true do if (v822==(1928 -(410 + 1517))) then if ((CFrameQ.Position-game:GetService(v7("\240\169\11\35\197\183\25","\90\160\197\106")).LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<=5) then game:GetService(v7("\209\176\58\122\75\224\180\62\115\70\208\161\37\100\67\228\176","\34\131\213\74\22")).Remotes.CommF_:InvokeServer(v7("\3\173\23\34\36\136\3\53\35\173","\80\80\217\118"),NameQuest,QuestLv);end break;end if ((0 + 0)==v822) then game:GetService(v7("\154\68\172\76\187\62\134\188\68\184\115\166\50\149\169\70\185","\231\200\33\220\32\210\93")).Remotes.CommF_:InvokeServer(v7("\125\90\71\227\51\83\86\119\248\50\79\76","\87\60\56\38\141"));toTarget(CFrameQ);v822=796 -(406 + 389) ;end end elseif (string.find(game:GetService(v7("\53\68\10\100\0\90\24","\29\101\40\107")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,NameMon) or (game:GetService(v7("\245\249\209\170\24\215\230","\125\165\149\176\211")).LocalPlayer.PlayerGui.Main.Quest.Visible==true)) then for v1189,v1190 in pairs(game:GetService(v7("\126\12\56\234\150\89\2\41\228","\229\41\99\74\129")).Enemies:GetChildren()) do if (v1190:FindFirstChild(v7("\27\16\236\42\61\10\232\47","\75\83\101\129")) and v1190:FindFirstChild(v7("\218\94\76\209\252\68\72\212\192\68\78\196\194\74\83\196","\176\146\43\33")) and (v1190.Humanoid.Health>0)) then if (v1190.Name==Ms) then local v1513=0 -0 ;local v1514;while true do if (v1513==0) then v1514=630 -(547 + 83) ;while true do if (v1514==(0 -0)) then repeat local v1874=0 + 0 ;while true do if (v1874==(1 + 0)) then AutoHaki();EquipTool(SelectWeapon);Tween(v1190.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1874=782 -(78 + 702) ;end if (v1874==(6 -4)) then v1190.HumanoidRootPart.Size=Vector3.new(34 + 26 ,60,60);v1190.HumanoidRootPart.Transparency=1;v1190.Humanoid.JumpPower=0 -0 ;v1874=544 -(499 + 42) ;end if (v1874==3) then v1190.Humanoid.WalkSpeed=0 -0 ;v1190.HumanoidRootPart.CanCollide=false;FarmPos=v1190.HumanoidRootPart.CFrame;v1874=1 + 3 ;end if (v1874==4) then MonFarm=v1190.Name;break;end if (v1874==(0 + 0)) then local v1964=0 -0 ;while true do if ((0 -0)==v1964) then wait(_G.Fast_Delay);AttackNoCoolDown();v1964=1 + 0 ;end if (v1964==1) then bringmob=true;v1874=564 -(168 + 395) ;break;end end end end until  not _G.AutoLevel or  not v1190.Parent or (v1190.Humanoid.Health<=(1970 -(939 + 1031))) or  not game:GetService(v7("\159\210\227\26\189\107\169\222\244","\27\200\189\145\113\206")).Enemies:FindFirstChild(v1190.Name) or (game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible==false)  bringmob=false;break;end end break;end end end end end for v1191,v1192 in pairs(game:GetService(v7("\151\132\64\160\92\176\138\81\174","\47\192\235\50\203"))[v7("\31\240\21\195\224\216\155\155\41\192\19\223","\233\64\167\122\177\140\188\212")].EnemySpawns:GetChildren()) do if string.find(v1192.Name,NameMon) then if ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v1192.Position).Magnitude>=10) then Tween(v1192.CFrame * CFrame.new(posX,posY,posZ) );end end end end end);end end end);local v124=v12.Main:AddToggle(v7("\123\123\241\71\231\185\211\78\122\242\89","\144\47\20\150\32\139\220"),{[v7("\4\43\169\245\223","\132\80\66\221\153\186\224")]=v7("\103\186\48\24\251\96\174\54\26\251\101\174\42\19\162\6\231\100\56\181\74\182\100\58\186\94\239\8\18\173\67\163\100\94","\219\38\207\68\119"),[v7("\41\19\25\50\7\133\29\2\3\62\27","\236\109\118\106\81\117")]=v7("\204\38\210\32\238\203\50\212\34\238\206\50\200\43\183\173\123\134\0\160\225\42\134\2\175\245\115\234\42\184\232\63\134\102","\206\141\83\166\79"),[v7("\201\172\219\203\235\225\189","\158\141\201\189\170")]=false});v124:OnChanged(function(v365) local v366=0;local v367;while true do if ((748 -(50 + 698))==v366) then v367=0;while true do if (v367==0) then _G.AutoCandy=v365;if (v365==false) then local v1122=0 + 0 ;local v1123;local v1124;while true do if ((0 -0)==v1122) then v1123=0 + 0 ;v1124=nil;v1122=175 -(76 + 98) ;end if (v1122==(234 -(221 + 12))) then while true do if ((0 -0)==v1123) then v1124=0 -0 ;while true do if (1==v1124) then wait();break;end if (v1124==0) then local v1751=0;while true do if (v1751==(1 -0)) then v1124=1;break;end if (v1751==0) then wait();Tween(game:GetService(v7("\39\188\248\162\72\5\163","\45\119\208\153\219")).LocalPlayer.Character.HumanoidRootPart.CFrame);v1751=1;end end end end break;end end break;end end end break;end end break;end end end);v13.ToggleCandy:SetValue(false);local v125=CFrame.new( -16603.197265625,293.3873748779297 -163 ,1087.16455078125);spawn(function() while wait() do if _G.AutoCandy then pcall(function() local v702=0;while true do if (v702==(0 + 0)) then toTarget(v125);if (game:GetService(v7("\227\86\182\30\0\196\88\167\16","\115\180\57\196\117")).Enemies:FindFirstChild(v7("\27\111\92\241\16\235\63\212\62\125\71","\160\82\28\48\148\48\164\74")) or game:GetService(v7("\244\223\175\45\41\29\194\211\184","\109\163\176\221\70\90")).Enemies:FindFirstChild(v7("\251\82\59\85\125\54\146\99\56\77","\82\178\33\87\52\19")) or game:GetService(v7("\123\173\250\113\111\92\163\235\127","\28\44\194\136\26")).Enemies:FindFirstChild(v7("\79\108\73\75\125\131\72\221\121\125\7\49\119\152\73\199\115\107","\174\28\25\39\102\22\234\59")) or game:GetService(v7("\254\70\2\211\221\150\200\74\21","\230\169\41\112\184\174")).Enemies:FindFirstChild(v7("\227\215\121\187\82\55\219\78\199\212\124\177\28","\47\170\164\21\222\114\116\179"))) then for v1297,v1298 in pairs(game:GetService(v7("\202\136\159\221\238\151\140\213\248","\182\157\231\237")).Enemies:GetChildren()) do if ((v1298.Name==v7("\220\233\0\165\181\213\25\180\249\251\27","\192\149\154\108")) or (v1298.Name==v7("\208\234\235\33\51\50\65\219\246\254","\97\153\153\135\64\93\86")) or (v1298.Name==v7("\53\75\220\101\242\32\152\202\3\90\146\31\248\59\153\208\9\76","\185\102\62\178\72\153\73\235")) or (v1298.Name==v7("\93\169\39\183\52\153\35\179\121\170\34\189\122","\210\20\218\75"))) then if (v1298:FindFirstChild(v7("\160\232\10\114\82\22\61\140","\84\232\157\103\19\60\121")) and v1298:FindFirstChild(v7("\52\102\127\66\18\124\123\71\46\124\125\87\44\114\96\87","\35\124\19\18")) and (v1298.Humanoid.Health>0)) then local v1598=0;while true do if (v1598==(1654 -(1529 + 125))) then repeat wait(_G.Fast_Delay);AttackNoCoolDown();bringmob=true;AutoHaki();EquipTool(SelectWeapon);Tween(v1298.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1298.HumanoidRootPart.Size=Vector3.new(145 -85 ,44 + 16 ,15 + 45 );v1298.HumanoidRootPart.Transparency=1 -0 ;v1298.Humanoid.JumpPower=1028 -(212 + 816) ;v1298.Humanoid.WalkSpeed=0 -0 ;v1298.HumanoidRootPart.CanCollide=false;FarmPos=v1298.HumanoidRootPart.CFrame;MonFarm=v1298.Name;until  not _G.AutoCandy or  not v1298.Parent or (v1298.Humanoid.Health<=(0 -0))  bringmob=false;break;end end end end end Tween(CFrame.new( -16599.1484375,84.26811218261719 + 70 , -(1765.3218688964844 -(62 + 1537))));end break;end end end);end end end);local v126=v12.Main:AddToggle(v7("\208\92\19\193\91\225\126\27\196\118\241\65\21","\55\132\51\116\166"),{[v7("\252\53\169\120\1","\157\168\92\221\20\100\94")]=v7("\227\216\249\19\90\247\115\201\195\181\3\90\244\121\202\145\212\10\8\216","\22\168\177\149\127\122\185"),[v7("\147\162\41\73\237\190\183\46\67\240\185","\159\215\199\90\42")]=v7("\25\198\194\42\179\28\202\207\52\179\46\143\227\41\241\114\238\219\52\242","\147\82\175\174\70"),[v7("\51\135\11\61\84\27\150","\33\119\226\109\92")]=false});v126:OnChanged(function(v368) local v369=0 -0 ;local v370;while true do if (v369==0) then v370=0;while true do if (v370==(61 -(58 + 3))) then _G.AutoNear=v368;if (v368==false) then local v1125=0 -0 ;local v1126;while true do if (v1125==(0 + 0)) then v1126=169 -(82 + 87) ;while true do if (v1126==(0 + 0)) then local v1599=0 + 0 ;while true do if ((0 + 0)==v1599) then wait();Tween(game:GetService(v7("\138\138\123\224\254\168\149","\155\218\230\26\153")).LocalPlayer.Character.HumanoidRootPart.CFrame);v1599=1758 -(922 + 835) ;end if (v1599==(2 -1)) then v1126=1 + 0 ;break;end end end if (v1126==(970 -(320 + 649))) then wait();break;end end break;end end end break;end end break;end end end);v13.ToggleMobAura:SetValue(false);spawn(function() while wait(0.1 -0 ) do if _G.AutoNear then pcall(function() for v761,v762 in pairs(game.Workspace.Enemies:GetChildren()) do if (v762:FindFirstChild(v7("\62\7\22\194\24\29\18\199","\163\118\114\123")) and v762:FindFirstChild(v7("\202\243\253\177\187\237\239\244\130\186\237\242\192\177\167\246","\213\130\134\144\208")) and (v762.Humanoid.Health>0)) then if v762.Name then if ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v762:FindFirstChild(v7("\211\41\16\53\75\118\84\45\201\51\18\32\117\120\79\61","\73\155\92\125\84\37\25\61")).Position).Magnitude<=5000) then local v1417=0 -0 ;while true do if (v1417==(0 + 0)) then repeat local v1676=0;while true do if (v1676==(13 -9)) then MonFarm=v762.Name;break;end if (0==v1676) then wait(_G.Fast_Delay);AttackNoCoolDown();bringmob=true;v1676=1 + 0 ;end if (v1676==3) then v762.Humanoid.WalkSpeed=953 -(588 + 365) ;v762.HumanoidRootPart.CanCollide=false;FarmPos=v762.HumanoidRootPart.CFrame;v1676=4;end if (v1676==2) then v762.HumanoidRootPart.Size=Vector3.new(131 -71 ,14 + 46 ,1609 -(1058 + 491) );v762.HumanoidRootPart.Transparency=1676 -(1633 + 42) ;v762.Humanoid.JumpPower=0 -0 ;v1676=5 -2 ;end if (1==v1676) then AutoHaki();EquipTool(SelectWeapon);Tween(v762.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1676=1 + 1 ;end end until  not _G.AutoNear or  not v762.Parent or (v762.Humanoid.Health<=0) or  not game.Workspace.Enemies:FindFirstChild(v762.Name)  bringmob=false;break;end end end end end end end);end end end);local v127=v12.Main:AddToggle(v7("\117\205\234\212\66\68\225\236\192\90\77\199\223\210\71\69","\46\33\162\141\179"),{[v7("\104\165\185\49\45","\72\60\204\205\93")]=v7("\133\209\214\187\8\13\165\215\214\184\77\110\150\197\203\176\8\50\228\244\203\166\73\58\161\215\130\151\73\61\176\200\199","\78\196\164\162\212\40"),[v7("\127\200\218\93\224\192\176\179\82\194\199","\199\59\173\169\62\146\169\192")]=v7("\22\176\168\172\119\134\189\176\35\169\185\227\5\164\181\167\119\185\252\147\62\183\189\183\50\182\252\128\54\182\168\175\50","\195\87\197\220"),[v7("\149\244\167\178\192\112\232","\84\209\145\193\211\181\28\156")]=false});v127:OnChanged(function(v371) _G.CastleRaid=v371;end);v13.ToggleCastleRaid:SetValue(false);spawn(function() while wait() do if _G.CastleRaid then pcall(function() local v703=0 + 0 ;local v704;while true do if (v703==(0 -0)) then v704=CFrame.new( -(1189.17432 + 4307),313.768921, -(9084.53027 -6243),0.924894512 -0 ,7.37058e-9,0.380223751 + 0 ,3.588102e-8 + 0 ,2 -1 , -(1.06665446e-7 -0), -(0.380223751 -0),260.00000011229713 -(11 + 249) ,0.924894512 -0 );if ((CFrame.new( -(5777.3115234375 -(214 + 24)),1250.800537109375 -(550 + 387) , -(3637.372314453125 -(411 + 254))).Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<=(59 + 441)) then for v1299,v1300 in pairs(game:GetService(v7("\230\236\60\131\212\193\226\45\141","\167\177\131\78\232")).Enemies:GetChildren()) do if (_G.CastleRaid and v1300:FindFirstChild(v7("\128\24\134\70\10\71\7\193\154\2\132\83\52\73\28\209","\165\200\109\235\39\100\40\110")) and v1300:FindFirstChild(v7("\161\111\236\41\29\134\115\229","\115\233\26\129\72")) and (v1300.Humanoid.Health>(1805 -(1208 + 597)))) then if ((v1300.HumanoidRootPart.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<(7681 -5681)) then repeat local v1677=60 -(55 + 5) ;while true do if (v1677==3) then Tween(v1300.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );break;end if ((0 + 0)==v1677) then wait(_G.Fast_Delay);AttackNoCoolDown();v1677=1599 -(187 + 1411) ;end if (v1677==2) then v1300.HumanoidRootPart.CanCollide=false;v1300.HumanoidRootPart.Size=Vector3.new(958 -(607 + 291) ,256 -196 ,178 -118 );v1677=3 + 0 ;end if (v1677==(4 -3)) then AutoHaki();EquipTool(SelectWeapon);v1677=2;end end until (v1300.Humanoid.Health<=(1596 -(1347 + 249))) or  not v1300.Parent or  not _G.CastleRaid  end end end else toTarget(v704);end break;end end end);end end end);v12.Main:AddButton({[v7("\76\7\195\139\225","\132\24\110\183\231")]=v7("\143\100\20\188\26\151\126\70\189\101","\35\206\17\96\211\58\212\22"),[v7("\23\203\154\58\154\177\184\221\58\193\135","\169\83\174\233\89\232\216\200")]=v7("\125\7\79\50\248\232\225\19\79\6","\118\60\114\59\93\216\171\137"),[v7("\113\200\72\232\190\83\202\79","\220\50\169\36\132")]=function() _G.JoinTeam=v7("\193\142\30\176\229\130\31","\209\145\231\108");_G.Stop_If_Has_Items=true;loadstring(game:HttpGet("https://github.com/PNguyen0199/Script/raw/main/Trash_Auto_Chest.lua"))();end});v12.Main:AddButton({[v7("\109\40\28\1\221","\66\57\65\104\109\184\165")]=v7("\143\14\254\91\224\176\75\219\82\233\253\40\245\90\224","\133\221\107\154\62"),[v7("\255\27\166\226\85\203\33\207\23\186\239","\81\187\126\213\129\39\162")]=v7("\183\180\41\241\161\136\241\12\248\168\197\146\34\240\161","\196\229\209\77\148"),[v7("\100\212\125\16\95\243\206\76","\173\39\181\17\124\61\146")]=function() RedeemCode();end});function RedeemCode(v372) game:GetService(v7("\72\217\227\46\129\121\221\231\39\140\73\200\252\48\137\125\217","\232\26\188\147\66")).Remotes.Redeem:InvokeServer(v372);end v12.Main:AddButton({[v7("\33\232\242\23\118","\19\117\129\134\123")]=v7("\5\19\218\86\22\44\44\16\221\19\38","\67\67\99\169\118\84"),[v7("\38\47\246\76\65\191\233\162\11\37\235","\214\98\74\133\47\51\214\153")]=v7("\44\94\99\52\81\88\5\93\100\113\97","\55\106\46\16\20\19"),[v7("\106\186\190\60\52\63\16\66","\115\41\219\210\80\86\94")]=function() FPSBooster();end});function FPSBooster() local v373=true;local v374=game;local v375=v374.Workspace;local v376=v374.Lighting;local v377=v375.Terrain;sethiddenproperty(v376,v7("\148\76\234\18\220\52\172\70\238\3","\91\192\41\137\122\178"),2);sethiddenproperty(v377,v7("\115\32\201\231\69\36\222\225\88\43","\136\55\69\170"),false);v377.WaterWaveSize=0 + 0 ;v377.WaterWaveSpeed=0;v377.WaterReflectance=0;v377.WaterTransparency=0;v376.GlobalShadows=false;v376.FogEnd=9000000255 -(386 + 381) ;v376.Brightness=0;settings().Rendering.QualityLevel=v7("\207\248\6\63\218\163\124","\173\131\157\112\90\182\147\77");for v515,v516 in pairs(v374:GetDescendants()) do if (v516:IsA(v7("\42\23\50\19","\103\122\118\64")) or v516:IsA(v7("\197\230\25\203\254","\221\144\136\112\164\144")) or v516:IsA(v7("\122\50\107\170\92\47\78\161\93\58\124\148\88\47\109","\196\57\93\25")) or v516:IsA(v7("\254\94\165\150\92\250\77\162\145","\47\170\44\208\229"))) then local v628=0;while true do if (v628==(1612 -(1474 + 138))) then v516.Material=v7("\120\78\191\9\15\238\52","\87\40\34\222\122\123\135");v516.Reflectance=0 -0 ;break;end end elseif (v516:IsA(v7("\101\56\130\52\205","\176\33\93\225\85\161")) or (v516:IsA(v7("\150\28\149\192\108\176\28","\25\194\121\237\180")) and v373)) then v516.Transparency=2 -1 ;elseif (v516:IsA(v7("\132\182\43\59\15\73\184\178\28\34\15\94\160\178\43","\42\212\215\89\79\102")) or v516:IsA(v7("\131\67\37\25\195","\151\215\49\68\112\175\46\39"))) then v516.Lifetime=NumberRange.new(0 + 0 );elseif v516:IsA(v7("\99\101\166\64\130\85\116\185\66","\237\38\29\214\44")) then local v1193=0;while true do if (v1193==0) then v516.BlastPressure=973 -(407 + 565) ;v516.BlastRadius=2 -1 ;break;end end elseif (v516:IsA(v7("\48\47\101\3","\225\118\70\23\102\19\38\213")) or v516:IsA(v7("\19\74\82\54\117\253\183\40\78","\208\64\58\61\66\57\148")) or v516:IsA(v7("\218\179\169\79\236","\36\137\222\198")) or v516:IsA(v7("\210\228\227\48\195\174\7\90","\41\129\148\130\66\168\194\98"))) then v516.Enabled=false;elseif v516:IsA(v7("\60\47\146\24\115\41\98\184","\204\113\74\225\112\35\72\16")) then local v1515=1039 -(688 + 351) ;while true do if ((621 -(592 + 28))==v1515) then v516.TextureID=10385902758728956;break;end if (v1515==(0 -0)) then v516.Material=v7("\65\18\0\51\240\182\176","\128\17\126\97\64\132\223\211");v516.Reflectance=1245 -(1150 + 95) ;v1515=1214 -(463 + 750) ;end end end end for v517,v518 in pairs(v376:GetChildren()) do if (v518:IsA(v7("\152\138\40\26\159\128\59\13\185\146","\104\218\230\93")) or v518:IsA(v7("\64\41\220\68\114\37\193\83\117\58\215\117\103","\22\19\92\178")) or v518:IsA(v7("\253\4\79\33\175\146\209\25\81\43\190\165\215\4\77\11\187\183\219\8\87","\209\190\107\35\78\221")) or v518:IsA(v7("\162\34\217\238\219\165\40\208\228\213\148","\182\224\78\182\129")) or v518:IsA(v7("\201\8\181\26\222\31\121\98\228\8\169\10\243\54\121\65\238\25","\36\141\109\197\110\182\80\31"))) then v518.Enabled=false;end end end local v128=v12.Main:AddSection(v7("\206\11\5\147\27\46\250\74\48\134\12\49","\92\131\106\118\231\126"));local v129=v12.Main:AddDropdown(v7("\153\81\49\181\39\178\84\48\136\34\174\87\59\183\58","\67\221\35\94\197"),{[v7("\113\181\52\86\64","\58\37\220\64")]=v7("\241\141\231\24\177\190\197\204\217\3\176\169","\204\188\236\148\108\212"),[v7("\250\217\76\240\230\27\17\166\215\211\81","\210\190\188\63\147\148\114\97")]=v7("\152\199\182\144\20\167\223\229\169\30\177\195","\113\213\166\197\228"),[v7("\251\63\206\70\79\150","\129\173\94\162\51\42\229\99")]={v7("\113\49\4\52\186","\214\61\84\114\81"),v7("\105\230\29\87\141\251\72\225\15","\182\39\131\124\37\173")},[v7("\23\8\182\0\160","\20\90\125\218\116\201")]=false,[v7("\1\12\29\134\63\34\73","\61\69\105\123\231\74\78")]=1 + 0 });v129:SetValue(v7("\253\168\172\14\219","\183\177\205\218\107"));v129:OnChanged(function(v386) TypeMastery=v386;end);local v130=v12.Main:AddToggle(v7("\49\63\138\120\192\51\40\49\158\107\201\36\28\22\159\106\197\34","\86\101\80\237\31\172"),{[v7("\103\49\186\88\127","\189\51\88\206\52\26\169")]=v7("\7\214\95\90\102\225\109\21\11\194\88\65\35\209\82","\53\70\163\43"),[v7("\229\167\180\27\100\58\90\213\171\168\22","\42\161\194\199\120\22\83")]=v7("\129\233\76\61\50\19\161\239\76\55\96\39\224\218\74\39\123\42","\94\192\156\56\82\18"),[v7("\121\190\2\76\104\1\150","\226\61\219\100\45\29\109")]=false});v130:OnChanged(function(v387) AutoFarmMasDevilFruit=v387;end);v13.ToggleMasteryFruit:SetValue(false);local v131=v12.Main:AddSlider(v7("\201\175\41\68\255\177\8\69\251\175\52","\32\154\195\64"),{[v7("\197\19\78\211\219","\65\145\122\58\191\190")]=v7("\217\18\229\117\215\249\87\172\60\138\177\58\235\123","\163\145\119\132\25"),[v7("\43\4\217\197\74\6\17\222\207\87\1","\56\111\97\170\166")]=v7("\163\122\135\53\59\132\173\50\203\82\137\59","\23\235\31\230\89\79\236\141"),[v7("\246\89\197\162\219\35\251","\143\178\60\163\195\174\79")]=1517 -(624 + 868) ,[v7("\63\14\239","\85\114\103\129\167\24\97")]=0 -0 ,[v7("\22\210\170","\103\91\179\210\236\175\99")]=807 -(179 + 528) ,[v7("\107\250\71\246\84\176\174\133","\226\57\149\50\152\48\217\192")]=30 -(22 + 7) ,[v7("\96\173\38\162\249\66\175\33","\155\35\204\74\206")]=function(v388) KillPercent=v388;end});v131:OnChanged(function(v389) KillPercent=v389;end);v131:SetValue(43 -18 );spawn(function() while task.wait(1 -0 ) do if _G.UseSkill then pcall(function() if _G.UseSkill then for v972,v973 in pairs(game:GetService(v7("\128\205\105\44\212\167\195\120\34","\167\215\162\27\71")).Enemies:GetChildren()) do if ((v973.Name==MonFarm) and v973:FindFirstChild(v7("\21\150\198\35\51\50\138\207","\93\93\227\171\66")) and v973:FindFirstChild(v7("\0\220\193\175\48\40\199\133\26\198\195\186\14\38\220\149","\225\72\169\172\206\94\71\174")) and (v973.Humanoid.Health<=((v973.Humanoid.MaxHealth * KillPercent)/100))) then repeat local v1301=0 + 0 ;while true do if (1==v1301) then Tween(v973.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );PositionSkillMasteryDevilFruit=v973.HumanoidRootPart.Position;v1301=1552 -(666 + 884) ;end if (v1301==(0 + 0)) then game:GetService(v7("\127\71\90\212\241\34\94\68\81\81","\40\45\50\52\135\148\80")).Heartbeat:wait();EquipTool(game.Players.LocalPlayer.Data.DevilFruit.Value);v1301=1;end if (v1301==(2 + 0)) then if game:GetService(v7("\210\21\231\155\231\11\245","\226\130\121\134")).LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value) then local v1678=0 + 0 ;local v1679;while true do if (v1678==(10 -7)) then if (SkillF and (v1679>=(14 -9))) then game:GetService(v7("\26\245\179\95\46\254\32\213\175\91\46\235\1\253\175\74\60\250\62","\159\76\156\193\43\91")):SendKeyEvent(true,"F",false,game);wait(0.5 + 0 );game:GetService(v7("\79\37\28\97\176\72\79\195\119\60\27\97\136\72\77\235\126\41\28","\138\25\76\110\21\197\41\35")):SendKeyEvent(false,"F",false,game);end break;end if (v1678==(0 + 0)) then game:GetService(v7("\184\53\194\98\141\43\208","\27\232\89\163")).LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value).MousePos.Value=PositionSkillMasteryDevilFruit;v1679=game:GetService(v7("\196\165\193\218\241\187\211","\163\148\201\160")).LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value).Level.Value;v1678=32 -(16 + 15) ;end if (v1678==(1 + 1)) then if (SkillC and (v1679>=(5 -2))) then local v1875=0 -0 ;local v1876;while true do if (v1875==(0 + 0)) then v1876=0;while true do if (v1876==(1277 -(895 + 381))) then game:service(v7("\178\249\110\204\89\207\214\173\254\108\205\88\227\219\138\241\123\221\94","\186\228\144\28\184\44\174")):SendKeyEvent(false,"C",false,game);break;end if (0==v1876) then game:service(v7("\108\43\224\94\202\23\14\115\44\226\95\203\59\3\84\35\245\79\205","\98\58\66\146\42\191\118")):SendKeyEvent(true,"C",false,game);wait(0.3);v1876=1 + 0 ;end end break;end end end if (SkillV and (v1679>=(5 -1))) then local v1877=1597 -(238 + 1359) ;local v1878;while true do if (v1877==(0 -0)) then v1878=0 + 0 ;while true do if (v1878==(1443 -(1102 + 341))) then game:service(v7("\48\23\8\2\19\31\22\63\8\14\15\2\43\31\20\23\1\27\8","\118\102\126\122")):SendKeyEvent(true,"V",false,game);wait(0.4 -0 );v1878=1;end if (v1878==(1146 -(993 + 152))) then game:service(v7("\234\2\154\243\189\221\7\161\233\184\201\31\165\230\166\221\12\141\245","\200\188\107\232\135")):SendKeyEvent(false,"V",false,game);break;end end break;end end end v1678=1625 -(1611 + 11) ;end if (v1678==1) then if (SkillZ and (v1679>=(2 -1))) then game:service(v7("\104\140\250\242\168\4\82\172\230\246\168\17\115\132\230\231\186\0\76","\101\62\229\136\134\221")):SendKeyEvent(true,"Z",false,game);wait(0.1 -0 );game:service(v7("\68\70\228\251\11\115\67\223\225\14\103\91\219\238\16\115\72\243\253","\126\18\47\150\143")):SendKeyEvent(false,"Z",false,game);end if (SkillX and (v1679>=(2 -0))) then local v1879=0;while true do if ((367 -(265 + 102))==v1879) then game:service(v7("\130\199\218\104\39\112\19\157\192\216\105\38\92\30\186\207\207\121\32","\127\212\174\168\28\82\17")):SendKeyEvent(true,"X",false,game);wait(0.2);v1879=48 -(31 + 16) ;end if (v1879==(1 + 0)) then game:service(v7("\60\163\78\195\31\171\80\254\4\186\73\195\39\171\82\214\13\175\78","\183\106\202\60")):SendKeyEvent(false,"X",false,game);break;end end end v1678=2;end end end break;end end until  not AutoFarmMasDevilFruit or  not _G.UseSkill or (v973.Humanoid.Health==(0 + 0))  end end end end);end end end);spawn(function() while task.wait(0.1 + 0 ) do if (AutoFarmMasDevilFruit and (TypeMastery==v7("\98\249\36\80\60","\222\46\156\82\53\80\52"))) then pcall(function() local v705=0 + 0 ;while true do if (v705==0) then CheckLevel(SelectMonster);if ( not string.find(game:GetService(v7("\11\220\30\241\113\41\195","\20\91\176\127\136")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,NameMon) or (game:GetService(v7("\199\252\41\188\15\182\228","\196\151\144\72\197\106")).LocalPlayer.PlayerGui.Main.Quest.Visible==false)) then game:GetService(v7("\38\203\144\94\29\205\129\70\17\202\179\70\27\220\129\85\17","\50\116\174\224")).Remotes.CommF_:InvokeServer(v7("\244\122\1\201\5\202\219\73\21\194\18\209","\165\181\24\96\167\97"));if BypassTP then if ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-CFrameQ.Position).Magnitude>(4703 -2203)) then local v1517=0;while true do if (v1517==(1730 -(754 + 976))) then to(CFrameQ);wait(225.2 -(141 + 84) );break;end end elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-CFrameQ.Position).Magnitude<(1333 + 1167)) then Tween(CFrameQ);end else Tween(CFrameQ);end if ((CFrameQ.Position-game:GetService(v7("\156\33\61\93\169\63\47","\36\204\77\92")).LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<=5) then game:GetService(v7("\12\66\43\209\8\61\70\47\216\5\13\83\52\207\0\57\66","\97\94\39\91\189")).Remotes.CommF_:InvokeServer(v7("\6\101\250\4\176\35\236\48\98\239","\153\85\17\155\118\196\114"),NameQuest,QuestLv);end elseif (string.find(game:GetService(v7("\247\249\218\222\190\35\212","\81\167\149\187\167\219")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,NameMon) or (game:GetService(v7("\201\0\41\216\247\235\31","\146\153\108\72\161")).LocalPlayer.PlayerGui.Main.Quest.Visible==true)) then for v1454,v1455 in pairs(game:GetService(v7("\50\27\255\236\56\43\63\6\17","\94\101\116\141\135\75\91")).Enemies:GetChildren()) do if (v1455:FindFirstChild(v7("\26\181\14\197\75\244\230\18","\118\82\192\99\164\37\155\143")) and v1455:FindFirstChild(v7("\10\174\70\46\44\180\66\43\16\180\68\59\18\186\89\59","\79\66\219\43"))) then if (v1455.Name==Ms) then repeat local v1752=0 -0 ;while true do if (v1752==0) then wait(_G.Fast_Delay);if (v1455.Humanoid.Health<=((v1455.Humanoid.MaxHealth * KillPercent)/(1003 -(763 + 140)))) then _G.UseSkill=true;else _G.UseSkill=false;AutoHaki();bringmob=true;EquipTool(SelectWeapon);Tween(v1455.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1455.HumanoidRootPart.Size=Vector3.new(98 -38 ,212 -152 ,60);v1455.HumanoidRootPart.Transparency=1 + 0 ;v1455.Humanoid.JumpPower=0 + 0 ;v1455.Humanoid.WalkSpeed=0;v1455.HumanoidRootPart.CanCollide=false;FarmPos=v1455.HumanoidRootPart.CFrame;MonFarm=v1455.Name;NormalAttack();end break;end end until  not AutoFarmMasDevilFruit or  not v1455.Parent or (v1455.Humanoid.Health==(0 -0)) or (game:GetService(v7("\45\76\242\8\24\82\224","\113\125\32\147")).LocalPlayer.PlayerGui.Main.Quest.Visible==false) or  not game:GetService(v7("\235\221\219\72\88\164\221\209\204","\212\188\178\169\35\43")).Enemies:FindFirstChild(v1455.Name) or ( not TypeMastery==v7("\146\238\107\47\178","\74\222\139\29"))  bringmob=false;_G.UseSkill=false;end end end end break;end end end);elseif (AutoFarmMasDevilFruit and (TypeMastery==v7("\105\192\168\22\226\37\125\234\84","\136\39\165\201\100\194\104\18"))) then pcall(function() for v974,v975 in pairs(game.Workspace.Enemies:GetChildren()) do if (v975.Name and v975:FindFirstChild(v7("\91\250\65\119\221\233\38\214","\178\19\143\44\22\179\134\79")) and v975:FindFirstChild(v7("\53\148\166\20\70\222\254\128\47\142\164\1\120\208\229\144","\228\125\225\203\117\40\177\151"))) then if ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v975:FindFirstChild(v7("\192\188\199\117\132\15\46\236\155\197\123\158\48\38\250\189","\71\136\201\170\20\234\96")).Position).Magnitude<=5000) then repeat local v1456=0;while true do if (v1456==(0 -0)) then wait(_G.Fast_Delay);if (v975.Humanoid.Health<=((v975.Humanoid.MaxHealth * KillPercent)/(1684 -(1292 + 292)))) then _G.UseSkill=true;else local v1753=206 -(158 + 48) ;while true do if (v1753==2) then v975.Humanoid.WalkSpeed=0;v975.HumanoidRootPart.CanCollide=false;FarmPos=v975.HumanoidRootPart.CFrame;MonFarm=v975.Name;v1753=3;end if (v1753==(1 + 2)) then NormalAttack();break;end if ((3 -2)==v1753) then Tween(v975.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v975.HumanoidRootPart.Size=Vector3.new(1138 -(685 + 393) ,60,60);v975.HumanoidRootPart.Transparency=1 + 0 ;v975.Humanoid.JumpPower=0 -0 ;v1753=2;end if (v1753==0) then _G.UseSkill=false;AutoHaki();bringmob=true;EquipTool(SelectWeapon);v1753=1847 -(1736 + 110) ;end end end break;end end until  not AutoFarmMasDevilFruit or ( not MasteryType==v7("\61\33\125\218\134\221\171\17\55","\196\115\68\28\168\166\144")) or  not v975.Parent or (v975.Humanoid.Health==0) or ( not TypeMastery==v7("\246\86\237\110\69\217\94\218\64","\49\184\51\140\28\101\148"))  bringmob=false;_G.UseSkill=false;end end end end);end end end);if Third_Sea then local v519=0;local v520;local v521;local v522;local v523;local v524;local v525;while true do if (v519==(1 + 2)) then spawn(function() while wait(0 -0 ) do if _G.AutoRandomBone then local v1127=337 -(247 + 90) ;local v1128;while true do if (v1127==0) then v1128={[1 + 0 ]=v7("\218\207\173\251\16","\99\152\160\195\158"),[2]=v7("\165\34\207","\95\231\87\182\94\125"),[8 -5 ]=4 -3 ,[4]=1};game:GetService(v7("\106\204\232\56\0\127\18\76\204\252\7\29\115\1\89\206\253","\115\56\169\152\84\105\28")).Remotes.CommF_:InvokeServer(unpack(v1128));break;end end end end end);break;end if (v519==(438 -(370 + 67))) then local v706=0 + 0 ;while true do if (v706==1) then v523=CFrame.new( -(1769.75 + 7746),508.8521728515625 -334 ,6079.40625);v524=CFrame.new( -9359.453125,141.32679748535156,5502.81982421875 -(49 + 7) );v706=2 -0 ;end if (v706==2) then v519=2;break;end if (v706==(1250 -(569 + 681))) then v522:OnChanged(function(v1129) local v1130=0;while true do if (v1130==0) then _G.AutoBone=v1129;if (v1129==false) then wait();Tween(game:GetService(v7("\145\85\8\18\58\12\178","\126\193\57\105\107\95")).LocalPlayer.Character.HumanoidRootPart.CFrame);wait();end break;end end end);v13.ToggleBone:SetValue(false);v706=1;end end end if (v519==0) then v520=v12.Main:AddSection(v7("\214\225\135\206\128\203\70\152\249","\234\148\142\233\171\160\141\39"));v521=v12.Main:AddParagraph({[v7("\101\17\158\123\136","\37\49\120\234\23\237\146")]=v7("\159\77\117\176\107\150\40\188\86\110\166","\92\221\34\27\213\75\197"),[v7("\16\50\224\110\33\61\41","\68\83\93\142\26")]=""});spawn(function() pcall(function() while wait() do v521:SetDesc(v7("\187\161\219\77\36\4\185\135\238\148\77","\207\226\206\174\109\108\101")   .. tostring(game:GetService(v7("\134\73\63\255\237\75\251\64\177\72\28\231\235\90\251\83\177","\52\212\44\79\147\132\40\154")).Remotes.CommF_:InvokeServer(v7("\205\175\192\220\252","\185\143\192\174"),v7("\158\77\61\212\243","\129\221\37\88\183\152"))   .. v7("\31\197\223\28\53\47","\92\63\135\176\114\80") ) );end end);end);v522=v12.Main:AddToggle(v7("\2\255\82\3\51\78\20\255\91\1","\43\86\144\53\100\95"),{[v7("\136\252\210\60\45","\60\220\149\166\80\72\151")]=v7("\173\61\171\253\204\10\176\252\137","\146\236\72\223"),[v7("\154\252\87\192\201\25\174\237\77\204\213","\112\222\153\36\163\187")]="Cày Xương",[v7("\224\246\235\81\49\169\208","\197\164\147\141\48\68")]=false});v519=1;end if (v519==(1939 -(68 + 1869))) then spawn(function() while wait() do if _G.AutoBone then pcall(function() local v1194=0 -0 ;local v1195;local v1196;while true do if ((0 + 0)==v1194) then v1195=0 + 0 ;v1196=nil;v1194=1 + 0 ;end if (v1194==(1 -0)) then while true do if (v1195==(0 + 0)) then v1196=game:GetService(v7("\65\17\193\15\58\191\38","\85\17\125\160\118\95\205")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text;if  not string.find(v1196,v7("\204\18\237\244\230\30\227\187\219\24\245\247","\155\136\119\128")) then game:GetService(v7("\105\206\11\236\254\169\131\86\94\207\40\244\248\184\131\69\94","\34\59\171\123\128\151\202\226")).Remotes.CommF_:InvokeServer(v7("\89\231\125\205\77\55\118\212\105\198\90\44","\88\24\133\28\163\41"));end v1195=1;end if (v1195==(1 + 0)) then if (game:GetService(v7("\195\167\241\210\13\225\184","\104\147\203\144\171")).LocalPlayer.PlayerGui.Main.Quest.Visible==false) then local v1754=0;while true do if (v1754==0) then toTarget(v523);if ((v523.Position-game:GetService(v7("\123\30\93\164\78\0\79","\221\43\114\60")).LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<=(326 -(251 + 72))) then game:GetService(v7("\243\124\107\73\247\199\192\109\126\65\205\208\206\107\122\66\251","\164\161\25\27\37\158")).Remotes.CommF_:InvokeServer(v7("\0\81\205\165\11\2\80\201\164\11","\127\83\37\172\215"),v7("\254\223\210\27\94\15\206\210\195\219\212\1\24","\131\182\190\167\117\42\106\170"),1540 -(113 + 1426) );end break;end end elseif (game:GetService(v7("\18\143\251\167\92\151\207","\188\66\227\154\222\57\229")).LocalPlayer.PlayerGui.Main.Quest.Visible==true) then if (game:GetService(v7("\79\60\73\94\227\104\50\88\80","\144\24\83\59\53")).Enemies:FindFirstChild(v7("\30\133\183\194\9\34\192\134\198\30\32\133\161\194\21","\123\76\224\213\173")) or game:GetService(v7("\24\197\219\175\60\218\200\167\42","\196\79\170\169")).Enemies:FindFirstChild(v7("\175\50\51\116\141\60\101\71\140\54\39\116\134","\29\227\91\69")) or game:GetService(v7("\232\192\172\185\183\86\54\220\202","\87\191\175\222\210\196\38")).Enemies:FindFirstChild(v7("\119\237\122\237\205\199\80\168\68\237\214\194","\174\51\136\23\130\163")) or game:GetService(v7("\10\26\32\1\241\229\60\22\55","\149\93\117\82\106\130")).Enemies:FindFirstChild(v7("\214\178\14\227\216\245\184\25\166\230\243\176\16\255","\171\134\221\125\134"))) then for v1932,v1933 in pairs(game:GetService(v7("\135\43\235\125\227\160\37\250\115","\144\208\68\153\22")).Enemies:GetChildren()) do if (v1933:FindFirstChild(v7("\201\15\40\13\203\89\30\202\211\21\42\24\245\87\5\218","\174\129\122\69\108\165\54\119")) and v1933:FindFirstChild(v7("\209\200\215\232\247\210\211\237","\137\153\189\186")) and (v1933.Humanoid.Health>(177 -(112 + 65)))) then if ((v1933.Name==v7("\35\203\31\74\3\192\93\118\26\203\17\64\5\193\19","\37\113\174\125")) or (v1933.Name==v7("\125\77\82\160\95\67\4\147\94\73\70\160\84","\201\49\36\36")) or (v1933.Name==v7("\32\43\167\127\10\39\169\48\55\33\191\124","\16\100\78\202")) or (v1933.Name==v7("\141\179\99\243\144\81\78\175\253\145\101\251\142\91","\203\221\220\16\150\227\34\43"))) then if string.find(game:GetService(v7("\203\40\122\97\254\54\104","\24\155\68\27")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v7("\158\85\221\93\180\89\211\18\137\95\197\94","\50\218\48\176")) then repeat local v2009=0 -0 ;local v2010;while true do if (v2009==(0 -0)) then v2010=0 + 0 ;while true do if (v2010==(2 + 2)) then MonFarm=v1933.Name;break;end if (1==v2010) then bringmob=true;EquipTool(SelectWeapon);Tween(v1933.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v2010=1309 -(430 + 877) ;end if (v2010==(0 + 0)) then wait(_G.Fast_Delay);AttackNoCoolDown();AutoHaki();v2010=1;end if (v2010==3) then v1933.Humanoid.WalkSpeed=0;v1933.HumanoidRootPart.CanCollide=false;FarmPos=v1933.HumanoidRootPart.CFrame;v2010=311 -(284 + 23) ;end if (v2010==2) then v1933.HumanoidRootPart.Size=Vector3.new(1504 -(314 + 1130) ,1974 -(342 + 1572) ,60);v1933.HumanoidRootPart.Transparency=2 -1 ;v1933.Humanoid.JumpPower=0;v2010=3 + 0 ;end end break;end end until  not _G.AutoBone or (v1933.Humanoid.Health<=0) or  not v1933.Parent or (game:GetService(v7("\126\94\213\233\94\70\93","\52\46\50\180\144\59")).LocalPlayer.PlayerGui.Main.Quest.Visible==false)  else local v2003=0;while true do if (v2003==(246 -(112 + 134))) then game:GetService(v7("\63\52\53\123\15\58\251\25\52\33\68\18\54\232\12\54\32","\154\109\81\69\23\102\89")).Remotes.CommF_:InvokeServer(v7("\219\201\221\90\69\54\244\250\201\81\82\45","\89\154\171\188\52\33"));bringmob=false;break;end end end end end end else end end break;end end break;end end end);end end end);v525=v12.Main:AddToggle(v7("\194\27\11\49\250\17\62\55\248\16\3\59\212\27\2\51","\86\150\116\108"),{[v7("\67\182\56\162\196","\38\23\223\76\206\161")]=v7("\234\200\86\63\172\167\134\250\198\86\62","\166\184\169\56\91\195\202"),[v7("\131\181\98\39\208\174\160\101\45\205\169","\162\199\208\17\68")]=v7("\227\231\81\5\227\3\16\57\222\232\90","\123\177\134\63\97\140\110\48"),[v7("\20\81\242\194\231\23\97","\137\80\52\148\163\146\123\21")]=false});v525:OnChanged(function(v764) _G.AutoRandomBone=v764;end);v13.ToggleRandomBone:SetValue(false);v519=3;end end end if Third_Sea then local v526=v12.Main:AddSection(v7("\21\228\149\78\189\80\44\236\193\105\183\87\51","\37\94\133\225\47\214"));local v527=v12.Main:AddParagraph({[v7("\99\221\66\82\82","\62\55\180\54")]=v7("\216\242\45\197\73\4\141\26\240\255\104\235\77\70","\123\155\154\72\166\34\36\206"),[v7("\229\208\54\183\32\200\203","\69\166\191\88\195")]=""});spawn(function() while wait() do pcall(function() if (string.len(game:GetService(v7("\139\127\62\78\143\181\47\158\188\126\29\86\137\164\47\141\188","\234\217\26\78\34\230\214\78")).Remotes.CommF_:InvokeServer(v7("\147\30\227\82\122\162\22\230\84\79\131\15\233\64\68\181\13","\42\208\127\136\55")))==88) then v527:SetDesc(v7("\90\81\197\37\230\182\15","\47\17\56\169\73\198\140")   .. string.sub(game:GetService(v7("\16\48\76\79\164\131\35\33\89\71\158\148\45\39\93\68\168","\224\66\85\60\35\205")).Remotes.CommF_:InvokeServer(v7("\219\59\119\94\2\95\218\246\57\121\104\34\76\196\246\63\110","\179\152\90\28\59\82\45")),51 -12 ,7 + 34 )   .. "" );elseif (string.len(game:GetService(v7("\155\247\44\12\68\71\168\230\57\4\126\80\166\224\61\7\72","\36\201\146\92\96\45")).Remotes.CommF_:InvokeServer(v7("\202\199\246\64\244\229\245\255\234\195\206\85\197\224\242\244\251","\145\137\166\157\37\164\151\156")))==(1641 -(311 + 1243))) then v527:SetDesc(v7("\37\16\75\112\155\46\78","\20\110\121\39\28\187")   .. string.sub(game:GetService(v7("\60\244\20\43\93\31\163\26\244\0\20\64\19\176\15\246\1","\194\110\145\100\71\52\124")).Remotes.CommF_:InvokeServer(v7("\81\232\79\171\244\11\82\24\113\236\119\190\197\14\85\19\96","\118\18\137\36\206\164\121\59")),39,1918 -(1548 + 330) )   .. "" );elseif (string.len(game:GetService(v7("\204\220\243\24\69\253\216\247\17\72\205\205\236\6\77\249\220","\44\158\185\131\116")).Remotes.CommF_:InvokeServer(v7("\111\139\214\114\235\181\120\66\137\216\68\203\166\102\66\143\207","\17\44\234\189\23\187\199")))==(48 + 38)) then v527:SetDesc(v7("\28\119\210\6\119\36\158","\106\87\30\190")   .. string.sub(game:GetService(v7("\228\233\28\112\195\84\67\200\211\232\63\104\197\69\67\219\211","\188\182\140\108\28\170\55\34")).Remotes.CommF_:InvokeServer(v7("\255\181\227\230\236\166\225\237\223\177\219\243\221\163\230\230\206","\131\188\212\136")),68 -29 ,846 -(152 + 655) )   .. " " );else v527:SetDesc("Cake Prince : 🟢 ");end end);end end);local v528=v12.Main:AddToggle(v7("\189\4\118\33\90\140\40\112\45\83","\54\233\107\17\70"),{[v7("\196\33\63\9\193","\164\144\72\75\101")]=v7("\221\158\91\213\159\125\253\128\74\154\239\76\245\133\76\223","\62\156\235\47\186\191"),[v7("\41\239\253\34\222\174\60\248\4\229\224","\140\109\138\142\65\172\199\76")]=v7("\214\75\163\18\169\229\187\226\89\191\93\203\206\167\228","\212\151\62\215\125\137\161"),[v7("\17\163\9\141\32\170\27","\236\85\198\111")]=false});v528:OnChanged(function(v547) local v548=0 + 0 ;while true do if (v548==(0 + 0)) then _G.CakePrince=v547;if (v547==false) then local v976=0 + 0 ;while true do if ((1217 -(155 + 1061))==v976) then wait();break;end if (v976==(0 + 0)) then wait();Tween(game:GetService(v7("\46\61\118\236\89\12\34","\60\126\81\23\149")).LocalPlayer.Character.HumanoidRootPart.CFrame);v976=414 -(223 + 190) ;end end end break;end end end);v13.ToggleCake:SetValue(false);spawn(function() while wait() do if _G.CakePrince then pcall(function() local v825=0 + 0 ;local v826;while true do if (v825==0) then v826=CFrame.new( -(3486.66821 -(122 + 1222)),95.2588654 -24 , -(13038.4619 -(220 + 491)),0.996939838, -(4.3310784e-8 -0),0.078172572 -0 ,913.0000000420252 -(119 + 794) ,1 + 0 ,402.00000001808945 -(71 + 331) , -(1438.078172572 -(1006 + 432)), -(1.4748844e-8 + 0),0.996939838);toTarget(v826);v825=1 -0 ;end if (v825==1) then if (game.ReplicatedStorage:FindFirstChild(v7("\102\139\221\143\48\217\87\131\216\137\117","\137\37\234\182\234\16")) or game:GetService(v7("\206\4\75\56\31\82\140\160\252","\195\153\107\57\83\108\34\237")).Enemies:FindFirstChild(v7("\95\26\142\198\201\177\237\117\21\134\198","\159\28\123\229\163\233\225"))) then if game:GetService(v7("\176\27\39\30\148\4\52\22\130","\117\231\116\85")).Enemies:FindFirstChild(v7("\15\91\77\62\60\28\72\79\53\127\41","\28\76\58\38\91")) then for v1600,v1601 in pairs(game:GetService(v7("\143\161\51\188\242\195\238\187\171","\143\216\206\65\215\129\179")).Enemies:GetChildren()) do if (v1601.Name==v7("\129\115\2\249\226\66\27\245\172\113\12","\156\194\18\105")) then repeat wait(_G.Fast_Delay);AttackNoCoolDown();AutoHaki();EquipTool(SelectWeapon);v1601.HumanoidRootPart.Size=Vector3.new(56 + 4 ,60,60);v1601.HumanoidRootPart.CanCollide=false;Tween(v1601.HumanoidRootPart.CFrame * Pos );until (_G.CakePrince==false) or  not v1601.Parent or (v1601.Humanoid.Health<=(0 + 0))  bringmob=false;end end else Tween(CFrame.new( -2009.2802734375,4532.97216796875, -14937.3076171875));end elseif (game.Workspace.Enemies:FindFirstChild(v7("\194\173\47\227\41\231\236\23\254\38\230\170","\71\128\204\68\138")) or game.Workspace.Enemies:FindFirstChild(v7("\197\87\168\52\50\203\167\230\87\187","\198\141\50\201\80\18\137")) or game.Workspace.Enemies:FindFirstChild(v7("\206\79\134\89\1\24\231\236\92\137","\146\141\46\237\60\33\95")) or game.Workspace.Enemies:FindFirstChild(v7("\253\166\254\24\180\218\158\138\227\18\187\203\219\187","\191\190\201\145\115\221"))) then for v1602,v1603 in pairs(game:GetService(v7("\12\28\255\76\110\222\92\55\62","\84\91\115\141\39\29\174\61")).Enemies:GetChildren()) do if (((v1603.Name==v7("\52\226\88\244\24\228\19\206\2\226\85\251","\157\118\131\51")) or (v1603.Name==v7("\198\91\60\175\17\92\239\85\56\185","\30\142\62\93\203\49")) or (v1603.Name==v7("\128\162\60\142\231\57\182\162\37\143","\126\195\195\87\235\199")) or (v1603.Name==v7("\42\137\85\189\240\174\62\42\148\91\176\237\174\108","\30\105\230\58\214\153\203"))) and (v1603.Humanoid.Health>(0 + 0))) then repeat wait(_G.Fast_Delay);AttackNoCoolDown();AutoHaki();bringmob=true;EquipTool(SelectWeapon);v1603.HumanoidRootPart.Size=Vector3.new(60,44 + 16 ,1551 -(270 + 1221) );FarmPos=v1603.HumanoidRootPart.CFrame;MonFarm=v1603.Name;Tween(v1603.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );until (_G.CakePrince==false) or game:GetService(v7("\33\23\230\190\9\168\18\6\243\182\51\191\28\0\247\181\5","\203\115\114\150\210\96")):FindFirstChild(v7("\240\237\87\58\147\220\78\54\221\239\89","\95\179\140\60")) or  not v1603.Parent or (v1603.Humanoid.Health<=(0 + 0))  bringmob=false;end end else Tween(v826);end break;end end end);end end end);local v529=v12.Main:AddToggle(v7("\20\245\36\241\208\31\151\192\33\237\45\213\221\17\161","\176\64\154\67\150\188\122\196"),{[v7("\17\64\48\129\75","\157\69\41\68\237\46")]=v7("\13\239\243\255\174\227\213\45\237\233\176\205\209\206\41\186\215\226\231\222\198\41","\165\76\154\135\144\142\176"),[v7("\0\40\84\4\1\73\169\48\36\72\9","\217\68\77\39\103\115\32")]=v7("\134\153\184\210\146\194\207\166\155\162\157\241\240\212\162\204\156\207\219\255\220\162","\191\199\236\204\189\178\145"),[v7("\82\131\91\78\99\138\73","\47\22\230\61")]=true});v529:OnChanged(function(v549) _G.SpawnCakePrince=v549;end);v13.ToggleSpawnCake:SetValue(true);end spawn(function() while wait() do if _G.SpawnCakePrince then local v630=0 + 0 ;local v631;while true do if (v630==(0 + 0)) then v631={[1 + 0 ]=v7("\33\178\42\29\9\16\186\47\27\60\49\163\32\15\55\7\161","\89\98\211\65\120"),[2]=true};game:GetService(v7("\141\199\29\94\20\173\22\171\199\9\97\9\161\5\190\197\8","\119\223\162\109\50\125\206")).Remotes.CommF_:InvokeServer(unpack(v631));v630=1266 -(794 + 471) ;end if (v630==(4 -3)) then v631={[1]=v7("\60\3\6\71\49\13\11\3\65\4\44\18\12\85\15\26\16","\97\127\98\109\34")};game:GetService(v7("\5\15\96\60\164\25\54\30\117\52\158\14\56\24\113\55\168","\122\87\106\16\80\205")).Remotes.CommF_:InvokeServer(unpack(v631));break;end end end end end);end if Second_Sea then local v390=0;local v391;local v392;local v393;while true do if (v390==(645 -(447 + 198))) then v391=0;v392=nil;v390=1801 -(1307 + 493) ;end if (v390==1) then v393=nil;while true do if (v391==(0 + 0)) then v392=v12.Main:AddSection(v7("\197\11\253\249\243\224\241\219\237\72\207\247\241\225","\168\128\104\137\150\131\140\144"));v393=v12.Main:AddToggle(v7("\135\179\223\240\164\72\60\6\167\159\208\246\188\102\3\35\186","\103\211\220\184\151\200\45\106"),{[v7("\136\3\52\244\223","\95\220\106\64\152\186\151\211")]=v7("\80\147\166\176\185\243\210\101\137\162\179\248\197\220","\177\17\230\210\223\153\182"),[v7("\14\183\249\139\35\223\31\62\187\229\134","\111\74\210\138\232\81\182")]=v7("\60\11\35\140\128\98\30\10\56\147\204\70\14\19","\39\125\126\87\227\160"),[v7("\112\186\184\140\65\179\170","\237\52\223\222")]=false});v391=1;end if ((1 + 0)==v391) then v393:OnChanged(function(v977) _G.Ectoplasm=v977;end);v13.ToggleVatChatKiDi:SetValue(false);v391=62 -(35 + 25) ;end if (v391==2) then spawn(function() while wait(0.1 -0 ) do pcall(function() if _G.Ectoplasm then if (game:GetService(v7("\130\244\146\219\161\7\180\248\133","\119\213\155\224\176\210")).Enemies:FindFirstChild(v7("\139\235\139\35\50\140\12\237\179\235\131\61\118","\142\216\131\226\83\18\200\105")) or game:GetService(v7("\24\11\233\201\220\241\44\229\42","\134\79\100\155\162\175\129\77")).Enemies:FindFirstChild(v7("\250\72\172\251\137\101\171\236\192\78\160\238\219","\139\169\32\197")) or game:GetService(v7("\71\199\50\62\244\236\190\206\117","\173\16\168\64\85\135\156\223")).Enemies:FindFirstChild(v7("\38\95\253\225\168\104\33\64\2\86\230\245","\37\117\55\148\145\136\59\85")) or game:GetService(v7("\0\24\161\45\36\7\178\37\50","\70\87\119\211")).Enemies:FindFirstChild(v7("\130\222\10\46\231\28\183\208\10\61\162\33","\83\209\182\99\94\199"))) then for v1604,v1605 in pairs(game:GetService(v7("\239\216\146\82\203\199\129\90\221","\57\184\183\224")).Enemies:GetChildren()) do if ((v1605.Name==v7("\203\215\234\191\100\199\1\135\239\222\241\171","\226\152\191\131\207\68\148\117")) or (v1605.Name==v7("\41\67\180\194\21\63\69\186\219\91\31\78\175","\53\122\43\221\178")) or (v1605.Name==v7("\221\160\23\14\232\55\0\37\229\160\31\16\172","\70\142\200\126\126\200\115\101")) or ((v1605.Name==v7("\96\38\78\210\172\124\40\65\203\239\86\60","\140\51\78\39\162")) and v1605:FindFirstChild(v7("\38\215\214\245\255\236\252\207","\171\110\162\187\148\145\131\149")))) then if (v1605.Humanoid.Health>(0 + 0)) then local v1819=0 -0 ;local v1820;while true do if (v1819==(736 -(402 + 334))) then v1820=859 -(331 + 528) ;while true do if (v1820==0) then repeat local v1980=0 -0 ;local v1981;while true do if ((0 + 0)==v1980) then v1981=0;while true do if (v1981==(1184 -(153 + 1028))) then v1605.Humanoid.WalkSpeed=0 -0 ;v1605.HumanoidRootPart.CanCollide=false;FarmPos=v1605.HumanoidRootPart.CFrame;v1981=18 -14 ;end if (v1981==1) then bringmob=true;EquipTool(SelectWeapon);Tween(v1605.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1981=2;end if ((0 -0)==v1981) then wait(_G.Fast_Delay);AttackNoCoolDown();AutoHaki();v1981=1;end if (v1981==(2 -0)) then local v2025=0;while true do if (v2025==1) then v1605.Humanoid.JumpPower=0 + 0 ;v1981=3;break;end if (v2025==0) then v1605.HumanoidRootPart.Size=Vector3.new(60,60,60);v1605.HumanoidRootPart.Transparency=2 -1 ;v2025=1 + 0 ;end end end if (v1981==4) then MonFarm=v1605.Name;break;end end break;end end until (_G.Ectoplasm==false) or  not v1605.Parent or (v1605.Humanoid.Health==0) or  not game:GetService(v7("\134\2\57\69\81\161\12\40\75","\34\209\109\75\46")).Enemies:FindFirstChild(v1605.Name)  bringmob=false;break;end end break;end end end end end else local v1518=0;local v1519;while true do if (v1518==0) then v1519=(Vector3.new(904.4072265625,1387.05767822266 -(995 + 211) ,33341.38671875) -game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude;if (v1519>(8789 + 11211)) then game:GetService(v7("\33\252\171\176\243\16\248\175\185\254\32\237\180\174\251\20\252","\154\115\153\219\220")).Remotes.CommF_:InvokeServer(v7("\59\20\152\11\39\1\170\12\31\157\12\35\28\189\44","\222\73\113\233\126\66\114"),Vector3.new(2972.2125244140598 -2049 ,514.9760055542 -388 ,32852.83203125));end v1518=1 + 0 ;end if (v1518==(1 + 0)) then Tween(CFrame.new(233.4072265625 + 671 ,2004.05767822266 -(1567 + 256) ,33341.38671875));break;end end end end end);end end);break;end end break;end end end local v14=v12.Main:AddSection(v7("\166\19\178\17\87\90\23\222\137","\172\228\124\193\98\119\28\118"));if First_Sea then tableBoss={v7("\13\216\131\14\30\223\148\71\53\220\135\14\18\217\136\73","\46\89\176\230"),v7("\217\5\90\37\157","\108\155\106\56\71\228"),v7("\251\95\199\56","\173\162\58\179\81\186\52\64"),v7("\19\79\252\135\103\1\68\58\69\236","\37\94\32\158\167\43\100"),v7("\242\51\80\52\91\208\178\201\51\65\48\23","\214\164\90\51\81\123\145"),v7("\44\170\177\196\30\165","\160\123\203\195"),v7("\171\20\125\137\55\117\191\29\102\136\52\59","\85\232\124\20\236\81"),v7("\114\220\180\40","\30\33\171\213\70"),v7("\165\193\48\212\121\200\225\51\212\113\154\193\59","\24\232\160\87\185"),v7("\248\57\226\241\43\223\62\177\213\41\204\52","\70\190\80\145\153"),v7("\96\239\244\238\43\37","\108\55\150\135\158\78\87"),v7("\234\12\231\244\204\37\204\68\213\245\204","\64\190\100\146\154\168"),v7("\200\188\132\28\169\185","\35\139\197\230\115\219\222\114"),v7("\11\209\232\232\204\53\204\32\192\239\255\202","\137\88\176\138\141\190\21")};elseif Second_Sea then tableBoss={v7("\2\249\75\197\190\40\244","\209\70\144\42\168"),v7("\38\232\187\85\37\9","\112\108\141\201\48\72"),v7("\237\64\29\90\55\127","\30\171\33\119\51\67"),v7("\114\161\21\146\190\239\87\160","\152\54\206\123\178\237"),v7("\223\214\164\4\221\203\239\50\225\210\185\14\212","\86\140\187\203\111\184\235\174"),v7("\238\29\100\23\66\201\72\85\5\87\217\9\127\10","\39\173\104\22\100"),v7("\102\223\72\120\25\182\67\204\94","\211\34\190\58\19\123"),v7("\108\24\239\239\206","\158\35\106\139\138\188\170"),v7("\39\222\230\65\64\8\204\227\10\108\5\204\167\107\65\11\192\245\75\73","\37\102\169\135\42"),v7("\191\199\26\243\125\28\130\165\155\203\12","\192\235\174\126\150\93\87\231")};elseif Third_Sea then tableBoss={v7("\110\80\113\63\222","\184\61\36\30\81\187\170"),v7("\54\219\183\198\31\141\95\237\182\215\3\140\12\219","\233\127\168\219\167\113"),v7("\117\125\135\125\119\236\24\80\87\102\138\126","\61\62\20\235\18\87\173\124"),v7("\97\68\80\222\203\75\75\0\239\198\71\85\72\203\196\86","\170\34\37\32\170"),v7("\17\192\56\234\41\71\53\208\53\191\13\71\33\196\45\250","\46\83\165\89\159\93"),v7("\27\241\24\147\196\192\13\234\9\236\249\220\28\253\72\138\194\220\4","\174\105\152\104\204\173"),v7("\147\70\228\8\178\72","\111\223\41\138"),v7("\52\55\47\136\80\73\203\49\23\61\40","\80\103\88\90\228\112\27\174"),v7("\125\199\241\175\174\49\16\4\91\200","\97\62\166\154\202\142\96\101")};end local v15=v12.Main:AddDropdown(v7("\132\246\218\14\57\175\243\219\60\50\179\247","\93\192\132\181\126"),{[v7("\195\17\153\24\173","\98\151\120\237\116\200\185")]=v7("\0\24\124\180\130\193\161\230","\136\68\106\19\196\230\174\214"),[v7("\223\56\72\131\206\244\235\41\82\143\210","\157\155\93\59\224\188")]=v7("\152\48\137\108\202\106\218","\46\165\25\169"),[v7("\2\232\187\216\131\46","\183\84\137\215\173\230\93")]=tableBoss,[v7("\7\101\249\48\68","\28\74\16\149\68\45\101\112")]=false,[v7("\41\224\18\93\160\230\25","\138\109\133\116\60\213")]=1 -0 });v15:SetValue("");v15:OnChanged(function(v132) _G.SelectBoss=v132;end);local v16=v12.Main:AddToggle(v7("\57\31\175\86\1\21\137\68\25\31\142\80\31\29\138\94\30\3","\49\109\112\200"),{[v7("\232\215\107\82\219","\206\188\190\31\62\190")]=v7("\98\79\124\13\254\197\12\189\90","\206\41\38\16\97\222\135\99"),[v7("\160\167\21\237\227\66\197\144\171\9\224","\181\228\194\102\142\145\43")]=v7("\31\227\1\3\150\13\92\39\249","\51\84\138\109\111\182\79"),[v7("\58\94\29\33\243\238\10","\130\126\59\123\64\134")]=false});v16:OnChanged(function(v133) _G.AutoBoss=v133;end);v13.ToggleAutoFarmBoss:SetValue(false);spawn(function() while wait() do if _G.AutoBoss then pcall(function() if game:GetService(v7("\33\224\0\55\5\255\19\63\19","\92\118\143\114")).Enemies:FindFirstChild(_G.SelectBoss) then for v827,v828 in pairs(game:GetService(v7("\99\235\209\233\14\28\85\231\198","\108\52\132\163\130\125")).Enemies:GetChildren()) do if (v828.Name==_G.SelectBoss) then if (v828:FindFirstChild(v7("\211\7\187\44\207\24\242\22","\119\155\114\214\77\161")) and v828:FindFirstChild(v7("\159\54\237\184\185\44\233\189\133\44\239\173\135\34\242\173","\217\215\67\128")) and (v828.Humanoid.Health>0)) then repeat wait(_G.Fast_Delay);AttackNoCoolDown();AutoHaki();EquipTool(SelectWeapon);v828.HumanoidRootPart.CanCollide=false;v828.Humanoid.WalkSpeed=0 + 0 ;v828.HumanoidRootPart.Size=Vector3.new(80,80,1836 -(836 + 920) );Tween(v828.HumanoidRootPart.CFrame * Pos );sethiddenproperty(game:GetService(v7("\148\20\173\22\62\19\183","\97\196\120\204\111\91")).LocalPlayer,v7("\108\180\24\171\128\79\209\3\80\179\39\191\136\71\208\25","\106\63\221\117\222\236\46\165"),math.huge);until  not _G.AutoBoss or  not v828.Parent or (v828.Humanoid.Health<=(0 + 0))  end end end elseif game:GetService(v7("\236\176\169\179\132\221\180\173\186\137\237\161\182\173\140\217\176","\237\190\213\217\223")):FindFirstChild(_G.SelectBoss) then toTarget(game:GetService(v7("\138\69\230\176\175\187\65\226\185\162\139\84\249\174\167\191\69","\198\216\32\150\220")):FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame * CFrame.new(8 -3 ,1456 -(104 + 1342) ,7) );end end);end end end);local v17=v12.Main:AddSection(v7("\215\77\92\129\66\73\252\112\186\106\73\150\93","\28\154\44\40\228\48\32\157"));if First_Sea then MaterialList={v7("\119\59\232\67\74\167\123\48\80\57\246","\85\36\88\154\34\58\135\54"),v7("\98\140\130\174\65\178\92","\215\46\233\227\218\41"),v7("\60\122\139\235\248\93\67\133\224\243\14","\148\125\20\236\142"),v7("\32\125\57\255\161\124\136\31\121","\199\109\28\94\146\192\92"),v7("\88\126\58\192\137\216\47\165\114","\204\30\23\73\168\169\140\78")};elseif Second_Sea then MaterialList={v7("\29\209\254\205\205\236\107\87\58\211\224","\50\78\178\140\172\189\204\38"),v7("\246\58\193\104\247\1\97","\19\186\95\160\28\159\100"),v7("\139\239\214\252\218\43\186\250\219\227\208\106\148\239\198\240\199\35\184\226","\74\217\142\178\149\181"),v7("\86\89\145\222\40\14\158\204\105\79\146\198\36\25","\136\27\32\226\170\65\109\190"),v7("\157\207\173\45\255\240\225\184\37","\158\208\174\202\64"),v7("\107\38\191\237\84\53\183\189\123\38\188\250","\157\61\71\210")};elseif Third_Sea then MaterialList={v7("\203\95\99\4\163\17\221\253\72\112\9","\144\152\60\17\101\211\49"),v7("\226\79\235\243\176\196\220","\161\174\42\138\135\216"),v7("\233\189\7\207\195\177\9\128\250\177\25\208","\160\173\216\106"),v7("\170\118\127\80\170\225\140\125\49\121\176\240\134\120","\147\233\25\17\58\223"),v7("\106\62\1\28\223\56\14\31\3\26\220\51","\86\46\76\96\123\176"),v7("\154\185\112\252\170\87\136\35\175","\70\221\204\30\140\197\32\236"),v7("\197\60\68\253\163\1\86\252\239","\149\131\85\55"),v7("\52\180\61\162\70\110\225\72\18","\59\121\221\83\203\102\58\148")};end local v18=v12.Main:AddDropdown(v7("\129\6\53\184\53\84\178\26\23\169\37\94\183\29\59\164","\59\197\116\90\200\81"),{[v7("\201\161\251\206\59","\94\157\200\143\162")]=v7("\218\41\252\178\250\52\228\172","\194\158\91\147"),[v7("\136\23\8\177\202\252\188\6\18\189\214","\149\204\114\123\210\184")]=v7("\209\51\109\250\53\205\68","\42\163\92\29\158\90\186"),[v7("\247\39\75\15\32\217","\95\161\70\39\122\69\170")]=MaterialList,[v7("\158\15\249\57\78","\71\211\122\149\77\39\164")]=false,[v7("\3\130\245\215\144\43\147","\229\71\231\147\182")]=1 + 0 });v18:SetValue(v7("\164\216\208\202\143\196\145\254\131\203\221\200","\173\224\170\177"));v18:OnChanged(function(v134) SelectMaterial=v134;end);local v19=v12.Main:AddToggle(v7("\76\62\138\26\175\119\214\121\37\136\15\170\115\247","\155\24\81\237\125\195\18"),{[v7("\60\42\92\90\189","\48\104\67\40\54\216\38")]=v7("\38\70\45\250\71\126\56\225\2\65\48\244\11","\149\103\51\89"),[v7("\89\64\21\143\111\76\22\152\116\74\8","\236\29\37\102")]=v7("\150\54\150\60\23\154\34\150\54\69\190\34\142","\55\215\67\226\83"),[v7("\193\122\203\133\161\218\241","\182\133\31\173\228\212")]=false});v19:OnChanged(function(v135) local v136=0;local v137;while true do if ((0 + 0)==v136) then v137=0 -0 ;while true do if (v137==0) then _G.AutoMaterial=v135;if (v135==false) then wait();Tween(game:GetService(v7("\27\14\229\173\215\93\178","\191\75\98\132\212\178\47\193")).LocalPlayer.Character.HumanoidRootPart.CFrame);wait();end break;end end break;end end end);v13.ToggleMaterial:SetValue(false);spawn(function() while task.wait() do if _G.AutoMaterial then pcall(function() local v632=0 -0 ;while true do if (v632==(1 -0)) then if game:GetService(v7("\136\72\250\236\27\218\254\188\66","\159\223\39\136\135\104\170")).Enemies:FindFirstChild(MMon) then for v1197,v1198 in pairs(game.Workspace.Enemies:GetChildren()) do if (v1198:FindFirstChild(v7("\115\226\64\250\70\16\128\95","\233\59\151\45\155\40\127")) and v1198:FindFirstChild(v7("\142\21\243\69\168\15\247\64\148\15\241\80\150\1\236\80","\36\198\96\158")) and (v1198.Humanoid.Health>0)) then if (v1198.Name==MMon) then local v1520=0 + 0 ;while true do if (v1520==0) then repeat local v1760=0 -0 ;while true do if (v1760==(1259 -(906 + 351))) then v1198.Humanoid.JumpPower=0;v1198.Humanoid.WalkSpeed=0;v1198.HumanoidRootPart.CanCollide=false;FarmPos=v1198.HumanoidRootPart.CFrame;v1760=2 + 1 ;end if (1==v1760) then EquipTool(SelectWeapon);Tween(v1198.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1198.HumanoidRootPart.Size=Vector3.new(429 -(228 + 141) ,47 + 13 ,37 + 23 );v1198.HumanoidRootPart.Transparency=2 -1 ;v1760=2;end if ((0 -0)==v1760) then local v1893=0 + 0 ;while true do if (v1893==(0 + 0)) then wait(_G.Fast_Delay);AttackNoCoolDown();v1893=1166 -(1056 + 109) ;end if (v1893==(1 + 0)) then AutoHaki();bringmob=true;v1893=2;end if (v1893==(875 -(832 + 41))) then v1760=2 -1 ;break;end end end if (v1760==(4 -1)) then MonFarm=v1198.Name;break;end end until  not _G.AutoMaterial or  not v1198.Parent or (v1198.Humanoid.Health<=0)  bringmob=false;break;end end end end end else for v1199,v1200 in pairs(game:GetService(v7("\19\192\24\10\109\239\22\4\33","\103\68\175\106\97\30\159\119"))[v7("\24\218\19\19\43\233\51\19\46\234\21\15","\97\71\141\124")].EnemySpawns:GetChildren()) do if string.find(v1200.Name,Mon) then if ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v1200.Position).Magnitude>=(25 -15)) then Tween(v1200.CFrame * CFrame.new(posX,posY,posZ) );end end end end break;end if (v632==(0 -0)) then local v829=202 -(135 + 67) ;while true do if (v829==(1 + 0)) then v632=1;break;end if (v829==(0 -0)) then MaterialMon(SelectMaterial);toTarget(MPos);v829=1;end end end end end);end end end);if Third_Sea then local v394=0 + 0 ;local v395;local v396;local v397;local v398;local v399;while true do if (v394==(0 -0)) then local v633=1576 -(1123 + 453) ;while true do if (v633==(1 + 0)) then local v830=0 -0 ;while true do if (v830==(1 -0)) then v633=2;break;end if (v830==(0 + 0)) then function UpdateKitsune() if game.Workspace._WorldOrigin.Locations:FindFirstChild(v7("\136\161\20\70\182\166\5\21\138\187\12\84\173\172","\53\195\200\96")) then v396:SetDesc("Kitsune Island : 🟢 ");else v396:SetDesc("Kitsune Island : 🔴 ");end end spawn(function() pcall(function() while wait() do UpdateKitsune();end end);end);v830=1 + 0 ;end end end if (v633==(766 -(230 + 536))) then v395=v12.Main:AddSection(v7("\128\208\166\45\36\165\220","\81\203\185\210\94"));v396=v12.Main:AddParagraph({[v7("\229\209\56\161\81","\112\177\184\76\205\52\50\208")]=v7("\146\213\65\185\181\183\217\18\132\179\181\221\92\169","\192\217\188\50\205"),[v7("\38\66\88\45\207\11\89","\170\101\45\54\89")]=""});v633=1 + 0 ;end if (v633==(213 -(31 + 180))) then v394=1;break;end end end if (v394==(1201 -(719 + 481))) then local v634=0;while true do if (v634==(0 + 0)) then v397=v12.Main:AddToggle(v7("\153\82\57\63\142\75\136\78\46\19\139\90\190\72\48\61","\46\205\61\94\88\226"),{[v7("\61\205\13\175\12","\195\105\164\121")]=v7("\121\170\204\15\40\226\72\170\201\65\6\171\117\170\208\78\13\239","\139\60\217\188\47\99"),[v7("\46\248\99\246\4\17\26\233\121\250\24","\120\106\157\16\149\118")]=v7("\81\204\58\251\149\176\216\103\202\36\190\254\144\223\120\222\36\191","\172\20\191\74\219\222\217"),[v7("\23\198\129\22\96\63\215","\21\83\163\231\119")]=false});v397:OnChanged(function(v978) local v979=0 -0 ;while true do if (v979==(0 + 0)) then KitsuneIslandEsp=v978;while KitsuneIslandEsp do wait();UpdateIslandKisuneESP();end break;end end end);v634=1;end if (v634==(190 -(132 + 57))) then v13.ToggleEspKitsune:SetValue(false);function UpdateIslandKisuneESP() for v1131,v1132 in pairs(game:GetService(v7("\10\27\227\43\172\224\134\216\56","\187\93\116\145\64\223\144\231"))[v7("\74\39\12\164\95\40\90\2\10\177\90\34","\76\21\112\99\214\51")].Locations:GetChildren()) do pcall(function() if KitsuneIslandEsp then if (v1132.Name==v7("\221\191\223\54\159\163\243\246\226\54\134\172\248\178","\205\150\214\171\69\234")) then if  not v1132:FindFirstChild(v7("\249\232\234\75\242\250\247","\46\183\137\135")) then local v1681=0;local v1682;local v1683;while true do if (v1681==(0 + 0)) then v1682=Instance.new(v7("\212\64\89\181\84\249\72\71\189\113\227\64","\54\150\41\53\217"),v1132);v1682.Name=v7("\83\89\0\1\193\216\109","\171\29\56\109\100\132");v1682.ExtentsOffset=Vector3.new(0,1 + 0 ,0 -0 );v1681=1 + 0 ;end if (v1681==2) then v1683=Instance.new(v7("\193\231\61\198\217\227\39\215\249","\178\149\130\69"),v1682);v1683.Font=v7("\80\67\224\17","\138\19\44\132\116\28");v1683.FontSize=v7("\252\215\35\223\158\138","\186\175\190\89");v1681=10 -7 ;end if ((2 + 2)==v1681) then v1683.BackgroundTransparency=1;v1683.TextStrokeTransparency=0.5 + 0 ;v1683.TextColor3=Color3.fromRGB(57 + 23 ,896 -(259 + 392) ,910 -665 );break;end if ((2 -1)==v1681) then v1682.Size=UDim2.new(1213 -(705 + 507) ,448 -248 ,1 + 0 ,30);v1682.Adornee=v1132;v1682.AlwaysOnTop=true;v1681=2;end if (v1681==(2 + 1)) then v1683.TextWrapped=true;v1683.Size=UDim2.new(201 -(137 + 63) ,0,1 + 0 ,0);v1683.TextYAlignment=v7("\241\8\37","\200\165\103\85\192");v1681=16 -12 ;end end else v1132[v7("\128\228\190\94\96\37\31","\50\206\133\211\59\37\86\111")].TextLabel.Text=v1132.Name   .. "   \n"   .. round((game:GetService(v7("\241\237\4\6\7\211\242","\98\161\129\101\127")).LocalPlayer.Character.Head.Position-v1132.Position).Magnitude/3 )   .. v7("\205\201","\76\237\132\47\160\50\29\36") ;end end elseif v1132:FindFirstChild(v7("\149\211\189\222\158\193\160","\187\219\178\208")) then v1132:FindFirstChild(v7("\98\210\141\219\37\222\92","\173\44\179\224\190\96")):Destroy();end end);end end v634=2;end if (v634==2) then v394=2;break;end end end if (v394==(1344 -(1069 + 273))) then v398=v12.Main:AddToggle(v7("\241\170\113\90\143\192\145\70\118\138\209\182\99\83\134","\227\165\197\22\61"),{[v7("\248\64\74\164\201","\200\172\41\62")]=v7("\57\251\195\180\166\77\216\201\241\131\4\248\213\164\166\8\172\239\162\164\12\226\194","\200\109\140\166\209"),[v7("\230\64\202\83\208\76\201\68\203\74\215","\48\162\37\185")]=v7("\26\4\24\175\7\26\14\84\129\78\58\18\1\164\66\110\40\7\166\70\32\5","\39\78\97\116\202"),[v7("\159\235\243\79\247\41\175","\69\219\142\149\46\130")]=false});v398:OnChanged(function(v707) _G.TweenToKitsune=v707;end);v13.ToggleTPKitsune:SetValue(false);spawn(function() local v708=0;local v709;local v710;while true do if (v708==(0 + 0)) then v709=0;v710=nil;v708=1;end if (v708==1) then while true do if (v709==(4 -3)) then while wait() do if _G.TweenToKitsune then local v1521=0;local v1522;while true do if (v1521==(1122 -(724 + 398))) then v1522=v710:FindFirstChild(v7("\69\33\255\169\69\114\87\42\249\169\93\114","\23\22\73\141\192\43"));if v1522 then for v1849,v1850 in pairs(v1522:GetDescendants()) do if (v1850:IsA(v7("\207\236\244\199\201\236\255\243","\153\141\141\135\162")) and v1850.Name:find(v7("\26\18\84\243\147\193\69\61\25\94\205\161\219\67","\55\84\119\59\157\192\169"))) then Tween(v1850.CFrame);end end end break;end end end end break;end if (v709==(0 + 0)) then v710=nil;while  not v710 do local v1422=0 -0 ;local v1423;while true do if (v1422==(1900 -(183 + 1717))) then v1423=0 + 0 ;while true do if (v1423==0) then v710=game:GetService(v7("\251\71\0\69\36\220\73\17\75","\87\172\40\114\46")).Map:FindFirstChild(v7("\93\228\246\171\16\120\232\203\171\9\119\227\230","\101\22\141\130\216"));wait(2 -1 );break;end end break;end end end v709=383 -(325 + 57) ;end end break;end end end);v394=4 -1 ;end if (v394==3) then v399=v12.Main:AddToggle(v7("\10\91\122\204\232\181\32\42\50\88\120\200\240\145\25\48\44\81","\69\94\52\29\171\132\208\99"),{[v7("\237\30\101\175\237","\136\185\119\17\195")]=v7("\29\211\22\190\179\138\42\156\59\168\163\155\59\156\59\191\180\140\44\207","\233\94\188\122\210\214"),[v7("\112\22\218\135\174\181\199\64\26\198\138","\183\52\115\169\228\220\220")]=v7("\243\81\235\211\195\70\11\253\241\68\242\205\195\5\62\176\210\91\245\204\136\11","\221\176\62\135\191\166\37\127"),[v7("\44\32\91\244\29\41\73","\149\104\69\61")]=false});v399:OnChanged(function(v711) _G.CollectAzure=v711;end);v13.ToggleCollectAzure:SetValue(false);spawn(function() while wait() do if _G.CollectAzure then pcall(function() if game:GetService(v7("\108\218\16\215\72\197\3\223\94","\188\59\181\98")):FindFirstChild(v7("\139\186\34\165\113\20\241\31\139\180\35\182\119\57\249\25\175\188","\123\202\206\86\196\18\124\148")) then local v1302=0 + 0 ;local v1303;while true do if (v1302==(0 -0)) then v1303=0;while true do if ((1951 -(1021 + 930))==v1303) then Tween(game:GetService(v7("\69\226\144\30\246\232\120\244\119","\151\18\141\226\117\133\152\25")):WaitForChild(v7("\86\174\182\169\5\71\166\185\188\27\114\183\177","\119\19\195\212\204")):FindFirstChild(v7("\42\193\250\198","\211\122\160\136\178\102\72")).CFrame);print(v7("\100\10\158\108\12","\146\37\112\235\30\105\104\133"));break;end end break;end end end end);end end end);break;end end end if Third_Sea then local v400=0 -0 ;local v401;local v402;local v403;local v404;local v405;local v406;local v407;local v408;local v409;local v410;local v411;local v412;local v413;local v414;local v415;while true do if (v400==3) then v413=nil;v414=nil;v415=nil;while true do if (v401==(2 + 10)) then v415:OnChanged(function(v980) _G.AutoElite=v980;end);v13.ToggleElite:SetValue(false);spawn(function() while task.wait() do if _G.AutoElite then pcall(function() if (game:GetService(v7("\65\185\60\183\236\203\98","\185\17\213\93\206\137")).LocalPlayer.PlayerGui.Main.Quest.Visible==true) then if (string.find(game:GetService(v7("\140\54\139\12\191\174\41","\218\220\90\234\117")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v7("\230\24\197\34\93\37","\17\162\113\164\64\49\74")) or string.find(game:GetService(v7("\48\5\212\29\141\239\7","\116\96\105\181\100\232\157")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v7("\109\62\217\2\63\28\117","\59\41\91\184\108\91\110\16")) or string.find(game:GetService(v7("\184\75\163\66\22\154\84","\115\232\39\194\59")).LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v7("\46\217\229\55\172","\194\123\171\135\86"))) then if (game:GetService(v7("\104\141\107\207\39\239\29\118\90","\21\63\226\25\164\84\159\124")).Enemies:FindFirstChild(v7("\202\193\190\211\45\241","\122\142\168\223\177\65\158")) or game:GetService(v7("\244\44\3\14\201\70\41\192\38","\72\163\67\113\101\186\54")).Enemies:FindFirstChild(v7("\13\130\245\143\45\149\241","\225\73\231\148")) or game:GetService(v7("\38\57\92\93\213\1\55\77\83","\166\113\86\46\54")).Enemies:FindFirstChild(v7("\250\199\117\220\239","\103\175\181\23\189\129\166\231"))) then for v1834,v1835 in pairs(game:GetService(v7("\134\23\71\95\206\29\176\27\80","\109\209\120\53\52\189")).Enemies:GetChildren()) do if (v1835:FindFirstChild(v7("\107\29\240\19\213\189\74\12","\210\35\104\157\114\187")) and v1835:FindFirstChild(v7("\82\208\184\58\175\66\8\212\72\202\186\47\145\76\19\196","\176\26\165\213\91\193\45\97")) and (v1835.Humanoid.Health>(0 + 0))) then if ((v1835.Name==v7("\19\47\139\226\247\28","\138\87\70\234\128\155\115")) or (v1835.Name==v7("\133\222\211\78\219\176\21","\173\193\187\178\32\191\194\112")) or (v1835.Name==v7("\217\48\209\230\27","\68\140\66\179\135\117"))) then repeat local v1965=0 -0 ;local v1966;while true do if (v1965==0) then v1966=0;while true do if (v1966==1) then AutoHaki();toTarget(v1835.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );MonsterPosition=v1835.HumanoidRootPart.CFrame;v1966=2;end if (v1966==(6 -3)) then v1835.HumanoidRootPart.CanCollide=false;v1835.HumanoidRootPart.Size=Vector3.new(136 -76 ,164 -104 ,60);break;end if (v1966==(2 + 0)) then v1835.HumanoidRootPart.CFrame=v1835.HumanoidRootPart.CFrame;v1835.Humanoid.JumpPower=0 + 0 ;v1835.Humanoid.WalkSpeed=0 -0 ;v1966=3;end if (v1966==(1763 -(1651 + 112))) then wait(_G.Fast_Delay);AttackNoCoolDown();EquipTool(SelectWeapon);v1966=1;end end break;end end until (_G.AutoElite==false) or (v1835.Humanoid.Health<=(0 -0)) or  not v1835.Parent  end end end elseif game:GetService(v7("\70\143\88\246\50\86\169\96\143\76\201\47\90\186\117\141\77","\200\20\234\40\154\91\53")):FindFirstChild(v7("\100\178\170\185\119\79","\27\32\219\203\219")) then toTarget(game:GetService(v7("\20\248\9\178\247\115\83\171\35\249\42\170\241\98\83\184\35","\223\70\157\121\222\158\16\50")):FindFirstChild(v7("\148\28\175\239\227\65","\73\208\117\206\141\143\46")).HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );elseif game:GetService(v7("\157\255\65\127\166\249\80\103\170\254\98\103\160\232\80\116\170","\19\207\154\49")):FindFirstChild(v7("\31\55\3\242\27\236\62","\158\91\82\98\156\127")) then toTarget(game:GetService(v7("\131\129\242\202\59\54\140\165\129\230\245\38\58\159\176\131\231","\237\209\228\130\166\82\85")):FindFirstChild(v7("\211\160\248\203\6\59\242","\73\151\197\153\165\98")).HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );elseif game:GetService(v7("\103\31\229\198\178\113\36\65\31\241\249\175\125\55\84\29\240","\69\53\122\149\170\219\18")):FindFirstChild(v7("\4\237\22\247\60","\234\81\159\116\150\82\54\140")) then toTarget(game:GetService(v7("\40\197\21\19\19\195\4\11\31\196\54\11\21\210\4\24\31","\127\122\160\101")):FindFirstChild(v7("\98\57\43\232\175","\225\55\75\73\137\193\106\26")).HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );end end else game:GetService(v7("\123\190\86\22\64\184\71\14\76\191\117\14\70\169\71\29\76","\122\41\219\38")).Remotes.CommF_:InvokeServer(v7("\82\175\208\161\114\139\204\187\99\166\203","\213\23\195\185"));end end);end end end);break;end if (v401==(1 + 0)) then local v831=0 -0 ;while true do if ((1 + 0)==v831) then local v1201=0 + 0 ;while true do if (v1201==0) then v404=v12.Main:AddToggle(v7("\115\199\235\24\161\66\230\227\28\161\78\216\254\16\174\76","\205\39\168\140\127"),{[v7("\29\40\204\89\26","\77\73\65\184\53\127")]=v7("\17\114\232\81\62\249\166\127\79\167\113\57","\214\95\29\200\18\82\144"),[v7("\82\245\83\86\244\128\102\228\73\90\232","\233\22\144\32\53\134")]=v7("\17\27\101\4\59\81\47\84\23\40\52\83\113","\56\95\116\69\71\87"),[v7("\161\122\192\66\173\240\82","\38\229\31\166\35\216\156")]=false});v404:OnChanged(function(v1523) _G.Nocliprock=v1523;end);v1201=1;end if (v1201==(1 + 0)) then v831=1 + 1 ;break;end end end if (v831==(1 + 1)) then v401=2 + 0 ;break;end if (v831==(92 -(15 + 77))) then local v1202=0 + 0 ;while true do if (v1202==(0 -0)) then spawn(function() while wait() do pcall(function() if _G.SailBoat then if ( not game:GetService(v7("\116\166\159\189\148\109\37\64\172","\68\35\201\237\214\231\29")).Enemies:FindFirstChild(v7("\108\20\231\44\84","\94\63\124\134")) or  not game:GetService(v7("\195\214\93\112\231\201\78\120\241","\27\148\185\47")).Enemies:FindFirstChild(v7("\118\62\239\60\172\101\255\77\67\41\246","\37\34\91\157\78\195\23\140")) or  not game:GetService(v7("\43\78\251\137\105\35\29\66\236","\83\124\33\137\226\26")).Enemies:FindFirstChild(v7("\233\80\245\193\219\209\88","\181\185\57\135\160")) or  not game:GetService(v7("\238\15\240\57\29\228\161\218\5","\192\185\96\130\82\110\148")).Enemies:FindFirstChild(v7("\97\216\7\228\99\26\29\66\198\84\193\38\52\13\66\195","\111\39\177\116\140\67\89"))) then if  not game:GetService(v7("\66\137\40\15\196\178\116\133\63","\194\21\230\90\100\183")).Boats:FindFirstChild(v7("\243\238\14\249\32\172\10\209\230\18\252\22\187\36\196\230\24\253","\77\163\135\124\152\84\201")) then local v1911=0;while true do if (v1911==(0 + 0)) then buyb=TweenBoat(CFrame.new( -(17699.451171875 -(490 + 282)),1222.0863618850708 -(225 + 988) ,424.8642883300781 + 9 ));if ((CFrame.new( -(17246.451171875 -(137 + 182)),22.0863618850708 -13 ,630.8642883300781 -(100 + 97) ).Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude<=(5 + 5)) then if buyb then buyb:Stop();end local v1993={[1080 -(222 + 857) ]=v7("\125\27\54\205\35\244\75","\149\63\110\79\143\76"),[9 -7 ]=v7("\198\143\178\176\17\59\198\228\135\174\181\39\44\232\241\135\164\180","\129\150\230\192\209\101\94")};game:GetService(v7("\150\122\95\10\173\124\78\18\161\123\124\18\171\109\78\1\161","\102\196\31\47")).Remotes.CommF_:InvokeServer(unpack(v1993));end break;end end elseif game:GetService(v7("\216\57\34\115\81\82\172\80\234","\51\143\86\80\24\34\34\205")).Boats:FindFirstChild(v7("\185\18\230\228\95\32\167\155\26\250\225\105\55\137\142\26\240\224","\224\233\123\148\133\43\69")) then if (game.Players.LocalPlayer.Character:WaitForChild(v7("\255\45\116\128\217\55\112\133","\225\183\88\25")).Sit==false) then TweenBoat(game:GetService(v7("\54\254\161\57\174\16\0\242\182","\96\97\145\211\82\221")).Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0 + 0 ,4 -3 ,0) );else for v1994,v1995 in pairs(game:GetService(v7("\242\230\70\185\31\65\196\234\81","\49\165\137\52\210\108")).Boats:GetChildren()) do if (v1995.Name==v7("\126\47\15\183\90\35\58\164\79\40\25\148\92\47\26\183\74\35","\214\46\70\125")) then repeat wait(_G.Fast_Delay);if ((CFrame.new( -(23517.80078125 -6504),10.962434768676758 + 0 ,416.0169982910156 + 22 ).Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude<=(9 + 1)) then TweenShip(CFrame.new( -(13022.1875 + 20141),10.964323997497559, -324.4842224121094));elseif ((CFrame.new( -(34485.1875 -(613 + 709)),13.964323997497559 -3 , -324.4842224121094).Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude<=(169 -(97 + 62))) then TweenShip(CFrame.new( -(31131.49609375 + 6821),10.96342945098877, -1324.12109375));elseif ((CFrame.new( -(69910.49609375 -31958),10.96342945098877, -(2476.12109375 -1152)).Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude<=(1 + 9)) then TweenShip(CFrame.new( -(11777.1875 + 21386),466.96432399749756 -(324 + 132) , -324.4842224121094));end until game:GetService(v7("\225\204\153\177\197\211\138\185\211","\218\182\163\235")).Enemies:FindFirstChild(v7("\158\42\172\58\38","\77\205\66\205\72")) or game:GetService(v7("\146\180\237\85\144\221\83\54\160","\85\197\219\159\62\227\173\50")).Enemies:FindFirstChild(v7("\26\243\57\29\57\221\64\38\247\57\4","\51\78\150\75\111\86\175")) or game:GetService(v7("\11\130\217\78\47\157\202\70\57","\37\92\237\171")).Enemies:FindFirstChild(v7("\125\208\216\2\64\69\216","\46\45\185\170\99")) or game:GetService(v7("\36\196\221\188\229\3\202\204\178","\150\115\171\175\215")).Enemies:FindFirstChild(v7("\27\140\201\173\193\44\81\33\42\197\247\160\140\13\70\54","\68\93\229\186\197\225\111\35")) or (_G.SailBoat==false)  end end end end end end end);end end);spawn(function() pcall(function() while wait() do if _G.SailBoat then if (game:GetService(v7("\204\64\26\231\158\251\119\248\74","\22\155\47\104\140\237\139")).Enemies:FindFirstChild(v7("\211\32\84\105\204","\44\128\72\53\27\167\189")) or game:GetService(v7("\216\30\248\49\5\253\204\225\234","\130\143\113\138\90\118\141\173")).Enemies:FindFirstChild(v7("\178\210\46\63\7\73\149\223\61\63\3","\59\230\183\92\77\104")) or game:GetService(v7("\222\72\242\242\34\231\232\68\229","\151\137\39\128\153\81")).Enemies:FindFirstChild(v7("\74\196\252\95\241\244\89","\76\26\173\142\62\159\156\56")) or game:GetService(v7("\130\61\16\128\244\19\86\182\55","\55\213\82\98\235\135\99")).Enemies:FindFirstChild(v7("\54\182\18\126\225\94\2\186\22\54\140\120\29\189\4\100","\29\112\223\97\22\193"))) then game.Players.LocalPlayer.Character.Humanoid.Sit=false;end end end end);end);v1202=1 + 0 ;end if ((1 + 0)==v1202) then v831=1 + 0 ;break;end end end end end if ((1373 -(229 + 1137))==v401) then spawn(function() while wait() do if _G.AutoShark then pcall(function() if game:GetService(v7("\127\24\55\91\44\180\73\20\32","\196\40\119\69\48\95")).Enemies:FindFirstChild(v7("\109\201\90\1\213","\190\62\161\59\115")) then for v1606,v1607 in pairs(game:GetService(v7("\200\49\34\80\25\201\53\252\59","\84\159\94\80\59\106\185")).Enemies:GetChildren()) do if (v1607.Name==v7("\108\10\75\55\142","\229\63\98\42\69")) then if (v1607:FindFirstChild(v7("\247\14\82\79\51\249\223\219","\182\191\123\63\46\93\150")) and v1607:FindFirstChild(v7("\198\102\42\81\162\31\172\18\220\124\40\68\156\17\183\2","\118\142\19\71\48\204\112\197")) and (v1607.Humanoid.Health>0)) then repeat local v1852=0 + 0 ;local v1853;while true do if (v1852==(1269 -(977 + 292))) then v1853=0 -0 ;while true do if (v1853==(580 -(55 + 525))) then wait(_G.Fast_Delay);AttackNoCoolDown();v1853=164 -(18 + 145) ;end if (v1853==4) then game.Players.LocalPlayer.Character.Humanoid.Sit=false;break;end if ((1 + 0)==v1853) then local v1983=0;while true do if (v1983==0) then AutoHaki();EquipTool(SelectWeapon);v1983=248 -(40 + 207) ;end if (v1983==1) then v1853=1638 -(1030 + 606) ;break;end end end if (v1853==(2 + 1)) then local v1984=0 + 0 ;while true do if (v1984==(0 + 0)) then v1607.HumanoidRootPart.Size=Vector3.new(686 -(295 + 341) ,20 + 30 ,134 -84 );Tween(v1607.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1984=1 + 0 ;end if (v1984==(888 -(760 + 127))) then v1853=8 -4 ;break;end end end if (v1853==(6 -4)) then v1607.HumanoidRootPart.CanCollide=false;v1607.Humanoid.WalkSpeed=0 -0 ;v1853=3 + 0 ;end end break;end end until  not _G.AutoShark or  not v1607.Parent or (v1607.Humanoid.Health<=(0 -0))  end end end else local v1524=0;local v1525;while true do if (v1524==(793 -(496 + 297))) then v1525=0;while true do if (v1525==(0 -0)) then Tween(game:GetService(v7("\104\68\95\47\145\6\94\72\72","\118\63\43\45\68\226")).Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1968 -(1178 + 789) ,0) );if game:GetService(v7("\115\230\92\160\190\71\161\85\230\72\159\163\75\178\64\228\73","\192\33\131\44\204\215\36")):FindFirstChild(v7("\202\234\159\171\241\253\158\177\255\253\134","\217\158\143\237")) then Tween(game:GetService(v7("\78\67\82\53\80\221\16\104\67\70\10\77\209\3\125\65\71","\113\28\38\34\89\57\190")):FindFirstChild(v7("\29\190\163\66\141\59\168\185\81\144\34","\226\73\219\209\48")).HumanoidRootPart.CFrame * CFrame.new(7 -5 ,1 + 19 ,2) );else end break;end end break;end end end end);end end end);v410=v12.Main:AddToggle(v7("\140\70\246\230\166\219\156\177\90\249\194\184\219\173","\218\216\41\145\129\202\190"),{[v7("\156\16\95\224\28","\29\200\121\43\140\121")]=v7("\160\6\25\72\94\73\111\53\243\37\80\103\64\12\94","\92\128\77\112\36\50\105\41"),[v7("\95\81\29\161\105\93\30\182\114\91\0","\194\27\52\110")]=v7("\222\33\192\34\24\121\214\182\253\104\239\60\93\72","\197\149\72\172\78\56\63\191"),[v7("\118\133\114\124\71\140\96","\29\50\224\20")]=false});v410:OnChanged(function(v981) _G.AutoFishCrew=v981;end);v13.ToggleFishCrew:SetValue(false);v401=17 -9 ;end if ((522 -(260 + 253))==v401) then function CheckPirateBoat() local v982=0 + 0 ;local v983;local v984;while true do if (v982==1) then while true do if (v983==0) then v984={v7("\148\54\42\252\88\161\24\42\252\66\160\29\42\244\75\165\59\61","\44\196\95\88\157"),v7("\195\13\144\141\158\74\209\22\139\139\139\75\246","\47\147\100\226\236\234")};for v1608,v1609 in next,game:GetService(v7("\228\220\100\5\192\195\119\13\214","\110\179\179\22")).Enemies:GetChildren() do if (table.find(v984,v1609.Name) and v1609:FindFirstChild(v7("\243\210\66\118\68\63","\25\187\183\35\26\48\87\140")) and (v1609.Health.Value>(0 + 0))) then return v1609;end end break;end end break;end if (v982==(1873 -(92 + 1781))) then v983=207 -(26 + 181) ;v984=nil;v982=1277 -(853 + 423) ;end end end spawn(function() while wait() do if _G.Ship then pcall(function() if CheckPirateBoat() then game:GetService(v7("\75\214\76\98\104\222\82\95\115\207\75\98\80\222\80\119\122\218\76","\22\29\191\62")):SendKeyEvent(true,9 + 23 ,false,game);wait(0.5 -0 );game:GetService(v7("\190\243\221\32\25\181\132\211\193\36\25\160\165\251\193\53\11\177\154","\212\232\154\175\84\108")):SendKeyEvent(false,11 + 21 ,false,game);local v1526=CheckPirateBoat();repeat local v1610=0 + 0 ;while true do if (v1610==(1793 -(713 + 1079))) then AimBotSkillPosition=game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0 -0 , -5,0 + 0 ) ;Skillaimbot=true;v1610=94 -(13 + 79) ;end if (v1610==(2 + 0)) then AutoSkill=false;break;end if ((736 -(49 + 687))==v1610) then local v1761=0;while true do if (v1761==1) then v1610=1;break;end if (v1761==(0 + 0)) then wait();spawn(Tween(v1526.Engine.CFrame * CFrame.new(0 + 0 , -(90 -70),0 -0 ) ),1 + 0 );v1761=1;end end end end until  not v1526 or  not v1526.Parent or (v1526.Health.Value<=(0 + 0)) or  not CheckPirateBoat()  Skillaimbot=true;AutoSkill=false;end end);end end end);v412=v12.Main:AddToggle(v7("\14\19\203\254\207\41\171\66\53\15\216\202\203\37\156","\42\90\124\172\153\163\76\236"),{[v7("\28\131\172\116\45","\24\72\234\216")]=v7("\61\112\213\82\133\49\113\214\77\209\86\74\209\87\213","\165\118\25\185\62"),[v7("\33\76\246\67\23\64\245\84\12\70\235","\32\101\41\133")]=v7("\199\76\94\173\51\244\228\74\65\181\51\224\228\76\66\239","\179\140\37\50\193\19"),[v7("\108\184\23\42\16\244\92","\152\40\221\113\75\101")]=false});v412:OnChanged(function(v985) _G.GhostShip=v985;end);v401=640 -(295 + 335) ;end if ((1 + 1)==v401) then v13.ToggleNocliprock:SetValue(false);spawn(function() while wait() do if _G.Nocliprock then if (game.Players.LocalPlayer.Character.Humanoid.Sit==true) then local v1457=215 -(152 + 63) ;while true do if (v1457==(0 + 0)) then for v1717,v1718 in pairs(game.Workspace.Boats:GetDescendants()) do if (v1718:IsA(v7("\132\118\196\242\150\118\197\227","\151\198\23\183")) and (v1718.CanCollide==true)) then v1718.CanCollide=false;end end for v1719,v1720 in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do if (v1720:IsA(v7("\33\70\45\212\17\190\222\23","\172\99\39\94\177\65\223")) and (v1720.CanCollide==true)) then v1720.CanCollide=false;end end break;end end elseif (game.Players.LocalPlayer.Character.Humanoid.Sit==false) then for v1685,v1686 in pairs(game.Workspace.Boats:GetDescendants()) do if (v1686:IsA(v7("\101\29\42\124\153\65\189\85","\33\39\124\89\25\201\32\207")) and (v1686.CanCollide==false)) then v1686.CanCollide=true;end end for v1687,v1688 in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do if (v1688:IsA(v7("\10\51\68\45\142\41\32\67","\222\72\82\55\72")) and (v1688.CanCollide==false)) then v1688.CanCollide=true;end end end end end end);v405=v12.Main:AddSlider(v7("\10\83\204\220\60\77\246\200\60\90\193\250\54\94\209","\184\89\63\165"),{[v7("\56\209\108\0\168","\215\108\184\24\108\205\179\195")]=v7("\210\112\18\234\118\241\112\3\174\5\227\122\7\190","\37\129\21\102\202"),[v7("\213\57\106\174\227\53\105\185\248\51\119","\205\145\92\25")]=v7("\108\54\161\171\108\35\176\238\91\115\183\228\94\39","\139\63\83\213"),[v7("\59\17\42\61\97\238\0","\116\127\116\76\92\20\130")]=300,[v7("\165\203\50","\39\232\162\92\115\219")]=0 + 0 ,[v7("\7\246\70","\37\74\151\62")]=1000,[v7("\136\53\54\40\82\43\180\61","\66\218\90\67\70\54")]=584 -(288 + 295) ,[v7("\213\42\196\68\178\41\134\94","\53\150\75\168\40\208\72\229")]=function(v986) SetSpeedBoat=v986;end});v405:OnChanged(function(v987) SetSpeedBoat=v987;end);v401=3;end if (v401==(7 + 4)) then v413=v12.Main:AddSection(v7("\100\201\224\84\129\117\173\84\203\253\69\150\117\163\64\215\228","\229\33\165\137\32\228\85"));v414=v12.Main:AddParagraph({[v7("\131\139\17\112\17","\232\215\226\101\28\116\165\216")]=v7("\47\45\166\88\43\76\0\175\82\52\9","\64\108\69\195\59"),[v7("\49\124\194\76\71\28\103","\34\114\19\172\56")]=v7("\253\49\114\214\196\221\127\51","\177\174\69\19\162")});spawn(function() while wait() do pcall(function() if (game:GetService(v7("\190\75\88\22\143\25\165\152\75\76\41\146\21\182\141\73\77","\196\236\46\40\122\230\122")):FindFirstChild(v7("\155\254\117\163\231\63","\98\223\151\20\193\139\80")) or game:GetService(v7("\96\160\148\214\163\241\71\211\87\161\183\206\165\224\71\192\87","\167\50\197\228\186\202\146\38")):FindFirstChild(v7("\104\205\39\41\72\218\35","\71\44\168\70")) or game:GetService(v7("\48\2\203\192\11\4\218\216\7\3\232\216\13\21\218\203\7","\172\98\103\187")):FindFirstChild(v7("\18\85\130\45\54","\217\71\39\224\76\88\118\207")) or game:GetService(v7("\186\182\233\162\158\169\250\170\136","\201\237\217\155")).Enemies:FindFirstChild(v7("\83\74\90\206\182\135","\203\23\35\59\172\218\232\105")) or game:GetService(v7("\21\166\178\112\49\185\161\120\39","\27\66\201\192")).Enemies:FindFirstChild(v7("\6\32\250\123\206\72\39","\58\66\69\155\21\170")) or game:GetService(v7("\216\80\251\240\239\255\94\234\254","\156\143\63\137\155")).Enemies:FindFirstChild(v7("\39\57\127\61\134","\232\114\75\29\92"))) then v414:SetDesc("Elite Boss : 🟢yes | Killed:  "   .. game:GetService(v7("\59\84\233\90\192\201\8\69\252\82\250\222\6\67\248\81\204","\170\105\49\153\54\169")).Remotes.CommF_:InvokeServer(v7("\58\82\114\218\20\206\157\186\11\91\105","\212\127\62\27\174\113\134\232"),v7("\195\19\188\185\228\91\168\224","\219\147\97\211\222\150\62")) );else v414:SetDesc("Elite Boss : 🔴no | Killed: "   .. game:GetService(v7("\242\69\230\129\140\178\193\84\243\137\182\165\207\82\247\138\128","\209\160\32\150\237\229")).Remotes.CommF_:InvokeServer(v7("\150\54\76\86\125\223\153\189\46\64\80","\236\211\90\37\34\24\151"),v7("\100\182\188\135\70\161\160\147","\224\52\196\211")) );end end);end end);v415=v12.Main:AddToggle(v7("\43\72\66\62\63\230\58\75\76\45\54","\131\127\39\37\89\83"),{[v7("\253\30\251\79\95","\165\169\119\143\35\58")]=v7("\194\237\60\186\168\52\218\234\236\45\245\192\4\216\247\253\58","\182\131\152\72\213\136\113"),[v7("\98\21\166\171\84\25\165\188\79\31\187","\200\38\112\213")]=v7("\197\26\219\69\145\250\56\237\27\202\10\249\202\58\240\10\221","\84\132\111\175\42\177\191"),[v7("\204\140\43\200\26\73\39","\98\136\233\77\169\111\37\83")]=false});v401=12 + 0 ;end if (v401==6) then spawn(function() while wait() do if _G.farmpiranya then pcall(function() if game:GetService(v7("\215\93\153\226\224\240\83\136\236","\147\128\50\235\137")).Enemies:FindFirstChild(v7("\250\205\216\194\166\183\33","\64\170\164\170\163\200\223")) then for v1611,v1612 in pairs(game:GetService(v7("\53\181\183\81\147\108\200\1\191","\169\98\218\197\58\224\28")).Enemies:GetChildren()) do if (v1612.Name==v7("\192\20\247\242\196\220\202","\171\144\125\133\147\170\180")) then if (v1612:FindFirstChild(v7("\137\102\160\113\253\94\120\165","\17\193\19\205\16\147\49")) and v1612:FindFirstChild(v7("\220\96\70\71\192\35\253\113\121\73\193\56\196\116\89\82","\76\148\21\43\38\174")) and (v1612.Humanoid.Health>0)) then repeat local v1854=0 -0 ;while true do if (v1854==(1648 -(158 + 1490))) then local v1934=0;while true do if (v1934==(791 -(294 + 497))) then wait(_G.Fast_Delay);AttackNoCoolDown();v1934=3 -2 ;end if (1==v1934) then v1854=1;break;end end end if ((5 -3)==v1854) then v1612.HumanoidRootPart.CanCollide=false;v1612.Humanoid.WalkSpeed=0;v1854=6 -3 ;end if (v1854==(1 -0)) then AutoHaki();EquipTool(SelectWeapon);v1854=3 -1 ;end if (v1854==(7 -4)) then v1612.HumanoidRootPart.Size=Vector3.new(50,33 + 17 ,16 + 34 );Tween(v1612.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );break;end end until  not _G.farmpiranya or  not v1612.Parent or (v1612.Humanoid.Health<=(1676 -(1473 + 203)))  end end end elseif game:GetService(v7("\231\226\247\20\220\228\230\12\208\227\212\12\218\245\230\31\208","\120\181\135\135")):FindFirstChild(v7("\214\250\21\200\232\251\6","\169\134\147\103")) then Tween(game:GetService(v7("\144\234\13\120\140\161\238\9\113\129\145\251\18\102\132\165\234","\229\194\143\125\20")):FindFirstChild(v7("\180\186\218\226\138\187\201","\131\228\211\168")).HumanoidRootPart.CFrame * CFrame.new(1425 -(476 + 947) ,20,2) );else end end);end end end);v409=v12.Main:AddToggle(v7("\118\222\66\38\10\237\199\172\67\195\78","\196\34\177\37\65\102\136\148"),{[v7("\208\130\3\121\216","\223\132\235\119\21\189\27\51")]=v7("\50\87\245\240\56\236\76\24\76\242","\36\121\62\153\156\24\191"),[v7("\12\13\243\86\51\126\56\28\233\90\47","\23\72\104\128\53\65")]=v7("\234\202\168\43\129\240\172\38\211\200","\71\161\163\196"),[v7("\23\142\138\26\58\184\39","\212\83\235\236\123\79")]=false});v409:OnChanged(function(v988) _G.AutoShark=v988;end);v13.ToggleShark:SetValue(false);v401=1 + 6 ;end if (v401==10) then v13.ToggleGhostShip:SetValue(false);function CheckPirateBoat() local v989=254 -(127 + 127) ;local v990;while true do if (v989==(0 -0)) then v990={v7("\93\228\168\132\129\20\122\249","\123\27\141\219\236\195")};for v1424,v1425 in next,game:GetService(v7("\119\81\240\250\151\85\10\55\69","\84\32\62\130\145\228\37\107")).Enemies:GetChildren() do if (table.find(v990,v1425.Name) and v1425:FindFirstChild(v7("\9\129\72\191\82\94","\178\65\228\41\211\38\54")) and (v1425.Health.Value>(0 + 0))) then return v1425;end end break;end end end spawn(function() while wait() do pcall(function() if _G.bjirFishBoat then if CheckPirateBoat() then local v1527=188 -(148 + 40) ;local v1528;local v1529;while true do if (v1527==0) then v1528=0 -0 ;v1529=nil;v1527=1;end if (v1527==1) then while true do if (v1528==(3 + 0)) then Skillaimbot=false;break;end if (v1528==(6 -4)) then local v1855=0 -0 ;while true do if (v1855==(0 + 0)) then repeat wait();spawn(Tween(v1529.Engine.CFrame * CFrame.new(618 -(566 + 52) , -(15 + 5),81 -(67 + 14) ) ,1193 -(849 + 343) ));AutoSkill=true;Skillaimbot=true;AimBotSkillPosition=game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0 -0 , -(550 -(328 + 217)),0) ;until v1529.Parent or (v1529.Health.Value<=(0 -0)) or  not CheckPirateBoat()  AutoSkill=false;v1855=1;end if (v1855==(1 + 0)) then v1528=1 + 2 ;break;end end end if (v1528==0) then local v1856=1267 -(282 + 985) ;while true do if (v1856==(1802 -(468 + 1334))) then game:GetService(v7("\66\174\19\203\26\37\86\23\122\183\20\203\34\37\84\63\115\162\19","\94\20\199\97\191\111\68\58")):SendKeyEvent(true,7 + 25 ,false,game);wait(0.5);v1856=840 -(332 + 507) ;end if (v1856==1) then v1528=1 + 0 ;break;end end end if (v1528==(2 -1)) then game:GetService(v7("\231\138\242\3\95\209\53\248\141\240\2\94\253\56\223\130\231\18\88","\89\177\227\128\119\42\176")):SendKeyEvent(false,908 -(654 + 222) ,false,game);v1529=CheckPirateBoat();v1528=79 -(39 + 38) ;end end break;end end end end end);end end);spawn(function() while wait() do if _G.bjirFishBoat then pcall(function() if CheckPirateBoat() then local v1530=0;local v1531;while true do if (v1530==(0 + 0)) then v1531=0 + 0 ;while true do if (v1531==(1819 -(1509 + 302))) then wait(0.2 -0 );game:GetService(v7("\118\6\236\162\214\198\168\105\1\238\163\215\234\165\78\14\249\179\209","\196\32\111\158\214\163\167")):SendKeyEvent(true,164 -44 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\27\27\222\4\56\19\192\57\35\2\217\4\0\19\194\17\42\23\222","\112\77\114\172")):SendKeyEvent(false,384 -264 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.2 + 0 );game:GetService(v7("\187\73\58\54\161\140\76\1\44\164\152\84\5\35\186\140\71\45\48","\212\237\32\72\66")):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1531=9;end if (0==v1531) then AutoHaki();game:GetService(v7("\42\189\236\75\104\56\3\41\167\251\77","\111\124\212\158\63\29\89")):CaptureController();game:GetService(v7("\109\86\39\63\45\90\83\0\56\61\73","\88\59\63\85\75")):Button1Down(Vector2.new(3058 -1778 ,2489 -(1775 + 42) ));for v1895,v1896 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if v1896:IsA(v7("\134\222\226\139","\100\210\177\141\231\233")) then if (v1896.ToolTip==v7("\211\141\59\187\255","\130\158\232\87\222\154")) then game.Players.LocalPlayer.Character.Humanoid:EquipTool(v1896);end end end game:GetService(v7("\24\34\84\55\0\47\39\111\45\5\59\63\107\34\27\47\44\67\49","\117\78\75\38\67")):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1531=1 + 0 ;end if (v1531==(13 -4)) then game:GetService(v7("\129\230\110\56\162\238\112\5\185\255\105\56\154\238\114\45\176\234\110","\76\215\143\28")):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart);break;end if (v1531==(1 + 0)) then local v1857=0 + 0 ;while true do if (v1857==2) then wait(1799.2 -(602 + 1197) );v1531=2 + 0 ;break;end if (v1857==(1 + 0)) then game:GetService(v7("\98\30\54\96\166\4\210\55\90\7\49\96\158\4\208\31\83\18\54","\126\52\119\68\20\211\101\190")):SendKeyEvent(true,277 -157 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\235\177\67\192\84\220\180\120\218\81\200\172\124\213\79\220\191\84\198","\33\189\216\49\180")):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1857=1965 -(335 + 1628) ;end if (v1857==(0 + 0)) then game:GetService(v7("\206\57\78\90\1\249\60\117\64\4\237\36\113\79\26\249\55\89\92","\116\152\80\60\46")):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.2 -0 );v1857=4 -3 ;end end end if (v1531==(4 + 1)) then game:GetService(v7("\146\42\173\209\160\165\47\150\203\165\177\55\146\196\187\165\36\186\215","\213\196\67\223\165")):SendKeyEvent(false,"V",false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(1760.6 -(1191 + 569) );for v1897,v1898 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if v1898:IsA(v7("\68\71\177\248","\109\16\40\222\148")) then if (v1898.ToolTip==v7("\230\194\80\163\209","\209\181\181\63")) then game.Players.LocalPlayer.Character.Humanoid:EquipTool(v1898);end end end game:GetService(v7("\198\57\229\172\213\76\252\25\249\168\213\89\221\49\249\185\199\72\226","\45\144\80\151\216\160")):SendKeyEvent(true,2108 -(217 + 1769) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\18\52\168\49\75\37\49\147\43\78\49\41\151\36\80\37\58\191\55","\62\68\93\218\69")):SendKeyEvent(false,1080 -(344 + 614) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1531=16 -10 ;end if (v1531==4) then wait(1972.2 -(908 + 1064) );game:GetService(v7("\101\251\173\255\101\237\95\219\177\251\101\248\126\243\177\234\119\233\65","\140\51\146\223\139\16")):SendKeyEvent(true,54 + 45 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\217\21\144\185\234\238\16\171\163\239\250\8\175\172\241\238\27\135\191","\159\143\124\226\205")):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.2 + 0 );game:GetService(v7("\76\244\86\69\4\178\73\83\243\84\68\5\158\68\116\252\67\84\3","\37\26\157\36\49\113\211")):SendKeyEvent(true,"V",false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1531=1464 -(1436 + 23) ;end if (2==v1531) then game:GetService(v7("\154\179\37\59\174\173\182\30\33\171\185\174\26\46\181\173\189\50\61","\219\204\218\87\79")):SendKeyEvent(true,69 + 30 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\227\115\175\93\84\132\217\83\179\89\84\145\248\123\179\72\70\128\199","\229\181\26\221\41\33")):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.2 -0 );game:GetService(v7("\236\248\246\26\103\26\32\108\212\225\241\26\95\26\34\68\221\244\246","\37\186\145\132\110\18\123\76")):SendKeyEvent(false,"C",false,game.Players.LocalPlayer.Character.HumanoidRootPart);for v1899,v1900 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if v1900:IsA(v7("\183\30\231\5","\105\227\113\136")) then if (v1900.ToolTip==v7("\33\18\14\155\92\171\245\97\10\10","\20\99\126\97\227\124\237\135")) then game.Players.LocalPlayer.Character.Humanoid:EquipTool(v1900);end end end v1531=1808 -(864 + 941) ;end if (v1531==(1632 -(1037 + 592))) then local v1858=0;while true do if (v1858==1) then wait(363.2 -(122 + 241) );game:GetService(v7("\47\71\59\106\165\41\21\103\39\110\165\60\52\79\39\127\183\45\11","\72\121\46\73\30\208")):SendKeyEvent(true,89 + 31 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1858=1017 -(824 + 191) ;end if (v1858==(0 -0)) then game:GetService(v7("\133\164\246\243\24\13\8\154\163\244\242\25\33\5\189\172\227\226\31","\100\211\205\132\135\109\108")):SendKeyEvent(true,81 + 41 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\151\29\219\228\172\160\24\224\254\169\180\0\228\241\183\160\19\204\226","\217\193\116\169\144")):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1858=1 + 0 ;end if (v1858==(2 + 0)) then game:GetService(v7("\133\221\230\148\20\133\191\253\250\144\20\144\158\213\250\129\6\129\161","\228\211\180\148\224\97")):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1531=4;break;end end end if (v1531==7) then game:GetService(v7("\69\167\224\233\158\238\127\135\252\237\158\251\94\175\252\252\140\234\97","\143\19\206\146\157\235")):SendKeyEvent(false,270 -(50 + 121) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.5 -0 );for v1901,v1902 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if v1902:IsA(v7("\228\30\135\176","\220\176\113\232")) then if (v1902.ToolTip==v7("\49\14\75","\184\118\123\37\142\142")) then game.Players.LocalPlayer.Character.Humanoid:EquipTool(v1902);end end end game:GetService(v7("\155\235\53\28\184\227\43\33\163\242\50\28\128\227\41\9\170\231\53","\104\205\130\71")):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\176\27\86\145\30\24\124\200\136\2\81\145\38\24\126\224\129\23\86","\129\230\114\36\229\107\121\16")):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1531=8 + 0 ;end if (v1531==(6 + 0)) then wait(0.2 -0 );game:GetService(v7("\41\18\33\209\41\62\30\54\21\35\208\40\18\19\17\26\52\192\46","\114\127\123\83\165\92\95")):SendKeyEvent(true,27 + 93 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\240\212\236\167\211\220\242\154\200\205\235\167\235\220\240\178\193\216\236","\211\166\189\158")):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(657.2 -(6 + 651) );game:GetService(v7("\11\168\202\41\39\237\49\136\214\45\39\248\16\160\214\60\53\233\47","\140\93\193\184\93\82")):SendKeyEvent(true,2 + 97 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1531=1 + 6 ;end end break;end end end end);end end end);v401=775 -(412 + 352) ;end if (v401==(305 -(251 + 51))) then v405:SetValue(286 + 14 );v406=v12.Main:AddToggle(v7("\212\169\69\136\43\197\182\65\153\16\211\182\71\138\35\226","\79\135\217\32\237"),{[v7("\132\9\244\66\10","\78\208\96\128\46\111")]=v7("\2\229\64\28\238\168\118\136\48\225","\231\81\149\37\121\138\136\52"),[v7("\113\114\47\130\103\92\103\40\136\122\91","\21\53\23\92\225")]=v7("\217\9\94\134\173\227\243\32\235\13","\79\138\121\59\227\201\195\177"),[v7("\41\210\250\22\165\223\89","\45\109\183\156\119\208\179")]=false});v13.SpeedBoat_Toggle:SetValue(false);v406:OnChanged(function(v991) _G.SpeedBoat=v991;end);v401=4 + 0 ;end if (0==v401) then v402=v12.Main:AddSection(v7("\119\186\84\112\73\5\134\68\118","\33\37\213\33\23"));v403=v12.Main:AddToggle(v7("\242\4\213\135\33\219\245\10\219\140\15\209\199\31","\190\166\107\178\224\77"),{[v7("\192\133\66\28\119","\18\148\236\54\112")]=v7("\160\165\226\48\127\131\165\239\127\29\142\177\226","\95\225\208\150\95"),[v7("\136\112\244\138\190\124\247\157\165\122\233","\233\204\21\135")]=v7("\143\149\219\221\159\255\187\153\143\240\208\252\186","\157\206\224\175\178\191"),[v7("\143\115\182\177\35\206\33","\151\203\22\208\208\86\162\85")]=false});v403:OnChanged(function(v992) _G.SailBoat=v992;end);v13.ToggleSailBoat:SetValue(false);v401=2 -1 ;end if (v401==5) then spawn(function() while wait() do if _G.AutoTerrorshark then pcall(function() if game:GetService(v7("\111\116\41\179\242\26\89\120\62","\106\56\27\91\216\129")).Enemies:FindFirstChild(v7("\21\243\252\235\45\220\50\254\239\235\41","\174\65\150\142\153\66")) then for v1613,v1614 in pairs(game:GetService(v7("\26\141\1\138\16\19\44\129\22","\99\77\226\115\225\99")).Enemies:GetChildren()) do if (v1614.Name==v7("\180\180\60\227\192\44\147\185\47\227\196","\94\224\209\78\145\175")) then if (v1614:FindFirstChild(v7("\217\98\8\210\166\25\125\52","\80\145\23\101\179\200\118\20")) and v1614:FindFirstChild(v7("\218\97\95\119\130\219\251\112\96\121\131\192\194\117\64\98","\180\146\20\50\22\236")) and (v1614.Humanoid.Health>(767 -(278 + 489)))) then repeat local v1859=0;while true do if (v1859==0) then local v1938=0;while true do if (v1938==(1 + 0)) then v1859=1;break;end if (v1938==0) then wait(_G.Fast_Delay);AttackNoCoolDown();v1938=1527 -(1307 + 219) ;end end end if (v1859==2) then v1614.HumanoidRootPart.CanCollide=false;v1614.Humanoid.WalkSpeed=0 + 0 ;v1859=3;end if (v1859==1) then AutoHaki();EquipTool(SelectWeapon);v1859=3 -1 ;end if (v1859==3) then v1614.HumanoidRootPart.Size=Vector3.new(50,50,113 -63 );Tween(v1614.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );break;end end until  not _G.AutoTerrorshark or  not v1614.Parent or (v1614.Humanoid.Health<=(0 + 0))  end end end elseif game:GetService(v7("\96\142\233\236\234\81\138\237\229\231\97\159\246\242\226\85\142","\131\50\235\153\128")):FindFirstChild(v7("\203\74\169\110\115\52\203\247\78\169\119","\184\159\47\219\28\28\70")) then Tween(game:GetService(v7("\5\218\214\113\62\220\199\105\50\219\245\105\56\205\199\122\50","\29\87\191\166")):FindFirstChild(v7("\219\93\161\26\71\236\252\80\178\26\67","\158\143\56\211\104\40")).HumanoidRootPart.CFrame * CFrame.new(2 -0 ,17 + 3 ,6 -4 ) );else end end);end end end);v408=v12.Main:AddToggle(v7("\106\161\186\39\172\91\158\180\50\161\80\166\188","\192\62\206\221\64"),{[v7("\197\55\88\255\58","\95\145\94\44\147")]=v7("\161\141\12\63\237\230\53\58\243\167\11\59\224","\83\129\198\101"),[v7("\255\15\207\49\180\210\26\200\59\169\213","\198\187\106\188\82")]="Đánh Piranha",[v7("\6\31\240\60\200\54\63","\75\66\122\150\93\189\90")]=false});v408:OnChanged(function(v993) _G.farmpiranya=v993;end);v13.TogglePiranha:SetValue(false);v401=635 -(59 + 570) ;end if (v401==(8 + 0)) then local v832=0 -0 ;while true do if (v832==(0 + 0)) then spawn(function() while wait() do if _G.AutoFishCrew then pcall(function() if game:GetService(v7("\193\81\232\62\23\229\214\40\243","\75\150\62\154\85\100\149\183")).Enemies:FindFirstChild(v7("\90\31\243\215\0\254\2\121\1\160\242\69\208\18\121\4","\112\28\118\128\191\32\189")) then for v1764,v1765 in pairs(game:GetService(v7("\55\225\55\41\51\214\1\237\32","\166\96\142\69\66\64")).Enemies:GetChildren()) do if (v1765.Name==v7("\22\207\249\27\31\13\34\195\253\83\114\43\61\196\239\1","\78\80\166\138\115\63")) then if (v1765:FindFirstChild(v7("\102\28\166\17\95\65\0\175","\49\46\105\203\112")) and v1765:FindFirstChild(v7("\133\108\43\124\139\1\164\125\20\114\138\26\157\120\52\105","\110\205\25\70\29\229")) and (v1765.Humanoid.Health>(0 + 0))) then repeat local v1942=0 -0 ;local v1943;while true do if (v1942==(243 -(202 + 41))) then v1943=959 -(282 + 677) ;while true do if (v1943==4) then game.Players.LocalPlayer.Character.Humanoid.Sit=false;break;end if ((7 -5)==v1943) then local v2006=369 -(335 + 34) ;while true do if (v2006==(1527 -(486 + 1040))) then v1943=3;break;end if ((1351 -(676 + 675))==v2006) then v1765.HumanoidRootPart.CanCollide=false;v1765.Humanoid.WalkSpeed=0;v2006=1;end end end if (v1943==(0 -0)) then wait(_G.Fast_Delay);AttackNoCoolDown();v1943=2 -1 ;end if (3==v1943) then v1765.HumanoidRootPart.Size=Vector3.new(667 -(497 + 120) ,50,50);Tween(v1765.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1943=18 -14 ;end if (v1943==1) then AutoHaki();EquipTool(SelectWeapon);v1943=2;end end break;end end until  not _G.AutoFishCrew or  not v1765.Parent or (v1765.Humanoid.Health<=0)  end end end else Tween(game:GetService(v7("\146\202\28\196\63\229\27\252\160","\159\197\165\110\175\76\149\122")).Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0 -0 ) );if game:GetService(v7("\234\124\21\210\50\16\217\109\0\218\8\7\215\107\4\217\62","\115\184\25\101\190\91")):FindFirstChild(v7("\93\58\29\196\59\16\28\201\108\115\35\201\118\49\11\222","\172\27\83\110")) then Tween(game:GetService(v7("\5\67\145\180\62\69\128\172\50\66\178\172\56\84\128\191\50","\216\87\38\225")):FindFirstChild(v7("\81\174\36\63\23\8\75\114\176\119\26\82\38\91\114\181","\57\23\199\87\87\55\75")).HumanoidRootPart.CFrame * CFrame.new(2 + 0 ,20,1633 -(973 + 658) ) );else end end end);end end end);v411=v12.Main:AddToggle(v7("\35\247\47\174\215\18\203\32\160\203","\187\119\152\72\201"),{[v7("\149\249\220\244\164","\152\193\144\168")]=v7("\81\170\79\164\122\104\170\115\179","\194\26\195\35\200\90\59"),[v7("\231\209\14\236\8\72\246\215\221\18\225","\134\163\180\125\143\122\33")]=v7("\234\33\71\225\129\27\67\228\209\102\5","\141\161\72\43"),[v7("\175\118\180\8\6\215\159","\187\235\19\210\105\115")]=false});v832=3 -2 ;end if (v832==(1 + 0)) then local v1203=1584 -(79 + 1505) ;while true do if (v1203==0) then v411:OnChanged(function(v1532) _G.Ship=v1532;end);v13.ToggleShip:SetValue(false);v1203=1 -0 ;end if (v1203==(1882 -(149 + 1732))) then v832=917 -(728 + 187) ;break;end end end if (v832==(1 + 1)) then v401=9;break;end end end if (v401==4) then game:GetService(v7("\7\232\134\223\48\239\158\229\54\248","\140\85\157\232")).RenderStepped:Connect(function() if _G.SpeedBoat then for v1304,v1305 in pairs(game:GetService(v7("\48\196\31\120\20\219\12\112\2","\19\103\171\109")).Boats:GetChildren()) do if game:GetService(v7("\209\223\120\103\228\193\106","\30\129\179\25")).LocalPlayer.Character.Humanoid.Sit then v1305:FindFirstChild(v7("\39\245\172\126\131\21\227\34\245\165\99","\134\113\144\196\23\224\121")).MaxSpeed=SetSpeedBoat;end end end end);v407=v12.Main:AddToggle(v7("\217\183\130\84\225\189\177\86\255\170\138\65\254\176\132\65\230","\51\141\216\229"),{[v7("\142\194\41\173\191","\193\218\171\93")]=v7("\51\126\63\188\13\44\114\33\162\66\10\100\59\177\95\19","\45\120\23\83\208"),[v7("\102\24\246\252\244\75\13\241\246\233\76","\134\34\125\133\159")]=v7("\174\77\215\44\26\128\90\151\86\212\50\73\188\94\151\79","\63\229\36\187\64\58\212"),[v7("\97\71\55\205\80\78\37","\172\37\34\81")]=false});v407:OnChanged(function(v994) _G.AutoTerrorshark=v994;end);v13.ToggleTerrorshark:SetValue(false);v401=5;end end break;end if (v400==(976 -(939 + 37))) then v401=0 -0 ;v402=nil;v403=nil;v404=nil;v400=2 -1 ;end if (v400==(1027 -(17 + 1009))) then v405=nil;v406=nil;v407=nil;v408=nil;v400=1 + 1 ;end if ((2 + 0)==v400) then v409=nil;v410=nil;v411=nil;v412=nil;v400=6 -3 ;end end end if Third_Sea then local v416=1548 -(1185 + 363) ;local v417;local v418;local v419;local v420;local v421;local v422;local v423;local v424;local v425;local v426;while true do if (v416==2) then v425=nil;v426=nil;while true do if (v417==9) then v426=v12.Main:AddToggle(v7("\208\214\147\134\31","\33\145\163\231\233\72\221\213"),{[v7("\102\86\255\244\188","\106\50\63\139\152\217")]=v7("\164\240\231\132\27\181\247\246\152\72\197\210","\59\229\133\147\235"),[v7("\15\84\10\199\183\94\59\69\16\203\171","\55\75\49\121\164\197")]=v7("\155\200\159\10\249\138\207\142\22\170\250\234","\217\218\189\235\101"),[v7("\173\125\229\60\36\196\157","\168\233\24\131\93\81")]=false});v426:OnChanged(function(v995) _G.AutoW=v995;end);v13.AutoW:SetValue(false);spawn(function() while wait() do pcall(function() if _G.AutoW then game:GetService(v7("\115\54\48\101\239\62\186\108\49\50\100\238\18\183\75\62\37\116\232","\214\37\95\66\17\154\95")):SendKeyEvent(true,"W",false,game);end end);end end);break;end if (v417==(2 + 5)) then local v833=0 -0 ;while true do if (v833==1) then v13.Togglelockmoon:SetValue(false);spawn(function() while wait() do pcall(function() if _G.AutoLockMoon then local v1615=game.Lighting:GetMoonDirection();local v1616=game.Workspace.CurrentCamera.CFrame.p + (v1615 * (1056 -(839 + 117))) ;game.Workspace.CurrentCamera.CFrame=CFrame.lookAt(game.Workspace.CurrentCamera.CFrame.p,v1616);end end);end end);v833=9 -7 ;end if (v833==(1030 -(457 + 573))) then v424=v12.Main:AddToggle(v7("\126\209\140\179\118\244\222\223\73\213\134\187\117\255","\176\42\190\235\212\26\145\178"),{[v7("\78\52\47\235\223","\232\26\93\91\135\186\224")]=v7("\39\224\251\227\5\221\12\4\225\184\233\75\244\67\62\252\253\168\119\241\0\14\175\203\227\76\252\15","\99\107\143\152\136\37\144"),[v7("\7\117\207\138\72\209\51\100\213\134\84","\184\67\16\188\233\58")]=v7("\35\28\36\65\184\24\0\28\41\10\249\59\11\83\18\89\253\117\61\18\36\79\184\6\4\26\43\70\182","\85\111\115\71\42\152"),[v7("\33\125\45\21\248\120\71","\153\101\24\75\116\141\20\51")]=false});v424:OnChanged(function(v1306) _G.AutoLockMoon=v1306;end);v833=1;end if (v833==(4 -2)) then v417=17 -9 ;break;end end end if (v417==(3 + 3)) then local v834=1965 -(167 + 1798) ;while true do if (v834==1) then v13.ToggleTweenGear:SetValue(false);spawn(function() pcall(function() while wait() do if _G.TweenToGear then if game:GetService(v7("\234\89\108\70\54\161\252\43\216","\72\189\54\30\45\69\209\157")).Map:FindFirstChild(v7("\44\160\229\194\95\2\144\229\218\87\15\189","\54\97\217\150\182")) then for v1766,v1767 in pairs(game:GetService(v7("\236\176\28\252\18\14\134\216\186","\231\187\223\110\151\97\126")).Map.MysticIsland:GetChildren()) do if v1767:IsA(v7("\29\87\104\5\7\87\34\70","\54\80\50\27\109\87")) then if (v1767.Material==Enum.Material.Neon) then Tween2(v1767.CFrame);end end end end end end end);end);v834=3 -1 ;end if (v834==(1681 -(217 + 1462))) then v417=7;break;end if (v834==(0 -0)) then v423=v12.Main:AddToggle(v7("\42\221\233\214\242\179\42\197\235\212\240\145\27\211\252","\214\126\178\142\177\158"),{[v7("\117\32\32\66\20","\94\33\73\84\46\113")]=v7("\133\76\94\27\191\27\111\17\241\124\94\31\163","\126\209\59\59"),[v7("\150\74\187\219\179\169\152\166\70\167\214","\232\210\47\200\184\193\192")]=v7("\190\245\193\72\251\190\255\141\106\190\139\226","\219\234\144\173\45"),[v7("\104\68\239\4\12\239\77","\79\44\33\137\101\121\131\57")]=false});v423:OnChanged(function(v1307) _G.TweenToGear=v1307;end);v834=1 + 0 ;end end end if (v417==(4 + 1)) then function TweenMirage() local v996=0;while true do if (v996==0) then repeat wait();until game:GetService(v7("\31\90\108\91\171\56\84\125\85","\216\72\53\30\48")).Map:FindFirstChild(v7("\127\238\184\151\216\81\222\184\143\208\92\243","\177\50\151\203\227")) if game:GetService(v7("\49\140\58\237\19\22\130\43\227","\96\102\227\72\134")).Map:FindFirstChild(v7("\201\91\29\23\27\231\107\29\15\19\234\70","\114\132\34\110\99")) then local v1459=0 -0 ;while true do if (v1459==(1629 -(106 + 1523))) then AllNPCS=getnilinstances();for v1721,v1722 in pairs(game:GetService(v7("\235\245\0\201\224\202\165\126\217","\29\188\154\114\162\147\186\196")).NPCs:GetChildren()) do table.insert(AllNPCS,v1722);end v1459=1 + 0 ;end if (1==v1459) then for v1723,v1724 in pairs(AllNPCS) do if (v1724.Name==v7("\35\6\158\238\74\247\7\6\200\201\86\225\11\22\200\203\65\245\14\7\154","\148\98\98\232\143\36")) then Tween2(v1724.HumanoidRootPart.CFrame);end end break;end end end break;end end end v12.Main:AddButton({[v7("\159\77\46\31\166","\195\203\36\90\115")]=v7("\104\87\87\87\6\226\221\82\28\104\91\85\0\167\218\73\28\112\93\91\6\182","\61\60\32\50\50\104\194\169"),[v7("\150\32\99\26\160\44\96\13\187\42\126","\121\210\69\16")]=v7("\26\10\118\68\243\110\9\124\1\213\39\26\123\68\238\58\93\67\78\244\32\9","\157\78\125\19\33"),[v7("\250\117\252\221\219\117\243\218","\177\185\20\144")]=function() TwenetoHighestPoint();end});function TwenetoHighestPoint() HighestPoint=getHighestPoint();if HighestPoint then Tween2(HighestPoint.CFrame * CFrame.new(1791 -(1572 + 219) ,131.88 + 80 ,0 -0 ) );end end function getHighestPoint() local v997=0;while true do if (v997==(0 + 0)) then if  not game.workspace.Map:FindFirstChild(v7("\113\77\221\49\141\95\125\221\41\133\82\80","\228\60\52\174\69")) then return nil;end for v1426,v1427 in pairs(game:GetService(v7("\45\83\252\6\106\10\93\237\8","\25\122\60\142\109")).Map.MysticIsland:GetDescendants()) do if v1427:IsA(v7("\60\4\98\187\208\16\19\101","\128\113\97\17\211")) then if (v1427.MeshId=="rbxassetid://16435032782") then return v1427;end end end break;end end end v417=6;end if (v417==(912 -(325 + 587))) then local v835=0;while true do if ((0 -0)==v835) then v418=v12.Main:AddSection(v7("\187\37\119\236\239\53\67\148\156","\231\232\64\22\204\173\80\34"));v419=v12.Main:AddToggle(v7("\126\84\200\163\70\94\252\161\75\121\202\133\89\79","\196\42\59\175"),{[v7("\22\59\45\28\61","\88\66\82\89\112")]=v7("\63\149\59\90\30\45\133\46\21\124\27\129\60\65","\62\126\224\79\53"),[v7("\120\124\215\139\219\85\105\208\129\198\82","\169\60\25\164\232")]=v7("\226\25\148\223\17\62\202\194\76\162\213\80\30\219","\175\163\108\224\176\49\109"),[v7("\235\59\34\180\58\36\219","\72\175\94\68\213\79")]=false});v835=1332 -(454 + 877) ;end if (v835==(119 -(6 + 112))) then local v1204=0 -0 ;while true do if (v1204==0) then v419:OnChanged(function(v1533) _G.AutoSeaBeast=v1533;end);v13.ToggleSeaBeAst:SetValue(false);v1204=1370 -(372 + 997) ;end if (v1204==1) then v835=2 + 0 ;break;end end end if ((2 + 0)==v835) then v417=1923 -(948 + 974) ;break;end end end if ((1 + 3)==v417) then task.spawn(function() while task.wait() do pcall(function() if (game:GetService(v7("\54\217\3\142\239\19\222\3","\155\122\176\100\230")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431") then FullMoonStatus=v7("\250\213\77\97","\152\203\229\125\68");elseif (game:GetService(v7("\250\164\35\249\194\164\42\246","\145\182\205\68")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052") then FullMoonStatus=v7("\213\127\3","\141\226\74\38\23\236\84");elseif (game:GetService(v7("\171\123\127\45\147\123\118\34","\69\231\18\24")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733") then FullMoonStatus=v7("\37\143\119","\74\16\191\82");elseif (game:GetService(v7("\248\28\71\16\107\187\119\211","\25\180\117\32\120\31\210")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401") then FullMoonStatus=v7("\99\40\4","\169\81\29\33");elseif (game:GetService(v7("\209\180\213\123\4\244\179\213","\112\157\221\178\19")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680") then FullMoonStatus=v7("\162\78\78","\64\147\123\107\68\177\73");else FullMoonStatus=v7("\255\103","\194\207\66\68\77\78\22");end end);end end);task.spawn(function() while task.wait() do pcall(function() if game.Workspace._WorldOrigin.Locations:FindFirstChild(v7("\2\20\11\90\38\176\115\55\60\17\24\85\37","\126\79\125\121\59\65\213\83")) then MirageStatus="🟢yes";else MirageStatus="🔴no";end end);end end);spawn(function() pcall(function() while wait() do v422:SetDesc(v7("\126\202\226\67\84\198\176\107\64\207\241\76\87\153\176","\34\51\163\144")   .. MirageStatus   .. v7("\166\150\61\103\67\234\134\61\108\89\233\132\39\1","\54\134\234\29\33")   .. FullMoonStatus );end end);end);v12.Main:AddButton({[v7("\12\41\40\231\61","\139\88\64\92")]=v7("\75\57\19\120\25\63\58\25\61\58\118\60\23\122\18\63\7\5\113\22\113\42","\119\31\78\118\29"),[v7("\8\255\92\253\55\225\177\56\243\64\240","\193\76\154\47\158\69\136")]=v7("\255\82\4\87\174\153\196\23\37\91\252\140\204\82\72\123\253\129\202\89\12","\237\171\55\104\50\142"),[v7("\41\201\198\43\93\116\9\195","\21\106\168\170\71\63")]=function() TweenMirage();end});v417=5;end if (v417==3) then local v836=1011 -(117 + 894) ;while true do if (v836==(2 + 0)) then v417=509 -(418 + 87) ;break;end if ((1 -0)==v836) then local v1205=0;while true do if ((0 -0)==v1205) then v421=v12.Main:AddSection(v7("\104\10\216\241\240\250\195\117\86\15\203\254\243","\60\37\99\170\144\151\159\227"));v422=v12.Main:AddParagraph({[v7("\99\162\56\187\112","\46\55\203\76\215\21\82\218")]=v7("\181\202\248\40\246\5","\140\230\190\153\92\131\118"),[v7("\232\199\193\83\93\232\88","\25\171\168\175\39\56\134\44")]=v7("\28\166\194\37\147\159\38","\28\79\210\163\81\230\236")});v1205=1;end if (v1205==(3 -2)) then v836=1 + 1 ;break;end end end if ((0 + 0)==v836) then v13.ToggleAutoW:SetValue(false);spawn(function() while wait() do pcall(function() if _G.AutoW then game:GetService(v7("\225\217\110\73\174\214\220\85\83\171\194\196\81\92\181\214\215\121\79","\219\183\176\28\61")):SendKeyEvent(true,"W",false,game);end end);end end);v836=1;end end end if (v417==(1075 -(19 + 1048))) then spawn(function() while wait() do pcall(function() if _G.AutoLockMoon then game:GetService(v7("\11\17\215\30\40\25\201\35\51\8\208\30\16\25\203\11\58\29\215","\106\93\120\165")):SendKeyEvent(true,"T",false,game);wait(0.1 -0 );game:GetService(v7("\108\81\102\193\79\89\120\252\84\72\97\193\119\89\122\212\93\93\102","\181\58\56\20")):SendKeyEvent(false,"T",false,game);end end);end end);v425=v12.Main:AddToggle(v7("\120\171\246\131\27\73\137\248\150\22\75\161","\119\44\196\145\228"),{[v7("\199\113\173\79\231","\190\147\24\217\35\130\197")]=v7("\254\79\228\237\159\119\249\240\222\93\245\162\246\73\252\227\209\94","\130\191\58\144"),[v7("\86\26\230\34\237\123\15\225\40\240\124","\159\18\127\149\65")]=v7("\193\247\6\226\100\35\233\240\19\234\33\78\201\241\30\236\42\10\174","\110\128\130\114\141\68"),[v7("\158\84\212\163\55\182\69","\66\218\49\178\194")]=false});v425:OnChanged(function(v998) _G.AutoSeaBeast=v998;end);v13.ToggleMirage:SetValue(false);v417=9;end if (v417==(3 -1)) then spawn(function() while wait() do pcall(function() if AutoSkill then if Skillz then game:service(v7("\237\176\225\223\250\218\181\218\197\255\206\173\222\202\225\218\190\246\217","\143\187\217\147\171")):SendKeyEvent(true,"Z",false,game);wait(0.1);game:service(v7("\235\17\101\171\18\220\20\94\177\23\200\12\90\190\9\220\31\114\173","\103\189\120\23\223")):SendKeyEvent(false,"Z",false,game);end if Skillx then local v1534=0;while true do if (v1534==1) then game:service(v7("\48\22\67\168\19\30\93\149\8\15\68\168\43\30\95\189\1\26\67","\220\102\127\49")):SendKeyEvent(false,"X",false,game);break;end if (v1534==(0 -0)) then game:service(v7("\69\77\107\16\188\15\21\200\125\84\108\16\132\15\23\224\116\65\107","\129\19\36\25\100\201\110\121")):SendKeyEvent(true,"X",false,game);wait(0.1 + 0 );v1534=1 + 0 ;end end end if Skillc then game:service(v7("\126\20\93\216\29\181\179\154\70\13\90\216\37\181\177\178\79\24\93","\211\40\125\47\172\104\212\223")):SendKeyEvent(true,"C",false,game);wait(1539.1 -(94 + 1445) );game:service(v7("\120\72\62\26\91\64\32\39\64\81\57\26\99\64\34\15\73\68\62","\110\46\33\76")):SendKeyEvent(false,"C",false,game);end if Skillv then game:service(v7("\130\136\170\203\34\181\141\145\209\39\161\149\149\222\57\181\134\189\205","\87\212\225\216\191")):SendKeyEvent(true,"V",false,game);wait(0.1 -0 );game:service(v7("\208\90\215\156\172\231\95\236\134\169\243\71\232\137\183\231\84\192\154","\217\134\51\165\232")):SendKeyEvent(false,"V",false,game);end end end);end end);task.spawn(function() while wait() do pcall(function() if _G.AutoSeaBeast then if  not game:GetService(v7("\148\51\210\14\5\179\61\195\0","\118\195\92\160\101")).SeaBeasts:FindFirstChild(v7("\147\25\46\13\60\19\179\8\126","\114\192\124\79\79\89")) then if  not game:GetService(v7("\191\255\165\207\245\152\241\180\193","\134\232\144\215\164")).Boats:FindFirstChild(v7("\221\79\64\84\157\30\233\33\236\72\86\119\155\18\201\50\233\67","\83\141\38\50\53\233\123\174")) then if  not game:GetService(v7("\10\141\183\94\39\175\64\115\56","\16\93\226\197\53\84\223\33")).Boats:FindFirstChild(v7("\73\218\238\27\188\18\91\210\239\19\171","\119\25\179\156\122\200")) then if  not game:GetService(v7("\207\224\58\255\235\255\41\247\253","\148\152\143\72")).Boats:FindFirstChild(v7("\204\20\201\197\45\249\58\201\197\55\248\63\201\205\62\253\25\222","\89\156\125\187\164")) then local v1860=0;local v1861;while true do if (v1860==(0 + 0)) then v1861=0;while true do if (v1861==(0 + 0)) then buyb=TweenBoat(CFrame.new( -4513.90087890625,12.763982772827148 + 4 , -2658.820556640625));if ((CFrame.new( -4513.90087890625,989.7639827728271 -(294 + 679) , -2658.820556640625).Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude<=10) then local v2000=0;local v2001;local v2002;while true do if (1==v2000) then while true do if (v2001==(0 -0)) then if buyb then buyb:Stop();end v2002={[1]=v7("\226\66\220\154\199\241\203","\96\160\55\165\216\168\144\191"),[897 -(23 + 872) ]=v7("\40\93\103\59\12\81\82\40\25\90\113\24\10\93\114\59\28\81","\90\120\52\21")};v2001=1;end if (v2001==(1096 -(630 + 465))) then game:GetService(v7("\185\21\235\89\205\181\138\4\254\81\247\162\132\2\250\82\193","\214\235\112\155\53\164")).Remotes.CommF_:InvokeServer(unpack(v2002));break;end end break;end if (v2000==(0 + 0)) then v2001=599 -(186 + 413) ;v2002=nil;v2000=515 -(315 + 199) ;end end end break;end end break;end end elseif game:GetService(v7("\126\225\19\39\90\254\0\47\76","\76\41\142\97")).Boats:FindFirstChild(v7("\217\205\220\20\110\27\62\4\232\202\202\55\104\23\30\23\237\193","\118\137\164\174\117\26\126\121")) then if (game.Players.LocalPlayer.Character:WaitForChild(v7("\34\181\67\123\114\1\3\164","\110\106\192\46\26\28")).Sit==false) then TweenBoat(game:GetService(v7("\251\67\1\226\210\28\200\207\73","\169\172\44\115\137\161\108")).Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1721 -(113 + 1607) ,0) );elseif (game.Players.LocalPlayer.Character:WaitForChild(v7("\135\224\128\213\82\160\252\137","\60\207\149\237\180")).Sit==true) then repeat local v1996=0 -0 ;while true do if (v1996==(0 -0)) then wait(_G.Fast_Delay);if ((game:GetService(v7("\192\59\153\237\228\36\138\229\242","\134\151\84\235")).Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude<=(25 -15)) then TweenShip(CFrame.new(35.04552459716797,1283.7507781982422 -(355 + 911) ,4819.267578125));end break;end end until game:GetService(v7("\124\0\160\6\100\91\14\177\8","\23\43\111\210\109")).SeaBeasts:FindFirstChild(v7("\70\29\241\223\25\75\250\97\73","\137\21\120\144\157\124\42")) or (_G.AutoSeaBeast==false)  end end elseif game:GetService(v7("\198\4\3\176\19\179\8\242\14","\105\145\107\113\219\96\195")).Boats:FindFirstChild(v7("\209\250\0\56\245\246\53\43\224\253\22\27\243\250\21\56\229\246","\89\129\147\114")) then for v1903,v1904 in pairs(game:GetService(v7("\44\186\179\23\66\194\26\182\164","\178\123\213\193\124\49")).Boats:GetChildren()) do if (v1904.Name==v7("\221\32\181\205\201\136\220\102\236\39\163\238\207\132\252\117\233\44","\20\141\73\199\172\189\237\155")) then if v1904:FindFirstChild(v7("\218\6\18\12\56\236\78\235\233\2\14","\184\140\99\122\101\91\128\43")) then repeat local v1987=0;while true do if (v1987==(1456 -(197 + 1258))) then TweenBoat(v1904.VehicleSeat.CFrame * CFrame.new(0 -0 ,1,0 + 0 ) );break;end if (v1987==(0 -0)) then wait(_G.Fast_Delay);game.Players.LocalPlayer.Character:WaitForChild(v7("\211\25\181\7\245\3\177\2","\102\155\108\216")).Sit=false;v1987=1 + 0 ;end end until  not game:GetService(v7("\25\134\71\174\251\224\186\45\140","\219\78\233\53\197\136\144")).Boats:FindFirstChild(v7("\11\56\225\171\35\244\118\41\48\253\174\21\227\88\60\48\247\175","\49\91\81\147\202\87\145")) or (_G.AutoSeaBeast==false)  end end end end elseif game:GetService(v7("\54\88\74\229\145\48\79\2\82","\46\97\55\56\142\226\64")).Boats:FindFirstChild(v7("\55\129\200\250\81\230\45\91\6\134\222\217\87\234\13\72\3\141","\41\103\232\186\155\37\131\106")) then for v1838,v1839 in pairs(game:GetService(v7("\11\230\195\208\47\249\208\216\57","\187\92\137\177")).Boats:GetChildren()) do if (v1839.Name==v7("\114\11\155\10\99\92\127\80\3\135\15\85\75\81\69\3\141\14","\56\34\98\233\107\23\57")) then if v1839:FindFirstChild(v7("\111\226\25\33\41\40\27\106\226\16\60","\126\57\135\113\72\74\68")) then repeat wait(_G.Fast_Delay);game.Players.LocalPlayer.Character:WaitForChild(v7("\174\104\126\125\3\225\40\130","\65\230\29\19\28\109\142")).Sit=false;TweenBoat(v1839.VehicleSeat.CFrame * CFrame.new(0 -0 ,680 -(368 + 311) ,0) );until  not game:GetService(v7("\76\170\167\18\108\152\121\81\126","\50\27\197\213\121\31\232\24")).Boats:FindFirstChild(v7("\104\76\182\229\76\64\131\246\89\75\160\198\74\76\163\229\92\64","\132\56\37\196")) or (_G.AutoSeaBeast==false)  end end end end elseif game:GetService(v7("\111\211\37\188\205\247\89\223\50","\135\56\188\87\215\190")).SeaBeasts:FindFirstChild(v7("\152\44\84\42\95\170\58\65\89","\58\203\73\53\104")) then for v1725,v1726 in pairs(game:GetService(v7("\44\193\249\210\241\20\26\205\238","\100\123\174\139\185\130")).SeaBeasts:GetChildren()) do if v1726:FindFirstChild(v7("\40\53\60\55\1\168\9\36\3\57\0\179\48\33\35\34","\199\96\64\81\86\111")) then local v1840=0 -0 ;while true do if (v1840==1) then Skillaimbot=false;break;end if (v1840==0) then repeat local v1944=0;while true do if (v1944==(0 -0)) then wait(_G.Fast_Delay);game.Players.LocalPlayer.Character:WaitForChild(v7("\39\199\76\78\17\0\219\69","\127\111\178\33\47")).Sit=false;v1944=1;end if (v1944==(3 -0)) then Skillaimbot=true;break;end if ((1059 -(507 + 551))==v1944) then TweenBoat(v1726.HumanoidRootPart.CFrame * CFrame.new(0 + 0 ,1414 -(358 + 556) ,0 + 0 ) );EquipAllWeapon();v1944=7 -5 ;end if (v1944==(2 -0)) then AutoSkill=true;AimBotSkillPosition=v1726.HumanoidRootPart;v1944=3;end end until  not v1726:FindFirstChild(v7("\39\166\41\211\234\210\249\248\61\188\43\198\212\220\226\232","\156\111\211\68\178\132\189\144")) or (_G.AutoSeaBeast==false)  AutoSkill=false;v1840=1;end end end end end end end);end end);v420=v12.Main:AddToggle(v7("\223\223\71\227\248\238\16\75\255\223\119","\62\139\176\32\132\148\139\81"),{[v7("\196\33\205\91\128","\109\144\72\185\55\229\123\17")]=v7("\240\205\92\87\53\192\195\221\91\75\53\199","\144\177\184\40\56\21"),[v7("\167\240\10\164\55\179\147\225\16\168\43","\218\227\149\121\199\69")]=v7("\142\68\215\225\102\137\155\170\66\208\174\17","\233\207\49\163\142\70\217"),[v7("\106\220\196\236\212\188\149","\225\46\185\162\141\161\208")]=false});v420:OnChanged(function(v999) _G.AutoW=v999;end);v417=3;end if (v417==(850 -(799 + 50))) then Skillz=true;Skillx=true;Skillc=true;Skillv=true;v417=1 + 1 ;end end break;end if (v416==(1 -0)) then v421=nil;v422=nil;v423=nil;v424=nil;v416=2 + 0 ;end if (v416==(0 + 0)) then v417=0 + 0 ;v418=nil;v419=nil;v420=nil;v416=640 -(366 + 273) ;end end end local v20=v12.Main:AddSection(v7("\115\73\91\169\250\74\46\206\72\80","\175\58\61\62\196\137\106\104"));if Third_Sea then local v427=0;local v428;local v429;local v430;local v431;while true do if (v427==3) then spawn(function() while wait() do if AutoTushita then if game:GetService(v7("\232\35\240\91\70\207\45\225\85","\53\191\76\130\48")).Enemies:FindFirstChild(v7("\31\70\185\82\62\72","\53\83\41\215")) then for v1308,v1309 in pairs(game:GetService(v7("\108\173\83\67\182\75\163\66\77","\197\59\194\33\40")).Enemies:GetChildren()) do if ((v1309.Name==(v7("\161\68\179\237\234\252","\219\237\43\221\138\135\157") or (v1309.Name==v7("\216\177\115\166\112\245","\29\148\222\29\193")))) and (v1309.Humanoid.Health>(996 -(512 + 484))) and v1309:IsA(v7("\205\77\43\200\218","\182\128\34\79\173")) and v1309:FindFirstChild(v7("\23\29\228\225\82\48\1\237","\60\95\104\137\128")) and v1309:FindFirstChild(v7("\30\99\184\72\56\121\188\77\4\121\186\93\6\119\167\93","\41\86\22\213"))) then repeat wait(_G.Fast_Delay);AttackNoCoolDown();AutoHaki();if  not game.Players.LocalPlayer.Character:FindFirstChild(SelectWeapon) then wait();EquipTool(SelectWeapon);end FarmPos=v1309.HumanoidRootPart.CFrame;v1309.HumanoidRootPart.Size=Vector3.new(60,1572 -(1432 + 80) ,1762 -(991 + 711) );v1309.Humanoid.JumpPower=0 -0 ;v1309.Humanoid.WalkSpeed=0;v1309.HumanoidRootPart.CanCollide=false;v1309.Humanoid:ChangeState(11);Tween(v1309.HumanoidRootPart.CFrame * Pos );until  not AutoTushita or  not v1309.Parent or (v1309.Humanoid.Health<=(261 -(200 + 61)))  end end else Tween(CFrame.new( -(24201.875976563002 -13963),147.7912902832 + 242 , -(25601.7939453125 -16052)));end end end end);v431=v12.Main:AddToggle(v7("\59\6\130\85\186\10\33\138\94\175","\214\111\105\229\50"),{[v7("\205\33\232\89\43","\78\153\72\156\53")]=v7("\5\51\34\229\100\14\57\230\61\102\2\229\54\37\62","\138\68\70\86"),[v7("\16\77\241\2\194\224\236\32\65\237\15","\156\84\40\130\97\176\137")]=v7("\206\25\253\2\119\193\250\31\225\4\35\244\161\66","\149\143\108\137\109\87"),[v7("\30\114\253\9\67\54\99","\54\90\23\155\104")]=false});v431:OnChanged(function(v712) _G.Auto_Holy_Torch=v712;end);v13.ToggleHoly:SetValue(false);v427=1 + 3 ;end if (v427==(0 -0)) then v428=v12.Main:AddToggle(v7("\197\72\242\252\17\6\10\225\253\75\250\236","\128\145\39\149\155\125\99\66"),{[v7("\21\14\70\69\36","\41\65\103\50")]=v7("\16\37\234\78\249\112\48\60\242\78\174\24\2\51\231\85\177\93\113\11\216\84\181\84\40\13","\56\81\80\158\33\217"),[v7("\94\19\3\89\194\230\204\3\115\25\30","\119\26\118\112\58\176\143\188")]=v7("\15\229\52\125\153\171\47\252\44\125\206\195\29\243\57\102\209\134","\227\78\144\64\18\185"),[v7("\15\243\140\71\62\250\158","\38\75\150\234")]=false});v428:OnChanged(function(v713) AutoHallowSycthe=v713;end);v13.ToggleHallow:SetValue(false);spawn(function() while wait() do if AutoHallowSycthe then pcall(function() if game:GetService(v7("\215\65\7\162\243\94\20\170\229","\201\128\46\117")).Enemies:FindFirstChild(v7("\70\181\241\181\120\228\112\187\244\188\42","\182\21\218\132\217\88")) then for v1428,v1429 in pairs(game:GetService(v7("\79\232\237\95\3\167\121\228\250","\215\24\135\159\52\112")).Enemies:GetChildren()) do if string.find(v1429.Name,v7("\32\251\65\141\229\178\164\18\228\81\147","\193\115\148\52\225\197\224")) then repeat wait(_G.Fast_Delay);AttackNoCoolDown();AutoHaki();EquipTool(SelectWeapon);v1429.HumanoidRootPart.Size=Vector3.new(37 + 13 ,676 -(357 + 269) ,143 -93 );toTarget(v1429.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1429.HumanoidRootPart.Transparency=555 -(468 + 86) ;sethiddenproperty(game.Players.LocalPlayer,v7("\116\80\15\12\177\13\83\80\13\23\143\13\67\80\23\10","\108\39\57\98\121\221"),math.huge);until (v1429.Humanoid.Health<=(1043 -(915 + 128))) or (AutoHallowSycthe==false)  end end elseif (game:GetService(v7("\215\59\136\226\141\248\163","\156\135\87\233\155\232\138\208")).LocalPlayer.Backpack:FindFirstChild(v7("\172\66\58\118\139\84\118\95\151\80\51\116\135\70","\26\228\35\86")) or game:GetService(v7("\216\179\169\176\93\249\55","\65\136\223\200\201\56\139\68")).LocalPlayer.Character:FindFirstChild(v7("\214\251\59\251\85\233\186\18\228\73\251\244\52\242","\58\158\154\87\151"))) then local v1460=0 -0 ;while true do if ((0 -0)==v1460) then repeat toTarget(CFrame.new( -(3149.322265625 + 5783),87.83154296875 + 59 ,22494.55078125 -16432 ));wait();until (CFrame.new( -(9786.322265625 -(283 + 571)),1174.83154296875 -(14 + 1014) ,14068.55078125 -8006 ).Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<=(495 -(266 + 221))  wait(0.5 + 0 );v1460=480 -(442 + 37) ;end if (v1460==(1 + 0)) then EquipTool(v7("\206\173\226\133\6\103\119\31\245\191\235\135\10\117","\90\134\204\142\233\105\16\87"));break;end end elseif game:GetService(v7("\146\34\225\175\169\36\240\183\165\35\194\183\175\53\240\164\165","\195\192\71\145")):FindFirstChild(v7("\184\222\236\24\26\123\142\208\233\17\72","\41\235\177\153\116\58")) then toTarget(game:GetService(v7("\218\251\196\12\1\43\233\234\209\4\59\60\231\236\213\7\13","\72\136\158\180\96\104")):FindFirstChild(v7("\9\126\212\65\122\67\196\76\42\116\211","\45\90\17\161")).HumanoidRootPart.CFrame * CFrame.new(2,50 -30 ,2) );else end end);end end end);v427=2 -1 ;end if (v427==(1042 -(743 + 298))) then spawn(function() while wait(0.001 + 0 ) do if AutoHallowSycthe then local v1000={[1982 -(833 + 1148) ]=v7("\237\237\73\230\41","\28\175\130\39\131\90\142\65"),[5 -3 ]=v7("\86\109\166","\181\20\24\223\232"),[3]=1 + 0 ,[7 -3 ]=1};game:GetService(v7("\111\190\96\188\5\37\35\73\190\116\131\24\41\48\92\188\117","\66\61\219\16\208\108\70")).Remotes.CommF_:InvokeServer(unpack(v1000));end end end);v429=v12.Main:AddToggle(v7("\106\167\254\140\82\173\192\138\83\169","\235\62\200\153"),{[v7("\110\165\182\175\95","\195\58\204\194")]=v7("\197\178\225\59\164\128\240\32\164\158\244\57\229","\84\132\199\149"),[v7("\11\177\149\56\243\237\229\73\38\187\136","\61\79\212\230\91\129\132\149")]=v7("\237\147\169\2\49\249\230\18\140\191\188\0\112","\102\172\230\221\109\17\190\131"),[v7("\192\178\207\207\249\0\98","\157\132\215\169\174\140\108\22")]=false});v429:OnChanged(function(v714) _G.AutoYama=v714;end);v13.ToggleYama:SetValue(false);v427=2 + 0 ;end if (v427==2) then spawn(function() while wait() do if _G.AutoYama then if (game:GetService(v7("\133\254\3\163\243\52\204\52\178\255\32\187\245\37\204\39\178","\64\215\155\115\207\154\87\173")).Remotes.CommF_:InvokeServer(v7("\49\181\231\3\242\93\156\26\173\235\5","\233\116\217\142\119\151\21"),v7("\154\56\0\167\32\175\57\28","\82\202\74\111\192"))>=30) then repeat local v1310=0 + 0 ;while true do if (v1310==(70 -(6 + 64))) then wait(0.1);fireclickdetector(game:GetService(v7("\249\85\82\129\205\222\91\67\143","\190\174\58\32\234")).Map.Waterfall.SealedKatana.Handle.ClickDetector);break;end end until game:GetService(v7("\7\229\53\225\54\252\36","\142\87\137\84\152\83")).LocalPlayer.Backpack:FindFirstChild(v7("\185\170\54\247","\55\224\203\91\150\174\80")) or  not _G.AutoYama  end end end end);v430=v12.Main:AddToggle(v7("\140\112\122\55\207\30\29\106\171\119\116\36\194","\31\216\31\29\80\163\123\73"),{[v7("\35\4\253\166\214","\186\119\109\137\202\179")]=v7("\27\78\68\205\248\193\255\41\83\89\214\185","\138\90\59\48\162\216\149"),[v7("\157\169\35\22\12\200\223\71\176\163\62","\51\217\204\80\117\126\161\175")]=v7("\229\173\70\127\138\203\193\183\89\51\230\230\192\163\71\114\138\180\142\144\95\96\194\224\218\165","\137\174\196\42\19\170"),[v7("\89\130\225\80\166\94\47","\34\29\231\135\49\211\50\91")]=false});v430:OnChanged(function(v715) AutoTushita=v715;end);v13.ToggleTushita:SetValue(false);v427=3;end if (v427==4) then spawn(function() while wait() do if _G.Auto_Holy_Torch then pcall(function() local v1133=0 + 0 ;while true do if ((0 + 0)==v1133) then wait(1);repeat Tween(CFrame.new( -(21829 -11077),2391 -(660 + 1314) , -9366));wait();until  not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new( -10752,936 -519 , -(3894 + 5472))).Magnitude<=(1 + 9))  v1133=1 + 0 ;end if (2==v1133) then wait(1337 -(1224 + 112) );repeat Tween(CFrame.new( -(12520 -(184 + 204)),1498 -977 , -(3381 + 7274)));wait();until  not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new( -(5020 + 7112),1721 -1200 , -(20763 -10108))).Magnitude<=(880 -(404 + 466)))  v1133=3;end if (v1133==(3 + 1)) then wait(1778 -(108 + 1669) );repeat Tween(CFrame.new( -(25865 -12376),161 + 171 , -(35574 -27649)));wait();until  not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new( -(13815 -(47 + 279)),2310 -(358 + 1620) , -7925)).Magnitude<=(907 -(350 + 547)))  break;end if (v1133==(8 -5)) then local v1430=0;while true do if (v1430==0) then wait(1 + 0 );repeat Tween(CFrame.new( -(5237 + 8099),486, -(2656 + 4329)));wait();until  not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new( -(27501 -14165),767 -281 , -(7009 -(13 + 11)))).Magnitude<=(16 -6))  v1430=1 -0 ;end if (v1430==(1 + 0)) then v1133=1907 -(1250 + 653) ;break;end end end if (v1133==(2 -1)) then wait(147 -(134 + 12) );repeat local v1461=0 -0 ;local v1462;while true do if (v1461==(0 -0)) then v1462=0;while true do if (v1462==(1756 -(1701 + 55))) then Tween(CFrame.new( -11672,1216 -(810 + 72) , -(10903 -(955 + 474))));wait();break;end end break;end end until  not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new( -11672,788 -454 , -(9089 + 385))).Magnitude<=(5 + 5))  v1133=381 -(189 + 190) ;end end end);end end end);break;end end end if Second_Sea then local v432=0;local v433;local v434;while true do if (1==v432) then while true do if (v433==1) then v13.ToggleFactory:SetValue(false);spawn(function() while wait() do if _G.Factory then if game.Workspace.Enemies:FindFirstChild(v7("\164\236\61\210","\218\231\131\79\183\75\50\206")) then for v1540,v1541 in pairs(game.Workspace.Enemies:GetChildren()) do if ((v1541.Name==v7("\214\7\225\229","\157\149\104\147\128\221\136\219")) and (v1541.Humanoid.Health>0)) then repeat local v1727=0;local v1728;while true do if (v1727==(1364 -(1167 + 197))) then v1728=1908 -(174 + 1734) ;while true do if (v1728==(1 + 0)) then local v1945=1688 -(545 + 1143) ;while true do if (v1945==(2 + 0)) then v1728=1903 -(1076 + 825) ;break;end if ((1896 -(974 + 922))==v1945) then AutoHaki();Tween(v1541.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1945=1;end if (v1945==1) then v1541.HumanoidRootPart.Size=Vector3.new(181 -121 ,60,60);v1541.HumanoidRootPart.Transparency=1 + 0 ;v1945=2;end end end if (v1728==3) then MonFarm=v1541.Name;break;end if (v1728==(0 -0)) then wait(_G.Fast_Delay);AttackNoCoolDown();repeat local v1968=0 -0 ;local v1969;while true do if (v1968==(196 -(75 + 121))) then v1969=0;while true do if (v1969==0) then Tween(CFrame.new(2104.46756 -(501 + 1155) ,199.356781, -(283.389252 + 158)));wait();break;end end break;end end until  not _G.Factory or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(1262.46756 -814 ,1382.356781 -(410 + 773) , -(232.389252 + 209))).Magnitude<=(1132 -(682 + 440)))  EquipTool(SelectWeapon);v1728=1;end if (2==v1728) then v1541.Humanoid.JumpPower=0;v1541.Humanoid.WalkSpeed=0 + 0 ;v1541.HumanoidRootPart.CanCollide=false;FarmPos=v1541.HumanoidRootPart.CFrame;v1728=6 -3 ;end end break;end end until  not v1541.Parent or (v1541.Humanoid.Health<=(0 -0)) or (_G.Factory==false)  end end elseif game.ReplicatedStorage:FindFirstChild(v7("\163\251\232\196","\161\224\148\154")) then repeat local v1689=0;local v1690;while true do if (v1689==(520 -(341 + 179))) then v1690=0;while true do if (v1690==(467 -(456 + 11))) then Tween(CFrame.new(205.46756 + 243 ,199.356781, -(156.389252 + 285)));wait();break;end end break;end end until  not _G.Factory or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(448.46756,961.356781 -(676 + 86) , -(75.389252 + 366))).Magnitude<=(15 -5))  end end end end);break;end if (v433==(0 + 0)) then v434=v12.Main:AddToggle(v7("\5\173\195\19\255\52\132\197\23\231\62\176\221","\147\81\194\164\116"),{[v7("\24\162\32\38\205","\22\76\203\84\74\168\126")]=v7("\253\192\241\195\237\47\206\206\216\165\234\172\10\219\211\199\252","\175\188\181\133\172\205\105"),[v7("\148\122\187\54\191\244\160\107\161\58\163","\157\208\31\200\85\205")]="Auto Farm Factory (Đánh nhà Máy)",[v7("\121\253\186\51\109\127\32","\63\61\152\220\82\24\19\84")]=false});v434:OnChanged(function(v1001) _G.Factory=v1001;end);v433=2 -1 ;end end break;end if (v432==(0 + 0)) then local v635=0 + 0 ;while true do if (v635==(698 -(533 + 164))) then v432=858 -(331 + 526) ;break;end if (0==v635) then v433=0 + 0 ;v434=nil;v635=1;end end end end end if Third_Sea then local v435=726 -(269 + 457) ;local v436;while true do if (v435==(1864 -(1000 + 864))) then v436=v12.Main:AddToggle(v7("\11\244\64\248\214\83\28\250\76\250\236\4","\54\95\155\39\159\186"),{[v7("\255\30\163\242\206","\158\171\119\215")]=v7("\17\64\173\14\141\123\221\47\78\169\22\141\116\219\52\78\225\57\227\90\215\62\9\146\18\204\72\220\7","\178\90\41\193\98\173\63"),[v7("\3\231\234\201\219\10\20\209\46\237\247","\165\71\130\153\170\169\99\100")]=v7("\35\50\36\15\66\12\57\12\14\103\20\15\23\32\56\20\66\12\57\14\5\103\11\46\7\34\52\64\49\55\49\23\12\26","\96\98\71\80"),[v7("\154\78\85\225\86\48\170","\92\222\43\51\128\35")]=false});v436:OnChanged(function(v716) _G.AutoCakeV2=v716;end);v435=3 -2 ;end if (v435==(399 -(249 + 149))) then v13.ToggleCakeV2:SetValue(false);break;end end end spawn(function() while wait() do if _G.AutoCakeV2 then pcall(function() if game:GetService(v7("\128\177\216\189\73\77\140\180\187","\237\215\222\170\214\58\61")).Enemies:FindFirstChild(v7("\10\45\16\201\210\253\129\44\32\37","\69\78\66\101\174\186\221\202")) then for v837,v838 in pairs(game:GetService(v7("\180\9\180\0\144\22\167\8\134","\107\227\102\198")).Enemies:GetChildren()) do if (v838.Name==v7("\97\207\34\90\131\24\16\76\206\48","\91\37\160\87\61\235\56")) then if (v838:FindFirstChild(v7("\116\94\90\196\48\253\86\88","\63\60\43\55\165\94\146")) and v838:FindFirstChild(v7("\55\67\226\216\79\64\166\165\45\89\224\205\113\78\189\181","\193\127\54\143\185\33\47\207")) and (v838.Humanoid.Health>(0 + 0))) then repeat local v1431=0;local v1432;local v1433;while true do if (v1431==(1 + 0)) then while true do if (v1432==0) then v1433=0 + 0 ;while true do if (v1433==0) then wait(_G.Fast_Delay);AttackNoCoolDown();v1433=1;end if (v1433==(1193 -(254 + 937))) then v838.HumanoidRootPart.CanCollide=false;v838.Humanoid.WalkSpeed=0 -0 ;v1433=613 -(246 + 364) ;end if (v1433==(930 -(208 + 719))) then v838.HumanoidRootPart.Size=Vector3.new(1955 -(249 + 1656) ,1633 -(913 + 670) ,146 -96 );Tween(v838.HumanoidRootPart.CFrame * Pos );break;end if (v1433==(1 -0)) then AutoHaki();EquipTool(SelectWeapon);v1433=4 -2 ;end end break;end end break;end if (v1431==0) then v1432=0 + 0 ;v1433=nil;v1431=1;end end until  not _G.AutoCakeV2 or  not v838.Parent or (v838.Humanoid.Health<=0)  end end end elseif game:GetService(v7("\63\70\89\218\227\219\12\87\76\210\217\204\2\81\72\209\239","\184\109\35\41\182\138")):FindFirstChild(v7("\27\227\188\125\230\202\146\54\226\174","\217\95\140\201\26\142\234")) then Tween(game:GetService(v7("\223\122\101\38\243\238\126\97\47\254\222\107\122\56\251\234\122","\154\141\31\21\74")):FindFirstChild(v7("\202\39\87\240\28\5\197\33\76\240","\37\142\72\34\151\116")).HumanoidRootPart.CFrame * CFrame.new(2,20,687 -(206 + 479) ) );else end end);end end end);if (Second_Sea or Third_Sea) then local v437=v12.Main:AddToggle(v7("\134\37\132\217\42\183\2\130\213\47\145\37\143\209\52","\70\210\74\227\190"),{[v7("\218\77\255\26\197","\114\142\36\139\118\160\110")]=v7("\130\194\170\98\30\161\220\186\98\21\175\219\188\48","\86\192\183\211\66"),[v7("\167\94\98\73\231\141\147\79\120\69\251","\228\227\59\17\42\149")]=v7("\142\188\110\131\132\168\124\202\236\138\120\207\163\187","\163\204\201\23"),[v7("\62\199\28\71\15\206\14","\38\122\162\122")]=false});v437:OnChanged(function(v530) _G.Auto_Buy_Enchancement=v530;end);v13.ToggleHakiColor:SetValue(false);spawn(function() while wait() do if _G.Auto_Buy_Enchancement then local v717=0 -0 ;local v718;while true do if (v717==(0 -0)) then v718={[3 -2 ]=v7("\10\168\235\240\161\58\131\226\254\191\44\181","\211\73\199\135\159"),[4 -2 ]="2"};game:GetService(v7("\197\6\185\38\213\113\246\23\172\46\239\102\248\17\168\45\217","\18\151\99\201\74\188")).Remotes.CommF_:InvokeServer(unpack(v718));break;end end end end end);end if Second_Sea then local v438=v12.Main:AddToggle(v7("\105\11\184\45\61\195\44\74\11\173\46\29\195\17\90\1\177\46","\127\61\100\223\74\81\166"),{[v7("\108\196\201\195\172","\201\56\173\189\175")]=v7("\21\252\155\183\208\32\230\144\243\163\27\236\140\240\230\57\237\131\229\250","\131\87\137\226\151"),[v7("\149\252\26\139\38\4\73\10\184\246\7","\126\209\153\105\232\84\109\57")]=v7("\251\206\173\0\231\206\212\166\68\148\245\222\186\71\209\215\223\181\82\205","\180\185\187\212\32"),[v7("\253\81\89\0\189\213\64","\200\185\52\63\97")]=false});v438:OnChanged(function(v531) _G.BuyLengendSword=v531;end);v13.ToggleSwordLengend:SetValue(false);spawn(function() while wait(1799.1 -(1440 + 359) ) do pcall(function() if (_G.BuyLengendSword or Triple_A) then local v765=1952 -(850 + 1102) ;local v766;while true do if (v765==(0 + 0)) then v766={[1]=v7("\86\69\78\221\179\47\29\107\99\115\94\215\175\47\56\124\123\76\76\202","\25\26\32\41\184\221\75\124"),[2]="2"};game:GetService(v7("\135\197\145\34\174\182\193\149\43\163\134\212\142\60\166\178\197","\199\213\160\225\78")).Remotes.CommF_:InvokeServer(unpack(v766));break;end end else wait(123 -(58 + 63) );end end);end end);end if Second_Sea then local v439=v12.Main:AddToggle(v7("\188\139\131\182\17\171\212\158\139\182\176\30\171","\145\232\228\228\209\125\206"),{[v7("\139\191\235\1\186","\109\223\214\159")]=v7("\202\16\199\41\54\48\177\198\171\55\210\37\115","\169\139\101\179\70\22\117\199"),[v7("\4\1\65\200\90\57\48\16\91\196\70","\80\64\100\50\171\40")]="Auto Evo Race (Thức Tỉnh Tộc V2)",[v7("\111\133\217\205\51\211\73","\210\43\224\191\172\70\191\61")]=false});v439:OnChanged(function(v532) _G.AutoEvoRace=v532;end);v13.ToggleEvoRace:SetValue(false);spawn(function() while task.wait() do pcall(function() if _G.AutoEvoRace then local v767=0;local v768;while true do if (v767==(2 + 0)) then if (v768:FindFirstChild(v7("\116\252\10\15\191\173\18\161","\223\50\144\101\120\218")) and v768:FindFirstChild(v7("\237\171\74\170\177\39\100\83","\97\171\199\37\221\212\85\68")) and v768:FindFirstChild(v7("\134\132\83\191\70\201\141\243","\173\192\232\60\200\35\187"))) then game:GetService(v7("\244\192\249\0\87\122\18\210\192\237\63\74\118\1\199\194\236","\115\166\165\137\108\62\25")).Remotes.CommF_:InvokeServer(v7("\45\139\120\161\9\138\114\186\24","\201\108\231\27"),"1");game:GetService(v7("\109\170\235\76\72\66\94\187\254\68\114\85\80\189\250\71\68","\33\63\207\155\32\33")).Remotes.CommF_:InvokeServer(v7("\168\235\166\66\41\132\238\182\94","\76\233\135\197\42"),"3");end for v1206,v1207 in pairs(game.Workspace:GetChildren()) do if ((v1207.Name==v7("\146\202\131\216\239\166\151","\138\212\166\236\175")) or (v1207.Name==v7("\143\140\208\51\57\144\79","\100\201\224\191\68\92\226\125"))) then v1207.Size=Vector3.new(20,20,94 -74 );end end break;end if (v767==(0 + 0)) then local v1134=0 + 0 ;while true do if (v1134==0) then v768=game.Players.LocalPlayer.Backpack;game:GetService(v7("\7\92\148\205\20\54\88\144\196\25\6\77\139\211\28\50\92","\125\85\57\228\161")).Remotes.CommF_:InvokeServer(v7("\12\49\162\167\40\48\168\188\57","\207\77\93\193"),"1");v1134=3 -2 ;end if (v1134==(1 + 0)) then v767=2 -1 ;break;end end end if (v767==(1 + 0)) then game:GetService(v7("\96\12\170\170\171\123\19\70\12\190\149\182\119\0\83\14\191","\114\50\105\218\198\194\24")).Remotes.CommF_:InvokeServer(v7("\206\195\163\221\83\229\221\252\219","\180\143\175\192\181\54\136"),"2");if v768:FindFirstChild(v7("\139\83\29\205\82\11\151\209","\227\205\63\114\186\55\121\183")) then if v768:FindFirstChild(v7("\151\184\71\41\67\176\108\224","\76\209\212\40\94\38\194")) then local v1463=0 -0 ;local v1464;while true do if (v1463==0) then v1464=648 -(333 + 315) ;while true do if (v1464==(1266 -(969 + 297))) then Tween(CFrame.new( -(27039.06152 -21542),1660.5923004 -(57 + 1556) , -795.237061));for v1862,v1863 in pairs(game.Workspace.Enemies:GetChildren()) do if (v1863.Name==v7("\35\192\194\116\142\189","\100\121\175\175\22\231\216\61")) then repeat task.wait();EquipTool(SelectWeapon);Tween(v1863.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );until v768:FindFirstChild(v7("\225\208\236\0\194\206\163\68","\119\167\188\131")) end end break;end end break;end end else Tween(game.Workspace[v7("\110\13\182\25\72\207\25","\189\40\97\217\110\45")].CFrame);end else Tween(game.Workspace[v7("\12\202\207\76\128\56\148","\229\74\166\160\59")].CFrame);end v767=43 -(5 + 36) ;end end end end);end end);end local v21=v12.Setting:AddSection(v7("\98\25\41\85\71\242\112","\23\36\120\91\56\46\156"));local v22=v12.Setting:AddToggle(v7("\219\215\117\27\20\76\201\217\97\8","\41\143\184\18\124\120"),{[v7("\154\6\94\205\87","\47\206\111\42\161\50")]=v7("\239\66\196\203\166\207\72\133\239\171\217\88\133\232\190\222\77\198\194","\202\170\44\165\169"),[v7("\223\43\88\14\233\39\91\25\242\33\69","\109\155\78\43")]="Fast Attack (Đánh Nhanh)",[v7("\0\176\121\27\170\19\48","\127\68\213\31\122\223")]=true});v22:OnChanged(function(v138) _G.FastNe=v138;end);v13.ToggleFast:SetValue(true);local v23=require(game.ReplicatedStorage.Util.CameraShaker);CombatFrameworkR=require(game:GetService(v7("\3\224\12\165\54\254\30","\220\83\140\109")).LocalPlayer.PlayerScripts.CombatFramework);y=debug.getupvalues(CombatFrameworkR)[2 -0 ];spawn(function() game:GetService(v7("\135\20\23\243\1\169\190\161\182\4","\200\213\97\121\160\100\219\200")).RenderStepped:Connect(function() if _G.FastNe then if (typeof(y)==v7("\235\41\217\82\229","\155\159\72\187\62\128\115\124")) then pcall(function() v23:Stop();y.activeController.timeToNextAttack=math.huge^(math.huge^math.huge) ;y.activeController.timeToNextAttack=0 + 0 ;y.activeController.hitboxMagnitude=60;y.activeController.active=false;y.activeController.timeToNextBlock=0 + 0 ;y.activeController.focusStart=1384059002.0980349 + 271444337 ;y.activeController.increment=1;y.activeController.blocking=false;y.activeController.attacking=false;y.activeController.humanoid.AutoRotate=true;end);end end end);end);local v25=v12.Setting:AddToggle(v7("\5\242\9\27\61\248\44\14\56\243\9\49\62\255","\124\81\157\110"),{[v7("\196\118\23\17\129","\67\144\31\99\125\228\178\205")]="Enabled Bring Mob / Magnet",[v7("\247\52\206\52\214\211\54\24\218\62\211","\108\179\81\189\87\164\186\70")]="Bring Mob (Gom Quái)",[v7("\242\183\245\253\37\218\166","\80\182\210\147\156")]=true});v25:OnChanged(function(v139) _G.BringMob=v139;end);v13.ToggleBringMob:SetValue(true);spawn(function() while wait() do pcall(function() for v550,v551 in pairs(game:GetService(v7("\57\193\2\91\56\30\207\19\85","\75\110\174\112\48")).Enemies:GetChildren()) do if (_G.BringMob and bringmob) then if ((v551.Name==MonFarm) and v551:FindFirstChild(v7("\31\31\180\77\57\5\176\72","\44\87\106\217")) and (v551.Humanoid.Health>0)) then if (v551.Name==v7("\214\113\13\162\255\98\23\246\195\100\15\176\246","\214\144\16\110")) then if ((v551.HumanoidRootPart.Position-FarmPos.Position).Magnitude<=(532 -282)) then v551.Head.CanCollide=false;v551.HumanoidRootPart.CanCollide=false;v551.HumanoidRootPart.Size=Vector3.new(43 + 17 ,156 -96 ,234 -174 );v551.HumanoidRootPart.CFrame=FarmPos;sethiddenproperty(game.Players.LocalPlayer,v7("\232\172\164\109\182\209\95\78\212\171\155\121\190\217\94\84","\39\187\197\201\24\218\176\43"),math.huge);end elseif (v551.Name==MonFarm) then if ((v551.HumanoidRootPart.Position-FarmPos.Position).Magnitude<=250) then v551.Head.CanCollide=false;v551.HumanoidRootPart.CanCollide=false;v551.HumanoidRootPart.Size=Vector3.new(174 -114 ,60,60);v551.HumanoidRootPart.CFrame=FarmPos;sethiddenproperty(game.Players.LocalPlayer,v7("\22\183\49\211\75\252\149\15\42\176\14\199\67\244\148\21","\102\69\222\92\166\39\157\225"),math.huge);end end end end end end);end end);local v26=v12.Setting:AddToggle(v7("\74\42\53\202\218\53\106\103\53\51\222\197\4\120","\40\30\69\82\173\182\80"),{[v7("\134\80\207\85\32","\213\210\57\187\57\69")]=v7("\219\73\218\163\37\59\207\77\220\94\203\160\58\45\139\57\238","\109\158\39\187\193\73\94\171"),[v7("\243\173\72\138\195\241\199\188\82\134\223","\152\183\200\59\233\177")]="Enabled Bypass Tp (Di Chuyển Dạng Reset)",[v7("\167\167\176\62\238\175\106","\126\227\194\214\95\155\195\30")]=false});v26:OnChanged(function(v140) BypassTP=v140;end);v13.ToggleBypassTP:SetValue(false);local v27=v12.Setting:AddToggle(v7("\206\122\171\239\246\112\158\237\247\122\186\237","\136\154\21\204"),{[v7("\104\121\152\177\114","\27\60\16\236\221\23\16\207")]=v7("\242\15\193\224\219\4\196\162\229\4\205\237\193\4\128\198\214\12\197\162\227\4\216\246","\130\183\97\160"),[v7("\159\64\3\80\82\192\147\175\76\31\93","\227\219\37\112\51\32\169")]="Enabled Remove Dame Text (Ẩn Dame Đánh Quái)",[v7("\24\244\217\169\109\192\60","\101\92\145\191\200\24\172\72")]=true});v27:OnChanged(function(v141) _G.RemoveDameText=v141;end);v13.ToggleRemove:SetValue(true);spawn(function() while wait() do if _G.RemoveDameText then game:GetService(v7("\159\199\252\231\161\94\56\185\199\232\216\188\82\43\172\197\233","\89\205\162\140\139\200\61")).Assets.GUI.DamageCounter.Enabled=false;else game:GetService(v7("\147\249\178\198\168\255\163\222\164\248\145\222\174\238\163\205\164","\170\193\156\194")).Assets.GUI.DamageCounter.Enabled=true;end end end);local v28=v12.Setting:AddToggle(v7("\191\134\76\78\66\142\187\78\68\65\157\140\101\70\90\130\143\82","\46\235\233\43\41"),{[v7("\110\166\200\31\95","\115\58\207\188")]=v7("\128\207\10\79\47\160\197\75\127\38\168\206\29\72\99\132\205\7\13\13\170\213\2\75\58","\67\197\161\107\45"),[v7("\119\179\160\13\148\90\166\167\7\137\93","\230\51\214\211\110")]="Enabled Remove All Notify (Ẩn hết Thông báo)",[v7("\111\2\68\183\22\135\95","\235\43\103\34\214\99")]=false});v28:OnChanged(function(v142) RemoveNotify=v142;end);v13.ToggleRemoveNotify:SetValue(false);spawn(function() while wait() do if RemoveNotify then game.Players.LocalPlayer.PlayerGui.Notifications.Enabled=false;else game.Players.LocalPlayer.PlayerGui.Notifications.Enabled=true;end end end);local v29=v12.Setting:AddToggle(v7("\72\124\67\89\255\41\75\123\77\74\246","\76\28\19\36\62\147"),{[v7("\136\227\182\30\18","\173\220\138\194\114\119\33\108")]=v7("\115\209\189\30\216\83\219\252\43\220\95\203\185\92\231\85\205\185\25\218","\180\54\191\220\124"),[v7("\158\15\222\25\153\121\223\12\179\5\195","\120\218\106\173\122\235\16\175")]="Enabled White Screen (Màn hình Treo)",[v7("\128\13\25\234\177\4\11","\139\196\104\127")]=false});v29:OnChanged(function(v143) local v144=0 -0 ;while true do if (v144==(1139 -(358 + 781))) then _G.WhiteScreen=v143;if (_G.WhiteScreen==true) then game:GetService(v7("\226\6\171\19\213\1\179\41\211\22","\64\176\115\197")):Set3dRenderingEnabled(false);elseif (_G.WhiteScreen==false) then game:GetService(v7("\75\226\77\34\27\107\225\74\18\27","\126\25\151\35\113")):Set3dRenderingEnabled(true);end break;end end end);v13.ToggleWhite:SetValue(false);local v30=v12.Setting:AddSection(v7("\220\212\200\181\74\85\165\17\252\203\196\171\95","\112\143\191\161\217\38\117\232"));local v31=v12.Setting:AddToggle(v7("\114\199\25\78\170\244\124","\145\38\168\126\41\198"),{[v7("\46\46\239\115\234","\61\122\71\155\31\143\67")]=v7("\226\140\253\127\221\199\206","\19\177\231\148"),[v7("\139\162\148\213\107\5\78\180\166\168\137","\192\207\199\231\182\25\108\62")]=v7("\39\53\4\95\24\126\55","\51\116\94\109"),[v7("\109\125\133\244\92\116\151","\149\41\24\227")]=true});v31:OnChanged(function(v145) SkillZ=v145;end);v13.ToggleZ:SetValue(true);local v32=v12.Setting:AddToggle(v7("\235\165\75\174\175\176\39","\127\191\202\44\201\195\213"),{[v7("\242\247\76\64\170","\91\166\158\56\44\207\234\159")]=v7("\252\222\118\6\17\15\21","\77\175\181\31\106\125\47"),[v7("\8\197\242\255\179\37\208\245\245\174\34","\193\76\160\129\156")]=v7("\232\32\77\81\143\146\179","\233\187\75\36\61\227\178\235"),[v7("\124\69\224\175\77\76\242","\206\56\32\134")]=true});v32:OnChanged(function(v146) SkillX=v146;end);v13.ToggleX:SetValue(true);local v33=v12.Setting:AddToggle(v7("\12\18\22\10\190\141\27","\232\88\125\113\109\210"),{[v7("\105\245\81\61\207","\86\61\156\37\81\170\195\24")]=v7("\14\198\207\206\6\101\30","\69\93\173\166\162\106"),[v7("\248\204\159\44\249\188\165\206\213\198\130","\186\188\169\236\79\139\213\213")]=v7("\227\55\16\209\136\144\31","\228\176\92\121\189"),[v7("\243\86\196\239\81\219\71","\36\183\51\162\142")]=true});v33:OnChanged(function(v147) SkillC=v147;end);v13.ToggleC:SetValue(true);local v34=v12.Setting:AddToggle(v7("\141\38\187\132\246\253\187","\237\217\73\220\227\154\152"),{[v7("\154\209\250\26\213","\96\206\184\142\118\176\162\177")]=v7("\235\61\220\213\54\200\33","\138\184\86\181\185\90\232\119"),[v7("\82\44\151\225\159\222\102\61\141\237\131","\183\22\73\228\130\237")]=v7("\232\187\6\115\53\255\26","\67\187\208\111\31\89\223\76"),[v7("\98\128\218\135\83\137\200","\230\38\229\188")]=true});v34:OnChanged(function(v148) SkillV=v148;end);v13.ToggleV:SetValue(true);local v35=v12.Setting:AddToggle(v7("\222\15\183\123\230\5\150","\28\138\96\208"),{[v7("\19\188\55\226\42","\215\71\213\67\142\79\117")]=v7("\194\228\3\48\189\177\201","\209\145\143\106\92"),[v7("\7\135\204\49\182\41\193\55\139\208\60","\177\67\226\191\82\196\64")]=v7("\251\171\45\127\196\170\236","\25\168\192\68\19\168\138\170"),[v7("\103\188\67\243\41\186\87","\214\35\217\37\146\92")]=false});v35:OnChanged(function(v149) SkillF=v149;end);v13.ToggleF:SetValue(false);local v36=v12.Setting:AddSection(v7("\116\241\146\106\201\63\83\253\193\88\201\35\93","\81\48\152\225\30\168"));local v37=v12.Setting:AddSlider(v7("\235\80\115\216\66\254\232\83\105\228","\140\184\60\26\188\39"),{[v7("\79\12\84\82\89","\30\27\101\32\62\60\112")]=v7("\234\166\69\7\20","\76\186\201\54\39"),[v7("\52\198\92\182\24\20\39\4\202\64\187","\87\112\163\47\213\106\125")]=v7("\29\214\44\28\21","\60\77\185\95"),[v7("\62\161\248\37\15\168\234","\68\122\196\158")]=0,[v7("\226\161\121","\146\175\200\23\131\21\100")]= -60,[v7("\168\179\179","\40\229\210\203")]=438 -(297 + 81) ,[v7("\195\172\48\187\245\170\43\178","\213\145\195\69")]=1 -0 ,[v7("\154\180\199\38\229\184\182\192","\135\217\213\171\74")]=function(v150) posX=v150;end});v37:OnChanged(function(v151) posX=v151;end);v37:SetValue(0 -0 );local v38=v12.Setting:AddSlider(v7("\123\57\165\116\94\191\37\162\91\12","\205\40\85\204\16\59\205\117"),{[v7("\198\12\191\113\247","\29\146\101\203")]=v7("\205\215\197\114\131","\218\157\184\182\82"),[v7("\27\80\162\216\20\36\47\65\184\212\8","\77\95\53\209\187\102")]=v7("\29\221\167\244\45","\50\77\178\212\212\116\220\56"),[v7("\193\75\188\70\24\194\241","\174\133\46\218\39\109")]=30,[v7("\30\82\136","\26\83\59\230\227\107\215")]= -(242 -182),[v7("\36\211\229","\46\105\178\157")]=60,[v7("\35\78\237\82\207\136\31\70","\225\113\33\152\60\171")]=3 -2 ,[v7("\117\202\178\4\84\202\189\3","\104\54\171\222")]=function(v152) posY=v152;end});v38:OnChanged(function(v153) posY=v153;end);v38:SetValue(30);local v39=v12.Setting:AddSlider(v7("\45\177\43\252\0\28\158\72\13\135","\39\126\221\66\152\101\110\206"),{[v7("\218\249\26\117\208","\43\142\144\110\25\181\100")]=v7("\43\223\60\136\34","\182\123\176\79\168\120"),[v7("\192\203\25\38\6\237\222\30\44\27\234","\116\132\174\106\69")]=v7("\198\37\106\236\139","\209\150\74\25\204"),[v7("\152\225\117\53\200\161\177","\231\220\132\19\84\189\205\197")]=0 + 0 ,[v7("\119\91\141","\126\58\50\227\192\196\110\63")]= -(94 -34),[v7("\33\119\216","\157\108\22\160\188")]=1671 -(818 + 793) ,[v7("\65\247\34\203\119\241\57\194","\165\19\152\87")]=856 -(557 + 298) ,[v7("\21\5\87\164\132\55\7\80","\230\86\100\59\200")]=function(v154) posZ=v154;end});v39:OnChanged(function(v155) posZ=v155;end);v39:SetValue(0);local v40=v12.Stats:AddToggle(v7("\21\23\11\231\165\199\12\29\0\229\172","\162\65\120\108\128\201"),{[v7("\176\48\248\24\23","\105\228\89\140\116\114\128")]=v7("\93\31\27\187\119\43\121\6\10\177","\102\28\106\111\212\87"),[v7("\24\53\71\19\46\57\68\4\53\63\90","\112\92\80\52")]=v7("\152\77\183\139\11\195\188\84\166\129","\142\217\56\195\228\43"),[v7("\120\208\166\76\68\80\193","\49\60\181\192\45")]=false});v40:OnChanged(function(v156) _G.Auto_Stats_Melee=v156;end);v13.ToggleMelee:SetValue(false);local v41=v12.Stats:AddToggle(v7("\19\170\223\78\224\1\3\160","\100\71\197\184\41\140"),{[v7("\150\230\62\169\167","\197\194\143\74")]=v7("\163\86\246\208\12\111\62\223\135\77\241\218","\185\226\35\130\191\44\43\91"),[v7("\58\222\240\246\80\23\203\247\252\77\16","\34\126\187\131\149")]=v7("\31\51\235\38\60\26\35\249\44\114\45\35","\28\94\70\159\73"),[v7("\59\122\62\196\185\19\107","\204\127\31\88\165")]=false});v41:OnChanged(function(v157) _G.Auto_Stats_Defense=v157;end);v13.ToggleDe:SetValue(false);local v42=v12.Stats:AddToggle(v7("\185\194\222\62\221\136\254\206\54\195\137","\177\237\173\185\89"),{[v7("\110\94\39\241\14","\201\58\55\83\157\107\153\164")]=v7("\19\195\110\43\161\16\58\61\196\126","\77\82\182\26\68\129\67"),[v7("\200\187\99\20\254\183\96\3\229\177\126","\119\140\222\16")]=v7("\51\102\77\70\247\52\172\29\97\93","\219\114\19\57\41\215\103"),[v7("\18\80\171\201\225\58\65","\148\86\53\205\168")]=false});v42:OnChanged(function(v158) _G.Auto_Stats_Sword=v158;end);v13.ToggleSword:SetValue(false);local v43=v12.Stats:AddToggle(v7("\227\192\175\114\255\84\240\218\166","\49\183\175\200\21\147"),{[v7("\105\63\58\29\203","\143\61\86\78\113\174")]=v7("\7\72\28\179\13\146\51\83","\213\70\61\104\220\45"),[v7("\11\22\33\211\193\38\3\38\217\220\33","\179\79\115\82\176")]=v7("\231\156\229\85\83\225\156\255","\115\166\233\145\58"),[v7("\101\58\208\211\172\75\85","\39\33\95\182\178\217")]=false});v43:OnChanged(function(v159) _G.Auto_Stats_Gun=v159;end);v13.ToggleGun:SetValue(false);local v44=v12.Stats:AddToggle(v7("\8\43\205\190\201\37\26\54\223\176\209","\64\92\68\170\217\165"),{[v7("\32\55\93\187\17","\215\116\94\41")]=v7("\202\88\24\24\107\193\186\230\66\2\87\13\247\170\226\89","\223\139\45\108\119\75\133"),[v7("\83\179\50\208\37\126\166\53\218\56\121","\87\23\214\65\179")]=v7("\214\25\241\186\183\42\247\160\254\24","\213\151\108\133"),[v7("\57\228\189\191\11\20\9","\120\125\129\219\222\126")]=false});v44:OnChanged(function(v160) _G.Auto_Stats_Devil_Fruit=v160;end);v13.ToggleFruit:SetValue(false);spawn(function() while wait() do if _G.Auto_Stats_Devil_Fruit then local v556={[1 + 0 ]=v7("\219\236\6\189\55\238\244\252","\135\154\136\98\237\88"),[2]=v7("\13\137\138\204\187\90\122\183\60\133\147","\197\73\236\231\163\213\122\60"),[3]=3 -0 };game:GetService(v7("\106\22\98\137\172\222\66\76\22\118\182\177\210\81\89\20\119","\35\56\115\18\229\197\189")).Remotes.CommF_:InvokeServer(unpack(v556));end end end);spawn(function() while wait() do if _G.Auto_Stats_Gun then local v557=0 -0 ;local v558;while true do if (v557==(0 + 0)) then v558={[1661 -(823 + 837) ]=v7("\157\170\250\29\2\19\178\186","\122\220\206\158\77\109"),[1 + 1 ]=v7("\156\167\223","\60\219\210\177\217\185\226"),[333 -(134 + 196) ]=9 -6 };game:GetService(v7("\13\190\184\226\54\184\169\250\58\191\155\250\48\169\169\233\58","\142\95\219\200")).Remotes.CommF_:InvokeServer(unpack(v558));break;end end end end end);spawn(function() while wait() do if _G.Auto_Stats_Sword then local v559=0;local v560;while true do if (v559==(0 + 0)) then v560={[1 + 0 ]=v7("\246\250\119\28\186\4\220\234","\158\183\158\19\76\213\109\178"),[2 + 0 ]=v7("\200\199\165\149\178","\124\155\176\202\231\214"),[2 + 1 ]=3};game:GetService(v7("\16\226\185\20\43\228\168\12\39\227\154\12\45\245\168\31\39","\120\66\135\201")).Remotes.CommF_:InvokeServer(unpack(v560));break;end end end end end);spawn(function() while wait() do if _G.Auto_Stats_Defense then local v561=517 -(283 + 234) ;local v562;while true do if ((0 + 0)==v561) then v562={[1 + 0 ]=v7("\244\119\210\1\213\220\125\194","\186\181\19\182\81"),[3 -1 ]=v7("\116\182\199\124\133\167\187","\47\48\211\161\25\235\212\222"),[3]=3};game:GetService(v7("\152\4\21\129\176\204\47\190\4\1\190\173\192\60\171\6\0","\78\202\97\101\237\217\175")).Remotes.CommF_:InvokeServer(unpack(v562));break;end end end end end);spawn(function() while wait() do if _G.Auto_Stats_Melee then local v563=0 -0 ;local v564;while true do if (v563==0) then v564={[1 + 0 ]=v7("\80\122\219\75\138\47\127\106","\70\17\30\191\27\229"),[2]=v7("\41\137\228\73\1","\44\100\236\136"),[4 -1 ]=1508 -(1483 + 22) };game:GetService(v7("\200\46\153\119\39\242\244\102\255\47\186\111\33\227\244\117\255","\18\154\75\233\27\78\145\149")).Remotes.CommF_:InvokeServer(unpack(v564));break;end end end end end);local v45={};for v161,v162 in pairs(game:GetService(v7("\226\136\120\77\218\238\189","\146\178\228\25\52\191\156\206")):GetChildren()) do table.insert(v45,v162.Name);end local v46=v12.Player:AddDropdown(v7("\32\127\57\172\16\110\48\173\35\118\44","\201\115\26\85"),{[v7("\23\115\87\84\216","\180\67\26\35\56\189\132")]=v7("\15\120\195\196\236\18\205\12\113\206\216\234\20","\237\92\29\175\161\143\102"),[v7("\19\79\231\193\221\62\90\224\203\192\57","\175\87\42\148\162")]=v7("\229\176\90\18\68\194\245\102\27\70\207\176\68","\39\182\213\54\119"),[v7("\100\69\170\223\36\65","\65\50\36\198\170")]=v45,[v7("\251\101\86\29\172","\132\182\16\58\105\197\84\220")]=false,[v7("\173\22\75\125\13\169\227","\151\233\115\45\28\120\197")]=451 -(276 + 174) });v46:SetValue(v7("\176\199\68","\44\222\174\40"));v46:OnChanged(function(v163) _G.SelectPly=v163;end);v12.Player:AddButton({[v7("\6\85\102\58\45","\43\82\60\18\86\72")]=v7("\21\32\114\179\127\184\47\101\68\173\123\178\34\55","\203\71\69\20\193\26"),[v7("\192\185\32\51\193\225\42\240\181\60\62","\90\132\220\83\80\179\136")]=v7("\35\125\12\179\15\201\25\56\58\173\11\195\20\106","\186\113\24\106\193\106"),[v7("\150\136\218\138\183\136\213\141","\230\213\233\182")]=function() local v164=837 -(341 + 496) ;while true do if (v164==(0 -0)) then table.clear(v45);for v636,v637 in pairs(game:GetService(v7("\252\128\7\226\201\158\21","\155\172\236\102")):GetChildren()) do table.insert(v45,v637.Name);end break;end end end});local v47=v12.Player:AddToggle(v7("\47\186\7\211\2\126\47\176\12\209\30\116\9\161","\27\123\213\96\180\110"),{[v7("\156\18\231\82\119","\18\200\123\147\62")]=v7("\54\185\247\224\200\136\28\22\252\207\234\152\183\2\3\165\254\247","\110\98\220\155\133\184\231"),[v7("\83\166\60\62\107\115\155\1\126\172\33","\117\23\195\79\93\25\26\235")]=v7("\210\224\174\254\246\234\176\239\166\209\173\187\214\233\163\226\227\247","\155\134\133\194"),[v7("\228\72\112\114\61\204\89","\72\160\45\22\19")]=false});v47:OnChanged(function(v165) local v166=1613 -(463 + 1150) ;local v167;while true do if (v166==(0 -0)) then v167=24 -(17 + 7) ;while true do if (v167==(892 -(554 + 338))) then _G.TeleportPly=v165;if (v165==false) then local v1002=0;while true do if (v1002==(3 -2)) then toTarget(game:GetService(v7("\182\176\19\193\46\249\27","\104\230\220\114\184\75\139")).LocalPlayer.Character.HumanoidRootPart.CFrame);wait();break;end if (v1002==(0 -0)) then wait();AutoHaki();v1002=1012 -(566 + 445) ;end end end break;end end break;end end end);v13.ToggleTeleport:SetValue(false);spawn(function() while wait() do if _G.TeleportPly then pcall(function() if game.Players:FindFirstChild(_G.SelectPly) then toTarget(game.Players[_G.SelectPly].Character.HumanoidRootPart.CFrame);end end);end end end);local v48=v12.Player:AddToggle(v7("\185\89\36\11\67\136\103\54\13\65\190\87\55","\47\237\54\67\108"),{[v7("\39\75\84\11\0","\148\115\34\32\103\101")]=v7("\150\190\120\197\96\164\186\120\134\68\169\175\100\195\102","\20\197\206\29\166"),[v7("\109\46\14\28\199\34\240\77\64\36\19","\57\41\75\125\127\181\75\128")]=v7("\51\245\68\24\208\72\20\224\1\43\200\72\25\224\83","\41\96\133\33\123\164"),[v7("\48\55\78\94\232\174\249","\19\116\82\40\63\157\194\141")]=false});v48:OnChanged(function(v168) local v169=0 + 0 ;local v170;local v171;local v172;while true do if (v169==(0 -0)) then v170=0;v171=nil;v169=1 + 0 ;end if (v169==(2 -1)) then v172=nil;while true do if (v170==0) then local v778=1689 -(400 + 1289) ;while true do if (1==v778) then v170=1;break;end if (v778==(0 + 0)) then SpectatePlys=v168;v171=game:GetService(v7("\203\0\5\229\254\30\23","\156\155\108\100")).LocalPlayer.Character.Humanoid;v778=1;end end end if (v170==1) then v172=game:GetService(v7("\53\77\19\103\0\83\1","\30\101\33\114")):FindFirstChild(_G.SelectPly);repeat local v839=0;while true do if (v839==0) then wait(0.1 -0 );game:GetService(v7("\134\239\215\23\57\161\225\198\25","\74\209\128\165\124")).Camera.CameraSubject=game:GetService(v7("\120\54\209\91\77\40\195","\34\40\90\176")):FindFirstChild(_G.SelectPly).Character.Humanoid;break;end end until SpectatePlys==false  v170=1 + 1 ;end if (v170==(5 -3)) then game:GetService(v7("\128\247\68\169\26\37\182\251\83","\85\215\152\54\194\105")).Camera.CameraSubject=game:GetService(v7("\199\229\52\210\21\162\254","\141\151\137\85\171\112\208")).LocalPlayer.Character.Humanoid;break;end end break;end end end);v13.ToggleQuanSat:SetValue(false);local v49=v12.Player:AddToggle(v7("\120\52\125\170\64\62\92\172\95\47\91\185\88\58\121\166","\205\44\91\26"),{[v7("\200\64\30\132\229","\115\156\41\106\232\128\188\195")]=v7("\198\27\162\226\61\145\131\88\241\22\168\234\118\225\174\77\252\18\185","\44\133\119\203\129\86\177\194"),[v7("\230\255\242\170\46\203\234\245\160\51\204","\92\162\154\129\201")]=v7("\118\115\170\1\58\196\250\150\65\126\160\9\113\180\215\131\76\122\177","\226\53\31\195\98\81\228\187"),[v7("\98\195\216\92\192\74\210","\181\38\166\190\61")]=false});v49:OnChanged(function(v173) _G.FastAttackFaiFao=v173;end);v13.ToggleFastAttack:SetValue(false);local v50=v12.Player:AddSlider(v7("\201\143\255\53\255\145\210\52\246\130\239\16\238\151\247\50\241\179\250\48\227\134\228","\81\154\227\150"),{[v7("\159\164\169\229\3","\20\203\205\221\137\102")]=v7("\169\0\50\188\148\69\24\188\158\17\126\245\158\0\61\244","\221\237\101\94"),[v7("\21\19\177\19\149\25\212\181\56\25\172","\193\81\118\194\112\231\112\164")]=v7("\115\67\6\217\78\6\44\217\68\82\74\144\68\67\9\145","\184\55\38\106"),[v7("\208\116\124\121\208\181\149","\225\148\17\26\24\165\217")]=0.1 -0 ,[v7("\107\60\94","\193\38\85\48\73")]=611 -(445 + 166) ,[v7("\90\221\160","\70\23\188\216\102\52\211\124")]=1384 -(712 + 667) ,[v7("\157\207\247\177\48\35\9\168","\103\207\160\130\223\84\74")]=1,[v7("\193\184\30\24\185\131\212\233","\183\130\217\114\116\219\226")]=function(v174) _G.DelayAttackPlayer=v174;end});v50:OnChanged(function(v175) _G.DelayAttackPlayer=v175;end);v50:SetValue(1333.1 -(31 + 1302) );spawn(function() while wait() do pcall(function() if _G.FastAttackFaiFao then repeat wait(_G.DelayAttackPlayer);AttackNoCoolDown();until  not _G.FastAttackFaiFao end end);end end);local v51=require(game.ReplicatedStorage.Util.CameraShaker);v51:Stop();function getAllBladeHitsPlayers(v176) local v177=660 -(500 + 160) ;local v178;local v179;local v180;while true do if (v177==(0 -0)) then v178={};v179=game.Players.LocalPlayer;v177=2 -1 ;end if (v177==(1 + 0)) then v180=game:GetService(v7("\66\29\15\52\212\101\19\30\58","\167\21\114\125\95")).Characters:GetChildren();for v638=1, #v180 do local v639=v180[v638];local v640=v639:FindFirstChildOfClass(v7("\230\1\0\79\132\63\199\16","\80\174\116\109\46\234"));if ((v639.Name~=game.Players.LocalPlayer.Name) and v640 and v640.RootPart and (v640.Health>0) and (v179:DistanceFromCharacter(v640.RootPart.Position)<(v176 + 1 + 4))) then table.insert(v178,v640.RootPart);end end v177=4 -2 ;end if (v177==2) then return v178;end end end function getAllBladeHits(v181) local v182={};local v183=game.Players.LocalPlayer;local v184=game:GetService(v7("\18\215\6\167\221\53\217\23\169","\174\69\184\116\204")).Enemies:GetChildren();for v440=1 + 0 , #v184 do local v441=0 + 0 ;local v442;local v443;while true do if (v441==(1 -0)) then if (v443 and v443.RootPart and (v443.Health>(1038 -(569 + 469))) and (v183:DistanceFromCharacter(v443.RootPart.Position)<(v181 + (19 -14)))) then table.insert(v182,v443.RootPart);end break;end if ((0 -0)==v441) then v442=v184[v440];v443=v442:FindFirstChildOfClass(v7("\45\70\138\120\233\31\80\1","\57\101\51\231\25\135\112"));v441=1;end end end return v182;end local v52=v12.Player:AddSection(v7("\30\232\210\75\166\232","\156\93\135\191\41\199"));local v53=v12.Player:AddSlider(v7("\124\28\133\2\189\222\92\24\131\17\158\195\89","\172\47\112\236\102\216"),{[v7("\73\232\66\33\3","\224\29\129\54\77\102")]=v7("\98\133\236\41\17\170\249\58","\76\49\236\150"),[v7("\161\225\104\11\202\140\244\111\1\215\139","\184\229\132\27\104")]="Cỡ Fov",[v7("\154\196\6\187\233\121\70","\220\222\161\96\218\156\21\50")]=100,[v7("\107\62\27","\17\38\87\117\118\174\152")]=0 -0 ,[v7("\59\176\49","\37\118\209\73\26\131")]=500,[v7("\219\86\177\112\88\224\87\163","\60\137\57\196\30")]=1,[v7("\96\121\116\20\133\89\64\115","\56\35\24\24\120\231")]=function(v185) _G.Select_Size_Fov=v185;end});v53:OnChanged(function(v186) _G.Select_Size_Fov=v186;end);v53:SetValue(100);local v54=v12.Player:AddToggle(v7("\100\188\87\76\207\115\102\231\95\164\118\68\213","\143\48\211\48\43\163\22\53"),{[v7("\123\251\68\238\10","\134\47\146\48\130\111\147\133")]=v7("\57\58\91\22\82\121\190\28","\209\106\82\52\97\114\63"),[v7("\131\118\60\77\181\122\63\90\174\124\33","\46\199\19\79")]="Show Fov(Hiện Fov)",[v7("\240\206\183\131\229\128\192","\236\180\171\209\226\144")]=false});v54:OnChanged(function(v187) _G.Show_Fov=v187;end);v13.ToggleShowFov:SetValue(false);local v55=v12.Player:AddToggle(v7("\49\18\94\4\127\124\111\12\16\123\12\103\74\69\12\17\85","\46\101\125\57\99\19\25"),{[v7("\116\223\9\236\185","\220\32\182\125\128")]=v7("\204\237\31\210\180\204\241\6\223\251\249\184\56\214\253\225\244","\148\141\152\107\189"),[v7("\83\225\78\81\245\183\103\240\84\93\233","\222\23\132\61\50\135")]="Auto Aimbot Skill(Tự Động ngắm Skill)",[v7("\136\23\248\80\185\30\234","\49\204\114\158")]=false});v55:OnChanged(function(v188) _G.Aimbot_Skill_Fov=v188;end);v13.ToggleAimBotSkill:SetValue(false);local v56=game:GetService(v7("\145\231\29\162\77\96\178","\18\193\139\124\219\40")).LocalPlayer;local v57=v56:GetMouse();spawn(function() while wait() do if _G.Aimbot_Skill_Fov then pcall(function() local v642,v643=math.huge;for v719,v720 in pairs(game:GetService(v7("\57\128\84\103\69\241\46","\93\105\236\53\30\32\131")):GetChildren()) do local v721=v720.Character:FindFirstChild(v7("\47\67\79\23\90\95\73\3\100\77\25\64\96\65\21\66","\32\103\54\34\118\52\48"));local v722,v723=game.Workspace.CurrentCamera.WorldToScreenPoint(game.Workspace.CurrentCamera,v721.Position);local v724,v725=Vector2.new(v57.X,v57.Y),Vector2.new(v722.X,v722.Y);local v726=(v725-v724).Magnitude;if ((v726<v642) and (v726<=_G.Select_Size_Fov) and (v720.Name~=game.Players.LocalPlayer.Name)) then v642=v726;_G.Aim_Players=v720;end end end);end end end);spawn(function() local v189=getrawmetatable(game);local v190=v189.__namecall;setreadonly(v189,false);v189.__namecall=newcclosure(function(...) local v444=getnamecallmethod();local v445={...};if (tostring(v444)==v7("\136\57\101\175\132\176\84\184\53\101","\38\206\80\23\202\215\213")) then if (tostring(v445[1])==v7("\61\41\23\194\13\10\9\12\200\23\27","\121\111\76\122\173")) then if ((tostring(v445[491 -(36 + 453) ])~=v7("\212\242\239\21","\40\160\128\154\112\23\224")) and (tostring(v445[2])~=v7("\74\253\212\106\221","\117\44\156\184\25\184\166\96"))) then if _G.Aimbot_Skill_Fov then v445[5 -3 ]=_G.Aim_Players.Character.HumanoidRootPart.Position;return v190(unpack(v445));end end end end return v190(...);end);end);local v58=Drawing.new(v7("\147\120\6\53\188\116","\86\208\17\116"));v58.Color=Color3.fromRGB(0 + 0 ,1464 -(627 + 593) ,0 + 0 );v58.Thickness=1 + 0 ;v58.Radius=1166 -916 ;v58.NumSides=2422 -(492 + 1470) ;v58.Filled=false;v58.Transparency=867 -(440 + 426) ;game:GetService(v7("\115\151\29\210\252\216\237\72\129\22","\155\33\226\115\129\153\170")).Stepped:Connect(function() v58.Radius=_G.Select_Size_Fov;v58.Thickness=540 -(218 + 321) ;v58.NumSides=1467 -(831 + 176) ;v58.Position=game:GetService(v7("\77\108\42\61\202\254\178\109\107\28\42\241\230\171\123\122","\194\24\31\79\79\131\144")):GetMouseLocation();if _G.Show_Fov then v58.Visible=true;else v58.Visible=false;end end);local v65=v12.Player:AddSection(v7("\100\164\55\10","\178\41\205\68\105\52\104\33"));local v66=v12.Player:AddToggle(v7("\254\71\32\132\244\206\23\66\233\68\46\147","\45\170\40\71\227\152\171\89"),{[v7("\59\204\158\239\51","\21\111\165\234\131\86")]=v7("\25\252\136\133\59\250\216","\198\87\147\168"),[v7("\118\219\40\242\197\88\8\70\215\52\255","\120\50\190\91\145\183\49")]="No Clip(Xuyên Tường)",[v7("\51\195\183\242\55\27\210","\66\119\166\209\147")]=false});v66:OnChanged(function(v196) _G.LOf=v196;end);v13.ToggleNoClip:SetValue(false);spawn(function() pcall(function() game:GetService(v7("\195\16\163\61\184\227\19\164\13\184","\221\145\101\205\110")).Stepped:Connect(function() if _G.LOf then for v727,v728 in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do if v728:IsA(v7("\129\31\66\81\179\162\12\69","\227\195\126\49\52")) then v728.CanCollide=false;end end end end);end);end);local v67=v12.Player:AddToggle(v7("\210\112\247\173\174\3\196\231\115\251\165\172\49\242\242\122\226","\147\134\31\144\202\194\102"),{[v7("\220\49\174\207\237","\163\136\88\218")]=v7("\222\72\36\231\239\230\71\104\219\174\253\76\58","\207\137\41\72\140"),[v7("\35\85\20\241\2\17\178\19\89\8\252","\194\103\48\103\146\112\120")]=v7("\149\194\205\61\226\204\207\118\149\194\213\51\176","\86\194\163\161"),[v7("\141\81\255\81\213\246\66","\54\201\52\153\48\160\154")]=true});v67:OnChanged(function(v197) _G.WalkonWater=v197;end);v13.ToggleWalkonWater:SetValue(true);spawn(function() while task.wait() do pcall(function() if _G.WalkonWater then game:GetService(v7("\43\194\23\35\10\11\236\25\25","\122\124\173\101\72\121\123\141")).Map[v7("\220\190\28\5\44\48\79\186\238\242\56\12\63\28\75","\201\139\223\104\96\94\114\46")].Size=Vector3.new(2736 -(1005 + 731) ,112,2504 -1504 );else game:GetService(v7("\53\242\82\57\99\95\3\254\69","\47\98\157\32\82\16")).Map[v7("\228\231\223\187\149\215\129\218\214\171\251\178\134\251\133","\169\179\134\171\222\231\149\224")].Size=Vector3.new(1108 -(49 + 59) ,2029 -(759 + 1190) ,1000);end end);end end);local v68=v12.Player:AddToggle(v7("\141\31\117\61\137\142\198\40\188\21\118\8\144\133","\88\217\112\18\90\229\235\149"),{[v7("\124\217\48\168\31","\230\40\176\68\196\122")]=v7("\246\245\41\99\58\73\31\193\228","\122\164\128\71\67\105\57"),[v7("\200\209\145\179\164\185\14\248\221\141\190","\126\140\180\226\208\214\208")]=v7("\209\109\29\50\127\64\93\136\231","\237\131\24\115\18\44\48\56"),[v7("\213\63\176\85\98\253\46","\23\145\90\214\52")]=true});v68:OnChanged(function(v198) local v199=0;while true do if (v199==(0 + 0)) then InfAbility=v198;if (v198==false) then game:GetService(v7("\75\133\18\43\64\175\104","\221\27\233\115\82\37")).LocalPlayer.Character.HumanoidRootPart:FindFirstChild(v7("\157\215\216\237\210\53\231","\158\220\176\177\129\187\65")):Destroy();end break;end end end);v13.ToggleSpeedRun:SetValue(true);spawn(function() while wait() do if InfAbility then InfAb();end end end);function InfAb() if InfAbility then if  not game:GetService(v7("\196\73\83\202\241\87\65","\179\148\37\50")).LocalPlayer.Character.HumanoidRootPart:FindFirstChild(v7("\250\112\196\50\234\44\215","\174\187\23\173\94\131\88")) then local v646=0;local v647;local v648;while true do if (v646==(938 -(78 + 858))) then v647.LockedToPart=true;v647.Name=v7("\204\170\61\190\64\197\54","\114\141\205\84\210\41\177\79");v647.Rate=500;v648={NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1 + 0 ,4)};v646=1224 -(61 + 1160) ;end if (v646==(1986 -(131 + 1851))) then local v844=0 + 0 ;while true do if (v844==(1 + 0)) then v647.VelocityInheritance=508 -(386 + 122) ;v647.ZOffset=2;v844=3 -1 ;end if (0==v844) then v647.SpreadAngle=Vector2.new(0 + 0 ,0 -0 ,0,0 + 0 );v647.Texture="";v844=1;end if (v844==(1231 -(1175 + 54))) then v646=1 + 4 ;break;end end end if (v646==(0 -0)) then local v845=0 -0 ;while true do if (v845==(2 -0)) then v646=1;break;end if (0==v845) then v647=Instance.new(v7("\150\173\183\46\78\167\187\94\131\161\172\46\83\161\165","\59\198\204\197\90\39\196\215"));v647.Acceleration=Vector3.new(0,0 + 0 ,0 + 0 );v845=1215 -(39 + 1175) ;end if (v845==1) then v647.Archivable=true;v647.Drag=7 + 13 ;v845=6 -4 ;end end end if (v646==(14 -9)) then v647.Transparency=NumberSequence.new(0);v647.Color=ColorSequence.new(Color3.fromRGB(0 -0 ,0,0),Color3.fromRGB(0,0,0 + 0 ));v647.Parent=game:GetService(v7("\180\49\51\147\33\193\16","\99\228\93\82\234\68\179")).LocalPlayer.Character.HumanoidRootPart;break;end if (v646==3) then v647.Size=NumberSequence.new(v648);v647.RotSpeed=NumberRange.new(14093 -4094 ,99999);v647.Rotation=NumberRange.new(0 -0 ,0);v647.Speed=NumberRange.new(120 -90 ,30);v646=409 -(23 + 382) ;end if (v646==1) then v647.EmissionDirection=Enum.NormalId.Top;v647.Enabled=true;v647.Lifetime=NumberRange.new(25 -(23 + 2) ,610 -(499 + 111) );v647.LightInfluence=0 + 0 ;v646=5 -3 ;end end end elseif game:GetService(v7("\97\127\45\92\216\198\66","\180\49\19\76\37\189")).LocalPlayer.Character.HumanoidRootPart:FindFirstChild(v7("\50\65\184\181\94\215\191","\198\115\38\209\217\55\163")) then game:GetService(v7("\157\93\231\42\14\92\190","\46\205\49\134\83\107")).LocalPlayer.Character.HumanoidRootPart:FindFirstChild(v7("\18\9\218\92\8\247\174","\162\83\110\179\48\97\131\215")):Destroy();end end local v69=v12.Player:AddToggle(v7("\118\185\7\196\191\242\24\246\67\180\12\198\131\225\45","\152\34\214\96\163\211\151\93"),{[v7("\40\6\103\162\6","\35\124\111\19\206\99\112")]=v7("\127\7\188\195\80\83\231\95\16\164\201\80\70\223\110","\137\62\114\200\172\112\22"),[v7("\234\169\44\255\26\58\249\9\199\163\49","\125\174\204\95\156\104\83\137")]=v7("\134\59\38\218\104\130\32\51\215\36\162\110\2\227\24","\72\199\78\82\181"),[v7("\134\208\89\188\51\174\193","\70\194\181\63\221")]=false});v69:OnChanged(function(v200) _G.EnabledPvP=v200;end);v13.ToggleEnablePvp:SetValue(false);spawn(function() pcall(function() while wait() do if _G.EnabledPvP then if (game:GetService(v7("\35\118\50\8\160\236\0","\158\115\26\83\113\197")).LocalPlayer.PlayerGui.Main.PvpDisabled.Visible==true) then game:GetService(v7("\67\188\208\188\28\114\184\212\181\17\66\173\207\162\20\118\188","\117\17\217\160\208")).Remotes.CommF_:InvokeServer(v7("\112\214\138\83\196\80\101\206\155","\53\53\184\235\49\168"));end end end end);end);local v52=v12.Teleport:AddSection(v7("\227\240\229\177\199\250\251\160\151\194\230\166\219\241","\212\183\149\137"));v12.Teleport:AddButton({[v7("\150\138\72\6\167","\106\194\227\60")]=v7("\6\79\13\151\52\6\44\129\33","\228\64\38\127"),[v7("\133\121\72\243\158\77\55\62\168\115\85","\74\193\28\59\144\236\36\71")]=v7("\63\174\238\3\6","\55\108\203\143\35"),[v7("\215\228\223\238\182\165\247\238","\196\148\133\179\130\212")]=function() game:GetService(v7("\99\115\99\50\33\138\130\10\84\114\64\42\39\155\130\25\84","\126\49\22\19\94\72\233\227")).Remotes.CommF_:InvokeServer(v7("\176\37\185\146\186\213\169\54\177\138","\185\228\87\216\228\223"));end});v12.Teleport:AddButton({[v7("\110\169\11\36\7","\39\58\192\127\72\98\179\141")]=v7("\253\90\3\199\190\202\31\51\205\177","\208\174\63\96\168"),[v7("\162\8\33\186\152\143\29\38\176\133\136","\234\230\109\82\217")]=v7("\205\172\45\173\172","\141\158\201\76"),[v7("\227\181\36\84\215\193\183\35","\181\160\212\72\56")]=function() game:GetService(v7("\204\8\248\220\13\176\255\25\237\212\55\167\241\31\233\215\1","\211\158\109\136\176\100")).Remotes.CommF_:InvokeServer(v7("\63\5\222\10\237\64\47\5\218\15\251\94\4\4\222","\44\107\119\191\124\136"));end});v12.Teleport:AddButton({[v7("\225\1\147\51\30","\146\181\104\231\95\123\162")]=v7("\220\226\140\204\236\170\182\219\233","\190\136\138\229"),[v7("\223\71\213\132\188\242\82\210\142\161\245","\206\155\34\166\231")]=v7("\10\213\43\230\121","\58\89\176\74\198\74\145"),[v7("\62\205\215\93\51\30\160\93","\54\125\172\187\49\81\127\195")]=function() game:GetService(v7("\136\178\219\188\164\173\178\60\191\179\248\164\162\188\178\47\191","\72\218\215\171\208\205\206\211")).Remotes.CommF_:InvokeServer(v7("\101\192\31\47\219\169\152\215\68","\184\49\178\126\89\190\197\194"));end});local v65=v12.Teleport:AddSection(v7("\132\31\227\200\1\191\8\251\141\56\163\22\238\195\21","\113\208\122\143\173"));if First_Sea then IslandList={v7("\44\239\76\222\37\205\205\23","\161\123\134\34\186\104\164"),v7("\214\169\203\118\132\50","\27\155\200\185\31\234\87"),v7("\40\160\27\20\73\170\69\157\16\7\75","\207\101\201\127\112\37"),v7("\150\145\51\134\114\133","\52\220\228\93\225\30\224"),v7("\109\66\107\4\35\195\29\125\112\9\59\199\90\78","\166\61\43\25\101\87"),v7("\214\65\31\195\162\10","\40\146\36\108\166\208\126"),v7("\150\123\137\194\229\92\149\217\164\123\130","\181\197\21\230"),v7("\249\92\41\77\218\88\29\75\198\89","\36\180\61\91"),v7("\33\92\168\116\195\177\7\70\169","\194\98\51\196\27\176"),v7("\116\90\245\193\169\147\68\70\95\232\193\209","\40\39\49\140\225\224\224"),v7("\31\45\19\3\5\53\6\66\34\34\74\17","\35\76\70\106"),v7("\144\200\174\76\138\208\187\13\173\199\247\95","\108\195\163\215"),v7("\139\84\137\29\233\181","\134\219\38\224\110"),v7("\243\26\247\143\249\114\209\132\210\23\241\133\253","\237\190\123\144\226\152\82\135"),v7("\216\215\57\16\196\173\238\60\1\211\255\153\20\6\218\236\215\57","\182\141\185\93\117"),v7("\101\172\174\168\10\160\49\188\3\128\178\178\7","\210\35\195\219\198\126\193\88"),v7("\254\34\247\131\198\106\196\130\194\39","\237\173\74\150"),v7("\192\89\197\31\197\176\225\87\201\91","\195\141\54\167\63\140")};elseif Second_Sea then IslandList={v7("\52\85\28\85\35\92\31\16","\117\96\61\121"),v7("\94\56\165\105\34\81\57\220\119\62","\172\24\74\204\26\86\113\106"),v7("\20\117\228\25\28\52\186\53\117","\200\80\20\150\114\60\117"),v7("\3\50\203\121\248\43\57\197\52\220\36\48\217\125\254\43","\145\69\94\170\20"),v7("\33\77\79\186\247\87\0\78\14\133\241\86\10","\57\103\33\46\215\158"),v7("\209\3\169\165\214\145\204\30\162\165","\177\150\113\204\192\184"),v7("\164\7\165\36\141\20\191","\80\226\102\198"),v7("\171\34\93\160\155\62\68\166\133","\207\232\77\49"),v7("\58\195\69\216\9\201\8\243\19\192\73\212\4","\186\96\172\40"),v7("\127\57\200\89\114\27\138\92\110\234\22\84\27\145\74\39\201","\229\43\78\167\121\33\117"),v7("\216\204\45\76\135\217\217\66\233\203\39","\56\136\185\67\39\167\145\184"),v7("\36\105\238\191\224\25\81\52\116\245\188","\113\103\28\156\204\133\125"),v7("\144\38\116\177\154\36\98\229\181\32","\145\217\69\17"),v7("\166\59\144\249\233\148\32\135\240\166\169\39\142\255\232\132","\134\224\84\226\158"),v7("\125\61\153\167\254\8\7\153\164\239\70\42","\142\40\78\234\200"),v7("\0\25\245\184\180\221\61\71\109\57\232\189\245\224\50","\62\77\112\155\209\148\142\86")};elseif Third_Sea then IslandList={v7("\25\125\94\175\61\115\94","\220\84\28\48"),v7("\238\235\164\231\158\208\185\228\208","\147\190\132\214"),v7("\162\183\116\33\145\229\69\50\128\160","\64\229\197\17"),v7("\113\121\57\77\235\86\74\147\92\56\30\81\226\19\57\185\83","\220\50\24\74\57\135\51\106"),v7("\211\33\115\236\204\245\49","\159\158\72\29\133"),v7("\236\209\34\229\250\104\28\215\196\39\249\255","\85\164\168\70\151\155\72"),v7("\247\209\253\7\176\254\122\226\145\233\231\20\176\251\113","\133\177\189\146\102\196\151\20"),v7("\222\204\218\229\63\243\201\143\200\42\229\217\195\238","\75\150\173\175\139"),v7("\216\218\178\233\111\227\220\182\164\12\216\202\187\168\66\245","\44\145\185\215\201"),v7("\10\213\140\89\187\13\122\249\158\91\175\23\62","\121\90\176\237\55\206"),v7("\205\6\80\193\127\4\253\11\90\202\59","\77\142\103\59\164\95"),v7("\42\141\217\252\246\166\32\145\214\242\249\226","\134\105\226\186\147\151"),v7("\169\21\168\137\206\127\15\153\24\167\131\211","\70\234\116\198\237\183\95"),v7("\152\216\7\59\60\236\185\197\28\61\111\215","\163\204\177\108\82\28")};end local v70=v12.Teleport:AddDropdown(v7("\215\76\140\109\121\252\73\141\84\110\255\95\141\121","\29\147\62\227\29"),{[v7("\133\3\108\51\127","\198\209\106\24\95\26\188")]=v7("\169\33\46\161\38\49\235\131","\156\237\83\65\209\66\94"),[v7("\124\66\73\211\68\81\87\78\217\89\86","\54\56\39\58\176")]="Chọn Đảo",[v7("\46\38\112\0\74\47","\137\120\71\28\117\47\92\95")]=IslandList,[v7("\196\166\1\92\115","\158\137\211\109\40\26")]=false,[v7("\233\244\174\118\185\1\233","\157\173\145\200\23\204\109")]=1 + 0 });v70:SetValue(v7("\233\54\145","\111\199\24\191"));v70:OnChanged(function(v201) _G.SelectIsland=v201;end);v12.Teleport:AddButton({[v7("\152\185\97\183\50","\21\204\208\21\219\87")]=v7("\7\229\249\1\34","\190\83\146\156\100\76\113\163"),[v7("\134\32\50\5\251\14\155\182\44\46\8","\235\194\69\65\102\137\103")]="Tele Đảo",[v7("\145\203\118\112\249\250\182\185","\213\210\170\26\28\155\155")]=function() if (_G.SelectIsland==v7("\183\236\209\239\173\236\211\231","\139\224\133\191")) then toTarget(CFrame.new(979.79895019531,32.516613006591996 -16 ,1654.0466308594 -(149 + 76) ));elseif (_G.SelectIsland==v7("\205\223\85\132\55\79","\206\128\190\39\237\89\42")) then toTarget(CFrame.new( -(2718.4296875 -(91 + 61)),3.8556680679320996 + 3 ,93.25610351559999 + 1952 ));elseif (_G.SelectIsland==v7("\245\2\220\231\29\113\224\39\215\28\214","\115\184\107\184\131\113\20\192")) then toTarget(CFrame.new( -(56.33081054688 + 634),15.09425163269,2700.2380371094 -(67 + 1051) ));elseif (_G.SelectIsland==v7("\48\1\39\74\117\112","\21\122\116\73\45\25")) then toTarget(CFrame.new( -1612.7957763672,58.852081298828 -22 ,149.12843322754));elseif (_G.SelectIsland==v7("\225\207\151\228\179\60\246\231\207\137\233\166\62\179","\214\177\166\229\133\199\89")) then toTarget(CFrame.new( -(1296.3093261719 -(42 + 73)),3.7514905929565003 + 1 ,3803.5456542969));elseif (_G.SelectIsland==v7("\168\72\33\17\91\19","\210\236\45\82\116\41\103\63")) then toTarget(CFrame.new(2787.15789794922 -1843 ,1.9197292327880007 + 19 ,5605.3002929688 -(155 + 1077) ));elseif (_G.SelectIsland==v7("\33\71\32\39\130\59\90\35\49\204\22","\162\114\41\79\80")) then toTarget(CFrame.new(1347.8067626953,1957.66806030273 -(1081 + 772) , -(3112.7370605469 -1793)));elseif (_G.SelectIsland==v7("\219\53\153\178\117\92\208\59\153\191","\57\150\84\235\219\27")) then toTarget(CFrame.new( -(8999.8212890625 -4085),50.963626861572,15951.027832031301 -11670 ));elseif (_G.SelectIsland==v7("\243\25\95\80\30\195\19\70\82","\109\176\118\51\63")) then toTarget(CFrame.new( -(4014.6203613281 -2587),7.2881078720093, -2792.7722167969));elseif (_G.SelectIsland==v7("\96\6\227\78\232\64\1\251\0\197\19\92","\161\51\109\154\110")) then toTarget(CFrame.new( -(5084.1025390625 -(86 + 129)),733.46051025391, -(6583.0180664063 -3916)));elseif (_G.SelectIsland==v7("\215\56\201\124\61\160\232\50\222\56\84\225","\211\132\83\176\92\116")) then game:GetService(v7("\101\241\217\177\50\245\43\67\241\205\142\47\249\56\86\243\204","\74\55\148\169\221\91\150")).Remotes.CommF_:InvokeServer(v7("\44\37\184\9\59\51\189\57\48\52\187\29\48\35\172","\124\94\64\201"),Vector3.new( -(3296.8227500000003 + 1311),3670.54248 -2798 , -1667.55688));elseif (_G.SelectIsland==v7("\212\228\19\234\25\189\235\238\4\174\112\253","\206\135\143\106\202\80")) then game:GetService(v7("\222\76\53\169\192\221\11\94\233\77\22\177\198\204\11\77\233","\42\140\41\69\197\169\190\106")).Remotes.CommF_:InvokeServer(v7("\166\131\246\166\177\149\243\150\186\146\245\178\186\133\226","\211\212\230\135"),Vector3.new( -(28973.6176757813 -21079),1109.1416015625 + 4438 , -380.29119873047));elseif (_G.SelectIsland==v7("\98\180\126\245\209\92","\190\50\198\23\134")) then toTarget(CFrame.new(5437.330078125 -(273 + 289) ,1.6519818305968998 + 4 ,734.85021972656));elseif (_G.SelectIsland==v7("\110\85\164\81\223\49\201\254\79\88\162\91\219","\151\35\52\195\60\190\17\159")) then toTarget(CFrame.new( -(15150.716308593801 -9903),1314.883934020996 -(1138 + 164) ,8504.96875));elseif (_G.SelectIsland==v7("\131\186\127\236\144\246\131\122\253\135\164\244\82\250\142\183\186\127","\226\214\212\27\137")) then game:GetService(v7("\76\58\161\40\226\207\127\43\180\32\216\216\113\45\176\35\238","\172\30\95\209\68\139")).Remotes.CommF_:InvokeServer(v7("\228\29\57\64\243\11\60\112\248\12\58\84\248\27\45","\53\150\120\72"),Vector3.new(61163.8515625,11.6796875,4327.7841796875 -2508 ));elseif (_G.SelectIsland==v7("\89\11\195\13\89\126\13\216\67\110\118\16\207","\45\31\100\182\99")) then toTarget(CFrame.new(6579.1284179688 -(336 + 1116) ,59.501365661621,4105.4458007813));elseif (_G.SelectIsland==v7("\2\127\9\58\19\113\69\7\59\21","\120\81\23\104\84")) then toTarget(CFrame.new( -(6078.16553 -4636),29.8788261 + 0 , -28.3547478));elseif (_G.SelectIsland==v7("\229\64\127\55\225\92\113\118\198\75","\23\168\47\29")) then toTarget(CFrame.new( -(4800.20068 -(1028 + 922)),9.39224768 -2 ,5354.99268));elseif (_G.SelectIsland==v7("\68\179\142\202\83\186\141\143","\234\16\219\235")) then local v2053=56 -(34 + 22) ;while true do if ((1043 -(517 + 525))==v2053) then Tween2(CFrame.new( -380.47927856445,77.220390319824,255.82550048828));break;end if (v2053==(0 + 0)) then game:GetService(v7("\118\19\68\62\34\9\67\80\19\80\1\63\5\80\69\17\81","\34\36\118\52\82\75\106")).Remotes.CommF_:InvokeServer(v7("\40\132\10\167\234\150\72\206\52\149\9\179\225\134\89","\139\90\225\123\210\143\229\60"),Vector3.new( -(97.93707275390625 + 184),197.130615234375 + 109 ,96.280029296875 + 513 ));wait(0.1);v2053=1;end end elseif (_G.SelectIsland==v7("\214\58\19\32\204\176\195\56\21\39","\144\144\72\122\83\184")) then toTarget(CFrame.new( -11.311455726624,957.276733398438 -(13 + 915) ,2771.5224609375));elseif (_G.SelectIsland==v7("\206\13\92\77\233\203\30\75\71","\201\138\108\46\38")) then toTarget(CFrame.new(5334.0302734375 -(323 + 1231) ,12.652164459228999 + 10 , -(4386.5859375 -(442 + 446))));elseif (_G.SelectIsland==v7("\29\57\62\135\57\33\16\52\117\18\139\62\60\30\52\59","\119\91\85\95\234\80\79")) then game:GetService(v7("\111\177\90\166\120\94\181\94\175\117\110\160\69\184\112\90\177","\17\61\212\42\202")).Remotes.CommF_:InvokeServer(v7("\251\166\252\83\181\4\25\97\231\183\255\71\190\20\8","\36\137\195\141\38\208\119\109"),Vector3.new( -(1500.9370727539062 -(1082 + 137)),1447.130615234375 -1141 ,609.280029296875));elseif (_G.SelectIsland==v7("\23\208\59\66\218\63\219\53\15\225\62\211\55","\179\81\188\90\47")) then game:GetService(v7("\159\41\180\179\223\174\45\176\186\210\158\56\171\173\215\170\41","\182\205\76\196\223")).Remotes.CommF_:InvokeServer(v7("\68\231\227\208\191\39\251\211\88\246\224\196\180\55\234","\150\54\130\146\165\218\84\143"),Vector3.new(858.912109375 + 1426 ,5.152034759521484 + 10 ,308.48291015625 + 597 ));elseif (_G.SelectIsland==v7("\24\5\219\39\15\127\45\209\44\4","\97\95\119\190\66")) then toTarget(CFrame.new( -(3503.5300292969 -(339 + 716)),1219.016105651855 -(67 + 1079) , -3210.6306152344));elseif (_G.SelectIsland==v7("\138\121\39\70\219\190\97","\180\204\24\68\50")) then toTarget(CFrame.new(424.12698364258,1065.16171264648 -(619 + 235) , -(2175.54049682617 -(899 + 849))));elseif (_G.SelectIsland==v7("\211\113\82\127\227\109\75\121\253","\16\144\30\62")) then toTarget(CFrame.new( -(304.6224365234 + 1199),1088.7956237793 -(543 + 326) ,4864.3101806641 -3495 ));elseif (_G.SelectIsland==v7("\142\39\48\245\58\188\6\121\167\36\60\249\55","\48\212\72\93\151\83\217\38")) then toTarget(CFrame.new( -5622.033203125,56.19604492188 + 436 , -781.78552246094));elseif (_G.SelectIsland==v7("\5\159\1\195\96\13\62\159\78\174\92\22\63\156\15\138\93","\99\81\232\110\227\51")) then toTarget(CFrame.new(699.14288330078 + 54 ,1170.23559570313 -762 , -(5777.6147460938 -(256 + 247))));elseif (_G.SelectIsland==v7("\49\170\59\226\250\80\115\159\0\173\49","\229\97\223\85\137\218\24\18")) then toTarget(CFrame.new( -(11651.654296875 -5524),15.951762199402, -5040.2861328125));elseif (_G.SelectIsland==v7("\211\201\181\55\245\216\231\23\248\213\183","\68\144\188\199")) then game:GetService(v7("\33\1\223\214\4\53\245\7\1\203\233\25\57\230\18\3\202","\148\115\100\175\186\109\86")).Remotes.CommF_:InvokeServer(v7("\110\238\217\194\121\248\220\242\114\255\218\214\114\232\205","\183\28\139\168"),Vector3.new(1341.40197753906 -418 ,125.05712890625,33036.875 -(62 + 89) ));elseif (_G.SelectIsland==v7("\59\178\242\110\174\90\169\6\189\242","\218\114\209\151\78\237\59")) then toTarget(CFrame.new(6148.4116210938,291.38687133789 + 3 , -(7052.1166992188 -(267 + 44))));elseif (_G.SelectIsland==v7("\106\185\24\89\67\162\30\91\66\246\35\77\64\183\4\90","\62\44\214\106")) then toTarget(CFrame.new( -(8063.7641601563 -5031),1000.89672851563 -683 , -10075.373046875));elseif (_G.SelectIsland==v7("\19\46\16\223\187\102\20\16\220\170\40\57","\203\70\93\99\176")) then toTarget(CFrame.new(959.8618164063 + 3857 ,1668.4599885940552 -(94 + 1566) ,10779.8195800781 -7916 ));elseif (_G.SelectIsland==v7("\153\213\165\36\244\239\160\52\244\245\184\33\181\210\175","\77\212\188\203")) then Tween2(CFrame.new( -288.74060058594,21413.31640625 + 27913 , -(36689.59375 -(1411 + 30))));elseif (_G.SelectIsland==v7("\126\193\224\190\227\141\109\193\224\186","\173\57\179\133\223\151")) then toTarget(CFrame.new(1195.2736816406 + 1486 ,1682.8092041016, -(23611.9853515625 -16421)));elseif (_G.SelectIsland==v7("\141\84\88\249\64\255\114\248\160\21\127\229\73\186\1\210\175","\183\206\53\43\141\44\154\82")) then game:GetService(v7("\222\0\39\16\61\228\250\248\0\51\47\32\232\233\237\2\50","\155\140\101\87\124\84\135")).Remotes.CommF_:InvokeServer(v7("\212\1\40\26\15\83\210\33\55\27\24\65\200\7\60","\32\166\100\89\111\106"),Vector3.new( -(17022.50927734375 -11947),269.5155029296875 + 45 , -(9012.0224609375 -5862)));elseif (_G.SelectIsland==v7("\216\39\182\76\25\200\94","\46\149\78\216\37\74\163\39")) then Tween2(CFrame.new( -(588.65557861328 -328),45100.8046875 + 4225 , -(70846.5703125 -35593)));elseif (_G.SelectIsland==v7("\126\230\111\219\135\20\40\89\231","\71\46\137\29\175\167\64")) then toTarget(CFrame.new( -(92.7376708984375 + 198),6.729952812194824,1889.5537109375 + 3454 ));elseif (_G.SelectIsland==v7("\21\230\51\21\229\7\39\46\243\54\9\224","\110\93\159\87\103\132\39")) then game:GetService(v7("\97\16\57\46\201\80\20\61\39\196\96\1\38\48\193\84\16","\160\51\117\73\66")).Remotes.CommF_:InvokeServer(v7("\6\48\154\144\169\36\0\16\133\145\190\54\26\54\142","\87\116\85\235\229\204"),Vector3.new(22601.5478515625 -16848 ,338.7880859375 + 272 , -(866.3317260742188 -584)));elseif (_G.SelectIsland==v7("\197\138\27\220\107\52\83\228\198\32\200\109\41\81\230","\61\131\230\116\189\31\93")) then toTarget(CFrame.new( -13274.528320313,531.82073974609, -(15904.22265625 -8325)));elseif (_G.SelectIsland==v7("\131\7\27\233\177\77\23","\121\206\102\117\154\216\34")) then game:GetService(v7("\231\68\70\236\27\68\231\193\68\82\211\6\72\244\212\70\83","\134\181\33\54\128\114\39")).Remotes.CommF_:InvokeServer(v7("\16\201\180\80\169\17\216\128\75\184\16\205\171\70\169","\204\98\172\197\37"),Vector3.new( -(14289.5380859375 -(1530 + 291)),111.00942993164062 + 264 , -(2687.62548828125 + 4867)));elseif (_G.SelectIsland==v7("\231\0\109\47\179\194\213\143\34\121\50\179\203\212","\177\175\97\24\65\199\167")) then toTarget(CFrame.new( -(25315.3720703125 -15800),164.00624084473,5786.0610351562));elseif (_G.SelectIsland==v7("\61\219\251\22\17\108\164\246\25\152\215\69\62\127\175\243","\151\116\184\158\54\82\30\193")) then toTarget(CFrame.new( -902.56817626953,21.93204498291 + 58 , -(54087.84765625 -43099)));elseif (_G.SelectIsland==v7("\21\204\221\40\161\210\190\12\218\208\39\186\194","\158\69\169\188\70\212\166")) then toTarget(CFrame.new( -2062.7475585938,1843.473892211914 -(1539 + 254) , -(11444.568359375 -(12 + 1200))));elseif (_G.SelectIsland==v7("\40\217\253\15\152\34\203\250\11\214\15","\184\107\184\150\106")) then toTarget(CFrame.new( -(2815.7747802734375 -(526 + 405)),19.327526092529297, -(1882.8974609375 + 9784)));elseif (_G.SelectIsland==v7("\225\222\79\202\231\130\248\95\201\231\204\213","\134\162\177\44\165")) then toTarget(CFrame.new(87.94276428222656,73.55451202392578, -12319.46484375));elseif (_G.SelectIsland==v7("\228\41\79\246\222\104\104\225\203\41\79\246","\146\167\72\33")) then toTarget(CFrame.new( -(2648.4241943359375 -(1107 + 527)),149.11068725585938, -14555.962890625));elseif (_G.SelectIsland==v7("\206\5\164\37\226\97\88\238\28\160\63\182","\45\154\108\207\76\194\46")) then toTarget(CFrame.new( -16542.447265625,55.68632888793945,220.41650390625 + 824 ));end end});v12.Teleport:AddButton({[v7("\73\230\30\214\120","\186\29\143\106")]=v7("\154\221\169\7\76\136\61\30\172\199","\123\201\169\198\119\108\220\74"),[v7("\6\140\1\85\81\43\153\6\95\76\44","\35\66\233\114\54")]="Dừng bay",[v7("\80\132\134\251\207\114\134\129","\173\19\229\234\151")]=function() CancelTween();end});local v71=game.ReplicatedStorage:FindFirstChild(v7("\27\47\48\71\61\47\46","\40\73\74\93")).CommF_:InvokeServer(v7("\221\238\234\21\150\226\243\255\237","\151\154\139\158\83\228"));Table_DevilFruitSniper={};ShopDevilSell={};for v202,v203 in next,v71 do table.insert(Table_DevilFruitSniper,v203.Name);if v203.OnSale then table.insert(ShopDevilSell,v203.Name);end end _G.SelectFruit=v7("\211\175\7\201\217\237\174\69\245\221\240\186\9\203\220","\184\159\202\104\185");local v72=v12.Fruit:AddDropdown(v7("\119\27\176\247\174\92\30\177\193\184\70\0\171","\202\51\105\223\135"),{[v7("\156\242\192\184\173","\212\200\155\180")]=v7("\117\247\173\168\213\82\178\135\191\195\79\230","\182\38\146\193\205"),[v7("\43\28\154\161\253\6\9\157\171\224\1","\143\111\121\233\194")]=v7("\223\219\39\212\206\248\158\13\195\216\229\202","\173\140\190\75\177"),[v7("\221\53\36\192\85\0","\133\139\84\72\181\48\115")]=Table_DevilFruitSniper,[v7("\253\85\27\213\128","\55\176\32\119\161\233\211")]=false,[v7("\120\4\18\184\160\80\21","\213\60\97\116\217")]=1711 -(121 + 1589) });v72:SetValue(v7("\201\126\109","\74\231\80\67\23"));v72:OnChanged(function(v204) _G.SelectFruit=v204;end);local v44=v12.Fruit:AddToggle(v7("\55\216\187\85\92\67\127\216\22\222\168","\170\99\183\220\50\48\38\57"),{[v7("\11\27\41\18\58","\126\95\114\93")]=v7("\143\42\107\26\139\45\103\83\185\127\65\84\164\47\119\72","\58\205\95\18"),[v7("\40\24\215\242\181\5\13\208\248\168\2","\199\108\125\164\145")]=v7("\254\61\40\123\163\243\93\36\200\104\2\53\140\241\77\63","\77\188\72\81\91\229\129\40"),[v7("\134\130\87\53\245\127\182","\19\194\231\49\84\128")]=false});v44:OnChanged(function(v205) _G.AutoBuyFruitSniper=v205;end);v13.ToggleFruit:SetValue(false);spawn(function() pcall(function() while wait(0.1 + 0 ) do if _G.AutoBuyFruitSniper then local v649=0;while true do if ((0 -0)==v649) then game:GetService(v7("\106\2\187\177\79\218\67\222\93\3\152\169\73\203\67\205\93","\170\56\103\203\221\38\185\34")).Remotes.CommF_:InvokeServer(v7("\9\188\74\53\78\237\39\173\77","\152\78\217\62\115\60"));game:GetService(v7("\71\182\18\160\191\201\84\97\182\6\159\162\197\71\116\180\7","\53\21\211\98\204\214\170")).Remotes.CommF_:InvokeServer(v7("\9\207\94\5\187\170\42\223\126\7\164\141\43\207\69\18","\203\89\186\44\102\211"),v7("\154\165\129\7\206\169\135\204\32\237\183\151\198\32","\171\197\226\175\84"),false);break;end end end end end);end);local v73=v12.Fruit:AddToggle(v7("\179\89\116\82\223\130\101\103\90\193\130","\179\231\54\19\53"),{[v7("\242\252\163\66\161","\176\166\149\215\46\196\37\193")]=v7("\125\98\173\28\75\54\132\28\91\127\182","\110\46\22\194"),[v7("\169\246\41\255\216\167\157\231\51\243\196","\206\237\147\90\156\170")]=v7("\195\80\37\195\179\75\214\86\63\216\162","\107\144\36\74\177\214"),[v7("\95\201\56\199\103\3\111","\111\27\172\94\166\18")]=false});v73:OnChanged(function(v206) _G.AutoStoreFruit=v206;end);v13.ToggleStore:SetValue(false);spawn(function() while task.wait() do local v446=0;while true do if (v446==0) then if _G.AutoStoreFruit then pcall(function() if _G.AutoStoreFruit then local v1137=0;local v1138;while true do if (v1137==0) then v1138=0;while true do if (v1138==(1600 -(562 + 1036))) then if (game:GetService(v7("\247\22\22\56\219\233\212","\155\167\122\119\65\190")).LocalPlayer.Character:FindFirstChild(v7("\69\182\203\62\150\80\165\208\51\194","\182\22\215\165\90")) or game:GetService(v7("\212\3\57\196\236\30\176","\195\132\111\88\189\137\108")).LocalPlayer.Backpack:FindFirstChild(v7("\216\187\173\72\171\156\177\89\226\174","\44\139\218\195"))) then game:GetService(v7("\16\45\9\27\180\27\222\54\45\29\36\169\23\205\35\47\28","\191\66\72\121\119\221\120")).Remotes.CommF_:InvokeServer(v7("\4\150\168\43\143\164\85\34\139\179","\39\87\226\199\89\234\226"),v7("\194\76\198\236\142\114\197\255\73","\164\145\45\168\136\163\33"),game:GetService(v7("\2\56\13\45\26\94\253","\135\82\84\108\84\127\44\142")).LocalPlayer.Backpack:FindFirstChild(v7("\191\82\19\238\79\240\246\153\90\9","\132\236\51\125\138\111\182")));end if (game:GetService(v7("\252\80\26\7\17\254\4","\25\172\60\123\126\116\140\119")).LocalPlayer.Character:FindFirstChild(v7("\163\221\88\90\11\51\149\201\67\69","\117\231\188\42\49\43")) or game:GetService(v7("\176\89\249\54\133\71\235","\79\224\53\152")).LocalPlayer.Backpack:FindFirstChild(v7("\209\91\17\53\181\124\17\43\252\78","\94\149\58\99"))) then game:GetService(v7("\190\218\93\174\133\220\76\182\137\219\126\182\131\205\76\165\137","\194\236\191\45")).Remotes.CommF_:InvokeServer(v7("\54\179\16\67\0\129\13\68\12\179","\49\101\199\127"),v7("\62\121\185\221\207\255\120\160\17","\210\122\24\203\182\226\187\25"),game:GetService(v7("\215\15\177\198\226\17\163","\191\135\99\208")).LocalPlayer.Backpack:FindFirstChild(v7("\220\43\95\85\184\12\95\75\241\62","\62\152\74\45")));end if (game:GetService(v7("\119\126\73\32\250\255\213","\168\39\18\40\89\159\141\166")).LocalPlayer.Character:FindFirstChild(v7("\130\15\62\236\64\123\131\21\36\246\64","\91\197\103\81\159\52")) or game:GetService(v7("\135\59\174\94\167\165\36","\194\215\87\207\39")).LocalPlayer.Backpack:FindFirstChild(v7("\74\244\237\6\93\238\56\215\233\26\66\255","\139\24\145\155\111\43"))) then game:GetService(v7("\45\176\55\127\173\174\188\11\176\35\64\176\162\175\30\178\34","\221\127\213\71\19\196\205")).Remotes.CommF_:InvokeServer(v7("\255\79\87\62\4\234\40\23\197\79","\98\172\59\56\76\97\172\90"),v7("\246\195\220\26\50\156\236\219\6\53\197","\70\177\171\179\105"),game:GetService(v7("\28\192\70\240\141\246\147","\224\76\172\39\137\232\132")).LocalPlayer.Backpack:FindFirstChild(v7("\32\189\12\163\168\85\96\52\170\15\163\170","\64\114\216\122\202\222\48")));end if (game:GetService(v7("\5\6\17\67\172\39\25","\201\85\106\112\58")).LocalPlayer.Character:FindFirstChild(v7("\140\86\172\202\167\81\169\135\142\77\184\206\188","\167\200\63\205")) or game:GetService(v7("\52\192\15\96\225\205\74","\57\100\172\110\25\132\191")).LocalPlayer.Backpack:FindFirstChild(v7("\16\196\50\187\164\126\141\200\18\223\38\191\191","\232\84\173\83\214\203\16\233"))) then game:GetService(v7("\135\170\26\43\143\182\0\161\170\14\20\146\186\19\180\168\15","\97\213\207\106\71\230\213")).Remotes.CommF_:InvokeServer(v7("\180\247\171\225\61\161\241\177\250\44","\88\231\131\196\147"),v7("\238\37\58\58\238\125\171\248\238\37\58\58\238\125\171","\213\170\76\91\87\129\19\207"),game:GetService(v7("\185\89\134\82\116\240\225","\27\233\53\231\43\17\130\146")).LocalPlayer.Backpack:FindFirstChild(v7("\164\30\57\93\143\25\60\16\166\5\45\89\148","\48\224\119\88")));end if (game:GetService(v7("\143\0\165\110\203\249\56","\80\223\108\196\23\174\139\75")).LocalPlayer.Character:FindFirstChild(v7("\60\172\240\13\4\229\209\23\5\172\227","\101\112\197\151")) or game:GetService(v7("\247\27\209\249\186\182\12","\127\167\119\176\128\223\196")).LocalPlayer.Backpack:FindFirstChild(v7("\161\211\2\172\16\2\171\200\16\173\16","\34\237\186\101\196\100"))) then game:GetService(v7("\242\15\253\192\205\195\11\249\201\192\243\30\226\222\197\199\15","\164\160\106\141\172")).Remotes.CommF_:InvokeServer(v7("\138\223\133\66\13\251\185\31\176\223","\106\217\171\234\48\104\189\203"),v7("\24\1\176\75\244\139\202\61\15\191\87","\134\84\104\215\35\128\166"),game:GetService(v7("\54\91\177\181\129\20\68","\228\102\55\208\204")).LocalPlayer.Backpack:FindFirstChild(v7("\236\190\81\183\3\58\230\165\67\182\3","\26\160\215\54\223\119")));end v1138=14 -11 ;end if (v1138==(8 -4)) then if (game:GetService(v7("\216\201\235\17\119\220\238","\46\136\165\138\104\18\174\157")).LocalPlayer.Character:FindFirstChild(v7("\176\45\177\41\132\120\150\48\148\49\164","\66\225\88\208")) or game:GetService(v7("\216\41\125\36\237\55\111","\93\136\69\28")).LocalPlayer.Backpack:FindFirstChild(v7("\14\37\251\232\58\112\220\241\42\57\238","\131\95\80\154"))) then game:GetService(v7("\226\222\205\125\241\116\33\21\213\223\238\101\247\101\33\6\213","\97\176\187\189\17\152\23\64")).Remotes.CommF_:InvokeServer(v7("\32\225\130\162\2\226\249\6\252\153","\139\115\149\237\208\103\164"),v7("\7\238\207\35\191\102\185\35\250\197\45","\232\86\155\174\72\218\75"),game:GetService(v7("\206\38\67\208\244\214\237","\164\158\74\34\169\145")).LocalPlayer.Backpack:FindFirstChild(v7("\227\76\196\47\187\188\55\174\199\80\209","\220\178\57\165\68\222\156\113")));end if (game:GetService(v7("\203\57\243\201\254\39\225","\176\155\85\146")).LocalPlayer.Character:FindFirstChild(v7("\33\214\21\213\13\137\168\37\209\4\216\17","\136\99\163\113\177\101\232")) or game:GetService(v7("\121\175\225\37\63\149\200","\66\41\195\128\92\90\231\187")).LocalPlayer.Backpack:FindFirstChild(v7("\165\224\195\116\143\244\135\86\149\224\206\100","\16\231\149\167"))) then game:GetService(v7("\253\10\191\55\207\204\14\187\62\194\252\27\160\41\199\200\10","\166\175\111\207\91")).Remotes.CommF_:InvokeServer(v7("\174\239\241\194\193\74","\113\236\154\149\166\169\43\75"),game:GetService(v7("\182\80\176\164\229\82\237","\158\230\60\209\221\128\32")).LocalPlayer.Backpack:FindFirstChild(v7("\211\36\28\9\249\250\123\244\227\36\17\25","\178\145\81\120\109\145\155\91")));end if (game:GetService(v7("\30\198\128\104\181\107\86","\30\78\170\225\17\208\25\37")).LocalPlayer.Character:FindFirstChild(v7("\47\78\174\196\90\54\92\120\181\213\86\48","\68\124\62\199\160\63")) or game:GetService(v7("\45\116\219\200\210\202\70","\53\125\24\186\177\183\184")).LocalPlayer.Backpack:FindFirstChild(v7("\249\61\115\14\113\24\238\236\63\111\3\96","\206\170\77\26\106\20\106"))) then game:GetService(v7("\251\255\187\226\200\254\68\61\204\254\152\250\206\239\68\46\204","\73\169\154\203\142\161\157\37")).Remotes.CommF_:InvokeServer(v7("\50\63\254\206\4\13\227\201\8\63","\188\97\75\145"),v7("\141\81\208\35\70\224\244\141\81\208\35\70\224","\217\222\33\185\71\35\146"),game:GetService(v7("\4\232\69\90\49\59\39","\73\84\132\36\35\84")).LocalPlayer.Backpack:FindFirstChild(v7("\250\247\161\25\135\158\137\193\186\8\139\152","\236\169\135\200\125\226")));end if (game:GetService(v7("\50\66\227\111\7\92\241","\22\98\46\130")).LocalPlayer.Character:FindFirstChild(v7("\212\138\20\24\46\28\239\136\249\134\8\21\108\28\249\146\227\138\18","\224\150\227\102\124\20\60\191")) or game:GetService(v7("\206\215\55\19\131\236\200","\230\158\187\86\106")).LocalPlayer.Backpack:FindFirstChild(v7("\6\62\21\232\54\232\23\118\16\8\248\49\245","\111\86\86\122\141\88\129"))) then game:GetService(v7("\154\20\84\78\161\18\69\86\173\21\119\86\167\3\69\69\173","\34\200\113\36")).Remotes.CommF_:InvokeServer(v7("\139\217\244\192\38\230\201\173\196\239","\187\216\173\155\178\67\160"),v7("\140\127\112\177\237\47\109","\84\220\23\31\212\131\70\21"),game:GetService(v7("\209\78\43\192\228\80\57","\185\129\34\74")).LocalPlayer.Backpack:FindFirstChild(v7("\75\201\141\227\1\24\213\59\231\144\243\6\5","\173\27\161\226\134\111\113")));end if (game:GetService(v7("\74\178\31\109\20\59\96","\139\26\222\126\20\113\73\19")).LocalPlayer.Character:FindFirstChild(v7("\234\197\70\65\212\213\11\101\202\197\66\87","\35\184\176\43")) or game:GetService(v7("\58\203\162\50\42\24\212","\79\106\167\195\75")).LocalPlayer.Backpack:FindFirstChild(v7("\76\171\124\122\114\187\49\94\108\171\120\108","\24\30\222\17"))) then game:GetService(v7("\105\196\151\209\194\124\90\213\130\217\248\107\84\211\134\218\206","\31\59\161\231\189\171")).Remotes.CommF_:InvokeServer(v7("\34\21\133\92\225\55\19\159\71\240","\132\113\97\234\46"),v7("\144\204\123\211\18\167\148\68\196\19\160\213\115","\126\194\185\22\177"),game:GetService(v7("\215\252\55\195\34\42\244","\88\135\144\86\186\71")).LocalPlayer.Backpack:FindFirstChild(v7("\102\36\165\30\220\81\113\142\14\197\93\37","\176\52\81\200\124")));end v1138=3 + 2 ;end if ((1 + 4)==v1138) then if (game:GetService(v7("\75\142\39\164\126\144\53","\221\27\226\70")).LocalPlayer.Character:FindFirstChild(v7("\24\7\238\85\136\80\104\61\15\243","\26\72\102\135\59\168\22")) or game:GetService(v7("\0\56\23\29\46\34\39","\75\80\84\118\100")).LocalPlayer.Backpack:FindFirstChild(v7("\208\199\177\53\160\224\170\46\233\210","\91\128\166\216"))) then game:GetService(v7("\135\213\242\132\117\177\180\196\231\140\79\166\186\194\227\143\121","\210\213\176\130\232\28")).Remotes.CommF_:InvokeServer(v7("\129\187\80\41\243\148\189\74\50\226","\150\210\207\63\91"),v7("\100\139\17\121\147\219\85\131\22","\139\52\234\120\23\190"),game:GetService(v7("\0\27\136\144\179\34\4","\214\80\119\233\233")).LocalPlayer.Backpack:FindFirstChild(v7("\139\166\88\246\103\237\169\178\88\236","\171\219\199\49\152\71")));end if (game:GetService(v7("\50\194\57\15\7\220\43","\118\98\174\88")).LocalPlayer.Character:FindFirstChild(v7("\60\148\64\71\25\104\18\91\160\83\68\25\104","\107\123\230\33\49\112\28")) or game:GetService(v7("\137\83\117\168\29\167\255","\184\217\63\20\209\120\213\140")).LocalPlayer.Backpack:FindFirstChild(v7("\42\198\230\250\55\229\20\148\193\254\43\248\25","\145\109\180\135\140\94"))) then game:GetService(v7("\227\34\149\86\212\210\38\145\95\217\226\51\138\72\220\214\34","\189\177\71\229\58")).Remotes.CommF_:InvokeServer(v7("\39\214\221\75\17\228\192\76\29\214","\57\116\162\178"),v7("\35\182\78\96\181\97\42\73\131\93\119\170\124\39\29","\83\100\196\47\22\220\21"),game:GetService(v7("\251\175\44\73\58\224\179","\192\171\195\77\48\95\146")).LocalPlayer.Backpack:FindFirstChild(v7("\23\227\92\187\69\212\43\158\22\227\72\164\88","\190\80\145\61\205\44\160\82")));end if (game:GetService(v7("\116\212\196\214\220\75\87","\57\36\184\165\175\185")).LocalPlayer.Character:FindFirstChild(v7("\136\253\66\218\71\236\212\69\200\70\184","\47\204\146\55\189")) or game:GetService(v7("\149\237\184\245\242\21\182","\103\197\129\217\140\151")).LocalPlayer.Backpack:FindFirstChild(v7("\98\249\227\37\0\20\103\1\83\255\226","\115\38\150\150\66\104\52\33"))) then game:GetService(v7("\100\212\242\195\162\217\87\197\231\203\152\206\89\195\227\200\174","\186\54\177\130\175\203")).Remotes.CommF_:InvokeServer(v7("\185\84\143\1\75\23\200\62\131\84","\75\234\32\224\115\46\81\186"),v7("\31\185\204\206\138\12\31\185\204\206\138","\33\91\214\185\169\226"),game:GetService(v7("\8\139\67\5\87\106\43","\24\88\231\34\124\50")).LocalPlayer.Backpack:FindFirstChild(v7("\209\33\237\69\3\118\211\60\237\75\31","\86\149\78\152\34\107")));end if (game:GetService(v7("\225\229\138\63\184\57\194","\75\177\137\235\70\221")).LocalPlayer.Character:FindFirstChild(v7("\215\61\163\173\84\210\164\19\176\188\82\209","\165\132\85\194\201\59")) or game:GetService(v7("\27\57\169\100\46\39\187","\29\75\85\200")).LocalPlayer.Backpack:FindFirstChild(v7("\250\81\212\220\51\95\167\209\219\76\220\204","\151\169\57\181\184\92\40\135"))) then game:GetService(v7("\103\225\79\51\141\160\59\65\225\91\12\144\172\40\84\227\90","\90\53\132\63\95\228\195")).Remotes.CommF_:InvokeServer(v7("\232\7\122\83\5\132\46\206\26\97","\92\187\115\21\33\96\194"),v7("\243\140\51\45\53\145\99\243\140\51\45\53\145","\78\160\228\82\73\90\230"),game:GetService(v7("\146\212\64\144\218\237\56","\75\194\184\33\233\191\159")).LocalPlayer.Backpack:FindFirstChild(v7("\225\51\62\1\221\44\127\35\192\46\54\17","\101\178\91\95")));end if (game:GetService(v7("\42\41\58\11\185\245\224","\147\122\69\91\114\220\135")).LocalPlayer.Character:FindFirstChild(v7("\211\61\11\77\210\165\30\23\87\214\241","\191\133\88\101\34")) or game:GetService(v7("\98\41\28\105\89\219\65","\169\50\69\125\16\60")).LocalPlayer.Backpack:FindFirstChild(v7("\220\94\223\242\230\12\164\248\78\216\233","\226\138\59\177\157\139\44"))) then game:GetService(v7("\14\112\3\189\244\63\116\7\180\249\15\97\28\163\252\59\112","\157\92\21\115\209")).Remotes.CommF_:InvokeServer(v7("\253\144\170\25\10\46\71\219\141\177","\53\174\228\197\107\111\104"),v7("\38\207\184\58\142\97\38\207\184\58\142","\76\112\170\214\85\227"),game:GetService(v7("\20\54\83\99\250\175\105","\48\68\90\50\26\159\221\26")).LocalPlayer.Backpack:FindFirstChild(v7("\54\14\112\93\85\115\132\18\30\119\70","\194\96\107\30\50\56\83")));end v1138=6;end if (v1138==(0 + 0)) then if (game:GetService(v7("\21\3\250\44\53\80\83","\206\69\111\155\85\80\34\32")).LocalPlayer.Character:FindFirstChild(v7("\158\180\171\14\135\154\169\179\5\211","\167\220\219\198\108")) or game:GetService(v7("\154\8\24\39\48\84\23","\100\202\100\121\94\85\38")).LocalPlayer.Backpack:FindFirstChild(v7("\40\179\206\3\1\219\24\169\202\21","\157\106\220\163\97\33"))) then game:GetService(v7("\15\165\242\124\222\87\220\41\165\230\67\195\91\207\60\167\231","\189\93\192\130\16\183\52")).Remotes.CommF_:InvokeServer(v7("\58\6\53\38\14\29\37\28\27\46","\87\105\114\90\84\107\91"),v7("\81\198\200\178\197\127\206\114\113","\31\19\169\165\208\232\61\161"),game:GetService(v7("\226\172\32\31\254\220\196","\183\178\192\65\102\155\174")).LocalPlayer.Backpack:FindFirstChild(v7("\149\225\70\49\76\175\50\255\190\250","\138\215\142\43\83\108\233\64")));end if (game:GetService(v7("\79\181\136\101\122\171\154","\28\31\217\233")).LocalPlayer.Character:FindFirstChild(v7("\2\228\164\203\192\74\96\35\225\164\212","\38\81\148\205\160\165\106")) or game:GetService(v7("\127\66\174\63\112\19\9","\194\47\46\207\70\21\97\122")).LocalPlayer.Backpack:FindFirstChild(v7("\226\43\222\234\222\137\255\201\196\50\195","\187\177\91\183\129\187\169\185"))) then game:GetService(v7("\39\215\171\65\220\206\20\198\190\73\230\217\26\192\186\74\208","\173\117\178\219\45\181")).Remotes.CommF_:InvokeServer(v7("\200\10\244\245\140\95\151\238\23\239","\229\155\126\155\135\233\25"),v7("\119\30\131\25\83\135\119\30\131\25\83","\170\36\110\234\114\54"),game:GetService(v7("\240\71\51\65\248\106\224","\204\160\43\82\56\157\24\147")).LocalPlayer.Backpack:FindFirstChild(v7("\112\107\140\136\78\248\101\105\144\138\95","\216\35\27\229\227\43")));end if (game:GetService(v7("\55\84\47\17\180\191\20","\18\103\56\78\104\209\205\103")).LocalPlayer.Character:FindFirstChild(v7("\245\116\3\44\140\17\218\195\117\24","\168\182\28\108\92\172\87")) or game:GetService(v7("\199\77\161\176\232\197\228","\183\151\33\192\201\141")).LocalPlayer.Backpack:FindFirstChild(v7("\91\143\223\173\56\161\194\168\113\147","\221\24\231\176"))) then game:GetService(v7("\115\248\255\81\5\190\64\233\234\89\63\169\78\239\238\90\9","\221\33\157\143\61\108")).Remotes.CommF_:InvokeServer(v7("\134\255\135\179\215\15\167\254\129\181","\73\213\139\232\193\178"),v7("\151\130\89\72\17\62\188\133\70","\125\212\234\54\56\60"),game:GetService(v7("\109\48\120\93\83\186\232","\155\61\92\25\36\54\200")).LocalPlayer.Backpack:FindFirstChild(v7("\35\176\67\47\64\158\94\42\9\172","\95\96\216\44")));end if (game:GetService(v7("\198\69\27\70\184\91\109","\209\150\41\122\63\221\41\30")).LocalPlayer.Character:FindFirstChild(v7("\207\61\111\51\113\91\188\11\111\47\118\72","\60\156\77\29\90\31")) or game:GetService(v7("\159\211\229\153\170\205\247","\224\207\191\132")).LocalPlayer.Backpack:FindFirstChild(v7("\129\33\247\65\43\223\113\148\35\240\65\49","\81\210\81\133\40\69\184"))) then game:GetService(v7("\105\69\212\234\82\67\197\242\94\68\247\242\84\82\197\225\94","\134\59\32\164")).Remotes.CommF_:InvokeServer(v7("\134\207\16\151\45\101\238\160\210\11","\156\213\187\127\229\72\35"),v7("\66\221\203\126\164\223\9\66\221\203\126\164\223","\36\17\173\185\23\202\184"),game:GetService(v7("\46\68\247\49\234\192\181","\108\126\40\150\72\143\178\198")).LocalPlayer.Backpack:FindFirstChild(v7("\244\46\144\121\126\235\183\96\213\43\139\100","\38\167\94\226\16\16\140\151")));end if (game:GetService(v7("\104\9\17\161\201\74\22","\172\56\101\112\216")).LocalPlayer.Character:FindFirstChild(v7("\185\82\179\250\220\5\203\123\162\228\208\5","\113\235\61\208\145\185")) or game:GetService(v7("\189\64\72\16\136\94\90","\105\237\44\41")).LocalPlayer.Backpack:FindFirstChild(v7("\86\236\112\93\194\205\151\104\236\104","\229\29\133\28\50\226\139"))) then game:GetService(v7("\224\210\84\124\89\81\214\250\215\211\119\100\95\64\214\233\215","\142\178\183\36\16\48\50\183")).Remotes.CommF_:InvokeServer(v7("\197\157\252\226\243\175\225\229\255\157","\144\150\233\147"),v7("\25\13\172\47\93\65\102\48\160\39\83\80\63","\53\75\98\207\68\56"),game:GetService(v7("\14\170\181\55\59\180\167","\78\94\198\212")).LocalPlayer.Backpack:FindFirstChild(v7("\194\220\243\122\181\207\199\234\124\225","\149\137\181\159\21")));end v1138=1969 -(1586 + 382) ;end if (v1138==3) then if (game:GetService(v7("\23\180\252\92\217\200\101","\22\71\216\157\37\188\186")).LocalPlayer.Character:FindFirstChild(v7("\202\121\230\54\86\48\18\243\127\228","\96\134\22\144\83\118\118")) or game:GetService(v7("\1\170\141\9\17\69\246","\219\81\198\236\112\116\55\133")).LocalPlayer.Backpack:FindFirstChild(v7("\48\206\44\233\92\231\40\249\21\213","\140\124\161\90"))) then game:GetService(v7("\153\1\106\236\43\168\5\110\229\38\152\16\117\242\35\172\1","\66\203\100\26\128")).Remotes.CommF_:InvokeServer(v7("\25\159\221\15\47\173\192\8\35\159","\125\74\235\178"),v7("\223\162\70\42\164\175\253\12\246","\122\147\205\48\79\137\227\146"),game:GetService(v7("\131\69\24\43\234\82\153","\234\211\41\121\82\143\32")).LocalPlayer.Backpack:FindFirstChild(v7("\202\32\94\12\163\192\61\93\0\247","\131\134\79\40\105")));end if (game:GetService(v7("\105\80\40\45\92\78\58","\84\57\60\73")).LocalPlayer.Character:FindFirstChild(v7("\47\212\49\70\68\150\238\47\15\212\58\80","\105\125\161\83\36\33\228\206")) or game:GetService(v7("\151\126\231\102\0\181\97","\101\199\18\134\31")).LocalPlayer.Backpack:FindFirstChild(v7("\14\199\187\215\187\152\107\26\192\172\220\170","\75\92\178\217\181\222\234"))) then game:GetService(v7("\38\22\177\216\29\16\160\192\17\23\146\192\27\1\160\211\17","\180\116\115\193")).Remotes.CommF_:InvokeServer(v7("\219\145\76\9\237\163\81\14\225\145","\123\136\229\35"),v7("\106\64\58\237\137\74\24\10\250\142\90\80\42","\236\56\53\88\143"),game:GetService(v7("\12\195\215\30\57\221\197","\103\92\175\182")).LocalPlayer.Backpack:FindFirstChild(v7("\214\195\123\208\174\148\84\239\246\195\112\198","\169\132\182\25\178\203\230\116")));end if (game:GetService(v7("\70\1\2\163\228\100\30","\129\22\109\99\218")).LocalPlayer.Character:FindFirstChild(v7("\15\181\17\207\7\209\194\191\11\166\22\212\26","\159\77\212\99\189\110\180\176")) or game:GetService(v7("\47\140\218\215\228\166\12","\212\127\224\187\174\129")).LocalPlayer.Backpack:FindFirstChild(v7("\1\74\105\172\195\90\49\11\93\172\223\86\55","\63\67\43\27\222\170"))) then game:GetService(v7("\207\245\240\172\213\133\58\233\245\228\147\200\137\41\252\247\229","\91\157\144\128\192\188\230")).Remotes.CommF_:InvokeServer(v7("\63\197\12\91\19\29\205\25\216\23","\191\108\177\99\41\118\91"),v7("\161\160\76\65\42\188\72\163\161\160\76\65\42\188\72","\142\227\193\62\51\67\217\58"),game:GetService(v7("\120\168\88\62\170\169\206","\189\40\196\57\71\207\219")).LocalPlayer.Backpack:FindFirstChild(v7("\202\210\79\169\136\135\253\164\206\193\72\178\149","\132\136\179\61\219\225\226\143")));end if (game:GetService(v7("\212\118\59\212\225\104\41","\173\132\26\90")).LocalPlayer.Character:FindFirstChild(v7("\156\42\236\72\129\241\13\249\80\137\165","\224\209\75\139\37")) or game:GetService(v7("\196\75\211\5\241\85\193","\124\148\39\178")).LocalPlayer.Backpack:FindFirstChild(v7("\95\194\86\253\219\50\229\67\229\211\102","\186\18\163\49\144"))) then game:GetService(v7("\145\11\227\183\252\233\162\26\246\191\198\254\172\28\242\188\240","\138\195\110\147\219\149")).Remotes.CommF_:InvokeServer(v7("\66\185\242\106\225\34\210\100\164\233","\160\17\205\157\24\132\100"),v7("\43\84\135\4\7\24\173\8\1\88\129","\105\102\53\224"),game:GetService(v7("\234\210\23\167\20\99\182","\170\186\190\118\222\113\17\197")).LocalPlayer.Backpack:FindFirstChild(v7("\3\12\239\179\47\77\206\172\59\4\252","\222\78\109\136")));end if (game:GetService(v7("\20\181\160\145\33\171\178","\232\68\217\193")).LocalPlayer.Character:FindFirstChild(v7("\47\183\81\56\30\180\3\10\13\173\74\56","\76\127\216\35")) or game:GetService(v7("\219\253\60\61\168\249\226","\205\139\145\93\68")).LocalPlayer.Backpack:FindFirstChild(v7("\45\81\208\191\251\17\30\228\185\239\20\74","\154\125\62\162\203"))) then game:GetService(v7("\180\198\10\248\139\227\116\146\198\30\199\150\239\103\135\196\31","\21\230\163\122\148\226\128")).Remotes.CommF_:InvokeServer(v7("\108\10\48\252\90\56\45\251\86\10","\142\63\126\95"),v7("\58\253\95\214\65\158\17\253\66","\218\126\146\48\164\108"),game:GetService(v7("\47\251\3\180\196\226\213","\166\127\151\98\205\161\144")).LocalPlayer.Backpack:FindFirstChild(v7("\238\81\161\35\88\83\115\248\76\166\62\77","\83\190\62\211\87\57\63")));end v1138=11 -7 ;end if (v1138==(21 -15)) then if (game:GetService(v7("\239\232\16\55\195\224\200","\62\191\132\113\78\166\146\187")).LocalPlayer.Character:FindFirstChild(v7("\13\215\121\192\11\33\212\55\242\11\59\209\99","\121\78\184\23\180")) or game:GetService(v7("\11\16\73\209\83\41\15","\54\91\124\40\168")).LocalPlayer.Backpack:FindFirstChild(v7("\90\42\202\41\181\118\41\132\27\181\108\44\208","\199\25\69\164\93"))) then game:GetService(v7("\65\63\38\119\122\57\55\111\118\62\5\111\124\40\55\124\118","\27\19\90\86")).Remotes.CommF_:InvokeServer(v7("\228\220\236\95\210\238\241\88\222\220","\45\183\168\131"),v7("\147\227\216\17\217\231\188\161\245\10\197\252\162\227\218","\136\208\140\182\101\171"),game:GetService(v7("\31\227\127\230\42\253\109","\159\79\143\30")).LocalPlayer.Backpack:FindFirstChild(v7("\243\204\78\48\194\204\76\100\246\209\85\45\196","\68\176\163\32")));end if (game:GetService(v7("\52\218\47\195\187\209\211","\160\100\182\78\186\222\163")).LocalPlayer.Character:FindFirstChild(v7("\66\66\83\233\36\195\49\116\72\238\36\195","\183\17\50\58\155\77")) or game:GetService(v7("\228\173\251\201\209\179\233","\176\180\193\154")).LocalPlayer.Backpack:FindFirstChild(v7("\139\92\184\230\12\148\248\106\163\225\12\148","\224\216\44\209\148\101"))) then game:GetService(v7("\140\216\231\205\122\225\131\170\216\243\242\103\237\144\191\218\242","\226\222\189\151\161\19\130")).Remotes.CommF_:InvokeServer(v7("\232\69\212\33\222\119\201\38\210\69","\83\187\49\187"),v7("\109\243\220\127\89\242\61\163\82","\214\62\156\169\19\116\161\82"),game:GetService(v7("\45\177\120\17\24\175\106","\104\125\221\25")).LocalPlayer.Backpack:FindFirstChild(v7("\230\56\187\213\12\210\149\14\160\210\12\210","\166\181\72\210\167\101")));end if (game:GetService(v7("\199\132\9\214\242\154\27","\175\151\232\104")).LocalPlayer.Character:FindFirstChild(v7("\108\68\214\133\252\89\8\112\197\151\250\67","\55\40\54\183\226\147")) or game:GetService(v7("\241\221\42\209\196\195\56","\168\161\177\75")).LocalPlayer.Backpack:FindFirstChild(v7("\116\195\24\135\234\160\16\247\11\149\236\186","\206\48\177\121\224\133"))) then game:GetService(v7("\202\25\186\51\193\251\29\190\58\204\203\8\165\45\201\255\25","\168\152\124\202\95")).Remotes.CommF_:InvokeServer(v7("\36\18\211\164\18\32\206\163\30\18","\214\119\102\188"),v7("\230\35\224\242\205\63\172\209\208\48\230\250\204","\149\162\81\129"),game:GetService(v7("\124\36\18\161\237\94\59","\136\44\72\115\216")).LocalPlayer.Backpack:FindFirstChild(v7("\149\144\27\161\123\233\129\24\163\151\19\178","\94\209\226\122\198\20\135\161")));if (game:GetService(v7("\113\196\207\172\204\62\207","\188\33\168\174\213\169\76")).LocalPlayer.Character:FindFirstChild(v7("\87\73\242\170\24\89\243\140\93\94\232\179\13","\172\27\44\157\218\121\43\151")) or game:GetService(v7("\130\84\61\37\183\74\47","\92\210\56\92")).LocalPlayer.Backpack:FindFirstChild(v7("\41\219\38\233\180\161\69\69\248\59\236\188\167","\33\101\190\73\153\213\211"))) then game:GetService(v7("\140\215\84\4\187\189\211\80\13\182\141\198\75\26\179\185\215","\210\222\178\36\104")).Remotes.CommF_:InvokeServer(v7("\194\238\254\62\48\161\227\239\248\56","\231\145\154\145\76\85"),v7("\247\47\29\23\166\26\223\103\62\2\168\24\218\56\22","\104\187\74\114\103\199"),game:GetService(v7("\245\207\24\35\64\159\32","\168\165\163\121\90\37\237\83")).LocalPlayer.Backpack:FindFirstChild(v7("\83\1\177\10\87\73\189\187\89\22\171\19\66","\155\31\100\222\122\54\59\217")));end end break;end if (v1138==1) then local v1620=1982 -(652 + 1330) ;while true do if (v1620==(0 -0)) then if (game:GetService(v7("\74\138\205\58\77\161\105","\211\26\230\172\67\40")).LocalPlayer.Character:FindFirstChild(v7("\196\58\37\6\230\14\96\2\226\62\62","\112\151\87\74\109\131\46\38")) or game:GetService(v7("\26\196\49\212\179\56\219","\214\74\168\80\173")).LocalPlayer.Backpack:FindFirstChild(v7("\3\14\176\85\172\112\37\173\75\160\36","\201\80\99\223\62"))) then game:GetService(v7("\197\119\12\231\92\70\232\227\119\24\216\65\74\251\246\117\25","\137\151\18\124\139\53\37")).Remotes.CommF_:InvokeServer(v7("\36\99\37\98\164\222\5\98\35\100","\152\119\23\74\16\193"),v7("\64\178\61\222\88\134\64\178\61\222\88","\171\19\223\82\181\61"),game:GetService(v7("\43\137\211\200\196\9\150","\161\123\229\178\177")).LocalPlayer.Backpack:FindFirstChild(v7("\246\53\61\188\80\31\227\42\39\190\65","\63\165\88\82\215\53")));end if (game:GetService(v7("\5\208\174\39\125\249\200","\16\85\188\207\94\24\139\187")).LocalPlayer.Character:FindFirstChild(v7("\61\32\176\174\13\4\28\37\176\180","\66\110\80\217\192\45")) or game:GetService(v7("\205\26\28\33\23\239\5","\114\157\118\125\88")).LocalPlayer.Backpack:FindFirstChild(v7("\214\183\27\252\122\166\92\240\236\179","\133\133\199\114\146\90\224\46"))) then game:GetService(v7("\155\191\255\10\44\124\1\189\191\235\53\49\112\18\168\189\234","\96\201\218\143\102\69\31")).Remotes.CommF_:InvokeServer(v7("\204\7\45\59\227\55\183\216\246\7","\173\159\115\66\73\134\113\197"),v7("\58\164\202\30\136\223\81\0\186","\33\105\212\163\112\165\140"),game:GetService(v7("\22\116\187\196\35\106\169","\189\70\24\218")).LocalPlayer.Backpack:FindFirstChild(v7("\154\32\21\115\85\7\187\37\21\105","\65\201\80\124\29\117")));end v1620=1654 -(770 + 883) ;end if ((4 -2)==v1620) then if (game:GetService(v7("\42\7\87\48\31\25\69","\73\122\107\54")).LocalPlayer.Character:FindFirstChild(v7("\61\204\89\113\114\102\1\198\72","\20\116\175\60\81\52")) or game:GetService(v7("\57\13\18\57\12\19\0","\64\105\97\115")).LocalPlayer.Backpack:FindFirstChild(v7("\130\235\224\238\222\236\190\225\241","\158\203\136\133\206\152"))) then game:GetService(v7("\229\237\182\116\63\212\233\178\125\50\228\252\169\106\55\208\237","\86\183\136\198\24")).Remotes.CommF_:InvokeServer(v7("\178\63\167\211\62\207\186\148\34\188","\200\225\75\200\161\91\137"),v7("\102\209\117\66\25\233\54","\83\47\178\16\111\80\138"),game:GetService(v7("\51\198\27\187\112\53\41","\90\99\170\122\194\21\71")).LocalPlayer.Backpack:FindFirstChild(v7("\33\172\68\238\143\231\29\166\85","\149\104\207\33\206\201")));end v1138=2;break;end if (v1620==(573 -(62 + 510))) then local v1768=0 + 0 ;while true do if (v1768==(339 -(296 + 42))) then v1620=3 -1 ;break;end if (v1768==(188 -(29 + 159))) then if (game:GetService(v7("\228\122\3\208\210\185\160","\65\180\22\98\169\183\203\211")).LocalPlayer.Character:FindFirstChild(v7("\170\9\251\188\45\166\10\158\16\243\165","\76\236\101\154\209\72\134")) or game:GetService(v7("\142\95\60\253\122\172\64","\31\222\51\93\132")).LocalPlayer.Backpack:FindFirstChild(v7("\81\123\40\3\253\255\171\101\98\32\26","\237\23\23\73\110\152\223"))) then game:GetService(v7("\187\163\13\54\11\225\25\157\163\25\9\22\237\10\136\161\24","\120\233\198\125\90\98\130")).Remotes.CommF_:InvokeServer(v7("\148\210\56\243\34\231\61\210\174\210","\167\199\166\87\129\71\161\79"),v7("\20\117\12\64\55\203\20\117\12\64\55","\230\82\25\109\45\82"),game:GetService(v7("\125\123\58\219\27\31\216","\171\45\23\91\162\126\109")).LocalPlayer.Backpack:FindFirstChild(v7("\198\232\8\172\219\160\194\27\180\215\244","\190\128\132\105\193")));end if (game:GetService(v7("\99\222\68\62\190\65\193","\219\51\178\37\71")).LocalPlayer.Character:FindFirstChild(v7("\122\68\217\7\203\82\5\243\22\209\85\81","\164\60\37\181\100")) or game:GetService(v7("\38\57\183\37\62\213\213","\166\118\85\214\92\91\167")).LocalPlayer.Backpack:FindFirstChild(v7("\122\58\91\163\83\53\23\134\78\46\94\180","\192\60\91\55"))) then game:GetService(v7("\56\14\246\125\81\9\10\242\116\92\57\31\233\99\89\13\14","\56\106\107\134\17")).Remotes.CommF_:InvokeServer(v7("\40\72\117\92\49\30\53\14\85\110","\71\123\60\26\46\84\88"),v7("\174\31\116\44\138\180","\230\232\126\24\79\229\218\197"),game:GetService(v7("\134\95\89\201\254\224\221","\228\214\51\56\176\155\146\174")).LocalPlayer.Backpack:FindFirstChild(v7("\220\114\189\38\205\4\82\249\200\119\170","\139\189\30\222\73\163\36\20")));end v1768=1 + 0 ;end end end end end end break;end end end end);end wait(0.3);break;end end end end);local v74=v12.Fruit:AddToggle(v7("\192\242\236\215\60\188\69\65\250\249\228\221\22\171\98\73\224","\32\148\157\139\176\80\217\23"),{[v7("\195\237\177\203\242","\167\151\132\197")]=v7("\64\233\82\47\113\127\168\122\57\107\123\252","\30\18\136\60\75"),[v7("\23\225\215\194\197\58\244\208\200\216\61","\183\83\132\164\161")]=v7("\132\5\78\37\255\51\186\199\164\17\73\53","\129\214\100\32\65\144\94\154"),[v7("\7\72\133\3\55\47\89","\66\67\45\227\98")]=false});v74:OnChanged(function(v207) _G.Random_Auto=v207;end);v13.ToggleRandomFruit:SetValue(false);spawn(function() pcall(function() while wait(541.1 -(63 + 478) ) do if _G.Random_Auto then game:GetService(v7("\180\51\218\5\173\48\135\34\207\13\151\39\137\36\203\14\161","\83\230\86\170\105\196")).Remotes.CommF_:InvokeServer(v7("\159\143\146\173\201\115","\86\220\224\231\222\160\29\187"),v7("\149\196\197","\231\215\177\188"));end end end);end);local v75=v12.Fruit:AddToggle(v7("\72\25\113\199\112\19\85\207\112\26\115\195\104\34\70","\160\28\118\22"),{[v7("\142\160\200\86\191","\58\218\201\188")]=v7("\149\198\31\55\91\36\162\137\55\62\72\46\186\137\53\41\75\46\162\137\91\15\110\110","\71\214\169\115\91\62"),[v7("\115\192\227\21\92\46\239\51\94\202\254","\71\55\165\144\118\46\71\159")]=v7("\202\93\38\47\39\240\249\169\118\47\53\43\255\173\207\64\63\42\54\179\165\221\98\99","\141\137\50\74\67\66\147"),[v7("\157\168\197\37\239\205\173","\161\217\205\163\68\154")]=false});v75:OnChanged(function(v208) _G.CollectFruitTP=v208;end);v13.ToggleCollectTP:SetValue(false);spawn(function() while wait(0.1 + 0 ) do if _G.CollectFruitTP then for v650,v651 in pairs(game.Workspace:GetChildren()) do if string.find(v651.Name,v7("\105\246\197\113\144","\122\47\132\176\24\228\151\111")) then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v651.Handle.CFrame;end end end end end);local v76=v12.Fruit:AddToggle(v7("\203\230\64\22\85\185\124\127\243\229\66\18\77","\16\159\137\39\113\57\220\63"),{[v7("\206\8\211\238\19","\118\154\97\167\130")]=v7("\16\64\172\121\54\76\180\53\23\74\182\124\63\15\134\103\38\70\180\53\123\123\183\112\54\65\233","\21\83\47\192"),[v7("\23\118\248\215\87\55\35\103\226\219\75","\94\83\19\139\180\37")]=v7("\199\248\217\143\242\231\227\149\167\242\242\254\217\195\209\246\226\220\151\183\172\195\194\134\242\234\190","\151\132\151\181\227"),[v7("\14\244\192\49\63\253\210","\80\74\145\166")]=false});v76:OnChanged(function(v209) _G.Tweenfruit=v209;end);v13.ToggleCollect:SetValue(false);spawn(function() while wait(962.1 -(561 + 401) ) do if _G.Tweenfruit then for v652,v653 in pairs(game.Workspace:GetChildren()) do if string.find(v653.Name,v7("\62\152\235\36\200","\40\120\234\158\77\188")) then Tween(v653.Handle.CFrame);end end end end end);local v65=v12.Fruit:AddSection(v7("\133\233\45","\141\192\154\93\171\179\197\197"));local v77=v12.Fruit:AddToggle(v7("\254\243\140\6\55\181\16\243\218\204\135\0\34\181\39","\128\170\156\235\97\91\208\85"),{[v7("\250\204\51\10\45","\188\174\165\71\102\72\147")]=v7("\82\43\4\142\149\123\57\13\203\183","\197\23\88\116\174"),[v7("\200\83\32\39\254\95\35\48\229\89\61","\68\140\54\83")]=v7("\130\161\174\14\122\210\40\190\183\172","\73\199\210\222\46\42\190"),[v7("\236\79\220\244\209\143\220","\227\168\42\186\149\164")]=false});v77:OnChanged(function(v210) local v211=0;local v212;while true do if (v211==(328 -(229 + 99))) then v212=0 -0 ;while true do if ((0 -0)==v212) then ESPPlayer=v210;UpdatePlayerChams();break;end end break;end end end);v13.ToggleEspPlayer:SetValue(false);local v78=v12.Fruit:AddToggle(v7("\73\55\49\13\14\210\26\12\109\30\36\31\11\195","\127\29\88\86\106\98\183\95"),{[v7("\41\225\180\200\2","\190\125\136\192\164\103\111\58")]=v7("\94\188\168\21\95\170\174\92\119\239\158\71\110\166\172","\53\27\207\216"),[v7("\104\243\219\253\211\195\247\88\255\199\240","\135\44\150\168\158\161\170")]=v7("\248\203\244\23\244\216\206\237\91\144\251\202\241\94\196\206","\176\189\184\132\55"),[v7("\147\61\230\22\187\187\44","\206\215\88\128\119")]=false});v78:OnChanged(function(v213) local v214=0;local v215;local v216;while true do if (v214==(0 -0)) then v215=0 -0 ;v216=nil;v214=2 -1 ;end if (v214==1) then while true do if (v215==0) then v216=873 -(123 + 750) ;while true do if (v216==0) then DevilFruitESP=v213;while DevilFruitESP do local v1217=0 + 0 ;while true do if (v1217==0) then wait();UpdateDevilChams();break;end end end break;end end break;end end break;end end end);v13.ToggleEspFruit:SetValue(false);local v79=v12.Fruit:AddToggle(v7("\202\224\139\177\231\45\155\67\238\198\159\186\234\38\186","\48\158\143\236\214\139\72\222"),{[v7("\205\77\224\33\219","\112\153\36\148\77\190\57")]=v7("\109\216\49\164\242\202\123\198\70\207","\167\40\171\65\132\187\185\23"),[v7("\120\60\92\35\78\48\95\52\85\54\65","\64\60\89\47")]=v7("\34\145\238\246\194\235\211\232\9\134","\137\103\226\158\214\139\152\191"),[v7("\253\224\54\9\204\233\36","\104\185\133\80")]=false});v79:OnChanged(function(v217) IslandESP=v217;while IslandESP do local v447=0;while true do if (v447==(0 -0)) then wait();UpdateIslandESP();break;end end end end);v13.ToggleEspIsland:SetValue(false);local v80=v12.Fruit:AddToggle(v7("\137\184\21\196\177\178\55\208\173\145\30\204\170\178\0","\163\221\215\114"),{[v7("\202\14\206\222\255","\37\158\103\186\178\154\209")]=v7("\243\41\108\180\213\254\112\147\211\40","\228\182\90\28\148\147\146\31"),[v7("\217\179\239\90\167\124\208\233\191\243\87","\160\157\214\156\57\213\21")]=v7("\169\9\229\65\48\128\21\226\4\4","\118\236\122\149\97"),[v7("\243\199\127\93\35\219\214","\86\183\162\25\60")]=false});v80:OnChanged(function(v218) local v219=0 + 0 ;local v220;while true do if (v219==(0 + 0)) then v220=0 + 0 ;while true do if (v220==(1127 -(460 + 667))) then FlowerESP=v218;UpdateFlowerChams();break;end end break;end end end);v13.ToggleEspFlower:SetValue(false);spawn(function() while wait(2) do local v448=0;while true do if (v448==2) then if RealFruitESP then UpdateRealFruitChams();end break;end if (v448==(1779 -(629 + 1150))) then if FlowerESP then UpdateFlowerChams();end if DevilFruitESP then UpdateDevilChams();end v448=1;end if (v448==1) then if ChestESP then UpdateChestChams();end if ESPPlayer then UpdatePlayerChams();end v448=5 -3 ;end end end end);local v81={v7("\121\120\116\246\90","\155\63\20\21"),v7("\80\213\62","\162\25\182\91\52\224\171"),v7("\29\63\235\141\41","\230\76\74\138"),v7("\250\8\16\178\194","\218\182\97\119"),v7("\34\95\224\238","\155\102\62\146\133"),v7("\179\249\15\55\133\251","\83\224\137\102"),v7("\34\236\189\183\233\169","\31\112\153\208\213\133\204\76"),v7("\86\220\230\4\131","\81\27\189\129\105\226\27\60"),v7("\49\203\87\133\14\252","\45\115\190\51\225\102\157"),v7("\209\211\121\38","\31\130\178\23\66\102"),v7("\135\161\240\205\89\190\177","\55\215\201\159\168"),v7("\156\74\245\3\176","\100\216\37\128")};local v82=v12.Raid:AddDropdown(v7("\210\216\86\224\130\72\33\225\196\203\80\244","\143\150\170\57\144\230\39\86"),{[v7("\120\179\9\46\38","\224\44\218\125\66\67")]=v7("\9\237\177\123\22\46\168\158\118\28\42","\117\90\136\221\30"),[v7("\30\229\91\9\243\17\7\46\233\71\4","\119\90\128\40\106\129\120")]=v7("\250\196\138\161\117\190\169\234\201\143\180","\137\169\161\230\196\22\202"),[v7("\239\188\181\156\7\105","\223\185\221\217\233\98\26\234")]=v81,[v7("\57\181\177\249\4","\109\116\192\221\141")]=false,[v7("\158\191\72\1\210\252\174","\144\218\218\46\96\167")]=1});v82:SetValue(v7("\186\226\140","\140\148\204\162\103\113"));v82:OnChanged(function(v221) SelectChip=v221;end);local v83=v12.Raid:AddToggle(v7("\63\82\229\232\233\14\127\247\246","\133\107\61\130\143"),{[v7("\185\90\211\73\42","\188\237\51\167\37\79")]=v7("\169\105\220\231\170\210\130\108","\186\235\28\165\199\233"),[v7("\88\178\166\67\110\190\165\84\117\184\187","\32\28\215\213")]=v7("\53\72\32\60\21\85\30\77","\61\119\61\89\28\86"),[v7("\245\160\119\38\59\50\65","\151\177\197\17\71\78\94\53")]=false});v83:OnChanged(function(v222) _G.Auto_Buy_Chips_Dungeon=v222;end);v13.ToggleBuy:SetValue(false);spawn(function() while wait() do if _G.Auto_Buy_Chips_Dungeon then pcall(function() local v654={[1 + 0 ]=v7("\228\35\112\68\64\229\224\213","\144\182\66\25\32\51\171"),[1814 -(1677 + 135) ]=v7("\100\172\0\55\91\243","\135\55\201\108\82\56"),[3]=SelectChip};game:GetService(v7("\4\125\17\179\230\226\55\108\4\187\220\245\57\106\0\184\234","\129\86\24\97\223\143")).Remotes.CommF_:InvokeServer(unpack(v654));end);end end end);local v84=v12.Raid:AddToggle(v7("\53\70\193\216\142\140\117\21\72\212\203","\38\97\41\166\191\226\233"),{[v7("\45\173\20\18\54","\102\121\196\96\126\83\165\203")]=v7("\233\239\161\160\15\57\232\250\169\182","\25\186\155\192\210\123"),[v7("\205\57\14\188\52\61\249\40\20\176\40","\84\137\92\125\223\70")]=v7("\111\174\254\189\170\71\51\34\85\190","\67\60\218\159\207\222\103\97"),[v7("\245\218\57\244\170\196\231","\147\177\191\95\149\223\168")]=false});v84:OnChanged(function(v223) _G.Auto_StartRaid=v223;end);v13.ToggleStart:SetValue(false);spawn(function() while wait(0.1 + 0 ) do pcall(function() if _G.Auto_StartRaid then if (game:GetService(v7("\41\240\57\179\28\238\43","\202\121\156\88"))[v7("\158\45\183\128\190\18\184\128\171\39\166","\225\210\66\212")].PlayerGui.Main.Timer.Visible==false) then if (( not game:GetService(v7("\17\249\14\185\67\18\39\245\25","\98\70\150\124\210\48"))[v7("\107\198\206\177\182\244\123\227\200\164\179\254","\144\52\145\161\195\218")].Locations:FindFirstChild(v7("\91\107\114\196\124\124\62\148","\165\18\24\30")) and game:GetService(v7("\181\15\175\82\128\17\189","\43\229\99\206")).LocalPlayer.Backpack:FindFirstChild(v7("\38\231\199\195\28\246\206\128\56\254\193\210\26\244\202\201\5","\160\117\151\162"))) or game:GetService(v7("\72\1\137\48\125\31\155","\73\24\109\232")).LocalPlayer.Character:FindFirstChild(v7("\121\65\66\174\124\75\93\7\128\124\73\67\72\174\125\67\65","\21\42\49\39\205"))) then if Second_Sea then fireclickdetector(game:GetService(v7("\66\213\84\233\101\252\177\118\223","\208\21\186\38\130\22\140")).Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector);elseif Third_Sea then fireclickdetector(game:GetService(v7("\101\182\177\69\202\226\193\81\188","\160\50\217\195\46\185\146")).Map[v7("\45\165\13\243\232\194\184\21\27\166\9","\102\111\202\108\135\200\129\217")].RaidSummon2.Button.Main.ClickDetector);end end end end end);end end);local v85=v12.Raid:AddToggle(v7("\157\233\141\237\163\38\130\239\134\230\142\54\187\231","\67\201\134\234\138\207"),{[v7("\38\33\148\250\221","\62\114\72\224\150\184\162\153")]=v7("\90\179\50\46\111\126\202\152\112","\234\17\218\94\66\79\63\191"),[v7("\235\46\2\209\221\34\1\198\198\36\31","\178\175\75\113")]=v7("\202\166\230\123\161\142\255\101\224","\23\129\207\138"),[v7("\81\251\67\49\78\121\234","\59\21\158\37\80")]=false});v85:OnChanged(function(v224) KillAura=v224;end);v13.ToggleKillAura:SetValue(false);spawn(function() while wait() do if KillAura then pcall(function() for v729,v730 in pairs(game.Workspace.Enemies:GetDescendants()) do if (v730:FindFirstChild(v7("\225\245\205\7\245\212\41\240","\148\169\128\160\102\155\187\64")) and v730:FindFirstChild(v7("\143\224\230\54\140\229\174\241\217\56\141\254\151\244\249\35","\138\199\149\139\87\226")) and (v730.Humanoid.Health>(74 -(26 + 48)))) then repeat local v1003=0 -0 ;local v1004;while true do if ((0 + 0)==v1003) then v1004=0;while true do if (v1004==1) then v730.Humanoid.Health=0 + 0 ;v730.HumanoidRootPart.CanCollide=false;break;end if (v1004==(0 -0)) then local v1544=0;while true do if (v1544==(0 -0)) then task.wait();sethiddenproperty(game:GetService(v7("\179\170\81\221\222\41\199","\180\227\198\48\164\187\91")).LocalPlayer,v7("\231\84\14\24\2\213\73\10\2\0\230\92\7\4\27\199","\110\180\61\99\109"),math.huge);v1544=1 -0 ;end if (v1544==1) then v1004=1 + 0 ;break;end end end end break;end end until  not KillAura or  not v730.Parent or (v730.Humanoid.Health<=0)  end end end);end end end);local v86=v12.Raid:AddToggle(v7("\141\245\3\252\255\201\97\57\161\238\45\232\255\205\65\56","\92\217\154\100\155\147\172\47"),{[v7("\182\115\168\230\91","\39\226\26\220\138\62\218")]=v7("\20\234\54\220\99\19\252\34\201\45\62","\67\90\143\78\168"),[v7("\23\163\45\44\66\58\182\42\38\95\61","\48\83\198\94\79")]=v7("\35\13\184\235\191\36\27\172\254\241\9","\159\109\104\192\159"),[v7("\173\83\207\62\174\133\66","\219\233\54\169\95")]=false});v86:OnChanged(function(v225) AutoNextIsland=v225;end);v13.ToggleNextIsland:SetValue(false);spawn(function() while task.wait() do if AutoNextIsland then pcall(function() if (game:GetService(v7("\5\194\90\224\168\204\97","\149\85\174\59\153\205\190\18"))[v7("\164\119\168\243\205\32\132\121\178\247\211","\112\232\24\203\146\161")].PlayerGui.Main.Timer.Visible==true) then if game:GetService(v7("\118\172\54\7\169\156\24\66\166","\121\33\195\68\108\218\236"))[v7("\23\26\51\35\178\74\197\58\36\59\56\176","\138\72\77\92\81\222\46")].Locations:FindFirstChild(v7("\235\212\14\237\140\141\130\146","\233\162\167\98\140\226")) then Tween(game:GetService(v7("\217\34\220\84\0\47\135\237\40","\230\142\77\174\63\115\95"))[v7("\213\24\16\87\184\79\49\110\227\40\22\75","\28\138\79\127\37\212\43\126")].Locations:FindFirstChild(v7("\94\236\13\241\28\203\118\34","\86\23\159\97\144\114\175")).CFrame * CFrame.new(0 + 0 ,146 -76 ,61 + 39 ) );elseif game:GetService(v7("\39\114\74\178\60\33\17\126\93","\81\112\29\56\217\79"))[v7("\56\157\203\247\11\174\235\247\14\173\205\235","\133\103\202\164")].Locations:FindFirstChild(v7("\244\55\87\93\211\32\27\8","\60\189\68\59")) then Tween(game:GetService(v7("\232\126\29\115\51\207\112\12\125","\64\191\17\111\24"))[v7("\107\187\116\247\63\49\130\70\133\124\236\61","\205\52\236\27\133\83\85")].Locations:FindFirstChild(v7("\197\95\183\115\69\232\12\239","\43\140\44\219\18")).CFrame * CFrame.new(0,70,32 + 68 ) );elseif game:GetService(v7("\103\36\50\131\202\64\42\35\141","\185\48\75\64\232"))[v7("\43\9\20\245\172\16\85\6\55\28\238\174","\26\116\94\123\135\192\116")].Locations:FindFirstChild(v7("\233\222\93\62\206\201\17\108","\95\160\173\49")) then Tween(game:GetService(v7("\106\124\169\40\206\77\114\184\38","\189\61\19\219\67"))[v7("\126\35\231\227\76\37\110\6\225\246\73\47","\65\33\116\136\145\32")].Locations:FindFirstChild(v7("\158\244\76\226\209\17\123\113","\66\215\135\32\131\191\117\91")).CFrame * CFrame.new(0 -0 ,146 -76 ,48 + 52 ) );elseif game:GetService(v7("\147\239\240\217\190\55\8\167\229","\105\196\128\130\178\205\71"))[v7("\147\190\205\10\160\141\237\10\165\142\203\22","\120\204\233\162")].Locations:FindFirstChild(v7("\252\49\116\199\77\209\98\42","\35\181\66\24\166")) then Tween(game:GetService(v7("\195\181\201\0\213\254\248\247\191","\153\148\218\187\107\166\142"))[v7("\16\123\179\216\176\224\0\94\181\205\181\234","\132\79\44\220\170\220")].Locations:FindFirstChild(v7("\116\24\195\163\83\15\143\240","\194\61\107\175")).CFrame * CFrame.new(0,21 + 49 ,100) );elseif game:GetService(v7("\144\2\109\217\87\76\141\1\162","\98\199\109\31\178\36\60\236"))[v7("\148\44\70\222\195\119\51\178\162\28\64\194","\192\203\123\41\172\175\19\124")].Locations:FindFirstChild(v7("\128\64\62\69\167\87\114\21","\36\201\51\82")) then Tween(game:GetService(v7("\12\177\60\223\110\63\212\56\187","\181\91\222\78\180\29\79"))[v7("\8\134\12\178\90\161\24\163\10\167\95\171","\197\87\209\99\192\54")].Locations:FindFirstChild(v7("\31\10\252\212\220\21\191\40","\25\86\121\144\181\178\113\159")).CFrame * CFrame.new(0 + 0 ,70,100) );end end end);end end end);local v87=v12.Raid:AddToggle(v7("\104\94\49\83\58\182\222\156\93\90\51","\235\60\49\86\52\86\211\159"),{[v7("\241\216\181\74\192","\38\165\177\193")]=v7("\159\241\60\121\20\7\46\23\181\225","\118\222\132\72\22\52\70\89"),[v7("\219\136\200\3\227\227\156\191\246\130\213","\203\159\237\187\96\145\138\236")]=v7("\106\38\230\177\207\69\52\245\250\252\25","\170\43\81\135\218"),[v7("\58\20\39\50\220\18\93","\99\126\113\65\83\169\126\41")]=false});v87:OnChanged(function(v226) AutoAwakenAbilities=v226;end);v13.ToggleAwake:SetValue(false);spawn(function() while task.wait() do if AutoAwakenAbilities then pcall(function() game:GetService(v7("\65\250\49\22\232\112\254\53\31\229\64\235\46\8\224\116\250","\129\19\159\65\122")).Remotes.CommF_:InvokeServer(v7("\205\213\44\63\192\20\233\208","\122\140\162\77\84\165"),v7("\194\105\226\226\230\112","\137\131\30\131"));end);end end end);local v88=v12.Raid:AddToggle(v7("\66\202\229\6\122\192\197\4\98\227\240\20\127\209","\97\22\165\130"),{[v7("\223\187\241\220\113","\20\139\210\133\176\20\21\67")]=v7("\240\47\40\255\195\197\63\53\171\165\251\37\43\255\199\210\38\37","\133\183\74\92\223"),[v7("\147\37\255\254\240\190\48\248\244\237\185","\130\215\64\140\157")]=v7("\21\88\151\252\211\32\72\138\168\181\30\82\148\252\215\55\81\138","\149\82\61\227\220"),[v7("\213\73\69\220\228\64\87","\189\145\44\35")]=false});v88:OnChanged(function(v227) _G.Autofruit=v227;end);spawn(function() while wait(0.1 + 0 ) do pcall(function() if _G.Autofruit then local v655=0;local v656;while true do if ((103 -(57 + 42))==v655) then local v859=1136 -(725 + 411) ;while true do if (v859==(1 -0)) then local v1218=0;while true do if (v1218==(1 + 0)) then v859=1 + 1 ;break;end if (v1218==(0 -0)) then v656={[1 + 0 ]=v7("\97\176\45\212\4\95\170\37\196","\66\45\223\76\176"),[628 -(92 + 534) ]=v7("\212\191\170\84\51\20\172","\201\157\220\207\121\122\119")};game:GetService(v7("\158\5\229\168\61\131\18\97\169\4\198\176\59\146\18\114\169","\21\204\96\149\196\84\224\115")).Remotes.CommF_:InvokeServer(unpack(v656));v1218=1 + 0 ;end end end if (v859==0) then v656={[1635 -(114 + 1520) ]=v7("\89\54\212\21\5\53\17\32\97","\73\21\89\181\113\67\71\100"),[2]=v7("\246\42\28\31\69\81\157\13\17\16\73\80\222","\63\176\75\112\124\42")};game:GetService(v7("\129\81\198\179\16\87\204\167\81\210\140\13\91\223\178\83\211","\173\211\52\182\223\121\52")).Remotes.CommF_:InvokeServer(unpack(v656));v859=3 -2 ;end if (v859==2) then v655=14 -9 ;break;end end end if (v655==0) then v656={[1 -0 ]=v7("\104\245\197\241\149\158\81\243\208","\236\36\154\164\149\211"),[1 + 1 ]=v7("\206\118\133\68\9\58\165\206\118\133\68\9\58","\136\156\25\230\47\108\78")};game:GetService(v7("\107\246\8\64\80\240\25\88\92\247\43\88\86\225\25\75\92","\44\57\147\120")).Remotes.CommF_:InvokeServer(unpack(v656));v656={[1]=v7("\159\205\12\45\227\253\183\65\167","\40\211\162\109\73\165\143\194"),[2]=v7("\204\79\27\87\102\27\37\47\241","\70\159\63\114\57\75\72\85")};game:GetService(v7("\65\19\100\124\86\254\186\103\19\112\67\75\242\169\114\17\113","\219\19\118\20\16\63\157")).Remotes.CommF_:InvokeServer(unpack(v656));v655=1;end if (v655==1) then local v860=0 -0 ;while true do if (v860==(4 -3)) then v656={[1 + 0 ]=v7("\250\196\34\118\33\196\222\42\102","\103\182\171\67\18"),[9 -7 ]=v7("\215\214\6\52\74\181\95\150\244\212\29\51\67","\197\132\166\116\93\36\210\114")};game:GetService(v7("\134\178\107\165\201\194\71\160\178\127\154\212\206\84\181\176\126","\38\212\215\27\201\160\161")).Remotes.CommF_:InvokeServer(unpack(v656));v860=3 -1 ;end if (v860==(0 -0)) then v656={[1864 -(577 + 1286) ]=v7("\233\217\119\219\227\196\99\214\209","\191\165\182\22"),[2]=v7("\225\36\26\89\66\175\202\35\5","\236\162\76\117\41\111")};game:GetService(v7("\143\49\147\202\2\190\53\151\195\15\142\32\140\212\10\186\49","\107\221\84\227\166")).Remotes.CommF_:InvokeServer(unpack(v656));v860=1;end if (2==v860) then v655=5 -3 ;break;end end end if (v655==(1539 -(672 + 860))) then local v861=0 -0 ;while true do if (v861==(1 -0)) then v656={[1 + 0 ]=v7("\211\118\12\53\11\3\184\230\235","\143\159\25\109\81\77\113\205"),[1 + 1 ]=v7("\57\159\123\114\43\93\70\184\108\114\44\74\25","\47\107\234\25\16\78")};game:GetService(v7("\19\120\209\135\72\34\124\213\142\69\18\105\206\153\64\38\120","\33\65\29\161\235")).Remotes.CommF_:InvokeServer(unpack(v656));v861=5 -3 ;end if (v861==(9 -7)) then v655=1877 -(544 + 1325) ;break;end if (0==v861) then v656={[2 -1 ]=v7("\97\214\113\2\246\175\14\31\89","\118\45\185\16\102\176\221\123"),[2]=v7("\193\194\51\79\193\131\10\228\204\60\83","\70\141\171\84\39\181\174")};game:GetService(v7("\220\253\221\246\172\91\239\236\200\254\150\76\225\234\204\253\160","\56\142\152\173\154\197")).Remotes.CommF_:InvokeServer(unpack(v656));v861=1 -0 ;end end end if (v655==(1576 -(579 + 992))) then local v862=0 -0 ;while true do if (v862==(809 -(638 + 171))) then v656={[2 -1 ]=v7("\107\14\203\131\108\20\79\78\21","\58\39\97\170\231\42\102"),[2 + 0 ]=v7("\157\123\237\218\227\73\226\208\170","\190\206\26\131")};game:GetService(v7("\187\196\162\15\59\138\192\166\6\54\186\213\189\17\51\142\196","\82\233\161\210\99")).Remotes.CommF_:InvokeServer(unpack(v656));v862=1736 -(356 + 1379) ;end if (v862==2) then v655=27 -21 ;break;end if ((40 -(36 + 3))==v862) then v656={[1 -0 ]=v7("\195\125\255\57\201\96\235\52\251","\93\143\18\158"),[2 + 0 ]=v7("\137\52\23\49\234\137\52\23\49","\199\205\85\101\90")};game:GetService(v7("\9\217\25\217\92\61\175\47\217\13\230\65\49\188\58\219\12","\206\91\188\105\181\53\94")).Remotes.CommF_:InvokeServer(unpack(v656));v862=1 + 1 ;end end end if ((1741 -(734 + 1001))==v655) then v656={[1816 -(153 + 1662) ]=v7("\207\234\172\205\223\30\20\166\247","\207\131\133\205\169\153\108\97"),[1 + 1 ]=v7("\34\137\143\172\186\8\205\13\142\147\171","\138\101\225\224\223\206\37")};game:GetService(v7("\37\127\161\91\30\121\176\67\18\126\130\67\24\104\176\80\18","\55\119\26\209")).Remotes.CommF_:InvokeServer(unpack(v656));v656={[2 -1 ]=v7("\93\202\75\167\87\215\95\170\101","\195\17\165\42"),[4 -2 ]=v7("\240\177\234\193\219\182\239\129\240\177\234\193\219\182\239","\172\180\216\139")};game:GetService(v7("\132\228\253\170\198\52\117\38\179\229\222\178\192\37\117\53\179","\82\214\129\141\198\175\87\20")).Remotes.CommF_:InvokeServer(unpack(v656));v655=7;end if (v655==2) then v656={[24 -(21 + 2) ]=v7("\253\93\167\67\14\71\196\91\178","\53\177\50\198\39\72"),[2]=v7("\195\52\245\167\249\55\227\192\227","\173\129\91\152\197\212\117\140")};game:GetService(v7("\109\122\38\82\181\2\169\75\122\50\109\168\14\186\94\120\51","\200\63\31\86\62\220\97")).Remotes.CommF_:InvokeServer(unpack(v656));v656={[1 + 0 ]=v7("\33\59\120\14\172\31\33\112\30","\234\109\84\25\106"),[1 + 1 ]=v7("\224\217\84\238\26\227\118\166\220\223\94","\203\179\180\59\133\127\206\37")};game:GetService(v7("\250\209\186\218\32\249\45\220\209\174\229\61\245\62\201\211\175","\76\168\180\202\182\73\154")).Remotes.CommF_:InvokeServer(unpack(v656));v655=1746 -(528 + 1215) ;end if (v655==3) then v656={[1]=v7("\20\42\32\253\215\40\41\246\44","\159\88\69\65\153\145\90\92"),[1 + 1 ]=v7("\136\185\193\138\5\246\154\216\136\11\190","\96\219\201\168\225")};game:GetService(v7("\197\27\163\77\193\190\125\39\242\26\128\85\199\175\125\52\242","\83\151\126\211\33\168\221\28")).Remotes.CommF_:InvokeServer(unpack(v656));v656={[2 -1 ]=v7("\51\175\250\19\100\234\156\218\11","\179\127\192\155\119\34\152\233"),[5 -3 ]=v7("\228\195\84\203\230\143\233\89\199\238\199","\131\162\175\53\166")};game:GetService(v7("\59\168\63\66\91\10\172\59\75\86\58\185\32\92\83\14\168","\50\105\205\79\46")).Remotes.CommF_:InvokeServer(unpack(v656));v655=4;end if ((12 -4)==v655) then v656={[1]=v7("\243\214\173\136\249\203\185\133\203","\236\191\185\204"),[1907 -(15 + 1890) ]=v7("\244\8\73\187\239\211\27\22\139\231\196\27\82\172\244","\134\182\105\59\201")};game:GetService(v7("\60\208\215\19\211\13\212\211\26\222\61\193\200\13\219\9\208","\186\110\181\167\127")).Remotes.CommF_:InvokeServer(unpack(v656));break;end end end end);end end);if Second_Sea then v12.Raid:AddButton({[v7("\151\199\61\4\166","\104\195\174\73")]=v7("\235\197\234\206\153\232\226\200","\170\185\164\131"),[v7("\195\25\254\87\99\30\209\66\238\19\227","\54\135\124\141\52\17\119\161")]="Chổ Tập Kích",[v7("\49\139\180\74\192\19\137\179","\162\114\234\216\38")]=function() Tween2(CFrame.new( -(10225.735349999999 -3787),250.645355, -(2305.50684 + 2196)));end});elseif Third_Sea then v12.Raid:AddButton({[v7("\219\205\57\141\234","\225\143\164\77")]=v7("\252\238\127\198\235\203\207\237","\135\174\143\22\162\203"),[v7("\130\65\99\91\190\175\84\100\81\163\168","\204\198\36\16\56")]="Chổ Tập Kích",[v7("\204\177\193\32\83\217\254\228","\157\143\208\173\76\49\184")]=function() local v657=0 -0 ;while true do if (v657==(0 -0)) then game:GetService(v7("\60\174\198\0\176\244\32\80\11\175\229\24\182\229\32\67\11","\36\110\203\182\108\217\151\65")).Remotes.CommF_:InvokeServer(v7("\86\3\144\42\79\87\18\164\49\94\86\7\143\60\79","\42\36\102\225\95"),Vector3.new( -5075.50927734375,314.5155029296875, -(3635.0224609375 -(295 + 190))));Tween2(CFrame.new( -(1577.4086900000002 + 3440),314.844055, -(4154.0127 -(1176 + 155)), -(0.925743818 -0),1701.0000000448217 -(1456 + 245) , -0.378151238,1553.000000004555 -(523 + 1030) ,1 + 0 ,1.0737756e-7,1290.378151238 -(857 + 433) ,99.00000009768162 -(35 + 64) , -(1994.925743818 -(1272 + 722))));break;end end end});end local v65=v12.Raid:AddSection(v7("\57\185\32\146\202\132\28\188","\229\117\216\87\178\152"));local v89=v12.Raid:AddToggle(v7("\245\38\89\45\233\83\15\85\214","\52\161\73\62\74\133\54\67"),{[v7("\214\240\7\35\230","\131\130\153\115\79")]=v7("\7\170\208\244\180\171\47\49","\78\70\223\164\155\148\231"),[v7("\140\40\90\187\58\8\184\203\161\34\71","\191\200\77\41\216\72\97\200")]=v7("\8\63\77\51\105\8\76\37\105\9\81\53\57\106\18\124\2\35\85\48\105\40\86\47\58\106\85\61\62","\92\73\74\57"),[v7("\218\68\124\141\176\81\234","\61\158\33\26\236\197")]=false});v89:OnChanged(function(v228) Auto_Law=v228;end);v13.ToggleLaw:SetValue(false);spawn(function() pcall(function() while wait() do if Auto_Law then if ( not game:GetService(v7("\7\182\86\59\83\160\36","\210\87\218\55\66\54")).LocalPlayer.Character:FindFirstChild(v7("\80\130\39\72\218\27\13\116\155","\101\29\235\68\58\181\120")) and  not game:GetService(v7("\59\39\136\166\142\25\56","\235\107\75\233\223")).LocalPlayer.Backpack:FindFirstChild(v7("\0\83\119\251\175\123\20\36\74","\124\77\58\20\137\192\24")) and  not game:GetService(v7("\199\250\67\48\225\224\244\82\62","\146\144\149\49\91")).Enemies:FindFirstChild(v7("\46\173\193\68\223","\128\97\223\165\33\173\114\230")) and  not game:GetService(v7("\114\20\100\164\125\67\16\96\173\112\115\5\123\186\117\71\20","\20\32\113\20\200")):FindFirstChild(v7("\242\96\176\182\23","\164\189\18\212\211\101\26"))) then wait(0.3 + 0 );game:GetService(v7("\245\1\233\72\16\8\83\211\1\253\119\13\4\64\198\3\252","\50\167\100\153\36\121\107")).Remotes.CommF_:InvokeServer(v7("\43\230\177\249\18\241\125\8\248\180\200\28\228\121\27\238","\24\105\138\208\154\121\147"),v7("\11\234\191\71\141\68\211\40\54","\65\70\131\220\53\226\39\187"),"1");game:GetService(v7("\142\164\227\39\244\191\160\231\46\249\143\181\252\57\252\187\164","\157\220\193\147\75")).Remotes.CommF_:InvokeServer(v7("\52\243\220\143\193\231\19\254\207\136\248\224\1\254\207\136","\133\118\159\189\236\170"),v7("\48\136\5\44\18\130\14\55\13","\94\125\225\102"),"2");end end end end);end);spawn(function() pcall(function() while wait(0.4) do if Auto_Law then local v658=0;while true do if (v658==0) then if ( not game:GetService(v7("\32\138\101\115\4\149\118\123\18","\24\119\229\23")).Enemies:FindFirstChild(v7("\103\208\248\92\90","\57\40\162\156")) and  not game:GetService(v7("\216\91\255\251\2\23\234\88\239\90\220\227\4\6\234\75\239","\44\138\62\143\151\107\116\139")):FindFirstChild(v7("\245\147\112\15\154","\25\186\225\20\106\232\170"))) then if (game:GetService(v7("\126\186\119\145\216\168\78","\61\46\214\22\232\189\218")).LocalPlayer.Character:FindFirstChild(v7("\10\255\209\33\40\245\218\58\55","\83\71\150\178")) or game:GetService(v7("\199\171\197\32\64\252\8","\123\151\199\164\89\37\142")).LocalPlayer.Backpack:FindFirstChild(v7("\235\190\188\40\51\64\206\190\175","\35\166\215\223\90\92"))) then fireclickdetector(game:GetService(v7("\36\229\110\22\87\3\235\127\24","\36\115\138\28\125")).Map.CircleIsland.RaidSummon.Button.Main.ClickDetector);end end if (game:GetService(v7("\214\209\184\93\210\187\229\192\173\85\232\172\235\198\169\86\222","\216\132\180\200\49\187")):FindFirstChild(v7("\28\70\168\163\242","\128\83\52\204\198")) or game:GetService(v7("\100\69\44\74\161\92\89\239\86","\140\51\42\94\33\210\44\56")).Enemies:FindFirstChild(v7("\163\87\250\16\158","\117\236\37\158"))) then if game:GetService(v7("\191\161\216\226\54\239\137\173\207","\159\232\206\170\137\69")).Enemies:FindFirstChild(v7("\108\81\173\245\81","\144\35\35\201")) then for v1436,v1437 in pairs(game:GetService(v7("\27\181\204\51\63\170\223\59\41","\88\76\218\190")).Enemies:GetChildren()) do if (v1437.Name==v7("\103\41\218\66\154","\27\40\91\190\39\232")) then repeat wait(_G.Fast_Delay);AttackNoCoolDown();AutoHaki();EquipTool(SelectWeapon);Tween(v1437.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );v1437.HumanoidRootPart.CanCollide=false;v1437.HumanoidRootPart.Size=Vector3.new(1859 -(1074 + 665) ,5 + 115 ,52 + 68 );until  not v1437.Parent or (v1437.Humanoid.Health<=(0 + 0)) or (Auto_Law==false)  end end elseif game:GetService(v7("\101\5\25\21\94\3\8\13\82\4\58\13\88\18\8\30\82","\121\55\96\105")):FindFirstChild(v7("\250\193\228\63\210","\30\181\179\128\90\160\133")) then Tween(CFrame.new( -(586.2021484375 + 5631),24.047645568848 + 4 , -5053.1357421875));end end break;end end end end end);end);v12.Race:AddButton({[v7("\6\248\146\133\122","\119\82\145\230\233\31")]=v7("\130\227\163\242\186\239\238\205\176\170\154\235\187\239","\130\214\138\206"),[v7("\166\132\153\48\43\139\145\158\58\54\140","\89\226\225\234\83")]=v7("\68\208\44\17\190\254\167\95\223\97\53\187\246\226","\135\16\185\65\97\210\155"),[v7("\31\68\201\135\251\4\119\55","\20\92\37\165\235\153\101")]=function() game:GetService(v7("\229\225\18\174\112\212\229\22\167\125\228\240\13\176\120\208\225","\25\183\132\98\194")).Remotes.CommF_:InvokeServer(v7("\226\245\234\151\245\227\239\167\254\228\233\131\254\243\254","\226\144\144\155"),Vector3.new(122209.35546875 -93923 ,14895.3017578125,1158.6246948242188 -(371 + 685) ));end});v12.Race:AddButton({[v7("\33\67\181\219\89","\45\117\42\193\183\60")]=v7("\200\194\48\187\223\122\121\241\203\42","\41\132\167\70\222\173\90"),[v7("\227\9\51\121\213\5\48\110\206\3\46","\26\167\108\64")]=v7("\159\137\174\95\7\101\131\153\180\86","\69\211\236\216\58\117"),[v7("\60\125\85\242\214\3\30\161","\202\127\28\57\158\180\98\125")]=function() local v229=0;local v230;while true do if (v229==(0 + 0)) then v230=1708 -(966 + 742) ;while true do if (v230==(0 + 0)) then game:GetService(v7("\218\57\9\62\177\235\61\13\55\188\219\40\22\32\185\239\57","\216\136\92\121\82")).Remotes.CommF_:InvokeServer(v7("\211\164\183\176\114\188\213\132\168\177\101\174\207\162\163","\207\161\193\198\197\23"),Vector3.new(18380.35546875 + 9906 ,14895.3017578125,258.62469482421875 -156 ));Tween2(CFrame.new(28575.181640625,15341.6279296875 -(383 + 22) ,230.31636810302734 -158 ));break;end end break;end end end});v12.Race:AddButton({[v7("\30\90\43\114\47","\235\74\51\95\30\74\72")]=v7("\214\50\34\169\249\75\183\30\37\169","\63\151\81\75\204\151"),[v7("\209\95\40\168\189\20\229\78\50\164\161","\125\149\58\91\203\207")]=v7("\110\197\41\15\97\214\35\74\78\193\106\96\78\208","\47\32\181\74"),[v7("\25\71\14\241\180\35\119\49","\20\90\38\98\157\214\66")]=function() local v231=1721 -(955 + 766) ;local v232;while true do if (v231==(420 -(411 + 9))) then v232=0;while true do if (v232==(0 + 0)) then game:GetService(v7("\68\43\213\75\44\163\119\58\192\67\22\180\121\60\196\64\32","\192\22\78\165\39\69")).Remotes.CommF_:InvokeServer(v7("\173\127\76\6\179\21\71\237\177\110\79\18\184\5\86","\168\223\26\61\115\214\102\51"),Vector3.new(28286.35546875,14895.3017578125,87.62469482421875 + 15 ));Tween2(CFrame.new(30344.552734375 -(155 + 1208) ,14888.4267578125, -(877.245849609375 -(670 + 87))));break;end end break;end end end});local v65=v12.Race:AddSection(v7("\56\79\194\244\89\104\215\248\28","\155\121\58\182"));v12.Race:AddButton({[v7("\119\241\181\233\38","\42\35\152\193\133\67\44\41")]=v7("\48\251\71\192\129\38\245\75\215","\161\98\154\36\165"),[v7("\198\33\229\143\7\63\242\48\255\131\27","\86\130\68\150\236\117")]="Tộc Của Mày",[v7("\196\164\166\247\119\230\166\161","\21\135\197\202\155")]=function() local v233=0;local v234;while true do if ((0 -0)==v233) then v234=0 -0 ;while true do if ((0 -0)==v234) then game:GetService(v7("\230\81\220\180\221\87\205\172\209\80\255\172\219\70\205\191\209","\216\180\52\172")).Remotes.CommF_:InvokeServer(v7("\215\132\213\164\234\214\209\164\202\165\253\196\203\130\193","\165\165\225\164\209\143"),Vector3.new(87403.35546875 -59117 ,2473.3017578125 + 12422 ,1442.6246948242188 -(771 + 569) ));if (game:GetService(v7("\223\198\7\202\234\216\21","\179\143\170\102")).LocalPlayer.Data.Race.Value==v7("\138\219\196\178\71","\199\194\174\169\211\41\69\146")) then Tween2(CFrame.new(29221.822265625,14890.9755859375, -205.99114990234375));elseif (game:GetService(v7("\139\113\65\147\205\231\22","\101\219\29\32\234\168\149")).LocalPlayer.Data.Race.Value==v7("\45\22\221\64\5\117\229","\62\126\125\164\48\108\16\132")) then Tween2(CFrame.new(30258.158203125 -(762 + 536) ,15336.6240234375 -(59 + 358) ,235.03948974609375));elseif (game:GetService(v7("\242\248\41\170\229\238\237","\158\162\148\72\211\128\156")).LocalPlayer.Data.Race.Value==v7("\94\179\8\124\246\189\130","\236\24\218\123\20\155\220")) then Tween2(CFrame.new(28231.17578125,16296.9755859375 -(1387 + 19) , -(512.6417388916016 -(229 + 72))));elseif (game:GetService(v7("\31\219\178\214\42\197\160","\175\79\183\211")).LocalPlayer.Data.Race.Value==v7("\151\16\220\15\78\178","\213\212\105\190\96\60")) then Tween2(CFrame.new(28933.681640625 -(397 + 34) ,7399.9755859375 + 7496 , -(1039.7279357910156 -616)));elseif (game:GetService(v7("\246\9\207\76\38\10\227","\52\166\101\174\53\67\120\144")).LocalPlayer.Data.Race.Value==v7("\56\3\0\20\135","\127\127\107\111\97\235\160\169")) then Tween2(CFrame.new(12989.244140625 + 15685 ,7992.6767578125 + 6898 ,162.43106079101562 + 283 ));elseif (game:GetService(v7("\129\227\235\23\73\72\162","\58\209\143\138\110\44")).LocalPlayer.Data.Race.Value==v7("\86\222\210\80","\159\27\183\188\59")) then Tween2(CFrame.new(5966.341796875 + 23046 ,14890.9755859375, -(942.1492614746094 -(35 + 527))));end break;end end break;end end end});local v90=v12.Race:AddToggle(v7("\0\220\239\50\205\230\28\198\229\52\207\226\58\215\239\61\206\246\56","\131\84\179\136\85\161"),{[v7("\234\90\40\57\219","\85\190\51\92")]="Auto [ Human / Ghoul ] Trial",[v7("\250\57\0\35\204\53\3\52\215\51\29","\64\190\92\115")]="Auto  Human / Ghoul  Trial",[v7("\0\203\51\87\162\40\218","\215\68\174\85\54")]=false});v90:OnChanged(function(v235) KillAura=v235;end);v13.ToggleHumanandghoul:SetValue(false);local v91=v12.Race:AddToggle(v7("\204\39\47\16\59\253\9\61\3\56\236\58\33\22\59","\87\152\72\72\119"),{[v7("\250\171\180\122\143","\55\174\194\192\22\234")]=v7("\135\211\152\198\230\242\158\192\167\202","\169\198\166\236"),[v7("\45\203\49\14\79\91\25\218\43\2\83","\50\105\174\66\109\61")]=v7("\122\178\185\232\248\111\181\164\230\180","\216\59\199\205\135"),[v7("\24\140\13\191\104\94\40","\50\92\233\107\222\29")]=false});v91:OnChanged(function(v236) _G.AutoQuestRace=v236;end);v13.ToggleAutotrial:SetValue(false);spawn(function() pcall(function() while wait() do if _G.AutoQuestRace then if (game:GetService(v7("\239\250\19\254\63\192\204","\178\191\150\114\135\90")).LocalPlayer.Data.Race.Value==v7("\13\205\7\160\43","\193\69\184\106")) then for v863,v864 in pairs(game.Workspace.Enemies:GetDescendants()) do if (v864:FindFirstChild(v7("\9\71\214\249\43\46\91\223","\69\65\50\187\152")) and v864:FindFirstChild(v7("\83\172\224\90\117\182\228\95\73\182\226\79\75\184\255\79","\59\27\217\141")) and (v864.Humanoid.Health>0)) then pcall(function() repeat local v1315=0;while true do if (v1315==(0 -0)) then wait(0.1 + 0 );v864.Humanoid.Health=0 -0 ;v1315=1 -0 ;end if (v1315==1) then v864.HumanoidRootPart.CanCollide=false;sethiddenproperty(game.Players.LocalPlayer,v7("\156\35\56\164\50\174\62\60\190\48\157\43\49\184\43\188","\94\207\74\85\209"),math.huge);break;end end until  not _G.AutoQuestRace or  not v864.Parent or (v864.Humanoid.Health<=(0 + 0))  end);end end elseif (game:GetService(v7("\30\186\249\234\221\18\88","\43\78\214\152\147\184\96")).LocalPlayer.Data.Race.Value==v7("\250\73\107\249\203\20\42","\75\169\34\18\137\162\113")) then for v1139,v1140 in pairs(game:GetService(v7("\5\38\159\229\19\235\51\42\136","\155\82\73\237\142\96")).Map.SkyTrial.Model:GetDescendants()) do if (v1140.Name==v7("\98\16\91\0\218\98\18\85\25\215\78\61\77\27\218\127\26\81\5\157\33\70\5","\179\17\126\52\119")) then BTPZ(v1140.CFrame * CFrame.new(0 + 0 ,0 -0 ,0 -0 ) );end end elseif (game:GetService(v7("\28\121\55\75\244\62\102","\145\76\21\86\50")).LocalPlayer.Data.Race.Value==v7("\196\255\211\18\239\247\206","\122\130\150\160")) then for v1316,v1317 in pairs(game:GetService(v7("\190\51\27\67\107\176\136\63\12","\192\233\92\105\40\24")).SeaBeasts.SeaBeast1:GetDescendants()) do if (v1317.Name==v7("\157\170\46\135\183\186\182\39\180\182\186\171\19\135\171\161","\217\213\223\67\230")) then local v1469=0 + 0 ;while true do if (v1469==(1 + 1)) then game:GetService(v7("\247\130\110\47\147\0\178\57\207\155\105\47\171\0\176\17\198\142\110","\112\161\235\28\91\230\97\222")):SendKeyEvent(true,170 -71 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\0\32\209\74\35\40\207\119\56\57\214\74\27\40\205\95\49\44\209","\62\86\73\163")):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart);for v1729,v1730 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if v1730:IsA(v7("\78\234\242\137","\180\26\133\157\229\90")) then if (v1730.ToolTip==v7("\25\68\77\63\97\29\90\87\46\53","\65\91\40\34\71")) then game.Players.LocalPlayer.Character.Humanoid:EquipTool(v1730);end end end game:GetService(v7("\36\224\102\81\77\19\229\93\75\72\7\253\89\68\86\19\238\113\87","\56\114\137\20\37")):SendKeyEvent(true,138 -(9 + 7) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1469=3 -0 ;end if (v1469==(1630 -(764 + 859))) then game:GetService(v7("\54\17\61\199\84\1\20\6\221\81\21\12\2\210\79\1\31\42\193","\33\96\120\79\179")):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.5 -0 );for v1731,v1732 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if v1732:IsA(v7("\19\49\131\117","\44\71\94\236\25\106")) then if (v1732.ToolTip==v7("\138\38\194","\155\205\83\172\80")) then game.Players.LocalPlayer.Character.Humanoid:EquipTool(v1732);end end end game:GetService(v7("\138\38\159\174\242\67\243\237\178\63\152\174\202\67\241\197\187\42\159","\164\220\79\237\218\135\34\159")):SendKeyEvent(true,368 -(20 + 226) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1469=8;end if (v1469==8) then local v1691=0 -0 ;while true do if (v1691==2) then v1469=10 -1 ;break;end if (v1691==(0 + 0)) then game:GetService(v7("\77\4\177\25\110\12\175\36\117\29\182\25\86\12\173\12\124\8\177","\109\27\109\195")):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.2);v1691=1;end if (v1691==1) then game:GetService(v7("\29\22\161\246\42\7\92\147\37\15\166\246\18\7\94\187\44\26\161","\218\75\127\211\130\95\102\48")):SendKeyEvent(true,1014 -(334 + 560) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\193\248\254\32\161\184\45\35\249\225\249\32\153\184\47\11\240\244\254","\106\151\145\140\84\212\217\65")):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1691=1917 -(1277 + 638) ;end end end if (v1469==(452 -(185 + 261))) then game:GetService(v7("\56\57\52\40\186\63\15\39\62\54\41\187\19\2\0\49\33\57\189","\99\110\80\70\92\207\94")):SendKeyEvent(true,1668 -(107 + 1441) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\142\36\88\204\224\251\138\109\182\61\95\204\216\251\136\69\191\40\88","\36\216\77\42\184\149\154\230")):SendKeyEvent(false,221 -101 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.2 + 0 );game:GetService(v7("\239\236\221\151\237\2\237\240\235\223\150\236\46\224\215\228\200\134\234","\129\185\133\175\227\152\99")):SendKeyEvent(true,953 -(365 + 489) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1469=5 + 2 ;end if (v1469==(4 + 0)) then local v1692=0 + 0 ;while true do if (v1692==(568 -(344 + 223))) then game:GetService(v7("\111\40\41\42\34\26\85\8\53\46\34\15\116\32\53\63\48\30\75","\123\57\65\91\94\87")):SendKeyEvent(false,21 + 78 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.5 + 0 );v1692=1491 -(655 + 834) ;end if ((1600 -(573 + 1027))==v1692) then wait(0.2);game:GetService(v7("\177\77\209\77\166\134\72\234\87\163\146\80\238\88\189\134\67\198\75","\211\231\36\163\57")):SendKeyEvent(true,3 + 96 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1692=2 -1 ;end if (v1692==2) then v1469=5;break;end end end if (v1469==(0 + 0)) then Tween(v1317.CFrame * v36 );for v1733,v1734 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if v1734:IsA(v7("\75\215\138\189","\209\31\184\229")) then if (v1734.ToolTip==v7("\104\246\187\242\64","\151\37\147\215")) then game.Players.LocalPlayer.Character.Humanoid:EquipTool(v1734);end end end game:GetService(v7("\58\117\216\18\253\201\0\85\196\22\253\220\33\125\196\7\239\205\30","\168\108\28\170\102\136")):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\66\201\178\73\230\117\182\145\122\208\181\73\222\117\180\185\115\197\178","\216\20\160\192\61\147\20\218")):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1469=1305 -(1243 + 61) ;end if (v1469==(1 + 4)) then for v1735,v1736 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do if v1736:IsA(v7("\177\126\208\30","\43\229\17\191\114")) then if (v1736.ToolTip==v7("\111\93\13\10\206","\223\60\42\98\120\170\140")) then game.Players.LocalPlayer.Character.Humanoid:EquipTool(v1736);end end end game:GetService(v7("\244\22\23\199\148\120\118\230\204\15\16\199\172\120\116\206\197\26\23","\175\162\127\101\179\225\25\26")):SendKeyEvent(true,664 -(227 + 315) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\214\197\65\182\151\231\236\229\93\178\151\242\205\205\93\163\133\227\242","\134\128\172\51\194\226")):SendKeyEvent(false,1900 -(140 + 1638) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.2 + 0 );v1469=6;end if (v1469==(1881 -(1512 + 366))) then game:GetService(v7("\100\9\175\250\238\84\185\28\92\16\168\250\214\84\187\52\85\5\175","\85\50\96\221\142\155\53\213")):SendKeyEvent(false,260 -138 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.2 -0 );game:GetService(v7("\120\130\220\201\226\248\60\103\133\222\200\227\212\49\64\138\201\216\229","\80\46\235\174\189\151\153")):SendKeyEvent(true,1564 -(9 + 1435) ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\54\250\245\251\74\166\12\218\233\255\74\179\45\242\233\238\88\162\18","\199\96\147\135\143\63")):SendKeyEvent(false,11 + 109 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1469=385 -(220 + 161) ;end if (v1469==(27 -18)) then wait(0.2 + 0 );game:GetService(v7("\234\197\25\215\201\205\7\234\210\220\30\215\241\205\5\194\219\201\25","\163\188\172\107")):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart);game:GetService(v7("\218\220\211\187\87\166\13\197\219\209\186\86\138\0\226\212\198\170\80","\97\140\181\161\207\34\199")):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart);break;end if (v1469==1) then local v1693=0 -0 ;while true do if (v1693==1) then game:GetService(v7("\117\54\240\43\152\235\189\58\77\47\247\43\160\235\191\18\68\58\240","\115\35\95\130\95\237\138\209")):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart);wait(0.2);v1693=3 -1 ;end if (v1693==0) then wait(806.2 -(30 + 776) );game:GetService(v7("\120\32\226\34\40\53\139\103\39\224\35\41\25\134\64\40\247\51\47","\231\46\73\144\86\93\84")):SendKeyEvent(true,195 -75 ,false,game.Players.LocalPlayer.Character.HumanoidRootPart);v1693=1 + 0 ;end if (2==v1693) then v1469=1935 -(1345 + 588) ;break;end end end end end end elseif (game:GetService(v7("\19\17\8\38\235\49\14","\142\67\125\105\95")).LocalPlayer.Data.Race.Value==v7("\122\166\17\235\28\94","\110\57\223\115\132")) then Tween(CFrame.new(28654,15340.7832 -(9 + 433) , -(96 -66),1,0 + 0 ,0 + 0 ,314 -(215 + 99) ,1,1820 -(1807 + 13) ,835 -(115 + 720) ,1550 -(615 + 935) ,1 + 0 ));elseif (game:GetService(v7("\53\52\136\170\0\42\154","\211\101\88\233")).LocalPlayer.Data.Race.Value==v7("\105\84\119\205\123","\185\46\60\24\184\23\62")) then for v1623,v1624 in pairs(game.Workspace.Enemies:GetDescendants()) do if (v1624:FindFirstChild(v7("\101\34\215\202\235\21\68\51","\122\45\87\186\171\133")) and v1624:FindFirstChild(v7("\110\109\48\120\72\119\52\125\116\119\50\109\118\121\47\109","\25\38\24\93")) and (v1624.Humanoid.Health>(1753 -(1530 + 223)))) then pcall(function() repeat local v1841=0 + 0 ;while true do if (v1841==(1491 -(990 + 501))) then local v1912=0 -0 ;while true do if (1==v1912) then v1841=1 + 0 ;break;end if (v1912==(0 -0)) then wait(0.1 -0 );v1624.Humanoid.Health=0 -0 ;v1912=1396 -(1162 + 233) ;end end end if (v1841==(1 + 0)) then v1624.HumanoidRootPart.CanCollide=false;sethiddenproperty(game.Players.LocalPlayer,v7("\214\227\172\173\233\235\181\177\234\228\147\185\225\227\180\171","\216\133\138\193"),math.huge);break;end end until  not _G.AutoQuestRace or  not v1624.Parent or (v1624.Humanoid.Health<=(0 -0))  end);end end elseif (game:GetService(v7("\9\84\62\160\140\54\201","\177\89\56\95\217\233\68\186")).LocalPlayer.Data.Race.Value==v7("\175\242\37\168","\38\226\155\75\195\60\78\217")) then for v1737,v1738 in pairs(game:GetService(v7("\113\2\49\176\5\98\221\34\67","\65\38\109\67\219\118\18\188")):GetDescendants()) do if (v1738.Name==v7("\137\164\37\224\156\138\191\45\252\156","\232\218\208\68\146")) then Tween(v1738.CFrame * CFrame.new(0 -0 ,10,0) );end end end end end end);end);local v65=v12.Race:AddSection(v7("\86\222\98\64\31\67\217\119\70\81","\63\23\171\22\47"));local v92=v12.Race:AddToggle(v7("\119\127\162\8\69\84\98\101\177\0\104\82\74\117\171\27\120\68\70\99\177","\49\35\16\197\111\41"),{[v7("\22\88\201\129\250","\201\66\49\189\237\159")]=v7("\40\11\31\223\138\61\12\10\217\196","\170\105\126\107\176"),[v7("\216\44\190\112\94\245\57\185\122\67\242","\44\156\73\205\19")]=v7("\3\105\200\17\104\255\38\62\47\60\238\31\43\220\116\41\118","\95\66\28\188\126\72\185\84"),[v7("\41\9\26\114\24\0\8","\19\109\108\124")]=false});v92:OnChanged(function(v237) AutoFarmAcient=v237;end);v13.ToggleAutoAcientQuest:SetValue(false);local v93=CFrame.new(126.211181640625 + 90 ,126.9352035522461, -12599.0732421875);spawn(function() pcall(function() while wait() do if AutoFarmAcient then if (game.Players.LocalPlayer.Character.RaceTransformed.Value==true) then local v783=0;while true do if (v783==(0 + 0)) then AutoFarmAcient=false;toTarget(CFrame.new(216.211181640625,1121.935203552246 -(352 + 643) , -(10789.0732421875 + 1810)));break;end end end end end end);end);spawn(function() while wait() do if AutoFarmAcient then pcall(function() if (game:GetService(v7("\182\69\181\70\231\145\75\164\72","\148\225\42\199\45")).Enemies:FindFirstChild(v7("\10\195\160\233\46\116\151\243\59\222\170\233\61","\146\73\172\195\134\79\84\192")) or game:GetService(v7("\144\95\179\230\196\243\166\83\164","\131\199\48\193\141\183")).Enemies:FindFirstChild(v7("\48\200\234\222\28\204\228\201\22\128\199\220\1\128\199\220\7\212\233\216\1","\189\115\160\133")) or game:GetService(v7("\30\201\152\73\41\57\199\137\71","\90\73\166\234\34")).Enemies:FindFirstChild(v7("\229\78\228\10\196\17\25\11\223\92\231","\99\182\57\129\111\176\49\77")) or game:GetService(v7("\17\42\76\239\53\53\95\231\35","\132\70\69\62")).Enemies:FindFirstChild(v7("\146\235\87\40\225\253\192\130\179\239\85","\231\209\138\57\76\152\221\146"))) then for v865,v866 in pairs(game:GetService(v7("\243\89\228\247\52\68\197\85\243","\52\164\54\150\156\71")).Enemies:GetChildren()) do if ((v866.Name==v7("\132\27\3\122\166\84\55\116\181\6\9\122\181","\21\199\116\96")) or (v866.Name==v7("\11\121\7\13\207\60\192\109\45\49\42\15\210\112\227\120\60\101\4\11\210","\25\72\17\104\110\160\80\161")) or (v866.Name==v7("\109\5\245\47\3\141\210\86\27\245\44","\134\62\114\144\74\119\173")) or (v866.Name==v7("\52\113\208\62\108\141\37\117\220\63\121","\173\119\16\190\90\21"))) then if (v866:FindFirstChild(v7("\98\247\120\71\16\2\215\44","\72\42\130\21\38\126\109\190")) and v866:FindFirstChild(v7("\149\236\229\222\162\138\244\112\143\246\231\203\156\132\239\96","\20\221\153\136\191\204\229\157")) and (v866.Humanoid.Health>(0 + 0))) then bringmob=true;repeat local v1438=0;while true do if (v1438==(1 + 0)) then AutoHaki();EquipTool(SelectWeapon);v1438=3 -1 ;end if (v1438==3) then v866.Head.CanCollide=false;FarmPos=v866.HumanoidRootPart.CFrame;v1438=1386 -(249 + 1133) ;end if (v1438==(116 -(9 + 105))) then v866.HumanoidRootPart.CanCollide=false;v866.Humanoid.WalkSpeed=0;v1438=3;end if (v1438==(0 -0)) then wait(_G.Fast_Delay);AttackNoCoolDown();v1438=61 -(41 + 19) ;end if (v1438==(5 -1)) then MonFarm=v866.Name;Tween(v866.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ) );break;end end until  not AutoFarmAcient or  not v866.Parent or (v866.Humanoid.Health<=(1631 -(128 + 1503)))  bringmob=false;end end end else toTarget(v93);end end);end end end);spawn(function() pcall(function() while wait() do if AutoFarmAcient then if (game.Players.LocalPlayer.Character.RaceTransformed.Value==false) then AutoFarmAcient=true;end end end end);end);spawn(function() while wait() do pcall(function() if AutoFarmAcient then local v659=0 + 0 ;while true do if (v659==(4 -3)) then game:GetService(v7("\189\9\93\216\54\72\135\41\65\220\54\93\166\1\65\205\36\76\153","\41\235\96\47\172\67")):SendKeyEvent(false,"Y",false,game);break;end if (v659==0) then game:GetService(v7("\205\31\192\97\23\223\61\254\245\6\199\97\47\223\63\214\252\19\192","\183\155\118\178\21\98\190\81")):SendKeyEvent(true,"Y",false,game);wait(0.1);v659=1099 -(6 + 1092) ;end end end end);end end);v12.Shop:AddButton({[v7("\0\68\62\67\49","\47\84\45\74")]=v7("\111\8\227\252\53","\51\40\109\147\140\90"),[v7("\238\170\12\3\191\249\23\64\195\160\17","\52\170\207\127\96\205\144\103")]="Buy nhảy liên tục",[v7("\103\81\40\174\230\69\83\47","\132\36\48\68\194")]=function() game:GetService(v7("\147\30\162\45\15\0\193\32\164\31\129\53\9\17\193\51\164","\84\193\123\210\65\102\99\160")).Remotes.CommF_:InvokeServer(v7("\32\22\237\203\120\172\11","\199\98\99\148\131\25"),v7("\80\133\92\7\120","\119\23\224\44"));end});v12.Shop:AddButton({[v7("\47\132\59\64\172","\71\123\237\79\44\201\191\153")]=v7("\84\195\72\174\203\94\215\80\168","\235\22\182\59\193"),[v7("\227\76\6\220\104\49\88\211\64\26\209","\40\167\41\117\191\26\88")]="Buy haki vũ trang",[v7("\57\139\189\54\7\251\143\17","\236\122\234\209\90\101\154")]=function() game:GetService(v7("\244\79\109\61\207\73\124\37\195\78\78\37\201\88\124\54\195","\81\166\42\29")).Remotes.CommF_:InvokeServer(v7("\208\81\243\218\26\249\77","\123\146\36\138\146"),v7("\136\41\233\56","\87\202\92\154"));end});v12.Shop:AddButton({[v7("\57\127\202\176\202","\175\109\22\190\220")]=v7("\236\178\177\100","\91\191\221\195\17\195"),[v7("\48\38\224\133\6\42\227\146\29\44\253","\230\116\67\147")]="Buy dịch chuyển (soru)",[v7("\99\64\216\62\248\68\119\217","\178\32\33\180\82\154\37\20")]=function() game:GetService(v7("\65\117\185\204\167\242\83\72\118\116\154\212\161\227\83\91\118","\60\19\16\201\160\206\145\50")).Remotes.CommF_:InvokeServer(v7("\136\79\189\18\56\69\232","\95\202\58\196\90\89\46\129"),v7("\176\253\95\180","\189\227\146\45\193\177"));end});v12.Shop:AddButton({[v7("\221\62\156\71\12","\151\137\87\232\43\105\169\215")]=v7("\247\185\137\126\170\79\215\181","\46\188\220\231\94\226"),[v7("\195\180\196\203\169\170\247\165\222\199\181","\195\135\209\183\168\219")]="Buy haki quan sát",[v7("\213\222\67\57\125\54\213\253","\182\150\191\47\85\31\87")]=function() game:GetService(v7("\30\183\104\83\37\177\121\75\41\182\75\75\35\160\121\88\41","\63\76\210\24")).Remotes.CommF_:InvokeServer(v7("\124\218\141\101\40\91\212","\73\55\191\227\49"),v7("\126\255\70","\69\60\138\63\136"));end});local v65=v12.Shop:AddSection(v7("\32\213\244\160\18\213\253\175\70\239\231\177\10\217\224","\200\102\188\147"));v12.Shop:AddButton({[v7("\24\192\176\227\7","\232\76\169\196\143\98\90\74")]=v7("\10\115\237\252\172\104\83\233\248","\199\72\31\140\159"),[v7("\218\55\239\54\236\59\236\33\247\61\242","\85\158\82\156")]=v7("\215\18\223\167\89\10\189\246\12\134\235\94\1","\220\149\103\166\135\59\102"),[v7("\56\199\229\21\113\26\197\226","\19\123\166\137\121")]=function() game:GetService(v7("\199\56\14\196\59\246\60\10\205\54\198\41\17\218\51\242\56","\82\149\93\126\168")).Remotes.CommF_:InvokeServer(v7("\235\201\14\168\65\141\237\30\229\217\16","\117\169\188\119\234\45\236\142"));end});v12.Shop:AddButton({[v7("\110\77\91\167\116","\196\58\36\47\203\17")]=v7("\87\32\1\138\167\96\35","\211\18\76\100\233"),[v7("\146\85\222\37\164\89\221\50\191\95\195","\70\214\48\173")]=v7("\31\8\159\15\242\32\56\30\146\93\248","\76\93\125\230\47\151"),[v7("\0\166\177\197\11\93\165\58","\81\67\199\221\169\105\60\198")]=function() game:GetService(v7("\2\247\25\247\39\190\92\36\247\13\200\58\178\79\49\245\12","\61\80\146\105\155\78\221")).Remotes.CommF_:InvokeServer(v7("\3\33\190\36\30\182\57\53\38\168","\90\65\84\199\97\114\211"));end});v12.Shop:AddButton({[v7("\211\217\52\136\40","\77\135\176\64\228")]=v7("\60\60\249\212\228\130\56\58\49\52\248\221\253\134","\26\122\85\138\188\137\227\86"),[v7("\118\53\107\246\254\58\149\67\91\63\118","\55\50\80\24\149\140\83\229")]=v7("\249\233\165\115\139\180\205\5\214\253\178\115\134\188\204\12\207\249","\109\187\156\220\83\237\221\190"),[v7("\47\177\21\249\168\1\38\252","\151\108\208\121\149\202\96\69")]=function() game:GetService(v7("\115\229\19\79\72\227\2\87\68\228\48\87\78\242\2\68\68","\35\33\128\99")).Remotes.CommF_:InvokeServer(v7("\28\89\220\103\3\61\123\51\77\203\106\11\60\114\42\73","\19\94\44\165\33\106\78"));end});v12.Shop:AddButton({[v7("\219\218\180\85\91","\232\143\179\192\57\62\44")]=v7("\222\158\244\49\245\130\181\21\246\141\226","\86\154\236\149"),[v7("\84\201\249\16\170\121\220\254\26\183\126","\216\16\172\138\115")]=v7("\54\74\173\91\125\99\62\19\80\186\91\122\125\62\3","\95\116\63\212\123\25\17"),[v7("\116\57\160\15\193\172\238\92","\141\55\88\204\99\163\205")]=function() game:GetService(v7("\230\167\209\93\64\51\213\182\196\85\122\36\219\176\192\86\76","\80\180\194\161\49\41")).Remotes.CommF_:InvokeServer(v7("\55\237\221\14\67\60\11\218\7\229\238\8\95\63\28\223","\187\117\129\188\109\40\94\110"),v7("\245\174\50\252\222\178\16\247\208\171","\155\177\220\83"),"1");game:GetService(v7("\26\211\71\255\228\142\200\60\211\83\192\249\130\219\41\209\82","\169\72\182\55\147\141\237")).Remotes.CommF_:InvokeServer(v7("\218\179\29\21\198\135\208\218\234\187\46\19\218\132\199\223","\187\152\223\124\118\173\229\181"),v7("\2\241\19\8\136\37\198\42\226\5","\133\70\131\114\111\231\75"),"2");end});v12.Shop:AddButton({[v7("\107\222\74\45\197","\128\63\183\62\65\160")]=v7("\244\224\12\126\8\228\255\202\244\18","\138\167\149\124\27\122\140"),[v7("\250\194\164\169\172\137\206\211\190\165\176","\224\190\167\215\202\222")]=v7("\52\23\176\28\213\200\238\19\16\161\73\203\220\240","\158\118\98\201\60\166\189"),[v7("\12\26\255\78\43\46\24\248","\73\79\123\147\34")]=function() game:GetService(v7("\239\239\150\86\44\222\235\146\95\33\238\254\137\72\36\218\239","\69\189\138\230\58")).Remotes.CommF_:InvokeServer(v7("\106\13\208\6\147\218\244\207\64\13\196\52\136","\189\40\120\169\85\230\170\145"));end});v12.Shop:AddButton({[v7("\75\7\213\163\234","\182\31\110\161\207\143\80")]=v7("\55\122\219\20\51\29\221\18\22\111","\102\115\31\186\96\91\61\142"),[v7("\120\207\99\79\173\201\155\13\85\197\126","\121\60\170\16\44\223\160\235")]=v7("\169\211\250\99\173\89\195\242\131\134\208\55\140\76","\134\235\166\131\67\233\60\162"),[v7("\95\129\45\208\128\94\127\139","\63\28\224\65\188\226")]=function() game:GetService(v7("\208\78\70\0\211\40\74\64\231\79\101\24\213\57\74\83\231","\52\130\43\54\108\186\75\43")).Remotes.CommF_:InvokeServer(v7("\63\161\216\221\75\28\9\188\242\237\75\13","\125\125\212\161\153\46"));end});v12.Shop:AddButton({[v7("\185\112\39\94\181","\163\237\25\83\50\208\64")]=v7("\255\175\138\255\199\170\138\227\140\140\138\255\205\179\142","\141\172\199\235"),[v7("\12\11\198\127\148\139\56\26\220\115\136","\226\72\110\181\28\230")]=v7("\135\7\192\144\248\236\164\0\210\221\234\234\229\25\216\194\234\240\160","\132\197\114\185\176\139"),[v7("\63\52\125\216\30\52\114\223","\180\124\85\17")]=function() game:GetService(v7("\28\41\49\223\246\220\48\85\43\40\18\199\240\205\48\70\43","\33\78\76\65\179\159\191\81")).Remotes.CommF_:InvokeServer(v7("\212\219\152\30\112\247\220\138\32\121\248\229\128\63\121\226\203","\24\150\174\225\77"),true);game:GetService(v7("\23\122\95\248\201\205\27\49\122\75\199\212\193\8\36\120\74","\122\69\31\47\148\160\174")).Remotes.CommF_:InvokeServer(v7("\200\56\233\199\164\235\63\251\249\173\228\6\241\230\173\254\40","\204\138\77\144\148"));end});v12.Shop:AddButton({[v7("\192\33\223\178\191","\121\148\72\171\222\218\67")]=v7("\237\74\47\198\94\14\126\203\6\9\201\75\11","\23\168\38\74\165\42\124"),[v7("\129\23\145\244\192\172\2\150\254\221\171","\178\197\114\226\151")]=v7("\116\31\63\64\115\1\83\9\50\18\127\14\22\9\42\1\97","\109\54\106\70\96\22"),[v7("\54\126\87\238\164\197\22\116","\164\117\31\59\130\198")]=function() game:GetService(v7("\65\119\17\15\171\61\114\102\4\7\145\42\124\96\0\4\167","\94\19\18\97\99\194")).Remotes.CommF_:InvokeServer(v7("\91\47\145\209\8\124\57\156\230\13\122\25\132\245\19","\100\25\90\232\148"));end});v12.Shop:AddButton({[v7("\146\31\89\204\80","\157\198\118\45\160\53\232")]=v7("\21\213\232\69\62\201\169\118\48\203\230\76","\34\81\167\137"),[v7("\36\38\100\124\53\9\51\99\118\40\14","\71\96\67\23\31")]=v7("\89\187\214\114\127\188\206\53\116\160\143\38\122\162\192\60","\82\27\206\175"),[v7("\205\163\61\117\79\126\47\74","\33\142\194\81\25\45\31\76")]=function() game:GetService(v7("\236\174\157\179\225\62\42\202\174\137\140\252\50\57\223\172\136","\75\190\203\237\223\136\93")).Remotes.CommF_:InvokeServer(v7("\14\197\33\129\68\234\173\37\34\228\57\169\89\229","\74\76\176\88\197\54\139\202"));end});v12.Shop:AddButton({[v7("\31\172\38\126\46","\18\75\197\82")]=v7("\96\207\127\74\20\202\221\73","\188\39\160\27\34\97\167"),[v7("\5\14\206\129\51\2\205\150\40\4\211","\226\65\107\189")]=v7("\193\54\92\164\164\27\219\31\246\46\68\234","\119\131\67\37\132\195\116\191"),[v7("\57\43\4\43\22\141\25\33","\236\122\74\104\71\116")]=function() game:GetService(v7("\144\17\8\231\120\215\61\95\167\16\43\255\126\198\61\76\167","\43\194\116\120\139\17\180\92")).Remotes.CommF_:InvokeServer(v7("\168\65\82\16\17\191\127\3\135\85\69","\118\234\52\43\87\126\219\23"));end});local v65=v12.Shop:AddSection(v7("\26\178\169\215\3\30\175\191\217\80","\35\87\219\218\180"));v12.Shop:AddButton({[v7("\136\83\92\167\185","\203\220\58\40")]=v7("\250\76\37\202\198\77\99\236\220\72\55\204","\191\168\41\67"),[v7("\40\129\38\6\181\5\148\33\12\168\2","\199\108\228\85\101")]=v7("\135\37\120\178\33\217\245\19\106\166\59\206","\189\213\64\30\199\79"),[v7("\62\237\47\88\81\77\40\22","\75\125\140\67\52\51\44")]=function() local v238=0;while true do if ((242 -(13 + 229))==v238) then game:GetService(v7("\76\22\234\240\172\248\87\74\123\23\201\232\170\233\87\89\123","\62\30\115\154\156\197\155\54")).Remotes.CommF_:InvokeServer(v7("\146\179\178\216\187\189\182\218\162\187\129\222\167\190\161\223","\187\208\223\211"),v7("\183\202\170\233\230\70","\34\229\175\204\156\136"),"1");game:GetService(v7("\247\82\252\198\204\84\237\222\192\83\223\222\202\69\237\205\192","\170\165\55\140")).Remotes.CommF_:InvokeServer(v7("\218\251\237\224\183\250\242\237\241\184\202\242\251\226\174\252","\220\152\151\140\131"),v7("\25\252\56\244\199\211","\38\75\153\94\129\169\183\158"),"2");break;end end end});v12.Shop:AddButton({[v7("\127\57\145\194\78","\174\43\80\229")]=v7("\238\14\231\238\209\208\75\199\224\222\217","\189\188\107\149\129"),[v7("\213\134\241\5\247\248\147\246\15\234\255","\133\145\227\130\102")]=v7("\48\183\124\232\113\15\246\96\237\125\7","\30\98\214\18\140"),[v7("\154\169\244\190\208\41\186\163","\72\217\200\152\210\178")]=function() game:GetService(v7("\119\142\23\56\231\117\68\159\2\48\221\98\74\153\6\51\235","\22\37\235\103\84\142")).Remotes.CommF_:InvokeServer(v7("\127\22\81\94\43\95\31\81\79\36\111\31\71\92\50\89","\64\61\122\48\61"),v7("\111\10\240\117\81\3","\26\61\111\130"),"1");game:GetService(v7("\183\32\235\8\79\134\36\239\1\66\182\49\244\22\71\130\32","\38\229\69\155\100")).Remotes.CommF_:InvokeServer(v7("\112\255\121\120\232\86\74\83\225\124\73\230\67\78\64\247","\47\50\147\24\27\131\52"),v7("\99\31\51\232\86\242","\167\49\122\65\135\58\158\226"),"2");end});v12.Misc:AddButton({[v7("\154\191\193\119\171","\27\206\214\181")]=v7("\41\127\16\57\59\213\154\217\30\104\12\51\32","\138\123\26\122\86\82\187\186"),[v7("\234\32\52\81\27\199\53\51\91\6\192","\105\174\69\71\50")]=v7("\102\205\63\41\234\160\173\15\81\218\35\35\241\238\234\61\89\205","\92\52\168\85\70\131\206\141"),[v7("\20\199\94\143\88\219\24\190","\213\87\166\50\227\58\186\123")]=function() game:GetService(v7("\193\77\128\60\229\71\158\45\198\77\158\47\252\75\137","\89\149\40\236")):Teleport(game.PlaceId,game:GetService(v7("\128\65\186\152\68\79\163","\61\208\45\219\225\33")).LocalPlayer);end});v12.Misc:AddButton({[v7("\180\18\147\207\177","\81\224\123\231\163\212")]=v7("\55\63\218\176\44\53\216\230\26\34","\144\127\80\170"),[v7("\215\137\233\251\183\122\236\106\250\131\244","\30\147\236\154\152\197\19\156")]=v7("\136\239\188\56\101\175\239\166\56\55","\69\220\138\208\93"),[v7("\48\72\250\182\30\26\16\66","\123\115\41\150\218\124")]=function() Hop();end});function Hop() local v239=game.PlaceId;local v240={};local v241="";local v242=os.date(v7("\68\16\77","\147\101\58\57\79\83")).hour;local v243=false;function TPReturner() local v449=0 -0 ;local v450;local v451;local v452;while true do if (v449==(2 -1)) then v451="";if (v450.nextPageCursor and (v450.nextPageCursor~=v7("\16\108\181\86","\216\126\25\217\58\221")) and (v450.nextPageCursor~=nil)) then v241=v450.nextPageCursor;end v449=2;end if (v449==(0 -0)) then local v660=1103 -(530 + 573) ;while true do if (v660==(1 + 0)) then v449=408 -(232 + 175) ;break;end if ((0 + 0)==v660) then v450=nil;if (v241=="") then v450=game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"   .. v239   .. "/servers/Public?sortOrder=Asc&limit=100" ));else v450=game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"   .. v239   .. "/servers/Public?sortOrder=Asc&limit=100&cursor="   .. v241 ));end v660=1 -0 ;end end end if (v449==(341 -(297 + 42))) then v452=821 -(725 + 96) ;for v731,v732 in pairs(v450.data) do local v733=true;v451=tostring(v732.id);if (tonumber(v732.maxPlayers)>tonumber(v732.playing)) then local v867=0;while true do if (v867==0) then for v1318,v1319 in pairs(v240) do local v1320=0 -0 ;while true do if (v1320==0) then if (v452~=(1759 -(1096 + 663))) then if (v451==tostring(v1319)) then v733=false;end elseif (tonumber(v242)~=tonumber(v1319)) then local v1769=pcall(function() v240={};table.insert(v240,v242);end);end v452=v452 + (1 -0) ;break;end end end if (v733==true) then local v1439=0;while true do if (v1439==(3 -2)) then pcall(function() local v1694=821 -(519 + 302) ;while true do if (v1694==0) then wait();game:GetService(v7("\18\231\73\184\3\34\110\74\21\231\87\171\26\46\121","\62\70\130\37\221\115\77\28")):TeleportToPlaceInstance(v239,v451,game.Players.LocalPlayer);break;end end end);wait(4);break;end if (v1439==0) then table.insert(v240,v451);wait();v1439=1969 -(92 + 1876) ;end end end break;end end end end break;end end end function v52() while wait() do pcall(function() local v566=0;while true do if (v566==(0 + 0)) then TPReturner();if (v241~="") then TPReturner();end break;end end end);end end v52();end local v65=v12.Misc:AddSection(v7("\114\48\48\179","\222\38\85\81"));v12.Misc:AddButton({[v7("\50\193\201\3\247","\45\102\168\189\111\146\237")]=v7("\37\234\199\118\120\228\6\29\228\218\125\43\148\59\10\228\195","\111\111\133\174\24\88\180"),[v7("\226\11\228\47\79\253\240\235\207\1\249","\159\166\110\151\76\61\148\128")]=v7("\108\238\18\40\87\130\97\56\104\226\1\36","\24\60\135\96\73\35\231\18"),[v7("\107\62\71\213\57\136\246\208","\187\40\95\43\185\91\233\149")]=function() game:GetService(v7("\220\90\27\142\60\76\46\87\235\91\56\150\58\93\46\68\235","\35\142\63\107\226\85\47\79")).Remotes.CommF_:InvokeServer(v7("\244\9\170\235\93\180\202","\213\167\108\222\191\56"),v7("\53\31\52\84\40\233\21","\102\101\118\70\53\92\140"));end});v12.Misc:AddButton({[v7("\223\245\247\239\190","\45\139\156\131\131\219\34")]=v7("\44\238\137\213\187\5\196\20\232\142\222\232\104\241\3\224\141","\165\102\129\224\187\155\72"),[v7("\163\199\82\59\50\142\210\85\49\47\137","\64\231\162\33\88")]=v7("\27\86\42\11\141\175\37\23\12\7\130\167","\202\86\55\88\98\227"),[v7("\221\212\125\238\44\63\253\222","\94\158\181\17\130\78")]=function() game:GetService(v7("\203\223\241\175\206\250\219\245\166\195\202\206\238\177\198\254\223","\167\153\186\129\195")).Remotes.CommF_:InvokeServer(v7("\219\40\49\225\237\44\40","\181\136\77\69"),v7("\96\36\100\208\67\32\101","\185\45\69\22"));end});local v65=v12.Misc:AddSection(v7("\53\19\251\201\90\54\247","\167\122\99\158"));v12.Misc:AddButton({[v7("\8\83\252\64\77","\85\92\58\136\44\40\87")]=v7("\154\45\43\167\228\180\233\182\39\45\238\197\241\212\171","\186\222\72\93\206\136\148"),[v7("\8\41\199\49\67\37\60\192\59\94\34","\49\76\76\180\82")]=v7("\23\242\176\182\63\183\149\183\60\231\230\146\54\249\179","\223\83\151\198"),[v7("\49\124\233\66\53\19\126\238","\87\114\29\133\46")]=function() local v244=815 -(275 + 540) ;while true do if (v244==(1237 -(164 + 1073))) then game:GetService(v7("\51\40\224\138\207\130\199\21\40\244\181\210\142\212\0\42\245","\166\97\77\144\230\166\225")).Remotes.CommF_:InvokeServer(v7("\198\48\206\45\62\181\232\33\201","\192\129\85\186\107\76"));game:GetService(v7("\188\233\95\95\178\30\28","\111\236\133\62\38\215\108")).LocalPlayer.PlayerGui.Main.FruitShop.Visible=true;break;end end end});v12.Misc:AddButton({[v7("\129\182\32\164\14","\107\213\223\84\200")]=v7("\239\6\70\193\74\22\31\51\199\0\10\227\93\88\34","\82\172\105\42\174\56\54\87"),[v7("\215\61\37\28\247\240\73\231\49\57\17","\57\147\88\86\127\133\153")]=v7("\202\254\186\27\244\27\193\240\189\29\166\118\236\255\163","\59\137\145\214\116\134"),[v7("\240\40\72\163\117\210\42\79","\23\179\73\36\207")]=function() game.Players.localPlayer.PlayerGui.Main.Colors.Visible=true;end});v12.Misc:AddButton({[v7("\54\64\27\17\166","\22\98\41\111\125\195\218")]=v7("\112\234\83\12\57\185\229\69\238\66\64\17\252\197\81","\171\36\131\39\96\92\153"),[v7("\159\208\204\60\193\209\225\175\220\208\49","\145\219\181\191\95\179\184")]=v7("\152\95\86\78\67\236\120\67\79\67\236\123\71\76\83","\38\204\54\34\34"),[v7("\97\20\140\94\34\95\182\183","\220\34\117\224\50\64\62\213")]=function() local v246=0 + 0 ;local v247;while true do if ((1 + 0)==v246) then game.Players.localPlayer.PlayerGui.Main.Titles.Visible=true;break;end if (v246==0) then v247={[1 -0 ]=v7("\203\182\10\228\197\167\18\213\223","\176\172\211\126")};game:GetService(v7("\236\70\74\198\32\126\223\87\95\206\26\105\209\81\91\205\44","\29\190\35\58\170\73")).Remotes.CommF_:InvokeServer(unpack(v247));v246=1 -0 ;end end end});v12.Misc:AddButton({[v7("\9\118\45\55\56","\91\93\31\89")]=v7("\144\47\254\247\253\191\49\241\251\184\156\61\241\233","\152\209\88\159\156"),[v7("\244\80\2\195\28\80\25\250\217\90\31","\142\176\53\113\160\110\57\105")]=v7("\155\98\66\18\33\199\179\123\68\89\9\204\180\96\3\63\54\220\179\97","\169\218\21\35\121\68"),[v7("\22\217\134\9\90\52\219\129","\56\85\184\234\101")]=function() game:GetService(v7("\193\222\4\238\170\231\40","\198\145\178\101\151\207\149\91")).LocalPlayer.PlayerGui.Main.AwakeningToggler.Visible=true;end});local v65=v12.Misc:AddSection(v7("\119\161\58\208\35","\95\35\211\85\188\79"));v12.Misc:AddButton({[v7("\247\121\37\196\18","\46\163\16\81\168\119\111")]=v7("\156\125\61\198\202\136\110\33\193\158","\234\206\28\84\168"),[v7("\228\23\198\182\210\27\197\161\201\29\219","\213\160\114\181")]="Mưa trái ác quỷ",[v7("\238\43\168\59\163\34\79\249","\146\173\74\196\87\193\67\44")]=function() for v453,v454 in pairs(game:GetObjects("rbxassetid://6942501524")[1 + 0 ]:GetChildren()) do local v455=726 -(21 + 705) ;while true do if ((1 + 0)==v455) then if v454.Fruit:FindFirstChild(v7("\124\90\31\121\237\148\84\91\24\87\227\142\73\70\25\120\224\133\79","\224\61\52\118\20\140")) then v454.Fruit:FindFirstChild(v7("\168\74\68\73\136\80\68\75\135\103\66\74\157\86\66\72\133\65\95","\36\233\36\45")):LoadAnimation(v454.Fruit:FindFirstChild(v7("\35\13\218\166","\49\106\105\182\195"))):Play();end v454.Handle.Touched:Connect(function(v734) if (v734.Parent==game.Players.LocalPlayer.Character) then local v868=0 + 0 ;while true do if (v868==0) then v454.Parent=game.Players.LocalPlayer.Backpack;game.Players.LocalPlayer.Character.Humanoid:EquipTool(v454);break;end end end end);break;end if (v455==(0 -0)) then v454.Parent=game.Workspace.Map;v454:MoveTo(game.Players.LocalPlayer.Character.PrimaryPart.Position + Vector3.new(math.random( -(86 -36),50),1877 -(1318 + 459) ,math.random( -(1328 -(393 + 885)),223 -173 )) );v455=1194 -(55 + 1138) ;end end end end});local v65=v12.Misc:AddSection(v7("\199\17\3\19","\161\138\120\112\112"));local v94=v12.Misc:AddToggle(v7("\254\181\181\171\203\180\248\191\184\163\206\191","\209\170\218\210\204\167"),{[v7("\14\186\17\208\204","\117\90\211\101\188\169")]=v7("\106\188\180\202\125\29\78\163\175\204\51","\79\43\201\192\165\93"),[v7("\53\54\188\125\243\233\249\5\58\160\112","\137\113\83\207\30\129\128")]=v7("\99\245\207\251\179\221\71\234\212\253\253","\143\34\128\187\148\147"),[v7("\23\35\55\245\213\63\50","\160\83\70\81\148")]=true});v94:OnChanged(function(v249) _G.AutoRejoin=v249;end);v13.ToggleRejoin:SetValue(true);spawn(function() while wait() do if _G.AutoRejoin then getgenv().rejoin=game:GetService(v7("\15\123\232\121\7\100\125","\20\76\20\154\28\64\17")).RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(v663) if ((v663.Name==v7("\224\202\81\140\42\255\215\215\78\147\44","\175\165\184\35\227\88")) and v663:FindFirstChild(v7("\94\219\70\152\246\116\219\116\153\242\114","\151\19\190\53\235")) and v663.MessageArea:FindFirstChild(v7("\133\161\99\75\159\163\10\217\173\182","\184\192\211\17\36\237\229\120"))) then game:GetService(v7("\55\211\179\225\69\229\17\194\140\225\71\252\10\213\186","\138\99\182\223\132\53")):Teleport(game.PlaceId);end end);end end end);local v65=v12.Misc:AddSection(v7("\90\49\23\110\49\127\112\61\123\52","\68\17\80\126\26"));v12.Misc:AddButton({[v7("\225\206\235\38\122","\106\181\167\159\74\31\24\80")]=v7("\196\215\38\14\14\98\227\218\36\10","\43\151\191\73\121\46"),[v7("\4\124\111\90\88\12\149\52\112\115\87","\229\64\25\28\57\42\101")]="Hiện thị vật phẩm",[v7("\130\66\52\208\118\160\64\51","\20\193\35\88\188")]=function() local v250=0 + 0 ;local v251;local v252;local v253;local v254;local v255;local v256;local v257;local v258;local v259;local v260;local v261;local v262;local v263;local v264;local v265;local v266;local v267;local v268;local v269;local v270;local v271;local v272;local v273;local v274;local v275;local v276;local v277;local v278;while true do if (v250==4) then local v570=0 -0 ;while true do if (v570==(1 + 0)) then v272=Instance.new(v7("\222\188\63\123\252","\153\152\206\94\22"),game.Players.LocalPlayer.PlayerGui.BubbleChat);v272.BackgroundTransparency=1 + 0 ;v570=51 -(12 + 37) ;end if (v570==(3 + 0)) then v273=Instance.new(v7("\121\213\78\14\90","\99\63\167\47"),game.Players.LocalPlayer.PlayerGui.BubbleChat);v273.BackgroundTransparency=1 + 0 ;v570=1688 -(801 + 883) ;end if (v570==0) then v271.SortOrder=7 -5 ;v271.Padding=UDim.new(0 + 0 ,9 + 1 );v570=1 + 0 ;end if (4==v570) then v250=23 -18 ;break;end if (v570==(1 + 1)) then v272.Size=UDim2.new(1671.5 -(379 + 1292) ,0,1 + 0 ,0);v271.Parent=v272;v570=1 + 2 ;end end end if (v250==(1205 -(1187 + 17))) then local v571=0;while true do if (v571==(2 + 2)) then v250=2;break;end if (v571==(0 -0)) then v252:Create(v256,TweenInfo.new(249.4 -(22 + 227) ,Enum.EasingStyle.Back,Enum.EasingDirection.InOut),{[v7("\239\128\188\46","\38\188\233\198\75")]=6 + 44 }):Play();v256.Parent=game.Lighting;v571=1;end if (v571==3) then v261=Enum.ButtonStyle.RobloxButton;v259.Parent=game.CoreGui;v571=4;end if (v571==(405 -(330 + 74))) then v257=Instance.new(v7("\228\37\67\103\75\181\253\202","\175\177\108\16\19\57\218\150"));v258=Instance.new(v7("\208\216\16\53\247\255\54\40","\90\133\145\83"));v571=434 -(39 + 393) ;end if (v571==(2 -0)) then v259=Instance.new(v7("\25\32\67\211\213\36\4\68\223","\176\74\67\49\182"));v260=Instance.new(v7("\207\13\129\22\70\101\95\229\242\15\142","\145\134\96\224\113\35\39\42"));v571=487 -(157 + 327) ;end end end if (v250==(8 + 0)) then v276.Name=v7("\49\248\247\166","\179\127\153\154\195\161");v276.Parent=game:GetService(v7("\236\95\234\36\85\251\241","\130\188\51\139\93\48\137")).LocalPlayer.PlayerGui.Main.Beli;v276.Position=UDim2.new(0 -0 ,0, -(610.5 -(31 + 578)),0 + 0 );v276.Size=UDim2.new(1,0 -0 ,1601 -(1411 + 189) ,0 -0 );v276.TextColor3=Color3.fromRGB(255,151 + 104 ,248 + 7 );v276.Text=game.Players.LocalPlayer.Name;v277=game:GetService(v7("\24\58\236\231\243\9\59","\123\72\86\141\158\150")).LocalPlayer.PlayerGui.Main.Fragments:Clone();v277.Name=v7("\10\151\0\172\193\41\139\21\184\239\36\128\2\160","\172\76\229\97\203");v250=1 + 8 ;end if ((882 -(848 + 28))==v250) then v275.LayoutOrder=table.find(v265,k);v275.AutomaticSize=989 -(370 + 617) ;v275.LayoutOrder=100;v271=Instance.new(v7("\209\31\34\154\206\81\61\229\47\10\157\211","\113\132\86\101\232\167\53"),v275);v271.CellPadding=UDim2.new(0.005 -0 ,0 -0 ,1589.005 -(757 + 832) ,0);v271.CellSize=UDim2.new(0,70,0,1554 -(969 + 515) );v271.FillDirectionMaxCells=98 + 2 ;v271.FillDirection=Enum.FillDirection.Horizontal;v250=7;end if (v250==0) then local v588=0;while true do if (v588==0) then do local v869=game:GetService(v7("\63\166\170\3\105\45\186","\211\124\201\216\102\46\88")).RobloxGui.Modules.Profile:FindFirstChild(v7("\131\57\9\76\37\192\183\2\60","\178\214\112\69\37\71"));if v869 then v869:Destroy();end end v251=game:GetService(v7("\30\218\85\93\2\199\64\90\63\250\85\93\61\192\83\74","\47\75\169\48"));v588=1 + 0 ;end if (v588==(2 + 1)) then do local v870=1110 -(539 + 571) ;local v871;while true do if (v870==(0 + 0)) then v871=game:GetService(v7("\125\243\133\125\89\21\95\253","\124\49\154\226\21\45")):FindFirstChild(v7("\196\4\66\160","\210\134\104\55"));if v871 then v871:Destroy();end break;end end end v256=Instance.new(v7("\129\123\185\193\134\113\170\214\160\99","\179\195\23\204"));v588=1949 -(424 + 1521) ;end if (v588==(1226 -(536 + 688))) then v254=game:GetService(v7("\123\136\62\90\136\34\53","\70\43\228\95\35\237\80")).LocalPlayer;v255=v254:GetMouse();v588=3;end if (v588==(805 -(82 + 722))) then v252=game:GetService(v7("\75\2\142\193\33\51\124\109\3\130\199\42","\25\31\117\235\164\79\96"));v253=game:GetService(v7("\37\156\192\210\254\5\159\199\226\254","\155\119\233\174\129"));v588=1 + 1 ;end if (v588==4) then v250=1887 -(1873 + 13) ;break;end end end if (v250==(1010 -(469 + 536))) then v273.Size=UDim2.new(0.5 + 0 ,0 -0 ,1,0);v273.Position=UDim2.new(0.6 + 0 ,1665 -(1191 + 474) ,0,0);v271:Clone().Parent=v273;for v664,v665 in pairs(v269) do local v666=0;local v667;local v668;local v669;local v670;while true do if (v666==3) then v669.CellPadding=UDim2.new(0.005,208 -(50 + 158) ,0.005,0 -0 );v669.CellSize=UDim2.new(0 -0 ,49 + 21 ,0,185 -115 );v669.FillDirectionMaxCells=198 -98 ;v666=14 -10 ;end if ((3 + 2)==v666) then for v1005,v1006 in pairs(v665) do if (v264[v1006.ItemName.Text] and v264[v1006.ItemName.Text].Mastery) then if (v1006.ItemLine2.Text~=v7("\213\248\165\185\231\232\169\174\237","\220\148\155\198")) then local v1440=0 -0 ;local v1441;while true do if (v1440==(2 + 2)) then v1441.Position=UDim2.new(0.5,0 + 0 ,0.5,0 -0 );v1441.Parent=v1006;break;end if (v1440==3) then v1441.Text=v264[v1006.ItemName.Text].Mastery;v1441.Size=UDim2.new(0.5,0 -0 ,156.5 -(77 + 79) ,0 + 0 );v1440=4;end if (v1440==2) then v1441.TextYAlignment=2;v1441.ZIndex=5;v1440=3;end if ((1 + 0)==v1440) then v1441.TextSize=24 -14 ;v1441.TextXAlignment=2;v1440=2 + 0 ;end if ((686 -(114 + 572))==v1440) then v1441=v1006.ItemName:Clone();v1441.BackgroundTransparency=1 + 0 ;v1440=1 -0 ;end end end v1006.Parent=v667;elseif (v1006.ItemLine2.Text==v7("\114\59\119\46\230\153\233\69\62\108","\155\48\87\24\86\198\223")) then v1006.Parent=v668;end end v667.AutomaticSize=1510 -(1281 + 227) ;v668.AutomaticSize=1 + 1 ;break;end if ((2 + 0)==v666) then v668.Size=UDim2.new(3 -2 ,0 + 0 ,0 -0 ,746 -(540 + 206) );v668.LayoutOrder=table.find(v265,v664);v669=Instance.new(v7("\116\33\173\189\184\244\206\49\88\7\159\187","\80\33\104\234\207\209\144\130"),v667);v666=4 -1 ;end if (v666==0) then local v879=0;while true do if (v879==1) then v667.Size=UDim2.new(1419 -(117 + 1301) ,0 -0 ,0 -0 ,0 -0 );v666=1;break;end if (v879==0) then v667=Instance.new(v7("\139\58\85\15\31","\169\205\72\52\98\122\79"),v272);v667.BackgroundTransparency=1257 -(594 + 662) ;v879=1708 -(1111 + 596) ;end end end if (v666==4) then local v880=0 + 0 ;while true do if (v880==0) then v669.FillDirection=Enum.FillDirection.Horizontal;v670=v669:Clone();v880=1;end if (v880==(1 + 0)) then v670.Parent=v668;v666=8 -3 ;break;end end end if (v666==(2 -1)) then v667.LayoutOrder=table.find(v265,v664);v668=Instance.new(v7("\158\93\232\228\199","\162\216\47\137\137"),v273);v668.BackgroundTransparency=2 -1 ;v666=2 + 0 ;end end end v274={[v7("\106\158\50\54\55\21\76\134\35\61","\125\57\235\66\83\69")]=Vector2.new(3,618 -(488 + 128) ),[v7("\62\122\53\4\48\41\107\49\0","\88\122\31\84\112")]=Vector2.new(4,1 + 2 ),[v7("\173\47\163\47\107\69\136\139\0\170\45\104","\225\232\67\198\76\31\55")]=Vector2.new(4 -2 ,0),[v7("\222\221\195\253\217\239\240\55\198\212\208\238\198\231","\89\141\181\162\143\178\130\145")]=Vector2.new(313 -(33 + 280) ,0 + 0 ),[v7("\244\152\212\36\223\132\225\34\220\133\219","\67\176\234\181")]=Vector2.new(750 -(401 + 348) ,1121 -(1100 + 16) )};v275=Instance.new(v7("\170\238\239\54\90","\63\236\156\142\91\63"),v272);v275.BackgroundTransparency=1 + 0 ;v275.Size=UDim2.new(1,1708 -(576 + 1132) ,0 + 0 ,0 -0 );v250=16 -10 ;end if (3==v250) then v267= #getupvalue(v262.UpdateRender,1 + 3 );v268={};v269={};v270=1525 -(1118 + 407) ;while v270<v267  do local v671=0 + 0 ;local v672;while true do if (v671==(0 + 0)) then v672=0 -0 ;while (v672<(87635 -62635)) and (v270<v267)  do local v1007=0 -0 ;while true do if (v1007==1) then v672=v672 + 20 ;break;end if ((1878 -(340 + 1538))==v1007) then game:GetService(v7("\221\26\89\0\45\250\47","\92\141\118\56\121\72\136")).LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.CanvasPosition=Vector2.new(1856 -(981 + 875) ,v672);for v1443,v1444 in pairs(game:GetService(v7("\102\216\193\253\30\68\199","\123\54\180\160\132")).LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.Frame:GetChildren()) do if (v1444:IsA(v7("\51\11\251\5\208","\175\117\121\154\104\181")) and  not v268[v1444.ItemName.Text] and (v1444.ItemName.Visible==true)) then local v1547=687 -(135 + 552) ;local v1548;local v1549;while true do if (v1547==(1 + 0)) then while true do if ((0 + 0)==v1548) then v1549=GetRaity(v1444.Background.BackgroundColor3);if v1549 then local v1914=0 + 0 ;while true do if ((0 + 0)==v1914) then if  not v269[v1549] then v269[v1549]={};end table.insert(v269[v1549],v1444:Clone());break;end end end v1548=3 -2 ;end if (v1548==(3 -2)) then v270=v270 + 1 ;v268[v1444.ItemName.Text]=true;break;end end break;end if (v1547==(0 + 0)) then v1548=0 + 0 ;v1549=nil;v1547=1;end end end end v1007=1544 -(1347 + 196) ;end end end v671=1773 -(472 + 1300) ;end if (v671==1) then wait();break;end end end function GetXY(v673) return v673 * (427 -327) ;end v271=Instance.new(v7("\249\218\217\140\19\216\223\244\156\15\217\231","\96\172\147\149\229"));v271.FillDirection=Enum.FillDirection.Vertical;v250=584 -(99 + 481) ;end if (v250==(1109 -(808 + 294))) then v262={v7("\74\195\199\90\107\222\194\82\120\216","\63\25\182\183"),v7("\220\42\232\210\245\204\90\250\5\225\208\246","\51\153\70\141\177\129\190"),v7("\142\227\21\139\48\215\55\171\253\27\130","\99\202\145\116\236\95\185"),v7("\248\218\132\95\82\198\211\139\102\88\217\211\145\72","\57\171\178\229\45"),v7("\42\40\244\110\52\47\161\125\30","\24\110\77\149\26\92\124\213"),v7("\5\121\10\175\55\123\15\137","\231\66\22\110")};for v674,v675 in pairs(v262) do if (v274[v675] and (game:GetService(v7("\76\175\183\3\138\213\127\190\162\11\176\194\113\184\166\8\134","\182\30\202\199\111\227")).Remotes.CommF_:InvokeServer(v7("\241\171\144","\168\179\222\233")   .. v675 ,true)==(1 + 0))) then local v797=0 -0 ;local v798;while true do if ((1 -0)==v797) then v798.ImageRectSize=Vector2.new(53 + 47 ,268 -168 );v798.ImageRectOffset=v274[v675] * (29 + 71) ;break;end if (v797==(71 -(15 + 56))) then v798=Instance.new(v7("\132\120\58\115\15\129\116\57\113\6","\106\205\21\91\20"),v275);v798.Image="rbxassetid://16435032782";v797=1720 -(950 + 769) ;end end end end function formatNumber(v676) return tostring(v676):reverse():gsub(v7("\110\245\224\52\9\18","\145\75\145\197\80\44\118"),v7("\89\145\187","\72\124\160\151\66\230")):reverse():gsub(v7("\34\7","\54\124\43\207\217\134\56\200"),"");end game:GetService(v7("\12\246\208\153\204\46\233","\169\92\154\177\224")).LocalPlayer.PlayerGui.Main.Beli.AnchorPoint=Vector2.new(0.5,0.5);game:GetService(v7("\155\143\17\10\87\96\188","\207\203\227\112\115\50\18")).LocalPlayer.PlayerGui.Main.Beli.Position=UDim2.new(1628 -(1056 + 572) ,1120,0,2351 -1651 );game:GetService(v7("\254\12\138\211\234\101\88","\188\174\96\235\170\143\23\43")).LocalPlayer.PlayerGui.Main.Level.AnchorPoint=Vector2.new(0.5 -0 ,0.5 + 0 );game:GetService(v7("\54\40\0\161\31\90\96","\19\102\68\97\216\122\40")).LocalPlayer.PlayerGui.Main.Level.Position=UDim2.new(252 -(223 + 29) ,1518 -368 ,0 + 0 ,672 + 78 );v276=game:GetService(v7("\33\46\77\152\13\3\49","\104\113\66\44\225")).LocalPlayer.PlayerGui.Main.Fragments:Clone();v250=8;end if (v250==(1 + 8)) then v277.Parent=game:GetService(v7("\255\209\163\98\202\207\177","\27\175\189\194")).LocalPlayer.PlayerGui.Main.Beli;v277.Position=UDim2.new(0 + 0 ,0 -0 , -0.75,0);v277.Size=UDim2.new(1 + 0 ,0 -0 ,1,0 -0 );v277.Text="ƒ"   .. formatNumber(game:GetService(v7("\202\16\64\154\39\10\169","\62\154\124\33\227\66\120\218")).LocalPlayer.Data.Fragments.Value) ;v278={[3 -2 ]=v7("\71\166\255\24\250\246\75\166\229\60\233\214\66\170\231\48\249\254\69\176","\151\32\195\139\89\141")};game:GetService(v7("\107\191\252\63\190\11\186\77\191\232\0\163\7\169\88\189\233","\219\57\218\140\83\215\104")).Remotes.CommF_:InvokeServer(unpack(v278));game.Players.LocalPlayer.PlayerGui.Main.AwakeningToggler.Visible=true;game:GetService(v7("\243\30\165\227\18\111\46","\93\163\114\196\154\119\29")).LocalPlayer.PlayerGui.Main.AwakeningToggler.Position=UDim2.new(869.48 -(517 + 352) ,8 + 2 ,0.908,3 -1 );v250=463 -(247 + 206) ;end if (v250==10) then game:GetService(v7("\210\140\189\98\210\240\147","\183\130\224\220\27")).LocalPlayer.PlayerGui.Main.AwakeningToggler.Size=UDim2.new(931 -(245 + 685) ,0 -0 ,0.22 -0 ,1733 -(1197 + 536) );pcall(function() game:GetService(v7("\115\73\208\94\212\33\80","\83\35\37\177\39\177")).LocalPlayer.PlayerGui.Main.MenuButton.Visible=false;end);pcall(function() game:GetService(v7("\58\123\44\10\72\247\5","\118\106\23\77\115\45\133")).LocalPlayer.PlayerGui.Main.RaceEnergy.Visible=false;end);pcall(function() game:GetService(v7("\212\56\35\208\215\61\205","\70\132\84\66\169\178\79\190")).LocalPlayer.PlayerGui.Main.SafeZone.Visible=false;end);pcall(function() game:GetService(v7("\71\230\203\101\125\21\35","\80\23\138\170\28\24\103")).LocalPlayer.PlayerGui.Main.HP.Visible=false;end);pcall(function() game:GetService(v7("\209\191\166\15\234\178\215","\164\129\211\199\118\143\192")).LocalPlayer.PlayerGui.Backpack.Enabled.Visible=false;end);pcall(function() game:GetService(v7("\132\37\11\254\83\43\70","\53\212\73\106\135\54\89")).LocalPlayer.PlayerGui.Main.Energy.Visible=false;end);for v683,v684 in pairs(game:GetService(v7("\208\135\250\208\5\243\243","\129\128\235\155\169\96")).LocalPlayer.PlayerGui.Main:GetChildren()) do if v684:IsA(v7("\27\28\16\120\83\156\102\38\5\30\113","\19\82\113\113\31\54\222")) then v684:Destroy();end end v250=10 + 1 ;end if (v250==(5 + 6)) then pcall(function() game:GetService(v7("\205\240\220\227\197\19\238","\97\157\156\189\154\160")).LocalPlayer.PlayerGui.Main.Compass.Visible=false;end);break;end if (v250==(7 -5)) then v259.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;v262=require(game:GetService(v7("\4\197\33\58\189\50\228","\65\84\169\64\67\216\64\151")).LocalPlayer.PlayerGui.Main.UIController.Inventory);v263=game:GetService(v7("\250\255\207\91\193\249\222\67\205\254\236\67\199\232\222\80\205","\55\168\154\191")).Remotes.CommF_:InvokeServer(v7("\89\36\197\140\80\55\212\171\74\46\195\188","\197\62\65\177"));v264={};v265={v7("\135\240\188\119\51\226\171\229","\129\202\137\200\31\90"),v7("\45\31\234\187\87\5\27\255\167","\57\97\122\141\222"),v7("\200\188\103\218","\191\154\221\21"),v7("\117\27\28\206\75\138\113\15","\97\32\117\127\161\38\231\30"),v7("\60\231\220\45\208\17","\191\127\136\177\64")};v266={[v7("\212\95\200\23\246\249","\153\151\48\165\122")]=Color3.fromRGB(179,33 + 146 ,173 + 6 ),[v7("\130\193\175\67\225\42\187\185","\212\215\175\204\44\140\71")]=Color3.fromRGB(33 + 59 ,140,624 -413 ),[v7("\103\70\178\6","\200\53\39\192\99\205\161")]=Color3.fromRGB(317 -177 ,31 + 51 ,171 + 84 ),[v7("\117\23\169\119\87\22\175\96\64","\18\57\114\206")]=Color3.fromRGB(114 + 99 ,39 + 4 ,1825 -(332 + 1265) ),[v7("\197\209\179\125\225\203\166\121","\21\136\168\199")]=Color3.fromRGB(352 -114 ,847 -(306 + 494) ,139 -89 )};function GetRaity(v686) for v735,v736 in pairs(v266) do if (v736==v686) then return v735;end end end for v687,v688 in pairs(v263) do v264[v688.Name]=v688;end v250=8 -5 ;end end end});local v65=v12.Misc:AddSection(v7("\167\227\243","\189\227\130\138"));v12.Misc:AddButton({[v7("\66\10\94\69\201","\204\22\99\42\41\172")]=v7("\219\127\215\86\255\127\154\127\230\125","\57\137\26\186"),[v7("\142\181\247\119\92\217\14\39\163\191\234","\83\202\208\132\20\46\176\126")]=v7("\179\210\161\71\21\180\220\249\3\28\185\222\249\5\21\188\213\189\71\27\186\213\188\20","\121\213\187\217\103"),[v7("\52\209\116\68\77\170\176\28","\211\119\176\24\40\47\203")]=function() NoFog();end});function NoFog() local v279=game.Lighting;v279.FogEnd=100000;for v456,v457 in pairs(v279:GetDescendants()) do if v457:IsA(v7("\157\35\58\14\66\197\166\143\174\50","\234\220\87\87\97\49\181\206")) then v457:Destroy();end end end if (First_Sea or Second_Sea) then local v458=v12.Hop:AddSection(v7("\242\17\215\217\240\245\28\223\157\128\202\28\223\206\181\135\88","\208\166\121\190\189"));end if Third_Sea then local v459=498 -(350 + 148) ;local v460;local v461;while true do if (v459==(1 + 1)) then v461=v12.Hop:AddToggle(v7("\235\31\23\163\240\33\118\214\2\17\163\249\13\72\211\17\30\160","\59\191\112\112\196\156\68"),{[v7("\73\247\109\58\211","\110\29\158\25\86\182")]=v7("\97\172\7\240\102\33\78\183\8\243\35\76\110\182\5\245\40\8","\108\39\197\105\148\70"),[v7("\29\29\32\134\33\166\183\45\17\60\139","\199\89\120\83\229\83\207")]="Tìm đảo bí ẩn",[v7("\49\201\31\179\0\192\13","\210\117\172\121")]=false});v461:OnChanged(function(v737) _G.FindMirageIsland=v737;end);v459=1227 -(914 + 310) ;end if (v459==(1 + 2)) then v13.ToggleMirageIsland:SetValue(false);spawn(function() while wait() do if _G.FindMirageIsland then if (game:GetService(v7("\225\138\63\50\62\201\215\134\40","\185\182\229\77\89\77")).Map:FindFirstChild(v7("\82\20\62\20\254\0\232\84\115\12\35\4","\39\31\109\77\96\151\99\161")) or game:GetService(v7("\141\202\24\234\149\86\132\196\191","\167\218\165\106\129\230\38\229")).Map:FindFirstChild(v7("\147\224\21\77\81\198\151\234\10\88\86\193","\165\222\153\102\57\56"))) then if (HighestPointRealCFrame and ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-HighestPointRealCFrame.Position).Magnitude>(759 -(287 + 462)))) then Tween(getHighestPoint().CFrame * CFrame.new(679 -(255 + 424) ,81.88 + 130 ,0 -0 ) );end elseif ( not game:GetService(v7("\96\206\214\91\184\71\192\199\85","\203\55\161\164\48")).Map:FindFirstChild(v7("\27\9\227\204\176\67\31\3\252\217\183\68","\32\86\112\144\184\217")) or  not game:GetService(v7("\9\177\79\138\45\174\92\130\59","\225\94\222\61")).Map:FindFirstChild(v7("\196\111\109\78\224\117\87\73\229\119\112\94","\58\137\22\30"))) then Hop();end end end end);break;end if (v459==0) then v460=v12.Hop:AddToggle(v7("\144\175\124\41\14\220\130\169\117\42\47\214\171\174","\185\196\192\27\78\98"),{[v7("\107\217\153\250\90","\150\63\176\237")]=v7("\128\123\204\203\230\84\215\195\170\50\239\192\169\124","\175\198\18\162"),[v7("\87\182\229\200\182\55\45\2\122\188\248","\118\19\211\150\171\196\94\93")]="Tìm trăng tròn",[v7("\203\189\36\189\169\244\251","\152\143\216\66\220\220")]=false});v460:OnChanged(function(v738) _G.AutoFindMoon=v738;end);v459=1 + 0 ;end if ((1059 -(158 + 900))==v459) then v13.ToggleFindMoon:SetValue(false);spawn(function() while wait() do if _G.AutoFindMoon then if ((game:GetService(v7("\169\40\50\139\145\40\59\132","\227\229\65\85")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052") or (game:GetService(v7("\63\162\50\228\7\162\59\235","\140\115\203\85")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431")) then wait(2 + 0 );elseif (game:GetService(v7("\46\120\113\253\22\120\120\242","\149\98\17\22")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733") then local v1445=0 -0 ;local v1446;while true do if (v1445==(0 + 0)) then v1446=807 -(798 + 9) ;while true do if (v1446==0) then Hop();v8:Notify({[v7("\106\166\102\56\91","\84\62\207\18")]=v7("\154\72\68\38\237\230\247\145\72\82","\215\217\29\16\114\172\191"),[v7("\239\133\175\84\127\215\250","\142\172\234\193\32\26\185")]=v7("\8\196\165\224\56\31\245\216\124\247\190\224\124\112\213\203\48\221\247\195\119\63\253\144\114\159","\190\92\177\215\142\24\80\147"),[v7("\15\3\243\8\133\50\2\244\37\158","\234\92\118\145\75")]="",[v7("\158\71\73\120\163\40\15\180","\96\218\50\59\25\215\65")]=5});break;end end break;end end elseif (game:GetService(v7("\247\192\43\255\95\168\63\3","\100\187\169\76\151\43\193\81")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401") then local v1550=385 -(58 + 327) ;while true do if (v1550==0) then Hop();v8:Notify({[v7("\98\234\164\66\77","\74\54\131\208\46\40\59\207")]=v7("\253\35\11\12\119\10\88\246\35\29","\120\190\118\95\88\54\83"),[v7("\150\179\162\237\176\178\184","\153\213\220\204")]=v7("\197\22\44\2\252\151","\229\141\121\92\44\210\185"),[v7("\56\221\6\127\5\219\3\14\198\16","\119\107\168\100\60\106\181")]="",[v7("\133\145\40\15\27\25\4\44","\66\193\228\90\110\111\112\107")]=5});break;end end elseif (game:GetService(v7("\206\142\242\27\246\142\251\20","\115\130\231\149")).Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680") then Hop();v8:Notify({[v7("\54\65\252\83\134","\218\98\40\136\63\227")]=v7("\169\2\113\180\129\179\119\109\181\130","\192\234\87\37\224"),[v7("\248\134\66\23\222\135\88","\99\187\233\44")]=v7("\112\8\84\200\172\127","\139\56\103\36\230\130\81"),[v7("\78\34\196\28\208\66\105\50\200\43","\44\29\87\166\95\191")]="",[v7("\59\35\62\135\11\63\35\136","\230\127\86\76")]=5});else Hop();end end end end);v459=957 -(256 + 699) ;end end end v8:Notify({[v7("\203\132\205\172\250","\192\159\237\185")]=v7("\121\251\135\16\161\219\125\114\251\145","\93\58\174\211\68\224\130"),[v7("\168\193\64\189\58\222\159","\176\235\174\46\201\95")]=v7("\106\82\223\173\36\142\25\182\78\78\154\229\54\158\75\189\91\95\212\173\59\130\10\187\91\94\154\254\34\142\8\186\77\73\220\248\59\129\18\254","\223\62\58\186\141\87\237\107"),[v7("\222\59\211\93\137\243\32","\236\157\84\189\41")]=v7("\86\201\5\198\32\183\162\112\66\213\14\136\38\170\252","\21\48\188\107\230\69\207\210"),[v7("\43\174\76\52\28\115\38","\72\111\219\62\64\117\28")]=3});warn(v7("\96\121\198\32\2\101\133\107\121\208\84\15\83\196\71\69\252\19\99\127\202\78\92\254\17\55\89\193\2\13","\165\35\44\146\116\67\60"));
+function InfAbility()
+    if _G.SpeedHack then
+        if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Agility") then
+            local inf = Instance.new("ParticleEmitter")
+            inf.Acceleration = Vector3.new(0, 0, 0)
+            inf.Archivable = true
+            inf.Drag = 20
+            inf.EmissionDirection = Enum.NormalId.Top
+            inf.Enabled = true
+            inf.Lifetime = NumberRange.new(0.2, 0.2)
+            inf.LightInfluence = 0
+            inf.LockedToPart = true
+            inf.Name = "Agility"
+            inf.Rate = 500
+            local numberKeypoints2 = {
+                NumberSequenceKeypoint.new(0, 0),
+                NumberSequenceKeypoint.new(1, 4),
+            }
+
+            inf.Size = NumberSequence.new(numberKeypoints2)
+            inf.RotSpeed = NumberRange.new(999, 9999)
+            inf.Rotation = NumberRange.new(0, 0)
+            inf.Speed = NumberRange.new(30, 30)
+            inf.SpreadAngle = Vector2.new(360, 360)
+            inf.Texture = "rbxassetid://243098098"
+            inf.VelotyInheritance = 0
+            inf.ZOffset = 2
+            inf.Transparency = NumberSequence.new(0)
+            inf.Color = ColorSequence.new(Color3.fromRGB(0, 255, 255), Color3.fromRGB(0, 255, 255))
+            inf.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+        end
+    else
+        if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Agility") then
+            game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Agility"):Destroy()
+        end
+    end
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+local ToggleWalkOnWater = Tabs.Player:AddToggle("ToggleWalkOnWater", {Title = "Wakl On Water", Default = true })
+ToggleWalkOnWater:OnChanged(function(Value)
+    _G.WalkWater = Value
+end)
+Options.ToggleWalkOnWater:SetValue(true)
+ 
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.WalkWater then
+                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
+            else
+                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+            end
+        end)
+    end
+end)
+]]
+-----------------------------------------------------------------------------------------------------------------------------------------------
+--Teleport
+local Teleport = Tabs.Teleport:AddSection("Teleport World")
+
+Tabs.Teleport:AddButton({
+    Title = "First Sea",
+    Description = "Sea 1",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
+    end
+})
+
+
+
+Tabs.Teleport:AddButton({
+    Title = "Second Sea",
+    Description = "Sea 2",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+    end
+})
+
+
+
+Tabs.Teleport:AddButton({
+    Title = "Third Sea",
+    Description = "Sea 3",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+    end
+})
+
+
+
+local Mastery = Tabs.Teleport:AddSection("Teleport Island")
+
+if First_Sea then
+ IslandList = {
+                "WindMill",
+                "Marine",
+                "Middle Town",
+                "Jungle",
+                "Pirate Village",
+                "Desert",
+                "Snow Island",
+                "MarineFord",
+                "Colosseum",
+                "Sky Island 1",
+                "Sky Island 2",
+                "Sky Island 3",
+                "Prison",
+                "Magma Village",
+                "Under Water Island",
+                "Fountain City",
+                "Shank Room",
+                "Mob Island",
+}
+
+elseif Second_Sea then
+       IslandList = {
+        "The Cafe",
+        "Frist Spot",
+        "Dark Area",
+        "Flamingo Mansion",
+        "Flamingo Room",
+        "Green Zone",
+        "Factory",
+        "Colossuim",
+        "Zombie Island",
+        "Two Snow Mountain",
+        "Punk Hazard",
+        "Cursed Ship",
+        "Ice Castle",
+        "Forgotten Island",
+        "Ussop Island",
+        "Mini Sky Island",
+       }
+
+elseif Third_Sea then
+    IslandList = {
+        "Mansion",
+        "Port Town",
+        "Great Tree",
+        "Castle On The Sea",
+        "MiniSky", 
+        "Hydra Island",
+        "Floating Turtle",
+        "Haunted Castle",
+        "Ice Cream Island",
+        "Peanut Island",
+        "Cake Island",
+        "Cocoa Island",
+        "Candy Island",
+        "Tiki Outpost",
+       }
+    end
+
+local DropdownIsland = Tabs.Teleport:AddDropdown("DropdownIsland",{
+    Title = "Dropdown",
+    Description = "Chọn Đảo",
+    Values = IslandList,
+    Multi = false,
+    Default = 1,
+})
+
+DropdownIsland:SetValue("...")
+DropdownIsland:OnChanged(function(Value)
+    _G.SelectIsland = Value
+end)
+
+Tabs.Teleport:AddButton({
+    Title = "Tween",
+    Description = "Tele Đảo",
+    Callback = function()
+            if _G.SelectIsland == "WindMill" then
+                toTarget(CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594))
+            elseif _G.SelectIsland == "Marine" then
+                toTarget(CFrame.new(-2566.4296875, 6.8556680679321, 2045.2561035156))
+            elseif _G.SelectIsland == "Middle Town" then
+                toTarget(CFrame.new(-690.33081054688, 15.09425163269, 1582.2380371094))
+            elseif _G.SelectIsland == "Jungle" then
+                toTarget(CFrame.new(-1612.7957763672, 36.852081298828, 149.12843322754))
+            elseif _G.SelectIsland == "Pirate Village" then
+                toTarget(CFrame.new(-1181.3093261719, 4.7514905929565, 3803.5456542969))
+            elseif _G.SelectIsland == "Desert" then
+                toTarget(CFrame.new(944.15789794922, 20.919729232788, 4373.3002929688))
+            elseif _G.SelectIsland == "Snow Island" then
+                toTarget(CFrame.new(1347.8067626953, 104.66806030273, -1319.7370605469))
+            elseif _G.SelectIsland == "MarineFord" then
+                toTarget(CFrame.new(-4914.8212890625, 50.963626861572, 4281.0278320313))
+            elseif _G.SelectIsland == "Colosseum" then
+                toTarget( CFrame.new(-1427.6203613281, 7.2881078720093, -2792.7722167969))
+            elseif _G.SelectIsland == "Sky Island 1" then
+                toTarget(CFrame.new(-4869.1025390625, 733.46051025391, -2667.0180664063))
+            elseif _G.SelectIsland == "Sky Island 2" then  
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
+            elseif _G.SelectIsland == "Sky Island 3" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
+            elseif _G.SelectIsland == "Prison" then
+                toTarget( CFrame.new(4875.330078125, 5.6519818305969, 734.85021972656))
+            elseif _G.SelectIsland == "Magma Village" then
+                toTarget(CFrame.new(-5247.7163085938, 12.883934020996, 8504.96875))
+            elseif _G.SelectIsland == "Under Water Island" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+            elseif _G.SelectIsland == "Fountain City" then
+                toTarget(CFrame.new(5127.1284179688, 59.501365661621, 4105.4458007813))
+            elseif _G.SelectIsland == "Shank Room" then
+                toTarget(CFrame.new(-1442.16553, 29.8788261, -28.3547478))
+            elseif _G.SelectIsland == "Mob Island" then
+                toTarget(CFrame.new(-2850.20068, 7.39224768, 5354.99268))
+            elseif _G.SelectIsland == "The Cafe" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-281.93707275390625, 306.130615234375, 609.280029296875))
+                wait(0.1)
+                Tween2(CFrame.new(-380.47927856445, 77.220390319824, 255.82550048828))
+            elseif _G.SelectIsland == "Frist Spot" then
+                toTarget(CFrame.new(-11.311455726624, 29.276733398438, 2771.5224609375))
+            elseif _G.SelectIsland == "Dark Area" then
+                toTarget(CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375))
+            elseif _G.SelectIsland == "Flamingo Mansion" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-281.93707275390625, 306.130615234375, 609.280029296875))
+            elseif _G.SelectIsland == "Flamingo Room" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(2284.912109375, 15.152034759521484, 905.48291015625))
+            elseif _G.SelectIsland == "Green Zone" then
+                toTarget( CFrame.new(-2448.5300292969, 73.016105651855, -3210.6306152344))
+            elseif _G.SelectIsland == "Factory" then
+                toTarget(CFrame.new(424.12698364258, 211.16171264648, -427.54049682617))
+            elseif _G.SelectIsland == "Colossuim" then
+                toTarget( CFrame.new(-1503.6224365234, 219.7956237793, 1369.3101806641))
+            elseif _G.SelectIsland == "Zombie Island" then
+                toTarget(CFrame.new(-5622.033203125, 492.19604492188, -781.78552246094))
+            elseif _G.SelectIsland == "Two Snow Mountain" then
+                toTarget(CFrame.new(753.14288330078, 408.23559570313, -5274.6147460938))
+            elseif _G.SelectIsland == "Punk Hazard" then
+                toTarget(CFrame.new(-6127.654296875, 15.951762199402, -5040.2861328125))
+            elseif _G.SelectIsland == "Cursed Ship" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.40197753906, 125.05712890625, 32885.875))
+            elseif _G.SelectIsland == "Ice Castle" then
+                toTarget(CFrame.new(6148.4116210938, 294.38687133789, -6741.1166992188))
+            elseif _G.SelectIsland == "Forgotten Island" then
+                toTarget(CFrame.new(-3032.7641601563, 317.89672851563, -10075.373046875))
+            elseif _G.SelectIsland == "Ussop Island" then
+                toTarget(CFrame.new(4816.8618164063, 8.4599885940552, 2863.8195800781))
+            elseif _G.SelectIsland == "Mini Sky Island" then
+                Tween2(CFrame.new(-288.74060058594, 49326.31640625, -35248.59375))
+            elseif _G.SelectIsland == "Great Tree" then
+                toTarget(CFrame.new(2681.2736816406, 1682.8092041016, -7190.9853515625))
+            elseif _G.SelectIsland == "Castle On The Sea" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-5075.50927734375, 314.5155029296875, -3150.0224609375))
+            elseif _G.SelectIsland == "MiniSky" then
+                Tween2(CFrame.new(-260.65557861328, 49325.8046875, -35253.5703125))
+            elseif _G.SelectIsland == "Port Town" then
+                toTarget(CFrame.new(-290.7376708984375, 6.729952812194824, 5343.5537109375))
+            elseif _G.SelectIsland == "Hydra Island" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(5753.5478515625, 610.7880859375, -282.33172607421875))
+            elseif _G.SelectIsland == "Floating Turtle" then
+                toTarget(CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625))
+            elseif _G.SelectIsland == "Mansion" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-12468.5380859375, 375.0094299316406, -7554.62548828125))
+            elseif _G.SelectIsland == "Haunted Castle" then
+                toTarget(CFrame.new(-9515.3720703125, 164.00624084473, 5786.0610351562))
+            elseif _G.SelectIsland == "Ice Cream Island" then
+                toTarget(CFrame.new(-902.56817626953, 79.93204498291, -10988.84765625))
+            elseif _G.SelectIsland == "Peanut Island" then
+                toTarget(CFrame.new(-2062.7475585938, 50.473892211914, -10232.568359375))
+            elseif _G.SelectIsland == "Cake Island" then
+                toTarget(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
+            elseif _G.SelectIsland == "Cocoa Island" then
+                toTarget(CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375))
+            elseif _G.SelectIsland == "Candy Island" then
+                toTarget(CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625))
+            elseif _G.SelectIsland == "Tiki Outpost" then
+                toTarget(CFrame.new(-16542.447265625, 55.68632888793945, 1044.41650390625))
+            end
+        end
+    })
+
+    Tabs.Teleport:AddButton({
+        Title = "Stop Tween",
+        Description = "Dừng bay",
+        Callback = function()
+          CancelTween()
+        end
+    })
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Fruit
+
+local Remote_GetFruits = game.ReplicatedStorage:FindFirstChild("Remotes").CommF_:InvokeServer("GetFruits");
+Table_DevilFruitSniper = {}
+ShopDevilSell = {}
+for i,v in next,Remote_GetFruits do
+    table.insert(Table_DevilFruitSniper,v.Name)
+    if v.OnSale then 
+        table.insert(ShopDevilSell,v.Name)
+    end
+end
+_G.SelectFruit = "Leopard-Leopard"
+
+local DropdownFruit = Tabs.Fruit:AddDropdown("DropdownFruit", {
+    Title = "Select Fruit",
+    Description = "Select Fruit",
+    Values = Table_DevilFruitSniper,
+    Multi = false,
+    Default = 1,
+})
+
+DropdownFruit:SetValue("...")
+
+DropdownFruit:OnChanged(function(Value)
+    _G.SelectFruit = Value
+end)
+
+
+local ToggleFruit = Tabs.Fruit:AddToggle("ToggleFruit", {Title = "Buy Fruit Sniper",Description = "Buy Fruit Sniper", Default = false })
+ToggleFruit:OnChanged(function(Value)
+    _G.AutoBuyFruitSniper = Value
+end)
+Options.ToggleFruit:SetValue(false)
+spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if _G.AutoBuyFruitSniper then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetFruits")
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PurchaseRawFruit","_G.SelectFruit",false)
+            end 
+        end
+    end)
+end)
+
+
+local ToggleStore = Tabs.Fruit:AddToggle("ToggleStore", {Title = "Store Fruit",Description = "Store Fruit", Default = false })
+ToggleStore:OnChanged(function(Value)
+    _G.AutoStoreFruit = Value
+end)
+Options.ToggleStore:SetValue(false)
+
+spawn(function()
+    while task.wait() do
+        if _G.AutoStoreFruit then
+            pcall(function()
+                if _G.AutoStoreFruit then
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Bomb Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Bomb Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Bomb-Bomb",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Bomb Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Spike Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spike Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Spike-Spike",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spike Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Chop Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Chop Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Chop-Chop",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Chop Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Spring Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spring Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Spring-Spring",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spring Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Rocket Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Kilo Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Rocket-Rocket",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Kilo Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Smoke Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Smoke Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Smoke-Smoke",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Smoke Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Spin Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spin Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Spin-Spin",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spin Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flame Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flame Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Flame-Flame",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flame Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Falcon Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Falcon Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Falcon",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("alcon Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Ice Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Ice Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Ice-Ice",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Ice Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Sand Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Sand Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Sand-Sand",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Sand Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Dark Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dark Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Dark-Dark",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dark Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Ghost Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Revive Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Ghost-Ghost",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Revive Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Diamond Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Diamond Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Diamond-Diamond",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Diamond Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Light Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Light Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Light-Light",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Light Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Love Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Love Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Love-Love",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Love Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Rubber Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Rubber Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Rubber-Rubber",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Rubber Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Barrier Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Barrier Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Barrier-Barrier",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Barrier Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Magma Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Magma Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Magma-Magma",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Magma Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Portal Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Portal Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Door-Door",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Portal Fruit"))
+                    end
+
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Quake Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Quake Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Quake-Quake",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Quake Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Buddha Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Buddha Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buddha",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Buddha Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Spider Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spider Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Spider-Spider",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spider Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Bird: Phoenix Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Phoenix Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Phoenix",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Phoenix Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Rumble Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Rumble Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Rumble-Rumble",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Rumble Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Pain Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Pain Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Pain-Pain",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Pain Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Gravity Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Gravity Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Gravity-Gravity",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Gravity Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Dough Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dough Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Dough-Dough",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dough Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Shadow Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Shadow Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Shadow-Shadow",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Shadow Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Venom Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Venom Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Venom-Venom",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Venom Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Control Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Control Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Control-Control",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Control Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Spirit Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spirit Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Soul-Soul",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spirit Fruit"))
+                    end
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Dragon Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dragon Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Dragon-Dragon",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dragon Fruit"))
+                        if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Leopard Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Leopard Fruit") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Leopard-Leopard",game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Leopard Fruit"))
+                    end
+                end
+                end
+            end)
+        end
+        wait(0.3)
+    end
+    end)
+
+
+
+local ToggleRandomFruit = Tabs.Fruit:AddToggle("ToggleRandomFruit", {Title = "Random Fruit",Description = "Random Fruit", Default = false })
+ToggleRandomFruit:OnChanged(function(Value)
+    _G.Random_Auto = Value
+end)
+Options.ToggleRandomFruit:SetValue(false)
+spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if _G.Random_Auto then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy")
+            end 
+        end
+    end)
+end)
+
+local ToggleCollectTP = Tabs.Fruit:AddToggle("ToggleCollectTP", {Title = "Collect Devil Fruit (TP)",Description = "Collect Devil Fruit (TP)", Default = false })
+ToggleCollectTP:OnChanged(function(Value)
+    _G.CollectFruitTP = Value
+end)
+Options.ToggleCollectTP:SetValue(false)
+spawn(function()
+		while wait(.1) do
+			if _G.CollectFruitTP then
+					for i,v in pairs(game.Workspace:GetChildren()) do
+						if string.find(v.Name, "Fruit") then
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
+						end
+					end
+				end
+            end
+       end)
+
+local ToggleCollect = Tabs.Fruit:AddToggle("ToggleCollect", {Title = "Collect Devil Fruit (Tween)",Description = "Collect Devil Fruit (Tween)", Default = false })
+ToggleCollect:OnChanged(function(Value)
+    _G.Tweenfruit = Value
+end)
+Options.ToggleCollect:SetValue(false)
+
+
+spawn(function()
+    while wait(.1) do
+        if _G.Tweenfruit then
+            for i,v in pairs(game.Workspace:GetChildren()) do
+                if string.find(v.Name, "Fruit") then
+                    Tween(v.Handle.CFrame)
+                end
+            end
+        end
+end
+end)
+
+local Mastery = Tabs.Fruit:AddSection("Esp")
+
+
+local ToggleEspPlayer = Tabs.Fruit:AddToggle("ToggleEspPlayer", {Title = "Esp Player",Description = "Esp Player", Default = false })
+
+ToggleEspPlayer:OnChanged(function(Value)
+    ESPPlayer = Value
+	UpdatePlayerChams()
+end)
+Options.ToggleEspPlayer:SetValue(false)
+
+
+local ToggleEspFruit = Tabs.Fruit:AddToggle("ToggleEspFruit", {Title = "Esp Devil Fruit",Description = "Esp Devil Fruits", Default = false })
+
+ToggleEspFruit:OnChanged(function(Value)
+    DevilFruitESP = Value
+    while DevilFruitESP do wait()
+        UpdateDevilChams() 
+    end
+end)
+Options.ToggleEspFruit:SetValue(false)
+
+
+
+
+local ToggleEspIsland = Tabs.Fruit:AddToggle("ToggleEspIsland", {Title = "Esp Island",Description = "Esp Island", Default = false })
+
+ToggleEspIsland:OnChanged(function(Value)
+    IslandESP = Value
+    while IslandESP do wait()
+        UpdateIslandESP() 
+    end
+end)
+Options.ToggleEspIsland:SetValue(false)
+
+
+local ToggleEspFlower = Tabs.Fruit:AddToggle("ToggleEspFlower", {Title = "Esp Flower",Description = "Esp Flower", Default = false })
+
+ToggleEspFlower:OnChanged(function(Value)
+    FlowerESP = Value
+	UpdateFlowerChams() 
+end)
+Options.ToggleEspFlower:SetValue(false)
+
+
+spawn(function()
+    while wait(2) do
+        if FlowerESP then
+            UpdateFlowerChams() 
+        end
+        if DevilFruitESP then
+            UpdateDevilChams() 
+        end
+        if ChestESP then
+            UpdateChestChams() 
+        end
+        if ESPPlayer then
+            UpdatePlayerChams()
+        end
+        if RealFruitESP then
+            UpdateRealFruitChams()
+        end
+    end
+end)
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Raid
+
+
+
+local Chips = {"Flame","Ice","Quake","Light","Dark","Spider","Rumble","Magma","Buddha","Sand","Phoenix","Dough"}
+
+local DropdownRaid = Tabs.Raid:AddDropdown("DropdownRaid", {
+    Title = "Select Chip",
+    Description = "Select Chip",
+    Values = Chips,
+    Multi = false,
+    Default = 1,
+})
+DropdownRaid:SetValue("...")
+DropdownRaid:OnChanged(function(Value)
+    SelectChip = Value
+end)
+
+local ToggleBuy = Tabs.Raid:AddToggle("ToggleBuy", {Title = "Buy Chip", Description = "Buy Chip",Default = false })
+ToggleBuy:OnChanged(function(Value)
+    _G.Auto_Buy_Chips_Dungeon = Value
+end)
+Options.ToggleBuy:SetValue(false)
+spawn(function()
+    while wait() do
+		if _G.Auto_Buy_Chips_Dungeon then
+			pcall(function()
+				local args = {
+					[1] = "RaidsNpc",
+					[2] = "Select",
+					[3] = SelectChip
+				}
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+			end)
+        end
+    end
+end)
+
+
+    local ToggleStart = Tabs.Raid:AddToggle("ToggleStart", {Title = "Start Raid",Description = "Start Raid", Default = false })
+    ToggleStart:OnChanged(function(Value)
+        _G.Auto_StartRaid = Value
+end)
+Options.ToggleStart:SetValue(false)
+
+spawn(function()
+    while wait(.1) do
+        pcall(function()
+            if _G.Auto_StartRaid then
+                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
+                    if not game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip") then
+                        if Second_Sea then
+                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+                        elseif Third_Sea then
+                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+
+local ToggleKillAura = Tabs.Raid:AddToggle("ToggleKillAura", {Title = "Kill Aura",Description = "Kill Aura", Default = false })
+ToggleKillAura:OnChanged(function(Value)
+    KillAura = Value
+end)
+Options.ToggleKillAura:SetValue(false)
+spawn(function()
+    while wait() do
+        if KillAura then
+            pcall(function()
+                for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+                    if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                        repeat task.wait()
+                            sethiddenproperty(game:GetService('Players').LocalPlayer,"SimulationRadius",math.huge)
+                            v.Humanoid.Health = 0
+                            v.HumanoidRootPart.CanCollide = false
+                        until not KillAura or not v.Parent or v.Humanoid.Health <= 0
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+
+local ToggleNextIsland = Tabs.Raid:AddToggle("ToggleNextIsland", {Title = "Next Island",Description = "Next Island", Default = false })
+ToggleNextIsland:OnChanged(function(Value)
+    AutoNextIsland = Value
+end)
+Options.ToggleNextIsland:SetValue(false)
+spawn(function()
+    while task.wait() do
+        if AutoNextIsland then
+            pcall(function()
+                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true then
+                    if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5").CFrame * CFrame.new(0,70,100))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4").CFrame * CFrame.new(0,70,100))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3").CFrame * CFrame.new(0,70,100))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2").CFrame * CFrame.new(0,70,100))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1").CFrame * CFrame.new(0,70,100))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+
+
+local ToggleAwake = Tabs.Raid:AddToggle("ToggleAwake", {Title = "Auto Awake",Description = "Awakener V2", Default = false })
+ToggleAwake:OnChanged(function(Value)
+    AutoAwakenAbilities = Value
+end)
+Options.ToggleAwake:SetValue(false)
+spawn(function()
+    while task.wait() do
+        if AutoAwakenAbilities then
+            pcall(function()
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Awaken")
+            end)
+        end
+    end
+end)
+
+
+local ToggleGetFruit = Tabs.Raid:AddToggle("ToggleGetFruit", {Title = "Get Fruit Low Bely",Description = "Get Fruit Low Beli", Default = false })
+ToggleGetFruit:OnChanged(function(Value)
+    _G.Autofruit = Value
+end)
+
+spawn(function()
+    while wait(.1) do
+        pcall(function()
+     if _G.Autofruit then
+         
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Rocket-Rocket"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Spin-Spin"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Chop-Chop"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Spring-Spring"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Bomb-Bomb"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Smoke-Smoke"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Spike-Spike"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Flame-Flame"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Falcon-Falcon"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Ice-Ice"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Sand-Sand"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Dark-Dark"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Ghost-Ghost"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Diamond-Diamond"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Light-Light"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Rubber-Rubber"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "LoadFruit",
+    [2] = "Barrier-Barrier"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end
+end)
+end
+end)
+
+if Second_Sea then
+Tabs.Raid:AddButton({
+    Title = "Raid Lab",
+    Description = "Chổ Tập Kích",
+    Callback = function()
+     Tween2(CFrame.new(-6438.73535, 250.645355, -4501.50684))
+end
+})
+elseif Third_Sea then
+    Tabs.Raid:AddButton({
+        Title = "Raid Lab",
+        Description = "Chổ Tập Kích",
+        Callback = function()
+		 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-5075.50927734375, 314.5155029296875, -3150.0224609375))
+           Tween2(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
+        end
+        })
+end
+
+
+
+
+local Mastery = Tabs.Raid:AddSection("Law Raid")
+
+
+local ToggleLaw = Tabs.Raid:AddToggle("ToggleLaw", {Title = "Auto Law",Description = "Auto Buy Chip + Kill boss law", Default = false })
+
+ToggleLaw:OnChanged(function(Value)
+    Auto_Law = Value
+end)
+Options.ToggleLaw:SetValue(false)
+spawn(function()
+    pcall(function()
+        while wait() do
+            if Auto_Law then
+                if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Microchip") and not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Microchip") and not game:GetService("Workspace").Enemies:FindFirstChild("Order") and not game:GetService("ReplicatedStorage"):FindFirstChild("Order") then
+                    wait(0.3)
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Microchip","1")
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Microchip","2")
+                end
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait(0.4) do
+            if Auto_Law then
+                if not game:GetService("Workspace").Enemies:FindFirstChild("Order") and not game:GetService("ReplicatedStorage"):FindFirstChild("Order") then
+                    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Microchip") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Microchip") then
+                        fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main.ClickDetector)
+                    end
+                end
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Order") or game:GetService("Workspace").Enemies:FindFirstChild("Order") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Order") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Order" then
+                                repeat wait(_G.Fast_Delay)
+                                    AttackNoCoolDown()
+                                    AutoHaki()
+                                    EquipTool(SelectWeapon)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(120, 120, 120)
+                                    --Click
+                                until not v.Parent or v.Humanoid.Health <= 0 or Auto_Law == false
+                            end
+                        end
+                    elseif game:GetService("ReplicatedStorage"):FindFirstChild("Order") then
+                        Tween(CFrame.new(-6217.2021484375, 28.047645568848, -5053.1357421875))
+                    end
+                end
+            end
+        end
+    end)
+end)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--RaceV4
+
+
+Tabs.Race:AddButton({
+    Title = "Timple Of Time",
+    Description = "Timple Of Time",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(28286.35546875, 14895.3017578125, 102.62469482421875))
+    end
+})
+
+
+Tabs.Race:AddButton({
+    Title = "Lever Pull",
+    Description = "Lever Pull",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(28286.35546875, 14895.3017578125, 102.62469482421875))
+        Tween2(CFrame.new(28575.181640625, 14936.6279296875, 72.31636810302734))
+    end
+})
+
+
+Tabs.Race:AddButton({
+    Title = "Acient One",
+    Description = "Npc Acient One",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(28286.35546875, 14895.3017578125, 102.62469482421875))
+        Tween2(CFrame.new(28981.552734375, 14888.4267578125, -120.245849609375))
+    end
+})
+
+
+local Mastery = Tabs.Race:AddSection("Auto Race")
+Tabs.Race:AddButton({
+    Title = "Race Door",
+    Description = "Tộc Của Mày",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(28286.35546875, 14895.3017578125, 102.62469482421875))
+                    if game:GetService("Players").LocalPlayer.Data.Race.Value == "Human" then
+                    Tween2(CFrame.new(29221.822265625, 14890.9755859375, -205.99114990234375))
+                    elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Skypiea" then
+                    Tween2(CFrame.new(28960.158203125, 14919.6240234375, 235.03948974609375))
+                    elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Fishman" then
+                    Tween2(CFrame.new(28231.17578125, 14890.9755859375, -211.64173889160156))
+                    elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Cyborg" then
+                    Tween2(CFrame.new(28502.681640625, 14895.9755859375, -423.7279357910156))
+                    elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Ghoul" then
+                    Tween2(CFrame.new(28674.244140625, 14890.6767578125, 445.4310607910156))
+                    elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Mink" then
+                    Tween2(CFrame.new(29012.341796875, 14890.9755859375, -380.1492614746094))
+                    end
+    end
+})
+
+
+local ToggleHumanandghoul = Tabs.Race:AddToggle("ToggleHumanandghoul", {Title = "Auto [ Human / Ghoul ] Trial",Description = "Auto  Human / Ghoul  Trial", Default = false })
+ToggleHumanandghoul:OnChanged(function(Value)
+    KillAura = Value
+end)
+Options.ToggleHumanandghoul:SetValue(false)
+
+
+local ToggleAutotrial = Tabs.Race:AddToggle("ToggleAutotrial", {Title = "Auto Trial",Description = "Auto Trial", Default = false })
+ToggleAutotrial:OnChanged(function(Value)
+    _G.AutoQuestRace = Value
+end)
+Options.ToggleAutotrial:SetValue(false)
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.AutoQuestRace then
+				if game:GetService("Players").LocalPlayer.Data.Race.Value == "Human" then
+					for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+						if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+							pcall(function()
+								repeat wait(.1)
+									v.Humanoid.Health = 0
+									v.HumanoidRootPart.CanCollide = false
+									sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+								until not _G.AutoQuestRace or not v.Parent or v.Humanoid.Health <= 0
+							end)
+						end
+					end
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Skypiea" then
+					for i,v in pairs(game:GetService("Workspace").Map.SkyTrial.Model:GetDescendants()) do
+						if v.Name ==  "snowisland_Cylinder.081" then
+							BTPZ(v.CFrame* CFrame.new(0,0,0))
+						end
+					end
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Fishman" then
+					for i,v in pairs(game:GetService("Workspace").SeaBeasts.SeaBeast1:GetDescendants()) do
+						if v.Name ==  "HumanoidRootPart" then
+							Tween(v.CFrame* Pos)
+							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+								if v:IsA("Tool") then
+									if v.ToolTip == "Melee" then
+										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									end
+								end
+							end
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.2)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.2)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+								if v:IsA("Tool") then
+									if v.ToolTip == "Blox Fruit" then
+										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									end
+								end
+							end
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.2)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.2)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+					
+							wait(0.5)
+							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+								if v:IsA("Tool") then
+									if v.ToolTip == "Sword" then
+										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									end
+								end
+							end
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.2)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.2)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(0.5)
+							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+								if v:IsA("Tool") then
+									if v.ToolTip == "Gun" then
+										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									end
+								end
+							end
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.2)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							wait(.2)
+							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+						end
+					end
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Cyborg" then
+					Tween(CFrame.new(28654, 14898.7832, -30, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Ghoul" then
+					for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+						if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+							pcall(function()
+								repeat wait(.1)
+									v.Humanoid.Health = 0
+									v.HumanoidRootPart.CanCollide = false
+									sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+								until not _G.AutoQuestRace or not v.Parent or v.Humanoid.Health <= 0
+							end)
+						end
+					end
+				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Mink" then
+					for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+						if v.Name == "StartPoint" then
+							Tween(v.CFrame* CFrame.new(0,10,0))
+					  	end
+				   	end
+				end
+			end
+        end
+    end)
+end)
+
+
+local Mastery = Tabs.Race:AddSection("Auto Train")
+
+local ToggleAutoAcientQuest = Tabs.Race:AddToggle("ToggleAutoAcientQuest", {Title = "Auto Train",Description = "Auto Fram Race v4", Default = false })
+ToggleAutoAcientQuest:OnChanged(function(Value)
+    AutoFarmAcient = Value
+end)
+Options.ToggleAutoAcientQuest:SetValue(false)
+local AcientCframe = CFrame.new(216.211181640625, 126.9352035522461, -12599.0732421875)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if AutoFarmAcient then
+                if game.Players.LocalPlayer.Character.RaceTransformed.Value == true then
+                    AutoFarmAcient = false
+                    toTarget(CFrame.new(216.211181640625, 126.9352035522461, -12599.0732421875))
+                end
+            end
+        end
+    end)
+end)
+spawn(function()
+    while wait() do 
+        if AutoFarmAcient then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Cocoa Warrior") or game:GetService("Workspace").Enemies:FindFirstChild("Chocolate Bar Battler") or game:GetService("Workspace").Enemies:FindFirstChild("Sweet Thief") or game:GetService("Workspace").Enemies:FindFirstChild("Candy Rebel") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Cocoa Warrior" or v.Name == "Chocolate Bar Battler" or v.Name == "Sweet Thief" or v.Name == "Candy Rebel" then
+                           if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    bringmob = true
+                                    repeat wait(_G.Fast_Delay)
+                                    AttackNoCoolDown()
+                                    AutoHaki()
+                                    EquipTool(SelectWeapon)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false 
+                                    FarmPos = v.HumanoidRootPart.CFrame
+                                    MonFarm = v.Name
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                until not AutoFarmAcient or not v.Parent or v.Humanoid.Health <= 0
+                          bringmob = false
+                            end
+                        end
+                    end
+                else
+                toTarget(AcientCframe)
+                end
+            end)
+        end
+    end
+end)
+spawn(function()
+    pcall(function()
+        while wait() do
+            if AutoFarmAcient then
+                if game.Players.LocalPlayer.Character.RaceTransformed.Value == false then
+                    AutoFarmAcient = true
+                end
+            end
+        end
+    end)
+end)
+spawn(function()
+while wait() do
+    pcall(function()
+        if AutoFarmAcient then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
+            wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
+        end
+    end)
+end
+end)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--shop
+
+
+
+Tabs.Shop:AddButton({
+	Title = "Geppo",
+	Description = "Buy nhảy liên tục",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Geppo")
+	end
+})
+
+
+
+Tabs.Shop:AddButton({
+	Title = "Buso Haki",
+	Description = "Buy haki vũ trang",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Buso")
+	end
+})
+
+
+
+
+Tabs.Shop:AddButton({
+	Title = "Soru",
+	Description = "Buy soru",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Soru")
+	end
+})
+
+
+Tabs.Shop:AddButton({
+	Title = "Ken Haki",
+	Description = "Buy haki quan sát",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("KenTalk","Buy")
+	end
+})
+
+local Mastery = Tabs.Shop:AddSection("Fighting Styles")
+
+
+Tabs.Shop:AddButton({
+	Title = "Black Leg",
+	Description = "Buy Melee black leg",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
+	end
+})
+
+Tabs.Shop:AddButton({
+	Title = "Electro",
+	Description = "Buy Melee electro",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Fishman Karate",
+	Description = "Buy Melee fishman karate",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Dragon Claw",
+	Description = "Buy Melee dragon claw",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Superhuman",
+	Description = "Buy Melee superhuman",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Death Step",
+	Description = "Buy Melee Death Step",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Sharkman Karate",
+	Description = "Buy Melee sharkman karate",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate",true)
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Electric Claw",
+	Description = "Buy Melee electric claw",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Dragon Talon",
+	Description = "Buy Melee dragon talon",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Godhuman",
+	Description = "Buy Melee godhuman",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Sanguine Art",
+	Description = "Buy Melee Sanguine Art",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
+	end
+})
+
+
+local Mastery = Tabs.Shop:AddSection("Misc Items")
+
+Tabs.Shop:AddButton({
+	Title = "Refund Stats",
+	Description = "Refund Stats",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
+	end
+})
+Tabs.Shop:AddButton({
+	Title = "Reroll Race",
+	Description = "Random race",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","1")
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
+	end
+})
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--misc
+
+Tabs.Misc:AddButton({
+	Title = "Rejoin Server",
+	Description = "Rejoin Server game",
+	Callback = function()
+		game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+	end
+})
+
+
+Tabs.Misc:AddButton({
+	Title = "Hop Server",
+	Description = "Tele sever",
+	Callback = function()
+		Hop()
+	end
+})
+
+function Hop()
+	local PlaceID = game.PlaceId
+	local AllIDs = {}
+	local foundAnything = ""
+	local actualHour = os.date("!*t").hour
+	local Deleted = false
+	function TPReturner()
+		local Site;
+		if foundAnything == "" then
+			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+		else
+			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+		end
+		local ID = ""
+		if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+			foundAnything = Site.nextPageCursor
+		end
+		local num = 0;
+		for i,v in pairs(Site.data) do
+			local Possible = true
+			ID = tostring(v.id)
+			if tonumber(v.maxPlayers) > tonumber(v.playing) then
+				for _,Existing in pairs(AllIDs) do
+					if num ~= 0 then
+						if ID == tostring(Existing) then
+							Possible = false
+						end
+					else
+						if tonumber(actualHour) ~= tonumber(Existing) then
+							local delFile = pcall(function()
+								AllIDs = {}
+								table.insert(AllIDs, actualHour)
+							end)
+						end
+					end
+					num = num + 1
+				end
+				if Possible == true then
+					table.insert(AllIDs, ID)
+					wait()
+					pcall(function()
+						wait()
+						game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+					end)
+					wait(4)
+				end
+			end
+		end
+	end
+	function Teleport() 
+		while wait() do
+			pcall(function()
+				TPReturner()
+				if foundAnything ~= "" then
+					TPReturner()
+				end
+			end)
+		end
+	end
+	Teleport()
+end      
+
+
+local Mastery = Tabs.Misc:AddSection("Team")
+
+
+Tabs.Misc:AddButton({
+	Title = "Join Pirates Team",
+	Description = "Pirates Team",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pirates") 
+	end
+})
+
+
+Tabs.Misc:AddButton({
+	Title = "Join Marines Team",
+	Description = "Marines Team",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines") 
+	end
+})
+
+local Mastery = Tabs.Misc:AddSection("Open Ui")
+
+Tabs.Misc:AddButton({
+	Title = "Devil Shop Menu",
+	Description = "Devil Shop Menu",
+	Callback = function()
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetFruits")
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitShop.Visible = true
+	end
+})
+
+
+
+Tabs.Misc:AddButton({
+	Title = "Color Haki Menu",
+	Description = "Color Haki Menu",
+	Callback = function()
+		game.Players.localPlayer.PlayerGui.Main.Colors.Visible = true
+	end
+})
+
+
+
+Tabs.Misc:AddButton({
+	Title = "Title Name Menu",
+	Description = "Title Name Menu",
+	Callback = function()
+		local args = {
+			[1] = "getTitles"
+		}
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+		game.Players.localPlayer.PlayerGui.Main.Titles.Visible = true
+	end
+})
+
+
+
+Tabs.Misc:AddButton({
+	Title = "Awakening Menu",
+	Description = "Awakening Menu Fruit",
+	Callback = function()
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.Visible = true
+	end
+})
+
+
+local Mastery = Tabs.Misc:AddSection("Troll")
+
+
+Tabs.Misc:AddButton({
+	Title = "Rain Fruit",
+	Description = "Mưa trái ác quỷ",
+	Callback = function()
+        for i, v in pairs(game:GetObjects("rbxassetid://6942501524")[1]:GetChildren()) do
+            v.Parent = game.Workspace.Map
+            v:MoveTo(game.Players.LocalPlayer.Character.PrimaryPart.Position + Vector3.new(math.random(-50, 50), 100, math.random(-50, 50)))
+            if v.Fruit:FindFirstChild("AnimationController") then
+                v.Fruit:FindFirstChild("AnimationController"):LoadAnimation(v.Fruit:FindFirstChild("Idle")):Play()
+            end
+            v.Handle.Touched:Connect(function(otherPart)
+                if otherPart.Parent == game.Players.LocalPlayer.Character then
+                    v.Parent = game.Players.LocalPlayer.Backpack
+                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                end
+            end)
+        end
+	end
+})
+
+
+
+local Mastery = Tabs.Misc:AddSection("Misc")
+
+
+local ToggleRejoin = Tabs.Misc:AddToggle("ToggleRejoin", {Title = "Auto Rejoin", Description = "Auto Rejoin",Default = true })
+ToggleRejoin:OnChanged(function(Value)
+	_G.AutoRejoin = Value
+end)
+
+Options.ToggleRejoin:SetValue(true)
+spawn(function()
+	while wait() do
+		if _G.AutoRejoin then
+				getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+					if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+						game:GetService("TeleportService"):Teleport(game.PlaceId)
+					end
+				 end)
+			end
+		end
+	end)
+
+
+
+    local Mastery = Tabs.Misc:AddSection("Kaitun Cap")
+
+Tabs.Misc:AddButton({
+	Title = "Show Items",
+	Description = "Hiện thị vật phẩm",
+	Callback = function()
+		do
+			local ui = game:GetService("CoreGui").RobloxGui.Modules.Profile:FindFirstChild("UILibrary")
+			if ui then ui:Destroy() end
+		end
+		local UserInputService = game:GetService("UserInputService")
+		local TweenService = game:GetService("TweenService")
+		local RunService = game:GetService("RunService")
+		local LocalPlayer = game:GetService("Players").LocalPlayer
+		local Mouse = LocalPlayer:GetMouse()
+	
+		do
+			local ui = game:GetService("Lighting"):FindFirstChild("Blur")
+			if ui then ui:Destroy() end
+		end
+	
+		local Blur = Instance.new("BlurEffect")
+	
+		TweenService:Create(
+			Blur,
+			TweenInfo.new(.4, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
+			{ Size = 50 }
+		):Play()
+		Blur.Parent = game.Lighting
+	
+		local UIStroke = Instance.new("UIStroke")
+		local UICorner = Instance.new("UICorner")
+	
+		local ScreenGui = Instance.new("ScreenGui")
+		local ImageButton = Instance.new("ImageButton")
+		local RobloxButton = Enum.ButtonStyle.RobloxButton
+	
+		ScreenGui.Parent = game.CoreGui
+		ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	
+	
+		local cac = require(game:GetService("Players").LocalPlayer.PlayerGui.Main.UIController.Inventory)
+		local Inventory = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")
+		local Items = {}
+		local RaityLevel = { "Mythical", "Legendary", "Rare", "Uncommon", "Common" }
+		local RaityColor = {
+			["Common"] = Color3.fromRGB(179, 179, 179),
+			["Uncommon"] = Color3.fromRGB(92, 140, 211),
+			["Rare"] = Color3.fromRGB(140, 82, 255),
+			["Legendary"] = Color3.fromRGB(213, 43, 228),
+			["Mythical"] = Color3.fromRGB(238, 47, 50)
+		}
+		function GetRaity(color)
+			for k, v in pairs(RaityColor) do
+				if v == color then return k end
+			end
+		end
+	
+		for k, v in pairs(Inventory) do
+			Items[v.Name] = v
+		end
+	
+		local total = #getupvalue(cac.UpdateRender, 4)
+		local rac = {}
+		local allitem = {}
+		local total2 = 0
+		while total2 < total do
+			local i = 0
+			while i < 25000 and total2 < total do
+				game:GetService("Players").LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.CanvasPosition =
+					Vector2.new(0, i)
+				for k, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Main.InventoryContainer.Right.Content.ScrollingFrame.Frame:GetChildren()) do
+					if v:IsA("Frame") and not rac[v.ItemName.Text] and v.ItemName.Visible == true then
+						local vaihuhu = GetRaity(v.Background.BackgroundColor3)
+						if vaihuhu then
+							if not allitem[vaihuhu] then
+								allitem[vaihuhu] = {}
+							end
+							table.insert(allitem[vaihuhu], v:Clone())
+						end
+						total2 = total2 + 1
+						rac[v.ItemName.Text] = true
+					end
+				end
+				i = i + 20
+			end
+			wait()
+		end
+		function GetXY(vec)
+			return vec * 100
+		end
+	
+		local tvk = Instance.new("UIListLayout")
+		tvk.FillDirection = Enum.FillDirection.Vertical
+		tvk.SortOrder = 2
+		tvk.Padding = UDim.new(0, 10)
+	
+		local Left = Instance.new("Frame", game.Players.LocalPlayer.PlayerGui.BubbleChat)
+		Left.BackgroundTransparency = 1
+		Left.Size = UDim2.new(.5, 0, 1, 0)
+		tvk.Parent = Left
+	
+		local Right = Instance.new("Frame", game.Players.LocalPlayer.PlayerGui.BubbleChat)
+		Right.BackgroundTransparency = 1
+		Right.Size = UDim2.new(.5, 0, 1, 0)
+		Right.Position = UDim2.new(.6, 0, 0, 0)
+		tvk:Clone().Parent = Right
+		for k, v in pairs(allitem) do
+			local cac = Instance.new("Frame", Left)
+			cac.BackgroundTransparency = 1
+			cac.Size = UDim2.new(1, 0, 0, 0)
+			cac.LayoutOrder = table.find(RaityLevel, k)
+	
+			local cac2 = Instance.new("Frame", Right)
+			cac2.BackgroundTransparency = 1
+			cac2.Size = UDim2.new(1, 0, 0, 0)
+			cac2.LayoutOrder = table.find(RaityLevel, k)
+	
+			local tvk = Instance.new("UIGridLayout", cac)
+			tvk.CellPadding = UDim2.new(.005, 0, .005, 0)
+			tvk.CellSize = UDim2.new(0, 70, 0, 70)
+			tvk.FillDirectionMaxCells = 100
+			tvk.FillDirection = Enum.FillDirection.Horizontal
+	
+			local ccc = tvk:Clone()
+			ccc.Parent = cac2
+			for k, v in pairs(v) do
+				if Items[v.ItemName.Text] and Items[v.ItemName.Text].Mastery then
+					if v.ItemLine2.Text ~= "Accessory" then
+						local bucac                  = v.ItemName:Clone()
+						bucac.BackgroundTransparency = 1
+						bucac.TextSize               = 10
+						bucac.TextXAlignment         = 2
+						bucac.TextYAlignment         = 2
+						bucac.ZIndex                 = 5
+						bucac.Text                   = Items[v.ItemName.Text].Mastery
+						bucac.Size                   = UDim2.new(.5, 0, .5, 0)
+						bucac.Position               = UDim2.new(.5, 0, .5, 0)
+						bucac.Parent                 = v
+					end
+					v.Parent = cac
+				elseif v.ItemLine2.Text == "Blox Fruit" then
+					v.Parent = cac2
+				end
+			end
+			cac.AutomaticSize = 2
+			cac2.AutomaticSize = 2
+		end
+		local ListHuhu = {
+			["Superhuman"] = Vector2.new(3, 2),
+			["DeathStep"] = Vector2.new(4, 3),
+			["ElectricClaw"] = Vector2.new(2, 0),
+			["SharkmanKarate"] = Vector2.new(0, 0),
+			["DragonTalon"] = Vector2.new(1, 5)
+		}
+		local MeleeG = Instance.new("Frame", Left)
+		MeleeG.BackgroundTransparency = 1
+		MeleeG.Size = UDim2.new(1, 0, 0, 0)
+		MeleeG.LayoutOrder = table.find(RaityLevel, k)
+		MeleeG.AutomaticSize = 2
+		MeleeG.LayoutOrder = 100
+		local tvk = Instance.new("UIGridLayout", MeleeG)
+		tvk.CellPadding = UDim2.new(.005, 0, .005, 0)
+		tvk.CellSize = UDim2.new(0, 70, 0, 70)
+		tvk.FillDirectionMaxCells = 100
+		tvk.FillDirection = Enum.FillDirection.Horizontal
+	
+		local cac = { "Superhuman", "ElectricClaw", "DragonTalon", "SharkmanKarate", "DeathStep", "GodHuman" }
+		for k, v in pairs(cac) do
+			if ListHuhu[v] and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buy" .. v, true) == 1 then
+				local huhu = Instance.new("ImageLabel", MeleeG)
+				huhu.Image = "rbxassetid://16435032782"
+				huhu.ImageRectSize = Vector2.new(100, 100)
+				huhu.ImageRectOffset = ListHuhu[v] * 100
+			end
+		end
+		function formatNumber(v)
+			return tostring(v):reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
+		end
+	
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli.AnchorPoint = Vector2.new(0.5, 0.5)
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli.Position = UDim2.new(0, 1120, 0, 700)
+	
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.AnchorPoint = Vector2.new(0.5, 0.5)
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Position = UDim2.new(0, 1150, 0, 750)
+		local Name = game:GetService("Players").LocalPlayer.PlayerGui.Main.Fragments:Clone()
+		Name.Name = "Name"
+		Name.Parent = game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli
+		Name.Position = UDim2.new(0, 0, -1.5, 0)
+		Name.Size = UDim2.new(1, 0, 1, 0)
+		Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Name.Text = game.Players.LocalPlayer.Name
+	
+		local Fragments = game:GetService("Players").LocalPlayer.PlayerGui.Main.Fragments:Clone()
+		Fragments.Name = "FragmentsCheck"
+		Fragments.Parent = game:GetService("Players").LocalPlayer.PlayerGui.Main.Beli
+		Fragments.Position = UDim2.new(0, 0, -0.75, 0)
+		Fragments.Size = UDim2.new(1, 0, 1, 0)
+		Fragments.Text = 'ƒ' .. formatNumber(game:GetService("Players").LocalPlayer.Data.Fragments.Value)
+		local args = {
+			[1] = "getAwakenedAbilities"
+		}
+	
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+		game.Players.LocalPlayer.PlayerGui.Main.AwakeningToggler.Visible = true
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.Position = UDim2.new(0.48, 10, 0.908, 2)
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.AwakeningToggler.Size = UDim2.new(1, 0, 0.22, 0)
+	
+	
+		pcall(function()
+			game:GetService("Players").LocalPlayer.PlayerGui.Main.MenuButton.Visible = false
+		end)
+		pcall(function()
+			game:GetService("Players").LocalPlayer.PlayerGui.Main.RaceEnergy.Visible = false
+		end)
+		pcall(function()
+			game:GetService("Players").LocalPlayer.PlayerGui.Main.SafeZone.Visible = false
+		end)
+		pcall(function()
+			game:GetService("Players").LocalPlayer.PlayerGui.Main.HP.Visible = false
+		end)
+		pcall(function()
+			game:GetService("Players").LocalPlayer.PlayerGui.Backpack.Enabled.Visible = false
+		end)
+		pcall(function()
+			game:GetService("Players").LocalPlayer.PlayerGui.Main.Energy.Visible = false
+		end)
+		for k, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Main:GetChildren()) do
+			if v:IsA("ImageButton") then
+				v:Destroy()
+			end
+		end
+		pcall(function()
+			game:GetService("Players").LocalPlayer.PlayerGui.Main.Compass.Visible = false
+		end)
+	end
+})
+
+local Mastery = Tabs.Misc:AddSection("Day")
+
+Tabs.Misc:AddButton({
+	Title = "Remove Fog",
+	Description = "fix lag dele blind bones",
+	Callback = function()
+        NoFog()
+    end
+})
+function NoFog()
+    local c = game.Lighting
+    c.FogEnd = 100000
+    for r, v in pairs(c:GetDescendants()) do
+        if v:IsA("Atmosphere") then
+            v:Destroy()
+        end
+    end
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Hop
+
+if First_Sea or Second_Sea then
+    local Mastery = Tabs.Hop:AddSection("Thid Sea Please!!")
+end
+
+if Third_Sea then
+local ToggleFindMoon = Tabs.Hop:AddToggle("ToggleFindMoon", {Title = "Find Full Moon",Description = "Tìm trăng tròn", Default = false })
+ToggleFindMoon:OnChanged(function(Value)
+    _G.AutoFindMoon = Value
+end)
+Options.ToggleFindMoon:SetValue(false)
+
+
+spawn(function()
+    while wait() do
+        if _G.AutoFindMoon then
+        if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" or game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
+            wait(2.0)
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
+            Hop()
+            Fluent:Notify({
+                Title = "CUTTAY HUB",
+                Content = "Turn Off Find Full Moon...",
+                SubContent = "", -- Optional
+                Duration = 5 -- Set to nil to make the notification not disappear
+            })
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
+            Hop()
+            Fluent:Notify({
+                Title = "CUTTAY HUB",
+                Content = "Hop...",
+                SubContent = "", -- Optional
+                Duration = 5 -- Set to nil to make the notification not disappear
+            })
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
+            Hop()
+            Fluent:Notify({
+                Title = "CUTTAY HUB",
+                Content = "Hop...",
+                SubContent = "", -- Optional
+                Duration = 5 -- Set to nil to make the notification not disappear
+            })
+        else
+            Hop()
+            end
+        end
+    end
+end)
+
+
+local ToggleMirageIsland = Tabs.Hop:AddToggle("ToggleMirageIsland", {Title = "Find Mirage Island",Description = "Tìm đảo bí ẩn", Default = false })
+ToggleMirageIsland:OnChanged(function(Value)
+    _G.FindMirageIsland = Value
+end)
+Options.ToggleMirageIsland:SetValue(false)
+
+spawn(function()
+    while wait() do
+    if _G.FindMirageIsland then
+        if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") or game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+            if HighestPointRealCFrame and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - HighestPointRealCFrame.Position).Magnitude > 10 then
+            Tween(getHighestPoint().CFrame * CFrame.new(0, 211.88, 0))
+                end
+        elseif not game:GetService("Workspace").Map:FindFirstChild("MysticIsland") or not game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+            Hop()
+            end
+        end
+    end
+end)
+end
+----------------------------------------------------------------------------------------------------------------------------------------------
+Fluent:Notify({
+    Title = "CUTTAY HUB",
+    Content = "The script has been loaded successfully!",
+    Content = "fun experience.",
+    Durtion = 3
+})
+warn("CUTTAY HUB Loading Completed!!")

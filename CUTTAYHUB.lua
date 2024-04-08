@@ -2834,12 +2834,12 @@ Tabs.Main:AddButton({
         Title = "Click copy link Join Discord",
         Description = "Link Discord Dio",
         Callback = function()
-            LinkDicord()
+            CopyDicord()
         end
     })
 
-    function LinkDicord(Link)
-		game:GetService(" https://discord.gg/GwFVxH9n ").Remotes.link:InvokeServer(Link)
+    function CopyDicord(Code)
+		game:GetService("https://discord.gg/GwFVxH9n").Remotes.Copy:InvokeServer(Copy)
 	end
 
 

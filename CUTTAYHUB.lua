@@ -2831,14 +2831,6 @@ Tabs.Main:AddButton({
 	end
 
     Tabs.Main:AddButton({
-        Title = "Click copy link Join Discord",
-        Description = "Link Discord Dio",
-        Callback = Copy("https://discord.gg/GwFVxH9n")
-            CopyLinkDicord()
-        end
-    })
-
-    Tabs.Main:AddButton({
         Title = "Fps Booster",
         Description = "Fps Booster",
         Callback = function()

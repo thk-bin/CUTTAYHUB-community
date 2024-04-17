@@ -76,8 +76,8 @@ InputService.WindowFocusReleased:Connect(
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({
-    Name = "CUTTAY hub-Blox Fruit  |",
-    IntroText = "By GOOGLE🥀 or 𝕯𝖎𝖔 𝕹𝖔𝖇𝖑𝖊 🥀    ",
+    Name = "CUTTAY hub-Blox Fruit",
+    IntroText = "By GOOGLE or 𝕯𝖎𝖔 𝕹𝖔𝖇𝖑𝖊 🥀",
     HidePremium = false,
     SaveConfig = true,
     ConfigFolder = "OrionTest"
@@ -85,61 +85,61 @@ local Window = OrionLib:MakeWindow({
 
 local Fou = Window:MakeTab({
     Name = "Về chúng tôi",
-    Icon = "rbxassetid://11446900930",
+    Icon = "rbxassetid://16435032782",
     PremiumOnly = false
 })
 local Main = Window:MakeTab({
     Name = "Trang chủ",
-    Icon = "rbxassetid://11446825283",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Set = Window:MakeTab({
     Name = "Cài đặt",
-    Icon = "rbxassetid://11446835336",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Farm = Window:MakeTab({
     Name = "Cày khác",
-    Icon = "rbxassetid://11446859498",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Stats = Window:MakeTab({
     Name = "Chỉ số",
-    Icon = "rbxassetid://11447069304",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Island = Window:MakeTab({
     Name = "Dảo & ESP",
-    Icon = "rbxassetid://9606628205",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local DF = Window:MakeTab({
     Name = "Trái ác quỷ",
-    Icon = "rbxassetid://11446965348",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Raid = Window:MakeTab({
     Name = "Raid",
-    Icon = "rbxassetid://4483345998",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Shop = Window:MakeTab({
     Name = "Cửa hàng",
-    Icon = "rbxassetid://6031265976",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Misc = Window:MakeTab({
     Name = "Khác",
-    Icon = "rbxassetid://7040410130",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local RaceV4 = Window:MakeTab({
     Name = "Tộc V4",
-    Icon = "rbxassetid://9606626034",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 Fou:AddLabel("COMMUNITY: BO LAC CUT TAY")
-Fou:AddLabel("COMMUNITY: BO LAC CUT TAY")
+Fou:AddLabel("By 𝕯𝖎𝖔 𝕹𝖔𝖇𝖑𝖊 🥀 or GOOGLE")
 Fou:AddLabel("Name hub: CUTTAY hub")
 Fou:AddButton({
     Name = "Link mời Discord",

@@ -77,14 +77,14 @@ InputService.WindowFocusReleased:Connect(
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({
     Name = "CUTTAY hub-Blox Fruit",
-    IntroText = "By GOOGLE🥀 or Dio Roble🥀",
+    IntroText = "CUTTAY hub-Blox Fruit",
     HidePremium = false,
     SaveConfig = true,
     ConfigFolder = "OrionTest"
 })
 
 local Fou = Window:MakeTab({
-    Name = "Về chúng tôi",
+    Name = "Tap",
     Icon = "rbxassetid://16435032782",
     PremiumOnly = false
 })
@@ -119,12 +119,12 @@ local DF = Window:MakeTab({
     PremiumOnly = false
 })
 local Raid = Window:MakeTab({
-    Name = "Raid",
+    Name = "Tap Raid",
     Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Shop = Window:MakeTab({
-    Name = "Cửa hàng",
+    Name = "Tap Shope",
     Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
@@ -134,14 +134,14 @@ local Misc = Window:MakeTab({
     PremiumOnly = false
 })
 local RaceV4 = Window:MakeTab({
-    Name = "Tộc V4",
+    Name = "Tap Race",
     Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 Fou:AddLabel("COMMUNITY: BO LAC CUT TAY")
 Fou:AddLabel("By Dio Roble🥀 or GOOGLE🥀")
 Fou:AddLabel("Name hub: CUTTAY hub")
-Fou:AddLabel("Link Shop Bên Dưới!")
+Fou:AddLabel("Link Shop ở dưới!")
 Fou:AddButton({
     Name = "Link mời Discord",
     Callback = function(value)
@@ -1446,14 +1446,41 @@ function CheckLevel()
                 0, -0.156446099)
             CFrameMon = CFrame.new(-1437.56348, 17.1481285, -14385.6934, 0.173624337, -0, -0.984811902, 0, 1, -0,
                 0.984811902, 0, 0.173624337)
-        elseif Lv >= 2425 or SelectMonster == "Snow Demon [Lv. 2425]" or SelectArea == 'Candy Island' then
+        elseif Lv == 2425 or Lv <= 2449 or SelectMonster == "Snow Demon" or SelectArea == 'Candy Island' then
             Ms = "Snow Demon [Lv. 2425]"
             NameQuest = "CandyQuest1"
             QuestLv = 2
             NameMon = "Snow Demon"
-            CFrameQ = CFrame.new(-1149.328, 13.5759039, -14445.6143, -0.156446099, 0, -0.987686574, 0, 1, 0, 0.987686574,
-                0, -0.156446099)
-            CFrameMon = CFrame.new(-683.8216552734375, 73.99142456054688, -14395.048828125)
+            CFrameQ = CFrame.new(-1149.328, 13.5759039, -14445.6143, -0.156446099, 0, -0.987686574, 0, 1, 0, 0.987686574, 0, -0.156446099)
+            CFrameMon = CFrame.new(-916.222656, 17.1481285, -14638.8125, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
+        elseif Lv == 2450 or Lv <= 2474 or SelectMonster == "Isle Outlaw" or SelectArea == 'Tiki Outpost' then
+            Ms = "Isle Outlaw [Lv. 2450]"
+            NameQuest = "TikiQuest1"
+            QuestLv = 1
+            NameMon = "Isle Outlaw"
+            CFrameQ = CFrame.new(-16549.890625, 55.68635559082031, -179.91360473632812)
+            CFrameMon = CFrame.new(-16162.8193359375, 11.6863374710083, -96.45481872558594)
+        elseif Lv == 2475 or Lv <= 2499 or SelectMonster == "Island Boy" or SelectArea == 'Tiki Outpost' then 
+            Ms = "Island Boy [Lv. 2475]"
+            NameQuest = "TikiQuest1"
+            QuestLv = 2
+            NameMon = "Island Boy"
+            CFrameQ = CFrame.new(-16549.890625, 55.68635559082031, -179.91360473632812)
+            CFrameMon = CFrame.new(-16912.130859375, 11.787443161010742, -133.0850830078125)
+        elseif Lv == 2500 or Lv <= 2424 then
+            Ms = "Sun-kissed Warrior [Lv. 2500]"
+            QuestLv = 1
+            NameQuest = "TikiQuest2"
+            NameMon = "kissed"
+            CFrameQ = CFrame.new(-16539.078125, 55.68632888793945, 1051.5738525390625)
+            CFrameMon = CFrame.new(-16349.8779296875, 92.0808334350586, 1123.4169921875)
+        elseif Lv >= 2525 or SelectMonster == "Isle Champion" or SelectArea == 'Tiki Outpost' then
+            Ms = "Isle Champion [Lv. 2525]"
+            NameQuest = "TikiQuest2"
+            QuestLv = 2
+            NameMon = "Isle Champion"
+            CFrameQ = CFrame.new(-16542.447265625, 55.68632888793945, 1044.41650390625)
+            CFrameMon = CFrame.new(-16848.94140625, 21.68633460998535, 1041.4490966796875)
         end
     end
 end

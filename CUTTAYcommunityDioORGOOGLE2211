@@ -526,11 +526,11 @@ spawn(function()
         if _G.FastAttackDelay then
             pcall(function()
                 if _G.FastAttackDelay == "Điện thoại" then
-                    _G.FastAttackDelay = 0.4
-                elseif _G.FastAttackDelay == "Máy tính" then
-                    _G.FastAttackDelay = 0.1
-                elseif _G.FastAttackDelay == "Chậm" then
                     _G.FastAttackDelay = 0.10
+                elseif _G.FastAttackDelay == "Máy tính" then
+                    _G.FastAttackDelay = 0.2
+                elseif _G.FastAttackDelay == "Chậm" then
+                    _G.FastAttackDelay = 0.20
                 end
             end)
         end

@@ -514,7 +514,7 @@ local AttackList = { "Máy tính", "Điện thoại", "Chậm" }
 _G.FastAttackDelay = "MOBILE"
 Main:AddDropdown({
     Name = "Chọn chế độ đánh nhanh",
-    Default = "",
+    Default = "Chậm",
     Options = AttackList,
     Callback = function(adl)
         _G.FastAttackDelay = adl
@@ -526,11 +526,11 @@ spawn(function()
         if _G.FastAttackDelay then
             pcall(function()
                 if _G.FastAttackDelay == "Điện thoại" then
-                    _G.FastAttackDelay = 0.2
+                    _G.FastAttackDelay = 0.4
                 elseif _G.FastAttackDelay == "Máy tính" then
                     _G.FastAttackDelay = 0.1
                 elseif _G.FastAttackDelay == "Chậm" then
-                    _G.FastAttackDelay = 0.4
+                    _G.FastAttackDelay = 0.10
                 end
             end)
         end
@@ -538,7 +538,7 @@ spawn(function()
 end)
 Main:AddDropdown({
     Name = "Chọn chế độ cày",
-    Default = "",
+    Default = "Cày cấp độ",
     Options = {
         "Cày cấp độ", "Không nhiệm vụ", "Cày quái ở gần"
     },

@@ -1516,7 +1516,8 @@ elseif World3 then
         "Ice Cream Chef [Lv. 2125]", "Ice Cream Commander [Lv. 2150]", "Cookie Crafter [Lv. 2200]",
         "Cake Guard [Lv. 2225]", "Baking Staff [Lv. 2250]", "Head Baker [Lv. 2275]", "Cocoa Warrior [Lv. 2300]",
         "Chocolate Bar Battler [Lv. 2325]", "Sweet Thief [Lv. 2350]", "Candy Rebel [Lv. 2375]",
-        "Candy Pirate [Lv. 2400]", "Snow Demon [Lv. 2425]"
+        "Candy Pirate [Lv. 2400]", "Snow Demon [Lv. 2425]","Isle Outlaw [Lv. 2450]","Island Boy [Lv. 2475]","Sun-kissed Warrior [Lv. 2500]",
+        "Isle Champion [Lv. 2525]"
     }
 end
 
@@ -1533,7 +1534,7 @@ elseif World2 then
 elseif World3 then
     AreaList = {
         'Pirate Port', 'Amazon', 'Marine Tree', 'Deep Forest', 'Haunted Castle', 'Nut Island', 'Ice Cream Island',
-        'Cake Island', 'Choco Island', 'Candy Island'
+        'Cake Island', 'Choco Island', 'Candy Island','Tiki Outpost'
     }
 end
 

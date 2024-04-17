@@ -453,12 +453,12 @@ local posY = 30
 local posZ = 0
 local TweenSpeed = 350
 local WeaponList = {
-    "Melee", "Blox Fruit", "Kiếm", "Gun"
+    "Cận chiến", "Trái ác quỷ", "Kiếm", "Súng"
 }
 
 Main:AddDropdown({
     Name = "Chọn vũ khí",
-    Default = "Melee",
+    Default = "Cận chiến",
     Options = WeaponList,
     Callback = function(weaponfunc)
         _G.SelectWeapon = weaponfunc
@@ -467,7 +467,7 @@ Main:AddDropdown({
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.SelectWeapon == "Melee" then
+            if _G.SelectWeapon == "Cận chiến" then
                 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Melee" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
@@ -475,7 +475,7 @@ spawn(function()
                         end
                     end
                 end
-            elseif _G.SelectWeapon == "Sword" then
+            elseif _G.SelectWeapon == "Kiếm" then
                 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Sword" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
@@ -483,7 +483,7 @@ spawn(function()
                         end
                     end
                 end
-            elseif _G.SelectWeapon == "Blox Fruit" then
+            elseif _G.SelectWeapon == "Trái ác quỷ" then
                 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Blox Fruit" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
@@ -491,7 +491,7 @@ spawn(function()
                         end
                     end
                 end
-            elseif _G.SelectWeapon == "Gun" then
+            elseif _G.SelectWeapon == "Súng" then
                 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Gun" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
@@ -510,11 +510,11 @@ spawn(function()
     end
 end)
 --// Fast Attack
-local AttackList = { "Super Fast Attack", "Fast Attack", "Nomarl Attack" }
+local AttackList = { "Máy tính", "Điện thoại", "Chậm" }
 _G.FastAttackDelay = "MOBILE"
 Main:AddDropdown({
-    Name = "Chọn chế độ Fast Attack",
-    Default = "Nomarl Attack",
+    Name = "Chọn chế độ đánh nhanh",
+    Default = "",
     Options = AttackList,
     Callback = function(adl)
         _G.FastAttackDelay = adl
@@ -525,22 +525,22 @@ spawn(function()
     while wait(.1) do
         if _G.FastAttackDelay then
             pcall(function()
-                if _G.FastAttackDelay == "Fast Attack" then
-                    _G.FastAttackDelay = 0.5
-                elseif _G.FastAttackDelay == "Super Fast Attack" then
-                    _G.FastAttackDelay = 0
-                elseif _G.FastAttackDelay == "Nomarl Attack" then
-                    _G.FastAttackDelay = 0.20
+                if _G.FastAttackDelay == "Điện thoại" then
+                    _G.FastAttackDelay = 0.2
+                elseif _G.FastAttackDelay == "Máy tính" then
+                    _G.FastAttackDelay = 0.1
+                elseif _G.FastAttackDelay == "Chậm" then
+                    _G.FastAttackDelay = 0.4
                 end
             end)
         end
     end
 end)
 Main:AddDropdown({
-    Name = "Chọn chế độ Fram",
+    Name = "Chọn chế độ cày",
     Default = "",
     Options = {
-        "Fram Level", "Mod Aura", "plow monsters nearby"
+        "Cày cấp độ", "Không nhiệm vụ", "Cày quái ở gần"
     },
     Callback = function(value)
         _G.Select_Mode_Farm = value

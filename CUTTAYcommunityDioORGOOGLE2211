@@ -76,8 +76,8 @@ InputService.WindowFocusReleased:Connect(
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({
-    Name = "Crazzy Hub",
-    IntroText = "Crazzy Hub",
+    Name = "CUTTAY hub-Blox Fruit",
+    IntroText = "By GOOGLE🥀 or Dio Roble🥀",
     HidePremium = false,
     SaveConfig = true,
     ConfigFolder = "OrionTest"
@@ -85,66 +85,73 @@ local Window = OrionLib:MakeWindow({
 
 local Fou = Window:MakeTab({
     Name = "Về chúng tôi",
-    Icon = "rbxassetid://11446900930",
+    Icon = "rbxassetid://16435032782",
     PremiumOnly = false
 })
 local Main = Window:MakeTab({
     Name = "Trang chủ",
-    Icon = "rbxassetid://11446825283",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Set = Window:MakeTab({
     Name = "Cài đặt",
-    Icon = "rbxassetid://11446835336",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Farm = Window:MakeTab({
     Name = "Cày khác",
-    Icon = "rbxassetid://11446859498",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Stats = Window:MakeTab({
     Name = "Chỉ số",
-    Icon = "rbxassetid://11447069304",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Island = Window:MakeTab({
     Name = "Dảo & ESP",
-    Icon = "rbxassetid://9606628205",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local DF = Window:MakeTab({
     Name = "Trái ác quỷ",
-    Icon = "rbxassetid://11446965348",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Raid = Window:MakeTab({
     Name = "Raid",
-    Icon = "rbxassetid://4483345998",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Shop = Window:MakeTab({
     Name = "Cửa hàng",
-    Icon = "rbxassetid://6031265976",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local Misc = Window:MakeTab({
     Name = "Khác",
-    Icon = "rbxassetid://7040410130",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
 local RaceV4 = Window:MakeTab({
     Name = "Tộc V4",
-    Icon = "rbxassetid://9606626034",
+    Icon = "rbxassetid://16902732953",
     PremiumOnly = false
 })
-Fou:AddLabel("Founder : tungsuccac 🤓")
-Fou:AddLabel("Developer : NgocAnhBeo ❤️")
-Fou:AddLabel("Phiên bản : V2.1")
+Fou:AddLabel("COMMUNITY: BO LAC CUT TAY")
+Fou:AddLabel("By Dio Roble🥀 or GOOGLE🥀")
+Fou:AddLabel("Name hub: CUTTAY hub")
+Fou:AddLabel("Link Shop Bên Dưới!")
 Fou:AddButton({
     Name = "Link mời Discord",
     Callback = function(value)
-        setclipboard("https://discord.gg/zMhWGeR6")
+        setclipboard("https://discord.gg/vvXegtQr")
+    end
+})
+Fou:AddButton({
+    Name = "Click Copy Link Shop Dio",
+    Callback = function(value)
+        setclipboard("https://gamesstoredio.net/")
     end
 })
 Main:AddLabel("Code")
@@ -446,12 +453,12 @@ local posY = 30
 local posZ = 0
 local TweenSpeed = 350
 local WeaponList = {
-    "Cận chiến", "Trái ác quỷ", "Kiếm", "Súng"
+    "Melee", "Blox Fruit", "Kiếm", "Gun"
 }
 
 Main:AddDropdown({
     Name = "Chọn vũ khí",
-    Default = "",
+    Default = "Melee",
     Options = WeaponList,
     Callback = function(weaponfunc)
         _G.SelectWeapon = weaponfunc
@@ -460,7 +467,7 @@ Main:AddDropdown({
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.SelectWeapon == "Cận chiến" then
+            if _G.SelectWeapon == "Melee" then
                 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Melee" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
@@ -468,7 +475,7 @@ spawn(function()
                         end
                     end
                 end
-            elseif _G.SelectWeapon == "Kiếm" then
+            elseif _G.SelectWeapon == "Sword" then
                 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Sword" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
@@ -476,7 +483,7 @@ spawn(function()
                         end
                     end
                 end
-            elseif _G.SelectWeapon == "Trái ác quỷ" then
+            elseif _G.SelectWeapon == "Blox Fruit" then
                 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Blox Fruit" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
@@ -484,7 +491,7 @@ spawn(function()
                         end
                     end
                 end
-            elseif _G.SelectWeapon == "Súng" then
+            elseif _G.SelectWeapon == "Gun" then
                 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Gun" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
@@ -503,11 +510,11 @@ spawn(function()
     end
 end)
 --// Fast Attack
-local AttackList = { "Máy tính", "Điện thoại", "Chậm" }
+local AttackList = { "Super Fast Attack", "Fast Attack", "Nomarl Attack" }
 _G.FastAttackDelay = "MOBILE"
 Main:AddDropdown({
-    Name = "Chọn chế độ đánh nhanh",
-    Default = "",
+    Name = "Chọn chế độ Fast Attack",
+    Default = "Nomarl Attack",
     Options = AttackList,
     Callback = function(adl)
         _G.FastAttackDelay = adl
@@ -518,22 +525,22 @@ spawn(function()
     while wait(.1) do
         if _G.FastAttackDelay then
             pcall(function()
-                if _G.FastAttackDelay == "Điện thoại" then
-                    _G.FastAttackDelay = 0.2
-                elseif _G.FastAttackDelay == "Máy tính" then
-                    _G.FastAttackDelay = 0.1
-                elseif _G.FastAttackDelay == "Chậm" then
-                    _G.FastAttackDelay = 0.4
+                if _G.FastAttackDelay == "Fast Attack" then
+                    _G.FastAttackDelay = 0.5
+                elseif _G.FastAttackDelay == "Super Fast Attack" then
+                    _G.FastAttackDelay = 0
+                elseif _G.FastAttackDelay == "Nomarl Attack" then
+                    _G.FastAttackDelay = 0.20
                 end
             end)
         end
     end
 end)
 Main:AddDropdown({
-    Name = "Chọn chế độ cày",
+    Name = "Chọn chế độ Fram",
     Default = "",
     Options = {
-        "Cày cấp độ", "Không nhiệm vụ", "Cày quái ở gần"
+        "Fram Level", "Mod Aura", "plow monsters nearby"
     },
     Callback = function(value)
         _G.Select_Mode_Farm = value
